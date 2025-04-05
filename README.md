@@ -1,1 +1,1 @@
-# Mne-by-v-nebo
+# Мы не пушим в main :)
