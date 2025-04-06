@@ -4,9 +4,9 @@ export default {
 </script>
 
 <template>
-  <main>
-    <h2>Я блок main</h2>
-  </main>
+  <header>
+    <h2>Я header для меню</h2>
+  </header>
 </template>
 
 <style scoped>

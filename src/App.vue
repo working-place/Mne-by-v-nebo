@@ -1,5 +1,14 @@
 <script>
+import NavigationMenu from './components/NavigationMenu.vue';
+import FooterBlock from './components/FooterBlock.vue';
+import MainPage from './components/MainPage.vue';
+
 export default {
+  components: {
+    NavigationMenu,
+    FooterBlock,
+    MainPage
+  },
   data() {
     return {}
   }
@@ -7,7 +16,11 @@ export default {
 </script>
 
 <template>
-  <H1>Hello</H1>
+  <div>
+    <NavigationMenu />
+    <MainPage />
+    <FooterBlock />
+  </div>
 </template>
 
 <style>
