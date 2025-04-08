@@ -18,7 +18,11 @@ const isActive = (path) => {
   <header class="menu">
 
     <div class="menu__box" :class="{ 'menu-open': isOpen }">
-      <RouterLink to="/">
+      <RouterLink
+      to="/"
+      @click="closeMenu"
+      :class="{ active: isActive('/') }"
+      >
         <img class="menu__logo" src="/img/logo.png" alt="Логотип">
       </RouterLink>
       <button v-if="!isOpen" @click="isOpen = true" class="menu__menu-btn"></button>
