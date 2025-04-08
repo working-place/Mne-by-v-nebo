@@ -10,6 +10,8 @@
 
   --color-text-dark: rgb(0, 0, 0);
   --color-text-light: rgb(255, 255, 255);
+  --color-text-purple: rgb(115, 82, 229);
+  --color-text-gray: rgb(82, 82, 82);
 
   --font-family-nunito: Nunito, Roboto, sans-serif;
   --font-family-next-art: 'NEXT ART', Roboto, sans-serif;
