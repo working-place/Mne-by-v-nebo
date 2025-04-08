@@ -1,6 +1,7 @@
 <script setup>
 import { ref } from 'vue';
 import { useRoute } from 'vue-router';
+import NavLinks from './NavLinks.vue';
 
 const isOpen = ref(false);
 const route = useRoute()
@@ -16,48 +17,18 @@ const isActive = (path) => {
 
 <template>
   <header class="menu">
-
     <div class="menu__box" :class="{ 'menu-open': isOpen }">
-      <RouterLink
-      to="/"
-      @click="closeMenu"
-      :class="{ active: isActive('/') }"
-      >
+      <RouterLink to="/" @click="closeMenu" :class="{ active: isActive('/') }">
         <img class="menu__logo" src="/img/logo.png" alt="Логотип">
       </RouterLink>
       <button v-if="!isOpen" @click="isOpen = true" class="menu__menu-btn"></button>
       <button v-else @click="isOpen = false" class="menu__close-btn"></button>
     </div>
-
-    <nav v-show="isOpen" class="menu__nav-box">
-      <ul class="menu__link-box">
-        <li class="menu__link">
-          <RouterLink to="/sot" @click="closeMenu" class="menu__link" :class="{ active: isActive('/sot') }">СОТ</RouterLink>
-        </li>
-        <li class="menu__link">
-          <RouterLink to="/grants" @click="closeMenu" class="menu__link" :class="{ active: isActive('/grants') }">Гранты</RouterLink>
-        </li>
-        <li class="menu__link">
-          <RouterLink to="/usefull" @click="closeMenu" class="menu__link" :class="{ active: isActive('/usefull') }">Полезные материалы
-          </RouterLink>
-        </li>
-        <li class="menu__link">
-          <RouterLink to="/news" @click="closeMenu" class="menu__link" :class="{ active: isActive('/news') }">Новости</RouterLink>
-        </li>
-        <li class="menu__link">
-          <RouterLink to="/gallery" @click="closeMenu" class="menu__link" :class="{ active: isActive('/gallery') }">Галерея</RouterLink>
-        </li>
-      </ul>
-    </nav>
-
+    <NavLinks :is-open="isOpen" @close="closeMenu" />
   </header>
 </template>
 
 <style scoped>
-.active {
-  font-weight: bold;
-}
-
 .menu {
   position: relative;
   flex-direction: column;
@@ -68,8 +39,8 @@ const isActive = (path) => {
 .menu__box,
 .menu__nav-box {
   width: 100%;
-  max-width: 362px;
-  min-width: 320px;
+  max-width: var(--max-width);
+  min-width: var(--min-width);
   padding: 17px;
 }
 
@@ -106,34 +77,5 @@ const isActive = (path) => {
   background-repeat: no-repeat;
   border: none;
   background-color: transparent;
-}
-
-.menu__link-box {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  gap: 12px;
-  width: fit-content;
-  white-space: nowrap;
-}
-
-.menu__nav-box {
-  display: flex;
-  justify-content: center;
-  position: absolute;
-  top: 58px;
-  background-color: var(--color-background-light-blue);
-  border-bottom-left-radius: 8px;
-  border-bottom-right-radius: 8px;
-}
-
-.menu__link {
-  line-height: 1.5;
-  margin: 0;
-  text-decoration: none;
-  color: var(--color-text-dark);
 }
 </style>
