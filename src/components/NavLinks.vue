@@ -1,13 +1,25 @@
 <script setup>
 defineProps({
-  isOpen: Boolean
+  isOpen: {
+    type: Boolean,
+    default: true
+  },
+  align: {
+    type: String,
+    default: 'center',
+    validator: value => ['center', 'start'].includes(value)
+  },
+  decorationClass: {
+    type: String,
+    default: ''
+  }
 });
 const emit = defineEmits(['close']);
 </script>
 
 <template>
   <nav v-show="isOpen" class="menu__nav-box">
-    <ul class="menu__link-box">
+    <ul class="menu__link-box" :style="{ alignItems: align === 'center' ? 'center' : 'flex-start' }">
       <li class="menu__link">
         <RouterLink to="/sot" @click="emit('close')" class="menu__link" :class="{ active: $route.path === ('/sot') }">СОТ
         </RouterLink>
@@ -52,7 +64,6 @@ const emit = defineEmits(['close']);
 .menu__link-box {
   display: flex;
   flex-direction: column;
-  align-items: center;
   list-style: none;
   padding: 0;
   margin: 0;

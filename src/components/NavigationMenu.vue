@@ -24,7 +24,7 @@ const isActive = (path) => {
       <button v-if="!isOpen" @click="isOpen = true" class="menu__menu-btn"></button>
       <button v-else @click="isOpen = false" class="menu__close-btn"></button>
     </div>
-    <NavLinks :is-open="isOpen" @close="closeMenu" />
+    <NavLinks :is-open="isOpen" @close="closeMenu" align="center"/>
   </header>
 </template>
 
