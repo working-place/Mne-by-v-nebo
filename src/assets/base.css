@@ -26,6 +26,7 @@
 /* стили прописаны для mobile, так как mobile first */
 
 body {
+  width: 100vw;
   min-height: 100vh;
   font-family: var(--font-family-nunito);
   color: var(--color-text-dark);
