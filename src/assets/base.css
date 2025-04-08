@@ -13,6 +13,9 @@
 
   --font-family-nunito: Nunito, Roboto, sans-serif;
   --font-family-next-art: 'NEXT ART', Roboto, sans-serif;
+
+  --min-width: 320px;
+  --max-width: 362px;;
 }
 
 *,

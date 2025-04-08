@@ -4,8 +4,9 @@ export default {
 </script>
 
 <template>
-  <footer>
-    <h2>Я Footer</h2>
+  <footer class="footer">
+<div class="footer__logo-box"></div>
+<div class="footer__vk-box"></div>
   </footer>
 </template>
 
