@@ -10,9 +10,9 @@ import NavLinks from './NavLinks.vue';
       <RouterLink to="/">
         <img class="footer__logo-img" src="/img/logo.png" alt="Логотип">
       </RouterLink>
-      <RouterLink to="/">
+      <a href="https://vk.com/vospitaniedlyvseh">
         <img class="footer__vk-img" src="/img/socials.png" alt="Кнопка перехода в VK">
-      </RouterLink>
+      </a>
     </div>
     <div class="footer__navigation-box">
       <h2>Навигация</h2>
@@ -44,17 +44,15 @@ import NavLinks from './NavLinks.vue';
 
     <div class="footer__info-box">
       <div class="footer__info-box_direction">
-        <RouterLink to="/">
+        <a href="https://grant.obr.so/">
           <img class="footer__sot-logo" src="/img/sot-logo.png" alt="Логотип СОТ">
-        </RouterLink>
+        </a>
       </div>
       <div class="footer__info-box_direction">
-        <RouterLink to="/">
+        <a href="https://xn--g1ani7c.xn--p1ai/">
           <img class="footer__soyuz-logo" src="/img/soyuz-logo.png" alt="Логотип Союз.РФ">
-        </RouterLink>
-        <RouterLink to="/">
+        </a>
           <img class="footer__profit-code-logo" src="/img/profit-code.png" alt="Логотип ProfitCode">
-        </RouterLink>
       </div>
     </div>
     <div class="footer__text-about-center">
@@ -192,5 +190,4 @@ h2 {
   text-align: center;
   line-height: 1.2;
 }
-
 </style>
