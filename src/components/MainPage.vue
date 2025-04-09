@@ -1,11 +1,10 @@
-<script>
-export default {
-}
+<script setup>
+import MainScreen from './static-components/MainScreen.vue';
 </script>
 
 <template>
   <main>
-    <h2>Я блок main</h2>
+    <MainScreen/>
   </main>
 </template>
 
