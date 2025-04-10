@@ -60,6 +60,7 @@ const emit = defineEmits(['close']);
   background-color: var(--color-background-light-blue);
   border-bottom-left-radius: 8px;
   border-bottom-right-radius: 8px;
+  z-index: 1000;
 }
 
 .menu__link-box {

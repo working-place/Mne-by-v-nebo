@@ -6,6 +6,7 @@ import GrantsPage from '@/components/GrantsPage.vue';
 import UsefullMaterialPage from '@/components/UsefullMaterialPage.vue';
 import NewsPage from '@/components/NewsPage.vue';
 import GalleryPage from '@/components/GalleryPage.vue';
+import PrivacyPolicyPdfPage from '@/components/PrivacyPolicyPdfPage.vue';
 
 
 const router = createRouter({
@@ -41,6 +42,11 @@ const router = createRouter({
       path: '/gallery',
       name: 'gallery',
       component: GalleryPage,
+    },
+    {
+      path: '/privacy-policy',
+      name: 'privacy-policy',
+      component: PrivacyPolicyPdfPage,
     },
   ],
 })
