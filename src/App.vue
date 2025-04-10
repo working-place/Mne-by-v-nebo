@@ -1,6 +1,6 @@
 <script>
-import NavigationMenu from './components/NavigationMenu.vue';
-import FooterBlock from './components/FooterBlock.vue';
+import NavigationMenu from './components/layout/NavigationMenu.vue';
+import FooterBlock from './components/layout/FooterBlock.vue';
 
 export default {
   components: {

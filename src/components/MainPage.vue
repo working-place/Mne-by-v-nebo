@@ -1,5 +1,5 @@
 <script setup>
-import MainScreen from './static-components/MainScreen.vue';
+import MainScreen from './ui/MainScreen.vue';
 </script>
 
 <template>

@@ -1,10 +1,5 @@
 <script setup>
-
-import NavLinks from './dinamic-components/NavLinks.vue';
-// import VuePdfEmbed from 'vue-pdf-embed';
-
-// import privacyPolicyPdf from '/docs/Политика конфиденциальности.pdf';
-// import PrivacyPolicyPdfPage from './PrivacyPolicyPdfPage.vue';
+import NavLinks from './NavLinks.vue';
 
 </script>
 

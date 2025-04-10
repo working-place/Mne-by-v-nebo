@@ -1,7 +1,8 @@
 <script setup>
 import { ref } from 'vue';
 import { useRoute } from 'vue-router';
-import NavLinks from './dinamic-components/NavLinks.vue';
+import NavLinks from './NavLinks.vue';
+
 
 const isOpen = ref(false);
 const route = useRoute()
