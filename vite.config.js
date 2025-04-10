@@ -12,6 +12,16 @@ export default defineConfig({
     vueJsx(),
     vueDevTools(),
   ],
+  css: {
+    preprocessorOptions: {
+      scss: {
+        additionalData: `
+        @use "@/assets/scss/mixins.scss" as *;
+        @use "@/assets/scss/variables.scss" as *;
+        `
+      }
+    }
+  },
   resolve: {
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url))

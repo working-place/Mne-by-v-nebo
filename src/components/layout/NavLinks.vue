@@ -45,7 +45,8 @@ const emit = defineEmits(['close']);
   </nav>
 </template>
 
-<style scoped>
+<style scoped lang="scss">
+@use '@/assets/scss/mixins.scss' as *;
 
 .active {
   font-weight: bold;
@@ -59,11 +60,11 @@ const emit = defineEmits(['close']);
   background-color: var(--color-background-light-blue);
   border-bottom-left-radius: 8px;
   border-bottom-right-radius: 8px;
+  z-index: 1000;
 }
 
 .menu__link-box {
-  display: flex;
-  flex-direction: column;
+  @include display-flex-column-center;
   list-style: none;
   padding: 0;
   margin: 0;

@@ -1,5 +1,4 @@
 <script setup>
-
 import NavLinks from './NavLinks.vue';
 
 </script>
@@ -22,12 +21,15 @@ import NavLinks from './NavLinks.vue';
       <h2>Документы</h2>
       <ul class="footer__docs-list">
         <li class="footer__docs-item">
-          <RouterLink to="/" :class="{ active: $route.path === ('/') }" class="footer__docs-item">
+          <RouterLink to="/privacy-policy" :class="{ active: $route.path === '/privacy-policy' }" class="footer__docs-item">
             Политика конфиденциальности
           </RouterLink>
+          <!-- <div v-if="$route.path === '/privacy-policy'" class="pdf-container">
+            <VuePdfEmbed :source="privacyPolicyPdf" />
+          </div> -->
         </li>
         <li class="footer__docs-item">
-          <RouterLink to="/" :class="{ active: $route.path === ('/') }" class="footer__docs-item">
+          <RouterLink to="" :class="{ active: $route.path === ('/agreement') }" class="footer__docs-item">
             Пользовательское соглашение
           </RouterLink>
         </li>
@@ -62,6 +64,13 @@ import NavLinks from './NavLinks.vue';
 </template>
 
 <style scoped>
+/* .pdf-container {
+  max-height: 500px;
+  overflow-y: auto;
+  margin-top: 10px;
+  border: 1px solid #eee;
+  border-radius: 4px;
+} */
 .active {
   font-weight: bold;
 }
