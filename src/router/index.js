@@ -7,7 +7,7 @@ import UsefullMaterialPage from '@/components/UsefullMaterialPage.vue';
 import NewsPage from '@/components/NewsPage.vue';
 import GalleryPage from '@/components/GalleryPage.vue';
 import PrivacyPolicyPdfPage from '@/components/PrivacyPolicyPdfPage.vue';
-
+import UserAgreementPdf from '@/components/userAgreementPdf.vue';
 
 const router = createRouter({
   history: createWebHistory(),
@@ -48,12 +48,12 @@ const router = createRouter({
       name: 'privacy-policy',
       component: PrivacyPolicyPdfPage,
     },
+    {
+      path: '/user-agreement',
+      name: 'user-agreement',
+      component: UserAgreementPdf,
+    },
   ],
 })
 
 export default router
-
-      // route level code-splitting
-      // this generates a separate chunk (About.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
-      // component: () => import('../views/AboutView.vue'),

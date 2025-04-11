@@ -1,14 +1,14 @@
 <script setup>
 import VuePdfEmbed from 'vue-pdf-embed';
 
-import privacyPolicyPdf from '/docs/Политика конфиденциальности.pdf';
+import userAgreementPdf from '/docs/Пользовательское соглашение.pdf';
 </script>
 
 <template>
   <div class="pdf-container">
-    <h1>Политика конфиденциальности</h1>
-  <div v-if="$route.path === '/privacy-policy'" class="pdf-container__file">
-    <VuePdfEmbed :source="privacyPolicyPdf" />
+    <h1>Пользовательское соглашение</h1>
+  <div v-if="$route.path === '/user-agreement'" class="pdf-container__file">
+    <VuePdfEmbed :source="userAgreementPdf" />
   </div>
 
   </div>

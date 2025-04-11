@@ -27,7 +27,8 @@ import NavLinks from './NavLinks.vue';
           </RouterLink>
         </li>
         <li class="footer__docs-item">
-          <RouterLink to="" :class="{ active: $route.path === ('/agreement') }" class="footer__docs-item">
+          <RouterLink to="/user-agreement" :class="{ active: $route.path === ('/user-agreement') }"
+            class="footer__docs-item">
             Пользовательское соглашение
           </RouterLink>
         </li>
