@@ -45,7 +45,8 @@ const isActive = (path) => {
   }
 
   &__box {
-    @include d-flex-jc-space-between-ai-center;
+    @include display-flex-justify-content-center;
+    justify-content: space-between;
   }
 
   &__box.menu-open {

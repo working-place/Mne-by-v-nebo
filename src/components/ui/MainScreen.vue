@@ -36,7 +36,7 @@
 
   &__title-box,
   &__description-box {
-    @include display-flex-center;
+    @include display-flex-center-center;
     width: 100%;
     color: var(--color-text-light);
   }
@@ -55,6 +55,5 @@
     width: 286px;
     height: 325px;
   }
-
 }
 </style>
