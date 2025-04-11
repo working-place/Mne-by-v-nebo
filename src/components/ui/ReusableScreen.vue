@@ -4,17 +4,22 @@
 <template>
   <div class="main-screen">
     <div class="main-screen__title-box">
-      <h1 class="main-screen__title">AHO<br>«Воспитание<br>для всех»</h1>
+      <h1 class="main-screen__title">
+        <slot name="title"></slot>
+      </h1>
     </div>
     <div class="main-screen__description-box">
-      <span class="main-screen__description">Содействие развитию просветительской деятельности детей, их семей и
-        молодёжи в области образования, культуры и физической культуры</span>
+      <span class="main-screen__description">
+        <slot name="description"></slot>
+      </span>
     </div>
-    <div class="main-screen__img"></div>
+    <div class="main-screen__img-box">
+      <slot name="img"></slot>
+    </div>
   </div>
 </template>
 
-<style scoped lang="scss">
+<style lang="scss">
 @use '@/assets/scss/mixins.scss' as *;
 
 .main-screen {
@@ -26,7 +31,6 @@
   width: 100%;
   min-height: 600px;
   height: fit-content;
-  background-color: var(--color-background-purple);
   top: 62px;
   padding-top: 40px;
   padding-right: 20px;
@@ -49,9 +53,9 @@
     text-align: center;
   }
 
+  &__img-box,
   &__img {
     @include cover-center-no-repeat-img;
-    background-image: url(/img/main-screen-photo-boy.png);
     width: 286px;
     height: 325px;
   }
