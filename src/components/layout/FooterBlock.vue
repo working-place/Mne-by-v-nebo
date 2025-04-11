@@ -66,7 +66,7 @@ import NavLinks from './NavLinks.vue';
 @use '@/assets/scss/mixins.scss' as *;
 
 h2 {
-  @include h2-mobile-uppercase;
+  @include h2-mobile-uppercase-footer;
   color: var(--color-text-purple);
 }
 
