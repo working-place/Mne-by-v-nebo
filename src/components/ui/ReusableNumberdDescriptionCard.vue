@@ -53,7 +53,6 @@ defineProps({
   }
 
   &__img-box {
-    // @include cover-center-no-repeat-img;
     display: flex;
     align-items: flex-end;
     justify-content: flex-end;
