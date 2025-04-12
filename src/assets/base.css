@@ -50,8 +50,12 @@ main {
   align-items: center;
   min-width: var(--min-width);
   max-width: var(--max-width);
+  width: 100%;
   gap: 40px;
+  padding-right: 17px;
+  padding-left: 17px;
   height: fit-content;
+  padding-bottom: 40px;
 }
 
 h1,
@@ -71,7 +75,6 @@ h2 {
 
 h3 {
   font-family: var(--font-family-nunito);
-  font-weight: 600;
   font-size: 16px;
   line-height: 1.5;
 }

@@ -26,6 +26,10 @@
   line-height: 1.5;
 }
 
+@mixin h3-mobile-card {
+
+}
+
 @mixin display-flex-center-center {
   display: flex;
   justify-content: center;
@@ -50,7 +54,9 @@
 
 @mixin block-mobile {
   display: flex;
+  width: 100%;
   flex-direction: column;
+  height: fit-content;
   align-items: center;
   padding-left: 17px;
   padding-right: 17px;
@@ -60,6 +66,11 @@
 @mixin minmax-width-mobile {
   min-width: 320px;
   max-width: 362px;
+}
+
+@mixin minmax-width-mobile-block {
+  max-width: 320px;
+  min-height: 206px;
 }
 
 @mixin cover-center-no-repeat-img {
