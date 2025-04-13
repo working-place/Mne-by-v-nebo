@@ -111,6 +111,16 @@
   border-bottom-right-radius: 8px;
 }
 
+@mixin btn-purple-default {
+  background-color: var(--color-background-purple);
+  color: var(--color-text-light);
+}
+
+@mixin btn-yellow-default {
+  background-color: var(--color-background-yellow);
+  color: var(--color-text-dark);
+}
+
 // @mixin border-top-radius-8 {
 
 // }

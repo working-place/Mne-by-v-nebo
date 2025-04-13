@@ -9,6 +9,12 @@
   --color-background-lavender: rgb(202, 187, 255);
   --color-background-light-blue: rgb(245, 245, 253);
 
+  --color-hover-yellow: rgb(249, 194, 41);
+  --color-pressed-yellow: rgb(255, 230, 160);
+  --color-hover-purple: rgb(95, 68, 186);
+  --color-pressed-purple: rgb(134, 105, 233);
+  --color-disabled: rgb(227, 227, 227);
+
   --color-text-dark: rgb(0, 0, 0);
   --color-text-light: rgb(255, 255, 255);
   --color-text-purple: rgb(115, 82, 229);

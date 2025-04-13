@@ -7,7 +7,7 @@ import UsefullMaterialPage from '@/components/UsefullMaterialPage.vue';
 import NewsPage from '@/components/NewsPage.vue';
 import GalleryPage from '@/components/GalleryPage.vue';
 import PrivacyPolicyPdfPage from '@/components/PrivacyPolicyPdfPage.vue';
-import UserAgreementPdf from '@/components/userAgreementPdf.vue';
+import UserAgreementPdf from '@/components/UserAgreementPdf.vue';
 
 const router = createRouter({
   history: createWebHistory(),
