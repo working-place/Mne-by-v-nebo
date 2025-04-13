@@ -1,6 +1,85 @@
 <script setup>
-import ReusableNumberdDescriptionCard from './ui/ReusableNumberdDescriptionCard.vue';
+import { computed, ref } from 'vue';
+import RouterLinkButton from './ui/RouterLinkButton.vue';
+import NumberedCard from './ui/NumberedCard.vue';
 import ReusableScreen from './ui/ReusableScreen.vue';
+import NewsCard from './ui/NewsCard.vue';
+
+const cards = [
+  {
+    number: 1,
+    description: 'Содействие развитию просветительской деятельности детей, их семей и молодёжи в области образования, культуры и физической культуры',
+    img: {
+      src: '/img/book.png',
+      alt: 'Книга'
+    },
+    paddingBottom: '75px',
+  },
+  {
+    number: 2,
+    description: 'Социальная адаптация детей-инвалидов, людей с ограниченными возможностями здоровья',
+    img: {
+      src: '/img/heart.png',
+      alt: 'Сердце'
+    },
+    paddingBottom: null,
+  },
+  {
+    number: 3,
+    description: 'Проведение групповых и индивидуальных консультаций, тренингов и семинаров для населения по вопросам реализации социально значимых и общественных инициатив, участия в проектах',
+    img: {
+      src: '/img/star.png',
+      alt: 'Звезда'
+    },
+    paddingBottom: null,
+  },
+];
+
+const news = ref([
+  {
+    id: 1,
+    tag: 'хештег',
+    img: {
+      src: '/img/charity.jpeg',
+      alt: 'Благотоварительность'
+    },
+    text: 'Благотворительный фонд «Олимпия»',
+    date: '05.02.25',
+  },
+  {
+    id: 2,
+    tag: 'хештег',
+    img: {
+      src: '/img/proforientacia.jpeg',
+      alt: 'Профориентация'
+    },
+    text: 'Профориентация и БАС',
+    date: '05.02.25',
+  },
+  {
+    id: 3,
+    tag: 'хештег',
+    img: {
+      src: '/img/otkritie-granta.jpeg',
+      alt: 'Открытие гранта'
+    },
+    text: 'Открытие гранта «Мне бы в небо»',
+    date: '11.09.24',
+  },
+  {
+    id: 4,
+    tag: 'хештег',
+    img: {
+      src: '/img/proekt.jpeg',
+      alt: 'Завершение проекта'
+    },
+    text: 'В Новороссийске завершается проект «Школа для родителей особенного ребенка»',
+    date: '26.12.24',
+  },
+]);
+
+const firstTwoNews = computed(() => news.value.slice(0, 2));
+
 </script>
 
 <template>
@@ -20,37 +99,15 @@ import ReusableScreen from './ui/ReusableScreen.vue';
 
     <div class="description">
       <h2>Основное направление деятельности</h2>
-      <ReusableNumberdDescriptionCard padding-bottom="75px">
-        <template v-slot:number>1</template>
-        <template v-slot:description>
-          Содействие развитию просветительской деятельности детей, их семей и молодёжи в области образования, культуры и
-          физической культуры
+      <NumberedCard v-for="card in cards" :key="card.number" :padding-bottom="card.paddingBottom">
+        <template v-slot:number>{{ card.number }}</template>
+        <template v-slot:description>{{ card.description }}
         </template>
         <template v-slot:img>
-          <img src="/img/book.png" alt="Книга" class="description-card__img description-card__img_size-1">
+          <img :src="card.img.src" :alt="card.img.alt"
+            :class="`description-card__img description-card__img_size-${card.number}`">
         </template>
-      </ReusableNumberdDescriptionCard>
-
-      <ReusableNumberdDescriptionCard>
-        <template v-slot:number>2</template>
-        <template v-slot:description>
-          Социальная адаптация детей-инвалидов, людей с ограниченными возможностями здоровья
-        </template>
-        <template v-slot:img>
-          <img src="/img/heart.png" alt="Книга" class="description-card__img description-card__img_size-2">
-        </template>
-      </ReusableNumberdDescriptionCard>
-
-      <ReusableNumberdDescriptionCard padding-bottom="75px">
-        <template v-slot:number>3</template>
-        <template v-slot:description>
-          Проведение групповых и индивидуальных консультаций, тренингов и семинаров для населения по вопросам реализации
-          социально значимых и общественных инициатив, участия в проектах
-        </template>
-        <template v-slot:img>
-          <img src="/img/star.png" alt="Книга" class="description-card__img description-card__img_size-3">
-        </template>
-      </ReusableNumberdDescriptionCard>
+      </NumberedCard>
     </div>
 
     <!-- вставить ссылку на Устав -->
@@ -79,6 +136,26 @@ import ReusableScreen from './ui/ReusableScreen.vue';
           «Педагог-психолог Кубани» 2023, «Лучший педагог Новороссийска» 2024. Автор научных и методических работ,
           руководитель федеральных инновационных проектов.</span>
       </div>
+    </div>
+
+    <!-- сделать блок грамоты -->
+
+    <div class="news">
+      <h2>Новости</h2>
+      <NewsCard v-for="info in firstTwoNews" :key="info.id">
+        <template v-slot:img>
+          <img :src="info.img.src" :alt="info.img.alt" class="tag-card__img">
+        </template>
+        <template v-slot:tag>{{ info.tag }}</template>
+        <template v-slot:text>{{ info.text }}</template>
+        <template v-slot:date>{{ info.date }}</template>
+      </NewsCard>
+
+
+      <RouterLinkButton :to="{ name: 'news' }">
+        <template v-slot:text>ко всем новостям</template>
+      </RouterLinkButton>
+
     </div>
 
   </main>
@@ -180,5 +257,20 @@ h2 {
     min-width: 150px;
     min-height: 150px;
   }
+}
+
+.tag-card {
+  &__img {
+    @include cover-center-no-repeat-img;
+    width: 100%;
+    height: 168px;
+    border-top-right-radius: 8px;
+    border-top-left-radius: 8px;
+  }
+}
+
+.news {
+  @include block-mobile;
+  padding: 0;
 }
 </style>

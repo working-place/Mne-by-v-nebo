@@ -28,7 +28,7 @@
 
   justify-content: flex-end;
   min-width: var(--min-width);
-  width: 100%;
+  width: calc(100% + 34px);
   min-height: 600px;
   height: fit-content;
   top: 62px;
@@ -37,6 +37,8 @@
   padding-left: 20px;
   gap: 24px;
   border-radius: 12px;
+  margin-left: -17px;
+  margin-right: -17px;
 
   &__title-box,
   &__description-box {
