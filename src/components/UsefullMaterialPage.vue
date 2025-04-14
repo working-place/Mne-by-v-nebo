@@ -2,6 +2,7 @@
 import { ref, onMounted } from 'vue';
 import ReusableScreen from './ui/ReusableScreen.vue';
 import LinkCard from './ui/LinkCard.vue';
+import InfoCard from './ui/InfoCard.vue';
 
 
 const slides = ref([
@@ -111,10 +112,14 @@ onMounted(() => {
       </template>
     </ReusableScreen>
 
+    <InfoCard imageUrl="public\img\usefull-material-photo-boy2.png" title="Литература для специалистов"
+      description="Представляем подборку книг и методических материалов для специалистов в области детского образования.  Здесь вы найдете актуальные исследования, практические руководства и вдохновляющие примеры." />
+
     <!-- Основной контейнер слайдера -->
     <div class="slider-container">
       <!-- Область слайдов с обработчиками свайпа -->
-      <div class="slider" ref="slider" @touchstart="handleTouchStart" @touchmove="handleTouchMove" @touchend="handleTouchEnd">
+      <div class="slider" ref="slider" @touchstart="handleTouchStart" @touchmove="handleTouchMove"
+        @touchend="handleTouchEnd">
         <!-- Рендерим каждую плашку как компонент Card -->
         <LinkCard v-for="(slide, index) in slides" :key="index" :title="slide.title" :description="slide.description"
           :linkUrl="slide.linkUrl" :linkText="slide.linkText" :paddingBottom="'120px'">
