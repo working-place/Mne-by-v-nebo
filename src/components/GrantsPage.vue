@@ -99,7 +99,7 @@ const toggleItem = (index) => {
         и повышая вовлеченность детей
       </template>
       <template v-slot:img>
-        <img src="/img/grants-photo-boy.png" alt="" class="main-screen__img">
+        <img src="/img/grants-photo-boy.png" alt="Изображение мальчика" class="main-screen__img">
       </template>
     </ReusableScreen>
 
@@ -254,7 +254,8 @@ const toggleItem = (index) => {
 
 /* Кнопка "Все гранты" */
 .show-all-btn {
-  @include btn-purple-default;
+  background-color: #7352E5;
+  color: #ffffff;
   display: block;
   width: 100%;
   margin: 24px auto 0;
