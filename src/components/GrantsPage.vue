@@ -17,7 +17,7 @@ const items = ref([
     title: '«Грант главы города»',
     subtitle: 'Проект «Разные возможности — равные права» 2023',
     content: 'Проект «Разные возможности – равные права» представляет собой комплексную программу занятий по ранней профориентации для детей-инвалидов и детей с ОВЗ 7-14 лет. Программа включает тренинги с педагогом-психологом, игровые занятия, экскурсии на предприятия Новороссийска и мастер-классы. Особое внимание уделяется вовлечению родителей в процесс поддержки детей. Проект помогает детям узнать о различных профессиях, необходимых навыках и возможностях трудоустройства. Также планируется долгосрочное сотрудничество с учреждениями СПО и социальными партнерами. Этот опыт может быть полезен другим школам, способствуя успешной адаптации и социализации детей с ОВЗ.',
-    additionalText: 'Результат:',
+    additionalText: '',
     image: new URL('/public/img/grants-photo-boy2.png', import.meta.url).href,
     isOpen: false
   },
@@ -25,7 +25,7 @@ const items = ref([
     title: '«Гранд главы города»',
     subtitle: 'Проект «Мне бы в небо» 2024',
     content: 'Проект «Мне бы в небо» направлен на формирование предпрофессиональных компетенций у школьников 8-11 классов в области программирования, управления и технического сопровождения беспилотных летательных аппаратов. Он включает образовательные модули по теории, сборке, программированию и пилотированию дронов, а также соревнования по управлению квадрокоптерами. Учащиеся получат практические навыки работы с БПЛА, развивая как hard-skills, так и soft-skills. Реализация проекта повысит интерес подростков к техническим дисциплинам и поможет в профессиональном самоопределении. Дрон-рейсинг и обучение беспилотному пилотированию могут сыграть ключевую роль в выборе будущей профессии, связанной с инженерией, робототехникой и искусственным интеллектом.',
-    additionalText: 'Результат:',
+    additionalText: '',
     image: new URL('/public/img/grants-photo-boy2.png', import.meta.url).href,
     isOpen: false
   },
@@ -33,7 +33,7 @@ const items = ref([
     title: 'Фонд президентских грантов',
     subtitle: 'Проект «Школа для родителей особенного ребенка» 2024',
     content: 'Проект направлен на оказание психологической и информационной помощи семьям, воспитывающим детей с инвалидностью. В нем участвуют 12 семей (21 родитель и 15 детей), включая неполные семьи. В рамках проекта родители проходят практико-ориентированное обучение по коррекционно-развивающему взаимодействию с детьми. Разработаны методические рекомендации, программы тренингов и занятий для специалистов и родителей. Проект поможет семьям эффективно справляться с воспитательными и реабилитационными задачами. По итогам работы будет создан консультационный центр «Точка опоры» для поддержки родителей и специалистов.',
-    additionalText: 'Результат:',
+    additionalText: '',
     image: new URL('/public/img/grants-photo-boy2.png', import.meta.url).href,
     isOpen: false
   },
@@ -41,7 +41,7 @@ const items = ref([
     title: 'СОТ',
     subtitle: 'Проект «Мне бы в небо» 2024',
     content: 'Проект «Мне бы в небо» направлен на формирование предпрофессиональных компетенций школьников 8-11 классов в области программирования, управления и технического сопровождения беспилотных летательных аппаратов (БПЛА). Программа включает образовательные модули по теории, сборке, настройке, программированию и управлению дронами, а также соревнования по пилотированию. Учащиеся на практике изучат конструкцию и принципы работы БПЛА, освоят навыки пайки, 3D-печати и программирования. Проект способствует популяризации технических дисциплин и профессиональному самоопределению подростков. Полученные hard- и soft-skills помогут участникам успешно развиваться в IT-сфере и инженерных специальностях.',
-    additionalText: 'Результат:',
+    additionalText: '',
     image: new URL('/public/img/grants-photo-boy2.png', import.meta.url).href,
     isOpen: false
   },
@@ -115,8 +115,8 @@ const toggleItem = (index) => {
             <h3 v-if="item.isOpen" class="item-subtitle">{{ item.subtitle }}</h3>
           </div>
 
-          <!-- Стрелка в круге -->
-          <div class="arrow-circle" :class="{ 'is-open': item.isOpen }" @click.stop="toggleItem(index)">
+          <!-- Стрелка в круге - в заголовке (справа) -->
+          <div class="arrow-circle header-arrow" :class="{ 'is-open': item.isOpen }" @click.stop="toggleItem(index)">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
               <path d="M6 9L12 15L18 9" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
             </svg>
@@ -127,6 +127,14 @@ const toggleItem = (index) => {
           <div v-show="item.isOpen" class="accordion-content">
             <p class="main-text">{{ item.content }}</p>
             <p class="additional-text">{{ item.additionalText }}</p>
+
+            <!-- Стрелка в круге - в контенте (слева внизу) -->
+            <div class="arrow-circle content-arrow left" :class="{ 'is-open': item.isOpen }"
+              @click.stop="toggleItem(index)">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+                <path d="M6 9L12 15L18 9" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+              </svg>
+            </div>
           </div>
         </transition>
       </div>
@@ -143,12 +151,6 @@ const toggleItem = (index) => {
 
 .main-screen {
   background-color: var(--color-background-purple);
-}
-
-.grants-accordion {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 12px;
 }
 
 .accordion-item {
@@ -208,6 +210,27 @@ const toggleItem = (index) => {
   transform: rotate(180deg);
   color: #000000;
 }
+/* Стрелка в заголовке (справа) */
+.header-arrow {
+  position: static;
+  margin-left: auto;
+}
+
+/* Стрелка в контенте (слева внизу) */
+.content-arrow.left {
+  margin: 12px 0 0 12px;
+  display: none;
+}
+
+/* Скрываем стрелку в заголовке при открытом состоянии */
+.accordion-item.is-open .header-arrow {
+  display: none;
+}
+
+/* Показываем стрелку в контенте при открытом состоянии */
+.accordion-item.is-open .content-arrow {
+  display: flex;
+}
 
 /* Стили для картинок */
 .top-image {
@@ -222,24 +245,20 @@ const toggleItem = (index) => {
 /* Стили для контента */
 .accordion-content {
   padding: 0 12px 12px;
+  
 }
 
-.main-text,
 .additional-text {
-  font-size: 15px;
-  line-height: 1.5;
-  color: #444;
-  margin: 0;
+  margin-top: 16px;
 }
 
 /* Кнопка "Все гранты" */
 .show-all-btn {
+  @include btn-purple-default;
   display: block;
   width: 100%;
   margin: 24px auto 0;
   padding: 12px 24px;
-  background: #7352E5;
-  color: #FFFFFF;
   border: none;
   border-radius: 30px;
   font-family: var(--font-family-next-art);
