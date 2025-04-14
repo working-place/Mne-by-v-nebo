@@ -1,7 +1,7 @@
 <template>
     <div class="card" :style="{ paddingBottom: paddingBottom }">
         <div class="card-content__text">
-            <h2 class="card-title">{{ title }}</h2>
+            <h3 class="card-title">{{ title }}</h3>
             <p class="card-description">{{ description }}</p>
             <a :href="linkUrl" class="card-link">{{ linkText }}</a>
         </div>
@@ -50,16 +50,14 @@ defineProps({
     background-color: var(--color-background-light-blue);
     border-radius: var(--cards-border-radius);
 
-    
-
     &-title {
-        margin: 0 0 12px 0;
+        // margin: 0 0 12px 0;
         color: #000000;
         font-size: 16px;
     }
 
     &-description {
-        margin: 0 0 16px 0;
+        // margin: 0 0 16px 0;
         color: #000000;
         font-size: 16px;
         line-height: 1.4;
