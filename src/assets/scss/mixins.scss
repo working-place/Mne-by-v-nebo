@@ -111,14 +111,22 @@
   border-bottom-right-radius: 8px;
 }
 
-@mixin btn-purple-default {
-  background-color: var(--color-background-purple);
-  color: var(--color-text-light);
-}
+@mixin btn-disable {
+  background-color: var(--color-disabled);
+  color: var(--color-text-gray);
+  cursor: not-allowed;
+  pointer-events: none;
 
-@mixin btn-yellow-default {
-  background-color: var(--color-background-yellow);
-  color: var(--color-text-dark);
+  &:not(.button_disabled) {
+    &:active {
+      background-color: var(--color-pressed-purple);
+      transition: 0.3s;
+    }
+  }
+
+  &:hover {
+    background-color: var(--color-disabled);
+  }
 }
 
 // @mixin border-top-radius-8 {

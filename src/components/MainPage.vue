@@ -152,7 +152,7 @@ const firstTwoNews = computed(() => news.value.slice(0, 2));
       </NewsCard>
 
 
-      <RouterLinkButton :to="{ name: 'news' }">
+      <RouterLinkButton :to="{ name: 'news' }" :disabled="false">
         <template v-slot:text>ко всем новостям</template>
       </RouterLinkButton>
 
@@ -273,4 +273,5 @@ h2 {
   @include block-mobile;
   padding: 0;
 }
+
 </style>

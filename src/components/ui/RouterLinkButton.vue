@@ -3,12 +3,32 @@ defineProps({
   to: {
     type: [String, Object],
     required: true,
-  }
+  },
+  disabled: {
+    type: Boolean,
+    default: false
+  },
+  bgColor: {
+    type: String,
+    default: 'var(--color-background-purple)',
+  },
+  textColor: {
+    type: String,
+    default: 'var(--color-text-light)',
+  },
+  hoverColor: {
+    type: String,
+    default: 'var(--color-hover-purple)',
+  },
 })
 </script>
 
 <template>
-  <RouterLink class="button" :to="to">
+  <RouterLink class="button" :to="to" :class="{ 'button_disabled': disabled }" :aria-disabled="disabled" :style="{
+    '--button_bg-color': bgColor,
+    '--button_text-color': textColor,
+    '--button_hover-color': hoverColor,
+  }" @click.prevent="disabled ? null : $emit('click')">
     <h2>
       <slot name="text"></slot>
     </h2>
@@ -25,7 +45,8 @@ h2 {
 
 .button {
   @include display-flex-center-center;
-  @include btn-purple-default;
+  background-color: var(--button_bg-color);
+  color: var(--button_text-color);
   width: 100%;
   height: fit-content;
   padding: 10px;
@@ -33,5 +54,15 @@ h2 {
   border: none;
   border-radius: 60px;
   text-decoration: none;
+
+  @media (hover :hover) {
+    &:hover {
+      background-color: var(--button_hover-color);
+    }
+  }
+
+  &_disabled {
+    @include btn-disable;
+  }
 }
 </style>
