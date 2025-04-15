@@ -1,10 +1,10 @@
 <script setup>
-import { ref, onMounted } from 'vue';
 import ReusableScreen from './ui/ReusableScreen.vue';
 import LinkCard from './ui/LinkCard.vue';
+import InfoCard from './ui/InfoCard.vue';
+import Slider from './ui/Slider.vue';
 
-
-const slides = ref([
+const bookSlides = [
   {
     title: 'Взросление с умом:  Путеводитель по детскому развитию',
     description: 'Узнайте, как создать гармоничные отношения с вашим ребенком и помочь ему раскрыть свой потенциал',
@@ -36,62 +36,7 @@ const slides = ref([
     linkText: 'Источник',
     image: '/img/heart.png'
   },
-]);
-
-// Текущий активный слайд
-const currentIndex = ref(0);
-// Ссылка на DOM-элемент слайдера
-const slider = ref(null);
-// Координаты для обработки свайпа
-const touchStartX = ref(0);
-const touchEndX = ref(0);
-
-// Переход к следующему слайду
-const nextSlide = () => {
-  currentIndex.value = (currentIndex.value + 1) % slides.value.length;
-  updateSliderPosition();
-};
-
-// Переход к предыдущему слайду
-const prevSlide = () => {
-  currentIndex.value = (currentIndex.value - 1 + slides.value.length) % slides.value.length;
-  updateSliderPosition();
-};
-
-// Обновление позиции слайдера
-const updateSliderPosition = () => {
-  if (slider.value) {
-    const slideWidth = slider.value.children[0].offsetWidth;
-    slider.value.style.transform = `translateX(-${currentIndex.value * slideWidth}px)`;
-  }
-};
-
-// Обработка начала касания
-const handleTouchStart = (e) => {
-  touchStartX.value = e.touches[0].clientX;
-};
-
-// Обработка движения пальцем
-const handleTouchMove = (e) => {
-  touchEndX.value = e.touches[0].clientX;
-};
-
-// Обработка окончания касания
-const handleTouchEnd = () => {
-  // Если свайп влево более 50px
-  if (touchStartX.value - touchEndX.value > 50) {
-    nextSlide();
-  }
-  // Если свайп вправо более 50px
-  if (touchStartX.value - touchEndX.value < -50) {
-    prevSlide();
-  }
-};
-
-// Инициализация после монтирования компонента
-onMounted(() => {
-  updateSliderPosition();
-});
+];
 </script>
 
 <template>
@@ -111,26 +56,20 @@ onMounted(() => {
       </template>
     </ReusableScreen>
 
-    <!-- Основной контейнер слайдера -->
-    <div class="slider-container">
-      <!-- Область слайдов с обработчиками свайпа -->
-      <div class="slider" ref="slider" @touchstart="handleTouchStart" @touchmove="handleTouchMove"
-        @touchend="handleTouchEnd">
-        <!-- Рендерим каждую плашку как компонент Card -->
-        <LinkCard v-for="(slide, index) in slides" :key="index" :title="slide.title" :description="slide.description"
-          :linkUrl="slide.linkUrl" :linkText="slide.linkText" :paddingBottom="'120px'">
-          <!-- Слот для изображения в карточке -->
-          <template #image>
-            <img :src="slide.image" :alt="slide.title" width="176">
-          </template>
-        </LinkCard>
-      </div>
+    <InfoCard imageUrl="public\img\usefull-material-photo-boy2.png" title="Литература для специалистов"
+      description="Представляем подборку книг и методических материалов для специалистов в области детского образования.  Здесь вы найдете актуальные исследования, практические руководства и вдохновляющие примеры." />
 
-      <!-- Контролы для мобильной навигации -->
-      <div class="controls">
-        <button @click="prevSlide" class="arrow left">←</button>
-        <button @click="nextSlide" class="arrow right">→</button>
-      </div>
+    <div class="slider-container">
+      <Slider :items="bookSlides">
+        <template #default="{ items }">
+          <LinkCard v-for="(slide, index) in items" :key="index" :title="slide.title" :description="slide.description"
+            :linkUrl="slide.linkUrl" :linkText="slide.linkText" :paddingBottom="'120px'">
+            <template #image>
+              <img :src="slide.image" :alt="slide.title" width="176">
+            </template>
+          </LinkCard>
+        </template>
+      </Slider>
     </div>
   </main>
 </template>
@@ -154,50 +93,10 @@ onMounted(() => {
   object-fit: cover;
 }
 
-/* Основной контейнер */
 .slider-container {
   position: relative;
   max-width: 100%;
   overflow: hidden;
   padding: 20px 0;
-}
-
-/* Контейнер слайдов */
-.slider {
-  display: flex;
-  transition: transform 0.5s ease;
-  /* Плавная анимация */
-  width: 100%;
-}
-
-/* Стили для каждой карточки */
-.card {
-  min-width: 80%;
-  /* Ширина карточки 80% от экрана */
-  // margin: 0 10%;
-  /* Отступы по бокам */
-  flex-shrink: 0;
-  /* Запрещаем сжатие */
-  box-sizing: border-box;
-}
-
-/* Контейнер для кнопок навигации */
-.controls {
-  display: flex;
-  justify-content: center;
-  gap: 20px;
-  margin-top: 20px;
-}
-
-/* Стили для кнопок-стрелок */
-.arrow {
-  background: #4a6bdf;
-  color: white;
-  border: none;
-  border-radius: 50%;
-  width: 40px;
-  height: 40px;
-  font-size: 20px;
-  cursor: pointer;
 }
 </style>

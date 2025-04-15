@@ -1,17 +1,6 @@
-<template>
-    <div class="card" :style="{ paddingBottom: paddingBottom }">
-        <div class="card-content__text">
-            <h3 class="card-title">{{ title }}</h3>
-            <p class="card-description">{{ description }}</p>
-            <a :href="linkUrl" class="card-link">{{ linkText }}</a>
-        </div>
-        <div class="card__img-box">
-            <slot name="image"></slot>
-        </div>
-    </div>
-</template>
-
 <script setup>
+import { ref } from 'vue';
+
 defineProps({
     title: {
         type: String,
@@ -23,18 +12,36 @@ defineProps({
     },
     linkUrl: {
         type: String,
-        default: "#"
+        required: true
     },
     linkText: {
         type: String,
-        default: "Источник"
+        required: true
     },
     paddingBottom: {
         type: String,
         default: '0'
-    }
-})
+    },
+});
+
+const root = ref(null);
+defineExpose({
+    root
+});
 </script>
+
+<template>
+    <div class="card" :style="{ paddingBottom: paddingBottom }" ref="root">
+        <div class="card-content__text">
+            <h3 class="card-title">{{ title }}</h3>
+            <p class="card-description">{{ description }}</p>
+            <a :href="linkUrl" class="card-link">{{ linkText }}</a>
+        </div>
+        <div class="card__img-box">
+            <slot name="image"></slot>
+        </div>
+    </div>
+</template>
 
 <style scoped lang="scss">
 @use '@/assets/scss/mixins.scss' as *;
@@ -43,21 +50,20 @@ defineProps({
     @include display-flex-column-center;
     position: relative;
     max-width: 400px;
-    width: 100%;
     min-height: 206px;
     padding: 36px 30px;
     gap: 10px;
     background-color: var(--color-background-light-blue);
     border-radius: var(--cards-border-radius);
+    flex-shrink: 0;
+    box-sizing: border-box;
 
     &-title {
-        // margin: 0 0 12px 0;
         color: #000000;
         font-size: 16px;
     }
 
     &-description {
-        // margin: 0 0 16px 0;
         color: #000000;
         font-size: 16px;
         line-height: 1.4;
