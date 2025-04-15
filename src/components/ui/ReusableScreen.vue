@@ -11,6 +11,10 @@ defineProps({
   blockHeight: {
     type: String,
     default: '600px',
+  },
+  useFlex: {
+    type: Boolean,
+    default: true,
   }
 })
 </script>
@@ -26,7 +30,8 @@ defineProps({
         <slot name="title"></slot>
       </h1>
     </div>
-    <div class="main-screen__description-box">
+    <div class="main-screen__description-box"
+    :class="{'flex-layout': useFlex}">
       <span class="main-screen__description">
         <slot name="description"></slot>
       </span>
@@ -62,7 +67,9 @@ defineProps({
 
   &__title-box,
   &__description-box {
-    @include display-flex-center-center;
+    // @include display-flex-center-center;
+    justify-content: center;
+  align-items: center;
     width: 100%;
     color: var(--main-screen_text-color);
   }
@@ -81,5 +88,9 @@ defineProps({
     width: 286px;
     height: 325px;
   }
+}
+
+.flex-layout {
+  display: flex;
 }
 </style>

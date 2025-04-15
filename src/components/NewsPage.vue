@@ -28,7 +28,7 @@ onMounted(loadNews);
   <main>
 
 
-  <ReusableScreen bgColor="var(--color-background-lavender)" textColor="var(--color-text-dark)" blockHeight="470px">
+  <ReusableScreen bgColor="var(--color-background-lavender)" textColor="var(--color-text-dark)" blockHeight="470px" :use-flex="false">
     <template v-slot:title>
       новости
     </template>
@@ -65,6 +65,7 @@ onMounted(loadNews);
   margin: 0;
 
   &__search-input {
+    min-width: 100%;
     padding: 10px;
     border: none;
     outline: none;
@@ -75,6 +76,7 @@ onMounted(loadNews);
 .news {
   @include block-mobile;
   @include minmax-width-mobile-block;
+  padding: 0;
 }
 
 .tag-card {
