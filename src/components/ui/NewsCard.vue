@@ -1,9 +1,15 @@
 <script setup>
+defineProps({
+  tagClass: {
+    type: String,
+    required: true
+  }
+});
 </script>
 
 <template>
   <div class="tag-card">
-    <div class="tag-card__tag-box">
+    <div class="tag-card__tag-box" :class="`tag-card__tag-box_${tagClass}`">
       <span class="tag-card__tag">
         <slot name="tag"></slot>
       </span>
@@ -43,8 +49,15 @@
     height: 32px;
     padding: 10px;
     font-size: 14px;
-    background-color: var(--color-background-lavender);
     border-radius: 60px;
+  }
+
+  &__tag-box_articles {
+    background-color: var(--color-background-lavender);
+  }
+
+  &__tag-box_video {
+    background-color: var(--color-background-red);
   }
 
   &__img-box {

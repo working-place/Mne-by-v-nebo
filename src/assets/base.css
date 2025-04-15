@@ -13,6 +13,10 @@
   --color-pressed-yellow: rgb(255, 230, 160);
   --color-hover-purple: rgb(95, 68, 186);
   --color-pressed-purple: rgb(134, 105, 233);
+  --color-hover-red: rgb(246, 114, 66);
+  --color-pressed-red: rgb(236, 130, 91);
+  --color-hover-lavender: rgb(151, 122, 249);
+  --color-pressed-lavender: rgb(222, 212, 255);
   --color-disabled: rgb(227, 227, 227);
 
   --color-text-dark: rgb(0, 0, 0);

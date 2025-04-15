@@ -2,7 +2,8 @@
     "news": [
       {
         "id": 1,
-        "tag": "хештег",
+        "tag": "статьи",
+        "class": "articles",
         "img": {
           "src": "/img/charity.jpeg",
           "alt": "Благотворительность"
@@ -12,7 +13,8 @@
       },
       {
         "id": 2,
-        "tag": "хештег",
+        "tag": "статьи",
+        "class": "articles",
         "img": {
           "src": "/img/proforientacia.jpeg",
           "alt": "Профориентация"
@@ -22,7 +24,8 @@
       },
       {
         "id": 3,
-        "tag": "хештег",
+        "tag": "статьи",
+        "class": "articles",
         "img": {
           "src": "/img/otkritie-granta.jpeg",
           "alt": "Открытие гранта"
@@ -32,7 +35,8 @@
       },
       {
         "id": 4,
-        "tag": "хештег",
+        "tag": "статьи",
+        "class": "articles",
         "img": {
           "src": "/img/proekt.jpeg",
           "alt": "Завершение проекта"

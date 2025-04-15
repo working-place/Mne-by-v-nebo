@@ -1,27 +1,11 @@
 <script setup>
-import { ref, onMounted } from 'vue';
+import { ref, onMounted, computed } from 'vue';
 import NewsCard from './ui/NewsCard.vue';
 import ReusableScreen from './ui/ReusableScreen.vue';
 
-fetch('/path/to/db.json')
-  .then(response => response.json())
-  .then(data => {
-    const news = data.news;
-    console.log(news);
-  });
-
 const newsData = ref([]);
-
-const loadNews = async () => {
-  try {
-    const response = await import('@/data/db.json');
-    newsData.value = response.news;
-  } catch (error) {
-    console.error('Ошибка загрузки новостей:', error)
-  };
-}
-
-onMounted(loadNews);
+const activeTag = ref('все');
+const searchQuery = ref('');
 
 const filteringButtons = [
   {
@@ -30,28 +14,61 @@ const filteringButtons = [
     class: "all",
   },
   {
-    id: 1,
+    id: 2,
     title: "статьи",
     class: "articles",
   },
   {
-    id: 1,
+    id: 3,
     title: "видео",
     class: "video",
   },
 ]
+const loadNews = async () => {
+  try {
+    const response = await import('@/data/db.json?raw');
+    newsData.value = JSON.parse(response.default).news;
+  } catch (error) {
+    console.error('Ошибка загрузки новостей:', error);
+  }
+};
+
+const filteredNews = computed(() => {
+  const filtered = newsData.value.filter(news => {
+
+    const tagMatch = activeTag.value === "все" || news.tag === activeTag.value;
+
+    const searchMatch = news.text.toLowerCase().includes(searchQuery.value.toLowerCase()) || news.tag.toLowerCase().includes(searchQuery.value.toLowerCase());
+    return tagMatch && searchMatch
+  });
+  if (filtered.length === 0 && (searchQuery.value || activeTag.value !== "all")) {
+    return null
+  }
+  return filtered;
+});
+
+const handleSearchInput = (event) => {
+  searchQuery.value = event.target.value;
+};
+
+const handleTagFilter = (tag) => {
+  activeTag.value = tag;
+}
+
+onMounted(loadNews);
 
 </script>
 
 <template>
   <main>
+
     <ReusableScreen bgColor="var(--color-background-lavender)" textColor="var(--color-text-dark)" blockHeight="470px"
       :use-flex="false">
       <template v-slot:title>
         новости
       </template>
       <template v-slot:description>
-        <input type="text" class="main-screen__search-input">
+        <input type="text" class="main-screen__search-input" @input="handleSearchInput">
       </template>
       <template v-slot:img>
         <img src="/img/main-screen-photo-boy.png" alt="Изображение мальчика" class="main-screen__img">
@@ -59,20 +76,30 @@ const filteringButtons = [
     </ReusableScreen>
 
     <div class="news">
+
       <div class="news__filtering-box">
-        <button v-for="button in filteringButtons" :key="button.id" class="news__filtering-btn"
-          :class="[`news__filtering-btn_${button.class}`]">
+        <button v-for="button in filteringButtons" :key="button.id" class="news__filtering-btn" :class="[`news__filtering-btn_${button.class}`,
+        { 'news__filtering-btn_active': activeTag === button.title }
+        ]" @click="handleTagFilter(button.title)">
           <span>{{ button.title }}</span>
         </button>
       </div>
-      <NewsCard v-for="info in newsData" :key="info.id">
-        <template v-slot:img>
-          <img :src="info.img.src" :alt="info.img.alt" class="tag-card__img">
-        </template>
-        <template v-slot:tag>{{ info.tag }}</template>
-        <template v-slot:text>{{ info.text }}</template>
-        <template v-slot:date>{{ info.date }}</template>
-      </NewsCard>
+
+      <template v-if="filteredNews && filteredNews.length > 0">
+        <NewsCard v-for="info in filteredNews" :key="info.id" :tag-class="info.class">
+          <template v-slot:img>
+            <img :src="info.img.src" :alt="info.img.alt" class="tag-card__img">
+          </template>
+          <template v-slot:tag>{{ info.tag }}</template>
+          <template v-slot:text>{{ info.text }}</template>
+          <template v-slot:date>{{ info.date }}</template>
+        </NewsCard>
+      </template>
+
+      <div v-else-if="filteredNews === null" class="not-found">
+        <span>По вашему запросу ничего не найдено...</span>
+      </div>
+
     </div>
   </main>
 
@@ -85,8 +112,13 @@ const filteringButtons = [
   margin: 0;
 
   &__search-input {
+    background-image: url(/img/search-input.png);
+    background-size: 13px, 13px;
+    background-repeat: no-repeat;
+    background-position: 10px center;
     min-width: 100%;
-    padding: 10px;
+    height: 33px;
+    padding: 10px 10px 10px 30px;
     border: none;
     outline: none;
     border-radius: 60px;
@@ -125,16 +157,16 @@ const filteringButtons = [
   }
 
   &__filtering-btn_all:active {
-      background-color: var(--color-pressed-yellow);
-    }
+    background-color: var(--color-pressed-yellow);
+  }
 
-    &__filtering-btn_articles:active {
-      background-color: red;
-    }
+  &__filtering-btn_articles:active {
+    background-color: var(--color-pressed-lavender);
+  }
 
-    &__filtering-btn_video:active {
-      background-color: red;
-    }
+  &__filtering-btn_video:active {
+    background-color: var(--color-pressed-red);
+  }
 
   @media (hover :hover) {
     &__filtering-btn_all:hover {
@@ -142,11 +174,11 @@ const filteringButtons = [
     }
 
     &__filtering-btn_articles:hover {
-      background-color: red;
+      background-color: var(--color-hover-lavender);
     }
 
     &__filtering-btn_video:hover {
-      background-color: red;
+      background-color: var(--color-hover-red);
     }
   }
 }
@@ -158,6 +190,17 @@ const filteringButtons = [
     height: 168px;
     border-top-right-radius: 8px;
     border-top-left-radius: 8px;
+  }
+}
+
+.not-found {
+  @include block-mobile;
+  @include minmax-width-mobile-block;
+  justify-content: center;
+  padding: 0;
+
+  span {
+    text-align: center;
   }
 }
 </style>
