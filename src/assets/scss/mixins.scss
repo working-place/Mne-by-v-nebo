@@ -1,9 +1,8 @@
-
 @mixin h1-mobile {
   font-weight: 600;
   font-size: 36px;
   line-height: 1.25;
-  text-align:center;
+  text-align: center;
 }
 
 @mixin h1-pdf-container {
@@ -26,8 +25,20 @@
   line-height: 1.5;
 }
 
-@mixin h3-mobile-card {
+@mixin h3-mobile-card {}
 
+@mixin button-text {
+  font-family: var(--font-family-nunito);
+  line-height: 1;
+  font-size: 16px;
+  font-weight: 400;
+}
+
+@mixin button-basic-style {
+  padding: 10px;
+  outline: none;
+  border: none;
+  border-radius: 60px;
 }
 
 @mixin display-flex-center-center {
@@ -100,10 +111,10 @@
 
 @mixin list-decoration {
   white-space: nowrap;
-    padding: 0;
-    margin: 0;
-    gap: 12px;
-    list-style: none;
+  padding: 0;
+  margin: 0;
+  gap: 12px;
+  list-style: none;
 }
 
 @mixin border-bottom-radius-8 {

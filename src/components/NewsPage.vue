@@ -22,28 +22,49 @@ const loadNews = async () => {
 }
 
 onMounted(loadNews);
+
+const filteringButtons = [
+  {
+    id: 1,
+    title: "все",
+    class: "all",
+  },
+  {
+    id: 1,
+    title: "статьи",
+    class: "articles",
+  },
+  {
+    id: 1,
+    title: "видео",
+    class: "video",
+  },
+]
+
 </script>
 
 <template>
   <main>
+    <ReusableScreen bgColor="var(--color-background-lavender)" textColor="var(--color-text-dark)" blockHeight="470px"
+      :use-flex="false">
+      <template v-slot:title>
+        новости
+      </template>
+      <template v-slot:description>
+        <input type="text" class="main-screen__search-input">
+      </template>
+      <template v-slot:img>
+        <img src="/img/main-screen-photo-boy.png" alt="Изображение мальчика" class="main-screen__img">
+      </template>
+    </ReusableScreen>
 
-
-  <ReusableScreen bgColor="var(--color-background-lavender)" textColor="var(--color-text-dark)" blockHeight="470px" :use-flex="false">
-    <template v-slot:title>
-      новости
-    </template>
-    <template v-slot:description>
-      <input type="text" class="main-screen__search-input">
-    </template>
-    <template v-slot:img>
-      <img src="/img/main-screen-photo-boy.png" alt="Изображение мальчика" class="main-screen__img">
-    </template>
-  </ReusableScreen>
-
-  <!-- блок сортировки по хештегам -->
-
-  <div class="news">
-      <h2>Новости</h2>
+    <div class="news">
+      <div class="news__filtering-box">
+        <button v-for="button in filteringButtons" :key="button.id" class="news__filtering-btn"
+          :class="[`news__filtering-btn_${button.class}`]">
+          <span>{{ button.title }}</span>
+        </button>
+      </div>
       <NewsCard v-for="info in newsData" :key="info.id">
         <template v-slot:img>
           <img :src="info.img.src" :alt="info.img.alt" class="tag-card__img">
@@ -52,7 +73,6 @@ onMounted(loadNews);
         <template v-slot:text>{{ info.text }}</template>
         <template v-slot:date>{{ info.date }}</template>
       </NewsCard>
-
     </div>
   </main>
 
@@ -77,6 +97,58 @@ onMounted(loadNews);
   @include block-mobile;
   @include minmax-width-mobile-block;
   padding: 0;
+
+  &__filtering-box {
+    @include display-flex-justify-content-center;
+    width: 100%;
+    gap: 10px;
+  }
+
+  &__filtering-btn {
+    @include display-flex-center-center;
+    @include button-text;
+    @include button-basic-style;
+    min-width: 90px;
+    height: 32px;
+  }
+
+  &__filtering-btn_all {
+    background-color: var(--color-background-yellow);
+  }
+
+  &__filtering-btn_articles {
+    background-color: var(--color-background-lavender);
+  }
+
+  &__filtering-btn_video {
+    background-color: var(--color-background-red);
+  }
+
+  &__filtering-btn_all:active {
+      background-color: var(--color-pressed-yellow);
+    }
+
+    &__filtering-btn_articles:active {
+      background-color: red;
+    }
+
+    &__filtering-btn_video:active {
+      background-color: red;
+    }
+
+  @media (hover :hover) {
+    &__filtering-btn_all:hover {
+      background-color: var(--color-hover-yellow);
+    }
+
+    &__filtering-btn_articles:hover {
+      background-color: red;
+    }
+
+    &__filtering-btn_video:hover {
+      background-color: red;
+    }
+  }
 }
 
 .tag-card {
