@@ -1,8 +1,26 @@
 <script setup>
+defineProps({
+  bgColor: {
+    type: String,
+    default: 'var(--color-background-purple)',
+  },
+  textColor: {
+    type: String,
+    default: 'var(--color-text-light)',
+  },
+  blockHeight: {
+    type: String,
+    default: '600px',
+  }
+})
 </script>
 
 <template>
-  <div class="main-screen">
+  <div class="main-screen" :style="{
+    '--main-screen_bg-color' : bgColor,
+    '--main-screen_text-color' : textColor,
+    '--main-screen_block-height' : blockHeight,
+  }">
     <div class="main-screen__title-box">
       <h1 class="main-screen__title">
         <slot name="title"></slot>
@@ -26,10 +44,12 @@
   @include display-flex-column-center;
   @include minmax-width-mobile;
 
+  background-color: var(--main-screen_bg-color);
+
   justify-content: flex-end;
   min-width: var(--min-width);
   width: calc(100% + 34px);
-  min-height: 600px;
+  min-height: var(--main-screen_block-height);
   height: fit-content;
   top: 62px;
   padding-top: 40px;
@@ -44,7 +64,7 @@
   &__description-box {
     @include display-flex-center-center;
     width: 100%;
-    color: var(--color-text-light);
+    color: var(--main-screen_text-color);
   }
 
   &__title {

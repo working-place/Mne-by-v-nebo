@@ -96,7 +96,7 @@ onMounted(() => {
 
 <template>
   <main>
-    <ReusableScreen>
+    <ReusableScreen bgColor="var(--color-background-yellow)">
       <template v-slot:title>
         <span class="title-text">Полезные материалы</span>
       </template>
@@ -114,7 +114,8 @@ onMounted(() => {
     <!-- Основной контейнер слайдера -->
     <div class="slider-container">
       <!-- Область слайдов с обработчиками свайпа -->
-      <div class="slider" ref="slider" @touchstart="handleTouchStart" @touchmove="handleTouchMove" @touchend="handleTouchEnd">
+      <div class="slider" ref="slider" @touchstart="handleTouchStart" @touchmove="handleTouchMove"
+        @touchend="handleTouchEnd">
         <!-- Рендерим каждую плашку как компонент Card -->
         <LinkCard v-for="(slide, index) in slides" :key="index" :title="slide.title" :description="slide.description"
           :linkUrl="slide.linkUrl" :linkText="slide.linkText" :paddingBottom="'120px'">
@@ -137,9 +138,9 @@ onMounted(() => {
 <style scoped lang="scss">
 @use '@/assets/scss/mixins.scss' as *;
 
-.main-screen {
-  background-color: var(--color-background-yellow);
-}
+// .main-screen {
+//   background-color: var(--color-background-yellow);
+// }
 
 .title-text {
   @include h1-mobile
@@ -148,6 +149,7 @@ onMounted(() => {
 .title-text, .description-text {
   color: #000000;
 }
+
 .main-screen__img {
   object-fit: cover;
 }

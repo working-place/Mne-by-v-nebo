@@ -1,84 +1,33 @@
 <script setup>
-import { computed, ref } from 'vue';
+import { computed, ref, onMounted } from 'vue';
 import RouterLinkButton from './ui/RouterLinkButton.vue';
 import NumberedCard from './ui/NumberedCard.vue';
 import ReusableScreen from './ui/ReusableScreen.vue';
 import NewsCard from './ui/NewsCard.vue';
 
-const cards = [
-  {
-    number: 1,
-    description: 'Содействие развитию просветительской деятельности детей, их семей и молодёжи в области образования, культуры и физической культуры',
-    img: {
-      src: '/img/book.png',
-      alt: 'Книга'
-    },
-    paddingBottom: '75px',
-  },
-  {
-    number: 2,
-    description: 'Социальная адаптация детей-инвалидов, людей с ограниченными возможностями здоровья',
-    img: {
-      src: '/img/heart.png',
-      alt: 'Сердце'
-    },
-    paddingBottom: null,
-  },
-  {
-    number: 3,
-    description: 'Проведение групповых и индивидуальных консультаций, тренингов и семинаров для населения по вопросам реализации социально значимых и общественных инициатив, участия в проектах',
-    img: {
-      src: '/img/star.png',
-      alt: 'Звезда'
-    },
-    paddingBottom: null,
-  },
-];
+fetch('/path/to/db.json')
+  .then(response => response.json())
+  .then(data => {
+    const news = data.news;
+    console.log(news);
+  });
 
-const news = ref([
-  {
-    id: 1,
-    tag: 'хештег',
-    img: {
-      src: '/img/charity.jpeg',
-      alt: 'Благотоварительность'
-    },
-    text: 'Благотворительный фонд «Олимпия»',
-    date: '05.02.25',
-  },
-  {
-    id: 2,
-    tag: 'хештег',
-    img: {
-      src: '/img/proforientacia.jpeg',
-      alt: 'Профориентация'
-    },
-    text: 'Профориентация и БАС',
-    date: '05.02.25',
-  },
-  {
-    id: 3,
-    tag: 'хештег',
-    img: {
-      src: '/img/otkritie-granta.jpeg',
-      alt: 'Открытие гранта'
-    },
-    text: 'Открытие гранта «Мне бы в небо»',
-    date: '11.09.24',
-  },
-  {
-    id: 4,
-    tag: 'хештег',
-    img: {
-      src: '/img/proekt.jpeg',
-      alt: 'Завершение проекта'
-    },
-    text: 'В Новороссийске завершается проект «Школа для родителей особенного ребенка»',
-    date: '26.12.24',
-  },
-]);
+const newsData = ref([]);
+const mainDirection = ref([]);
 
-const firstTwoNews = computed(() => news.value.slice(0, 2));
+const loadData = async () => {
+  try {
+    const response = await import('@/data/db.json');
+    newsData.value = response.news;
+    mainDirection.value = response.cards;
+  } catch (error) {
+    console.error('Ошибка загрузки новостей:', error)
+  };
+}
+
+onMounted(loadData);
+
+const firstTwoNews = computed(() => newsData.value.slice(0, 2));
 
 </script>
 
@@ -99,7 +48,7 @@ const firstTwoNews = computed(() => news.value.slice(0, 2));
 
     <div class="description">
       <h2>Основное направление деятельности</h2>
-      <NumberedCard v-for="card in cards" :key="card.number" :padding-bottom="card.paddingBottom">
+      <NumberedCard v-for="card in mainDirection" :key="card.number" :padding-bottom="card.paddingBottom">
         <template v-slot:number>{{ card.number }}</template>
         <template v-slot:description>{{ card.description }}
         </template>
@@ -151,7 +100,6 @@ const firstTwoNews = computed(() => news.value.slice(0, 2));
         <template v-slot:date>{{ info.date }}</template>
       </NewsCard>
 
-
       <RouterLinkButton :to="{ name: 'news' }" :disabled="false">
         <template v-slot:text>ко всем новостям</template>
       </RouterLinkButton>
@@ -167,10 +115,6 @@ const firstTwoNews = computed(() => news.value.slice(0, 2));
 h2 {
   @include h2-mobile-uppercase;
   text-align: center;
-}
-
-.main-screen {
-  background-color: var(--color-background-purple);
 }
 
 .description {
