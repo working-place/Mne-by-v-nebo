@@ -91,7 +91,7 @@ const firstTwoNews = computed(() => newsData.value.slice(0, 2));
 
     <div class="news">
       <h2>Новости</h2>
-      <NewsCard v-for="info in firstTwoNews" :key="info.id">
+      <NewsCard v-for="info in firstTwoNews" :key="info.id" :tag-class="info.class">
         <template v-slot:img>
           <img :src="info.img.src" :alt="info.img.alt" class="tag-card__img">
         </template>
