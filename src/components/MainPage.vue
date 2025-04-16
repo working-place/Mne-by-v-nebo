@@ -67,7 +67,9 @@ const firstTwoNews = computed(() => newsData.value.slice(0, 2));
       <div class="organization-charter__text-block">
         <span class="organization-charter__text">
           Вы можете озакомиться с уставом организации<br>
-          <a href="/" class="organization-charter__link">перейдя по этой ссылке</a>
+          <RouterLink to="/charter" class="organization-charter__link" :class="{ active: $route.path === ('/charter') }">
+            перейдя по этой ссылке
+          </RouterLink>
         </span>
       </div>
     </div>

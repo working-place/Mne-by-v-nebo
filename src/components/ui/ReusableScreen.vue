@@ -82,7 +82,10 @@ defineProps({
     text-align: center;
   }
 
-  &__img-box,
+  &__img-box {
+    display: flex;
+  }
+
   &__img {
     @include cover-center-no-repeat-img;
     width: 286px;
