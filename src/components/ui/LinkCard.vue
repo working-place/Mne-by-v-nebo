@@ -48,45 +48,42 @@ defineExpose({
 
 .card {
     @include display-flex-column-center;
-    position: relative;
-    max-width: 400px;
-    min-height: 206px;
-    padding: 36px 30px;
-    gap: 10px;
-    background-color: var(--color-background-light-blue);
-    border-radius: var(--cards-border-radius);
-    flex-shrink: 0;
-    box-sizing: border-box;
+        position: relative;
+        min-width: var(--min-width);
+        width: calc(100% + 34px);
+        min-height: var(--main-screen_block-height);
+        padding: 20px;
+        gap: 10px;
+        background-color: var(--color-background-light-blue);
+        border-radius: var(--cards-border-radius);
+    
+        &-title {
+            color: #000000;
+        }
+    
+        &-description {
+            color: #000000;
+        }
+    
+        &-link {
+            color: #7352E5;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+        }
+    
+        &__img-box {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            display: flex;
+            justify-content: flex-end;
+            overflow: hidden;
+            border-radius: 0 0 12px 0;
 
-    &-title {
-        color: #000000;
-        font-size: 16px;
-    }
-
-    &-description {
-        color: #000000;
-        font-size: 16px;
-        line-height: 1.4;
-    }
-
-    &-link {
-        color: #7352E5;
-        text-decoration: none;
-        font-size: 16px;
-        display: block;
-    }
-
-    &__img-box {
-        position: absolute;
-        bottom: 0;
-        right: 0;
-        width: 176px;
-        height: 120px;
-        display: flex;
-        align-items: flex-end;
-        justify-content: flex-end;
-        overflow: hidden;
-        border-radius: 0 0 12px 0;
-    }
+            :slotted(img) {
+                    width: 140px;
+                }
+        }
 }
 </style>
