@@ -77,10 +77,6 @@ const bookSlides = [
 <style scoped lang="scss">
 @use '@/assets/scss/mixins.scss' as *;
 
-// .main-screen {
-//   background-color: var(--color-background-yellow);
-// }
-
 .title-text {
   @include h1-mobile
 }
@@ -91,12 +87,5 @@ const bookSlides = [
 
 .main-screen__img {
   object-fit: cover;
-}
-
-.slider-container {
-  position: relative;
-  max-width: 100%;
-  overflow: hidden;
-  padding: 20px 0;
 }
 </style>

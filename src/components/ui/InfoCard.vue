@@ -32,8 +32,8 @@ defineProps({
 
 .info-card {
     @include display-flex-column-center;
-    max-width: 400px;
-    min-height: 206px;
+    min-width: var(--min-width);
+    min-height: var(--main-screen_block-height);
     gap: 10px;
     padding: 20px;
     background-color: var(--color-background-light-blue);
