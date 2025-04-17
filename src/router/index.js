@@ -8,6 +8,7 @@ import NewsPage from '@/components/NewsPage.vue';
 import GalleryPage from '@/components/GalleryPage.vue';
 import PrivacyPolicyPdfPage from '@/components/PrivacyPolicyPdfPage.vue';
 import UserAgreementPdf from '@/components/UserAgreementPdf.vue';
+import OrganizationCharter from '@/components/OrganizationCharter.vue';
 
 const router = createRouter({
   history: createWebHistory(),
@@ -52,6 +53,11 @@ const router = createRouter({
       path: '/user-agreement',
       name: 'user-agreement',
       component: UserAgreementPdf,
+    },
+    {
+      path: '/charter',
+      name: 'charter',
+      component: OrganizationCharter,
     },
   ],
 })

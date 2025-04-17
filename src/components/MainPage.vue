@@ -5,13 +5,6 @@ import NumberedCard from './ui/NumberedCard.vue';
 import ReusableScreen from './ui/ReusableScreen.vue';
 import NewsCard from './ui/NewsCard.vue';
 
-fetch('/path/to/db.json')
-  .then(response => response.json())
-  .then(data => {
-    const news = data.news;
-    console.log(news);
-  });
-
 const newsData = ref([]);
 const mainDirection = ref([]);
 
@@ -59,7 +52,6 @@ const firstTwoNews = computed(() => newsData.value.slice(0, 2));
       </NumberedCard>
     </div>
 
-    <!-- вставить ссылку на Устав -->
     <div class="organization-charter">
       <div class="organization-charter__img-block">
         <img src="" alt="" class="organization-charter__img">
@@ -67,7 +59,9 @@ const firstTwoNews = computed(() => newsData.value.slice(0, 2));
       <div class="organization-charter__text-block">
         <span class="organization-charter__text">
           Вы можете озакомиться с уставом организации<br>
-          <a href="/" class="organization-charter__link">перейдя по этой ссылке</a>
+          <RouterLink to="/charter" class="organization-charter__link" :class="{ active: $route.path === ('/charter') }">
+            перейдя по этой ссылке
+          </RouterLink>
         </span>
       </div>
     </div>

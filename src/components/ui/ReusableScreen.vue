@@ -67,7 +67,6 @@ defineProps({
 
   &__title-box,
   &__description-box {
-    // @include display-flex-center-center;
     justify-content: center;
   align-items: center;
     width: 100%;
@@ -79,10 +78,15 @@ defineProps({
   }
 
   &__description {
+    display: flex;
+    width: 100%;
     text-align: center;
   }
 
-  &__img-box,
+  &__img-box {
+    display: flex;
+  }
+
   &__img {
     @include cover-center-no-repeat-img;
     width: 286px;

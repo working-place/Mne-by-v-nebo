@@ -7,7 +7,7 @@ import 'vue-pdf-embed/dist/styles/textLayer.css';
 
 const error = ref(null);
 
-const pdfSource = ref("/docs/user-agreement.pdf");
+const pdfSource = ref('/docs/charter.pdf');
 
 onMounted(() => {
   fetch(pdfSource.value)
@@ -19,9 +19,9 @@ onMounted(() => {
 
 <template>
   <div class="pdf-container">
-    <h1>Пользовательское соглашение</h1>
+    <h1>Устав организации</h1>
     <div v-if="error">{{ error }}</div>
-  <div v-if="$route.path === '/user-agreement'" class="pdf-container__file" :style="{ width: '1028px', height: '700px' }">
+  <div v-if="$route.path === '/charter'" class="pdf-container__file">
     <VuePdfEmbed :source="pdfSource" />
   </div>
 
@@ -36,6 +36,7 @@ onMounted(() => {
 
 h1 {
   @include h1-pdf-container;
+  width: 100%;
 }
 
 .pdf-container {
