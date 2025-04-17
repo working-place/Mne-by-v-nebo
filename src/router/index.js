@@ -9,6 +9,7 @@ import GalleryPage from '@/components/GalleryPage.vue';
 import PrivacyPolicyPdfPage from '@/components/PrivacyPolicyPdfPage.vue';
 import UserAgreementPdf from '@/components/UserAgreementPdf.vue';
 import OrganizationCharter from '@/components/OrganizationCharter.vue';
+import NotFound from '@/components/NotFound.vue';
 
 const router = createRouter({
   history: createWebHistory(),
@@ -59,6 +60,11 @@ const router = createRouter({
       name: 'charter',
       component: OrganizationCharter,
     },
+    {
+      path: '/:pathMatch(.*)*',
+      name: 'NotFound',
+      component: NotFound
+    }
   ],
 })
 
