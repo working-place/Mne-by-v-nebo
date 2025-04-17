@@ -5,13 +5,6 @@ import NumberedCard from './ui/NumberedCard.vue';
 import ReusableScreen from './ui/ReusableScreen.vue';
 import NewsCard from './ui/NewsCard.vue';
 
-fetch('/path/to/db.json')
-  .then(response => response.json())
-  .then(data => {
-    const news = data.news;
-    console.log(news);
-  });
-
 const newsData = ref([]);
 const mainDirection = ref([]);
 
@@ -59,7 +52,6 @@ const firstTwoNews = computed(() => newsData.value.slice(0, 2));
       </NumberedCard>
     </div>
 
-    <!-- вставить ссылку на Устав -->
     <div class="organization-charter">
       <div class="organization-charter__img-block">
         <img src="" alt="" class="organization-charter__img">

@@ -1,5 +1,24 @@
 <script setup>
+import { computed, ref, onMounted } from 'vue';
 import ReusableScreen from './ui/ReusableScreen.vue';
+import NewsCard from './ui/NewsCard.vue';
+
+const newsData = ref([]);
+// const mainDirection = ref([]);
+
+const loadData = async () => {
+  try {
+    const response = await import('@/data/db.json');
+    newsData.value = response.news;
+    // mainDirection.value = response.cards;
+  } catch (error) {
+    console.error('Ошибка загрузки новостей:', error)
+  };
+}
+
+onMounted(loadData);
+
+const firstTwoNews = computed(() => newsData.value.slice(0, 2));
 </script>
 
 <template>
@@ -16,6 +35,24 @@ import ReusableScreen from './ui/ReusableScreen.vue';
         <img src="/img/boy-thumb.png" alt="Изображение мальчика" class="main-screen__img">
       </template>
     </ReusableScreen>
+
+    <div class="similar-topics">
+      <h2>Статьи на похожую тему:</h2>
+      <NewsCard v-for="info in firstTwoNews" :key="info.id" :tag-class="info.class">
+        <template v-slot:img>
+          <img :src="info.img.src" :alt="info.img.alt" class="tag-card__img">
+        </template>
+        <template v-slot:tag>{{ info.tag }}</template>
+        <template v-slot:text>{{ info.text }}</template>
+        <template v-slot:date>{{ info.date }}</template>
+      </NewsCard>
+
+      <RouterLinkButton :to="{ name: 'news' }" :disabled="false">
+        <template v-slot:text>ко всем новостям</template>
+      </RouterLinkButton>
+
+    </div>
+
   </main>
 </template>
 
@@ -30,17 +67,24 @@ import ReusableScreen from './ui/ReusableScreen.vue';
   line-height: 1.5;
   }
 
-  &__description {
-    text-align: center;
-  }
-
   &__img {
     width: 247px;
     height: 282px;
   }
-
 }
-span {
-  text-align: center;
+
+.similar-topics {
+  @include block-mobile;
+  padding: 0;
+}
+
+.tag-card {
+  &__img {
+    @include cover-center-no-repeat-img;
+    width: 100%;
+    height: 168px;
+    border-top-right-radius: 8px;
+    border-top-left-radius: 8px;
+  }
 }
 </style>
