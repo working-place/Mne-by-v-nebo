@@ -107,15 +107,15 @@ const firstTwoNews = computed(() => newsData.value.slice(0, 4));
     </ReusableScreen>
 
     <InfoCard imageUrl="public\img\usefull-material-photo-boy2.png" title="Литература для специалистов"
-      description="Представляем подборку книг и методических материалов для специалистов в области детского образования.  Здесь вы найдете актуальные исследования, практические руководства и вдохновляющие примеры." />
+      description="Представляем подборку книг и методических материалов для специалистов в области детского образования. Здесь вы найдете актуальные исследования, практические руководства и вдохновляющие примеры." />
 
     <div class="slider-container">
       <Slider :items="bookSlidesSpecialist">
-        <template #default="{ items }">
-          <LinkCard v-for="(slide, index) in items" :key="index" :title="slide.title" :description="slide.description"
-            :linkUrl="slide.linkUrl" :linkText="slide.linkText" :paddingBottom="'120px'">
+        <template #default="{ item }">
+          <LinkCard :title="item.title" :description="item.description" :linkUrl="item.linkUrl"
+            :linkText="item.linkText" :paddingBottom="'120px'">
             <template #image>
-              <img :src="slide.image" :alt="slide.title" width="176">
+              <img :src="item.image" :alt="item.title" width="176">
             </template>
           </LinkCard>
         </template>
@@ -127,11 +127,11 @@ const firstTwoNews = computed(() => newsData.value.slice(0, 4));
 
     <div class="slider-container">
       <Slider :items="bookSlidesParent">
-        <template #default="{ items }">
-          <LinkCard v-for="(slide, index) in items" :key="index" :title="slide.title" :description="slide.description"
-            :linkUrl="slide.linkUrl" :linkText="slide.linkText" :paddingBottom="'120px'">
+        <template #default="{ item }">
+          <LinkCard :title="item.title" :description="item.description" :linkUrl="item.linkUrl"
+            :linkText="item.linkText" :paddingBottom="'120px'">
             <template #image>
-              <img :src="slide.image" :alt="slide.title" width="176">
+              <img :src="item.image" :alt="item.title" width="176">
             </template>
           </LinkCard>
         </template>
@@ -185,5 +185,26 @@ const firstTwoNews = computed(() => newsData.value.slice(0, 4));
     border-top-right-radius: 8px;
     border-top-left-radius: 8px;
   }
+}
+
+.slider-container {
+  position: relative;
+  width: 100%;
+  max-width: 410px;
+}
+
+.slide-content {
+  position: relative;
+  cursor: pointer;
+  transition: transform 0.3s;
+  height: 200px;
+  overflow: hidden;
+  border-radius: 8px;
+}
+
+.slide-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 </style>

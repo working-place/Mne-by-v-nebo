@@ -49,8 +49,6 @@ defineExpose({
 .card {
     @include display-flex-column-center;
         position: relative;
-        min-width: var(--min-width);
-        width: calc(100% + 34px);
         min-height: var(--main-screen_block-height);
         padding: 20px;
         gap: 10px;
@@ -59,6 +57,7 @@ defineExpose({
     
         &-title {
             color: #000000;
+            margin-bottom: 10px;
         }
     
         &-description {
