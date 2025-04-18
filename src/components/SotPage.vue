@@ -2,13 +2,27 @@
 import { computed, ref, onMounted } from 'vue';
 import ReusableScreen from './ui/ReusableScreen.vue';
 import NewsCard from './ui/NewsCard.vue';
+import LinkCard from './ui/LinkCard.vue';
+
+defineProps ({
+  bgColor: {
+    type: String,
+    default: 'var(--color-hover-red)',
+  }
+})
 
 const newsData = ref([]);
+const projectMneByVNebo = ref([]);
+const projectOVZ = ref([]);
+const projectOU = ref([]);
 
 const loadData = async () => {
   try {
     const response = await import('@/data/db.json');
     newsData.value = response.news;
+    projectMneByVNebo.value = response.projectMneByVNebo;
+    projectOVZ.value = response.projectOVZ;
+    projectOU.value = response.projectOU;
   } catch (error) {
     console.error('Ошибка загрузки новостей:', error)
   };
@@ -35,14 +49,56 @@ const firstTwoNews = computed(() => newsData.value.slice(0, 2));
       </template>
     </ReusableScreen>
 
-    <div class="projects">
+    <div class="project">
       <h2>Наши проекты</h2>
-      <div class="projects__box">
-        <div class="projects__title">
+      <div class="project__box" :style="{ backgroundColor: bgColor }">
+        <div class="project__title">
           <span>Мне бы в небо</span>
         </div>
-        <img class="projects__img" src="/img/mne-by-v-nebo.png" alt="Мальчик с самолетом в руке">
+        <img class="project__img" src="/img/mne-by-v-nebo.png" alt="Мальчик с самолетом в руке">
       </div>
+
+      <LinkCard v-for="(item, index) in projectMneByVNebo" :key="index" :title="item.title"
+        :description="item.description" :linkUrl="item.linkUrl" :linkText="item.linkText" :paddingBottom="'46px'"
+        image-width="30%" title-size="20px">
+        <template #image>
+          <img :src="item.image" :alt="item.title" width="90px">
+        </template>
+      </LinkCard>
+    </div>
+
+    <div class="project">
+      <div class="project__box" :style="{ backgroundColor: 'var(--color-background-purple)'}">
+        <div class="project__title">
+          <span>Апробирование современных технологий обучения учащихся с ОВ3 через практическую деятельность</span>
+        </div>
+        <img class="project__img" src="/img/mne-by-v-nebo.png" alt="Мальчик с самолетом в руке">
+      </div>
+
+      <LinkCard v-for="(item, index) in projectOVZ" :key="index" :title="item.title"
+        :description="item.description" :linkUrl="item.linkUrl" :linkText="item.linkText" :paddingBottom="'46px'"
+        image-width="30%" title-size="20px">
+        <template #image>
+          <img :src="item.image" :alt="item.title" width="90px">
+        </template>
+      </LinkCard>
+    </div>
+
+    <div class="project">
+      <div class="project__box" :style="{ backgroundColor: 'var(--color-background-yellow)'}">
+        <div class="project__title">
+          <span>Апробирование современных технологий обучения учащихся с ОВ3 через практическую деятельность</span>
+        </div>
+        <img class="project__img" src="/img/mne-by-v-nebo.png" alt="Мальчик с самолетом в руке">
+      </div>
+
+      <LinkCard v-for="(item, index) in projectOU" :key="index" :title="item.title"
+        :description="item.description" :linkUrl="item.linkUrl" :linkText="item.linkText" :paddingBottom="'46px'"
+        image-width="30%" title-size="20px">
+        <template #image>
+          <img :src="item.image" :alt="item.title" width="90px">
+        </template>
+      </LinkCard>
     </div>
 
     <div class="similar-topics">
@@ -82,7 +138,7 @@ const firstTwoNews = computed(() => newsData.value.slice(0, 2));
   }
 }
 
-.projects {
+.project {
   @include block-mobile;
 
   padding: 0;
@@ -97,9 +153,10 @@ const firstTwoNews = computed(() => newsData.value.slice(0, 2));
     height: 209px;
     padding: 0;
     gap: 0;
-    background-color: var(--color-hover-red);
     border-radius: var(--cards-border-radius);
   }
+
+
 
   &__title {
     display: flex;
@@ -117,7 +174,7 @@ const firstTwoNews = computed(() => newsData.value.slice(0, 2));
     max-height: 187px;
     width: 50%;
     border-bottom-right-radius: 12px;
-   }
+  }
 }
 
 .similar-topics {
