@@ -10,6 +10,7 @@ import PrivacyPolicyPdfPage from '@/components/PrivacyPolicyPdfPage.vue';
 import UserAgreementPdf from '@/components/UserAgreementPdf.vue';
 import OrganizationCharter from '@/components/OrganizationCharter.vue';
 import NotFound from '@/components/NotFound.vue';
+import Article from '@/components/Article.vue';
 
 const router = createRouter({
   history: createWebHistory(),
@@ -39,6 +40,12 @@ const router = createRouter({
       path: '/news',
       name: 'news',
       component: NewsPage,
+    },
+    {
+      path: '/news/:id',
+      name: 'article',
+      component: Article,
+      props: true
     },
     {
       path: '/gallery',

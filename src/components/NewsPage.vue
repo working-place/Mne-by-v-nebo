@@ -86,14 +86,17 @@ onMounted(loadNews);
       </div>
 
       <template v-if="filteredNews && filteredNews.length > 0">
-        <NewsCard v-for="info in filteredNews" :key="info.id" :tag-class="info.class">
-          <template v-slot:img>
-            <img :src="info.img.src" :alt="info.img.alt" class="tag-card__img">
-          </template>
-          <template v-slot:tag>{{ info.tag }}</template>
-          <template v-slot:text>{{ info.text }}</template>
-          <template v-slot:date>{{ info.date }}</template>
-        </NewsCard>
+        <router-link v-for="info in filteredNews" :key="info.id" :to="{ name: 'article', params: { id: info.id } }"
+          class="news-card-link">
+          <NewsCard :tag-class="info.class">
+            <template v-slot:img>
+              <img :src="info.img.src" :alt="info.img.alt" class="tag-card__img">
+            </template>
+            <template v-slot:tag>{{ info.tag }}</template>
+            <template v-slot:text>{{ info.text }}</template>
+            <template v-slot:date>{{ info.date }}</template>
+          </NewsCard>
+        </router-link>
       </template>
 
       <div v-else-if="filteredNews === null" class="not-found">
@@ -181,6 +184,12 @@ onMounted(loadNews);
       background-color: var(--color-hover-red);
     }
   }
+}
+
+.news-card-link {
+  display: block;
+  text-decoration: none;
+  color: inherit;
 }
 
 .tag-card {
