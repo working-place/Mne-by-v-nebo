@@ -21,12 +21,11 @@ onMounted(() => {
   <div class="pdf-container">
     <h1>Пользовательское соглашение</h1>
     <div v-if="error">{{ error }}</div>
-  <div v-if="$route.path === '/user-agreement'" class="pdf-container__file" :style="{ width: '1028px', height: '700px' }">
-    <VuePdfEmbed :source="pdfSource" />
+    <div v-if="$route.path === '/user-agreement'" class="pdf-container__file"
+      :style="{ width: '1028px', height: '700px' }">
+      <VuePdfEmbed :source="pdfSource" />
+    </div>
   </div>
-
-  </div>
-
 </template>
 
 <style scoped lang="scss">

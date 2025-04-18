@@ -21,12 +21,10 @@ onMounted(() => {
   <div class="pdf-container">
     <h1>Устав организации</h1>
     <div v-if="error">{{ error }}</div>
-  <div v-if="$route.path === '/charter'" class="pdf-container__file">
-    <VuePdfEmbed :source="pdfSource" />
+    <div v-if="$route.path === '/charter'" class="pdf-container__file">
+      <VuePdfEmbed :source="pdfSource" />
+    </div>
   </div>
-
-  </div>
-
 </template>
 
 <style scoped lang="scss">

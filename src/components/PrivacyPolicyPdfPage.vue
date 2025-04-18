@@ -24,9 +24,7 @@ onMounted(() => {
   <div v-if="$route.path === '/privacy-policy'" class="pdf-container__file">
     <VuePdfEmbed :source="pdfSource" />
   </div>
-
   </div>
-
 </template>
 
 <style scoped lang="scss">
