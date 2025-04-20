@@ -3,11 +3,16 @@ import { computed, ref, onMounted } from 'vue';
 import ReusableScreen from './ui/ReusableScreen.vue';
 import NewsCard from './ui/NewsCard.vue';
 import LinkCard from './ui/LinkCard.vue';
+import GallerySection from './ui/GallerySection.vue';
 
-defineProps ({
+defineProps({
   bgColor: {
     type: String,
     default: 'var(--color-hover-red)',
+  },
+  textColor: {
+    type: String,
+    default: 'var(--)',
   }
 })
 
@@ -50,7 +55,7 @@ const firstTwoNews = computed(() => newsData.value.slice(0, 2));
     </ReusableScreen>
 
     <div class="project">
-      <h2>Наши проекты</h2>
+      <slot name="title"><h2>Наши проекты</h2></slot>
       <div class="project__box" :style="{ backgroundColor: bgColor }">
         <div class="project__title">
           <span>Мне бы в небо</span>
@@ -65,40 +70,57 @@ const firstTwoNews = computed(() => newsData.value.slice(0, 2));
           <img :src="item.image" :alt="item.title" width="90px">
         </template>
       </LinkCard>
+
+      <GallerySection :photos="[
+        { id: 1, image: '/img/conferention.jpeg' },
+        { id: 2, image: '/img/gallery-gram.png' },
+        { id: 3, image: '/img/gallery-sertificats.jpeg' },
+      ]" :show-title="false" />
     </div>
 
-    <div class="project">
-      <div class="project__box" :style="{ backgroundColor: 'var(--color-background-purple)'}">
-        <div class="project__title">
+    <div class="project-ovz">
+      <div class="project-ovz__box" :style="{ backgroundColor: 'var(--color-background-purple)' }">
+        <div class="project-ovz__title project-ovz__title_color">
           <span>Апробирование современных технологий обучения учащихся с ОВ3 через практическую деятельность</span>
         </div>
-        <img class="project__img" src="/img/mne-by-v-nebo.png" alt="Мальчик с самолетом в руке">
+        <img class="project-ovz__img" src="/img/stem.png" alt="Мальчик смотрит в бинокль">
       </div>
 
-      <LinkCard v-for="(item, index) in projectOVZ" :key="index" :title="item.title"
-        :description="item.description" :linkUrl="item.linkUrl" :linkText="item.linkText" :paddingBottom="'46px'"
-        image-width="30%" title-size="20px">
+      <LinkCard v-for="(item, index) in projectOVZ" :key="index" :title="item.title" :description="item.description"
+        :linkUrl="item.linkUrl" :linkText="item.linkText" :paddingBottom="'46px'" image-width="30%" title-size="20px">
         <template #image>
           <img :src="item.image" :alt="item.title" width="90px">
         </template>
       </LinkCard>
+
+      <GallerySection :photos="[
+        { id: 1, image: '/img/conferention.jpeg' },
+        { id: 2, image: '/img/gallery-gram.png' },
+        { id: 3, image: '/img/gallery-sertificats.jpeg' },
+      ]" :show-title="false" />
     </div>
 
-    <div class="project">
-      <div class="project__box" :style="{ backgroundColor: 'var(--color-background-yellow)'}">
-        <div class="project__title">
-          <span>Апробирование современных технологий обучения учащихся с ОВ3 через практическую деятельность</span>
+    <div class="project-ovz">
+      <div class="project-ovz__box" :style="{ backgroundColor: 'var(--color-background-yellow)' }">
+        <div class="project-ovz__title">
+          <span>Современные технологии обучения детей с ОВ3 через практическую деятельность профессиональных навыков в
+            ОУ</span>
         </div>
-        <img class="project__img" src="/img/mne-by-v-nebo.png" alt="Мальчик с самолетом в руке">
+        <img class="project-ovz__img project-ovz__img_size" src="/img/stod.png" alt="Мальчик читает">
       </div>
 
-      <LinkCard v-for="(item, index) in projectOU" :key="index" :title="item.title"
-        :description="item.description" :linkUrl="item.linkUrl" :linkText="item.linkText" :paddingBottom="'46px'"
-        image-width="30%" title-size="20px">
+      <LinkCard v-for="(item, index) in projectOU" :key="index" :title="item.title" :description="item.description"
+        :linkUrl="item.linkUrl" :linkText="item.linkText" :paddingBottom="'46px'" image-width="30%" title-size="20px">
         <template #image>
           <img :src="item.image" :alt="item.title" width="90px">
         </template>
       </LinkCard>
+
+      <GallerySection :photos="[
+        { id: 1, image: '/img/conferention.jpeg' },
+        { id: 2, image: '/img/gallery-gram.png' },
+        { id: 3, image: '/img/gallery-sertificats.jpeg' },
+      ]" :show-title="false" />
     </div>
 
     <div class="similar-topics">
@@ -140,9 +162,7 @@ const firstTwoNews = computed(() => newsData.value.slice(0, 2));
 
 .project {
   @include block-mobile;
-
-  padding: 0;
-
+  padding: 20px 0 0 0;
 
   &__box {
     @include block-mobile;
@@ -150,13 +170,13 @@ const firstTwoNews = computed(() => newsData.value.slice(0, 2));
     justify-content: flex-end;
     align-items: flex-end;
     width: 100%;
-    height: 209px;
+    min-height: 209px;
+    height: fit-content;
     padding: 0;
+    padding-top: 25px;
     gap: 0;
     border-radius: var(--cards-border-radius);
   }
-
-
 
   &__title {
     display: flex;
@@ -173,13 +193,56 @@ const firstTwoNews = computed(() => newsData.value.slice(0, 2));
     max-width: 165px;
     max-height: 187px;
     width: 50%;
-    border-bottom-right-radius: 12px;
+    border-bottom-right-radius: var(--cards-border-radius);
+  }
+}
+
+.project-ovz {
+  @include block-mobile;
+  padding: 20px 0 0 0;
+
+  &__box {
+    @include block-mobile;
+    justify-content: center;
+    justify-content: space-between;
+    width: 100%;
+    min-height: 340px;
+    height: fit-content;
+    padding: 0;
+    padding-top: 40px;
+    gap: 0;
+    border-radius: var(--cards-border-radius);
+  }
+
+  &__img {
+    width: 265px;
+    height: 193px
+  }
+
+  &__img_size {
+    width: 100%;
+    height: 174px;
+    border-bottom-left-radius: var(--cards-border-radius);
+    border-bottom-right-radius: var(--cards-border-radius);
+  }
+
+  &__title {
+    display: flex;
+    text-align: center;
+    font-size: 18px;
+    font-weight: 600;
+    padding-left: 4px;
+    padding-right: 4px;
+  }
+
+  &__title_color {
+    color: var(--color-text-light);
   }
 }
 
 .similar-topics {
   @include block-mobile;
-  padding: 0;
+  padding: 20px 0 0 0;
 
   &__title-box {
     @include block-mobile;

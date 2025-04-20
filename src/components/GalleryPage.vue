@@ -1,6 +1,6 @@
 <script setup>
 import ReusableScreen from './ui/ReusableScreen.vue';
-import Slider from './ui/Slider.vue';
+import Slider from './ui/SliderWrapper.vue';
 import { ref } from 'vue';
 
 const photoSlides = [

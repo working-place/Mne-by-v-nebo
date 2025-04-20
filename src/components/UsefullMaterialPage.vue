@@ -3,7 +3,7 @@ import { computed, ref, onMounted } from 'vue';
 import ReusableScreen from './ui/ReusableScreen.vue';
 import LinkCard from './ui/LinkCard.vue';
 import InfoCard from './ui/InfoCard.vue';
-import Slider from './ui/Slider.vue';
+import Slider from './ui/SliderWrapper.vue';
 import NewsCard from './ui/NewsCard.vue';
 import RouterLinkButton from './ui/RouterLinkButton.vue';
 
