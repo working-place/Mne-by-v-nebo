@@ -12,7 +12,7 @@ defineProps({
   },
   textColor: {
     type: String,
-    default: 'var(--)',
+    default: 'var(--color-text-dark)',
   }
 })
 
@@ -29,7 +29,7 @@ const loadData = async () => {
     projectOVZ.value = response.projectOVZ;
     projectOU.value = response.projectOU;
   } catch (error) {
-    console.error('Ошибка загрузки новостей:', error)
+    console.error('Ошибка загрузки проектов:', error)
   };
 }
 
@@ -55,7 +55,9 @@ const firstTwoNews = computed(() => newsData.value.slice(0, 2));
     </ReusableScreen>
 
     <div class="project">
-      <slot name="title"><h2>Наши проекты</h2></slot>
+      <slot name="title">
+        <h2>Наши проекты</h2>
+      </slot>
       <div class="project__box" :style="{ backgroundColor: bgColor }">
         <div class="project__title">
           <span>Мне бы в небо</span>
@@ -71,11 +73,8 @@ const firstTwoNews = computed(() => newsData.value.slice(0, 2));
         </template>
       </LinkCard>
 
-      <GallerySection :photos="[
-        { id: 1, image: '/img/conferention.jpeg' },
-        { id: 2, image: '/img/gallery-gram.png' },
-        { id: 3, image: '/img/gallery-sertificats.jpeg' },
-      ]" :show-title="false" />
+      <GallerySection v-if="projectMneByVNebo[0]?.galleryImg"
+        :photos="projectMneByVNebo[0].galleryImg.map(img => ({ image: img.url }))" :show-title="false" />
     </div>
 
     <div class="project-ovz">
@@ -93,11 +92,8 @@ const firstTwoNews = computed(() => newsData.value.slice(0, 2));
         </template>
       </LinkCard>
 
-      <GallerySection :photos="[
-        { id: 1, image: '/img/conferention.jpeg' },
-        { id: 2, image: '/img/gallery-gram.png' },
-        { id: 3, image: '/img/gallery-sertificats.jpeg' },
-      ]" :show-title="false" />
+      <GallerySection v-if="projectOVZ[0]?.galleryImg"
+        :photos="projectOVZ[0].galleryImg.map(img => ({ image: img.url }))" :show-title="false" />
     </div>
 
     <div class="project-ovz">
@@ -116,11 +112,8 @@ const firstTwoNews = computed(() => newsData.value.slice(0, 2));
         </template>
       </LinkCard>
 
-      <GallerySection :photos="[
-        { id: 1, image: '/img/conferention.jpeg' },
-        { id: 2, image: '/img/gallery-gram.png' },
-        { id: 3, image: '/img/gallery-sertificats.jpeg' },
-      ]" :show-title="false" />
+      <GallerySection v-if="projectOU[0]?.galleryImg" :photos="projectOU[0].galleryImg.map(img => ({ image: img.url }))"
+        :show-title="false" />
     </div>
 
     <div class="similar-topics">

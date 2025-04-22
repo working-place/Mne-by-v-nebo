@@ -20,6 +20,22 @@ defineProps({
     type: String,
     default: 'var(--color-hover-purple)',
   },
+  fontSizeBtn: {
+    type: String,
+    default: '11px',
+  },
+  maxHeightBtn: {
+    type: String,
+    default: '36px',
+  },
+  minHeightBtn: {
+    type: String,
+    default: '36px',
+  },
+  textButton: {
+    type: String,
+    default: 'Перейти ко всем новостям',
+  },
 })
 </script>
 
@@ -28,9 +44,12 @@ defineProps({
     '--button_bg-color': bgColor,
     '--button_text-color': textColor,
     '--button_hover-color': hoverColor,
+    '--button_font-size': fontSizeBtn,
+    '--button_max-height': maxHeightBtn,
+    '--button_min-height': minHeightBtn
   }" @click.prevent="disabled ? null : $emit('click')">
     <h2>
-      <slot name="text"></slot>
+      <slot name="text">{{ textButton }}</slot>
     </h2>
   </RouterLink>
 
@@ -40,7 +59,8 @@ defineProps({
 @use '@/assets/scss/mixins.scss' as *;
 
 h2 {
-  @include h2-mobile-uppercase;
+  // @include h2-mobile-button;
+  font-size: var(--button_font-size, 11px);
 }
 
 .button {
@@ -48,6 +68,8 @@ h2 {
   background-color: var(--button_bg-color);
   color: var(--button_text-color);
   width: 100%;
+  min-height: var(--button_min-height, 36px);
+  max-height: var(--button_max-height, 36px);
   height: fit-content;
   padding: 10px;
   outline: none;

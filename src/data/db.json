@@ -90,11 +90,15 @@
       "galleryImg": [
         {
           "id": 1,
-          "url": "/img/gallery-photo1.png"
+          "url": "/img/conferention.jpeg"
         },
         {
           "id": 2,
           "url": "/img/gallery-gram.png"
+        },
+        {
+          "id": 3,
+          "url": "/img/gallery-sertificats.jpeg"
         }
       ]
     },
@@ -113,7 +117,21 @@
     {
       "title": "Описание проекта:",
       "description": "Проект направлен на создание учебно-производственного комбината для детей с ОВЗ, где они получают профессиональные навыки для трудоустройства через теоретические и практические занятия",
-      "image": "/img/medal-projects.png"
+      "image": "/img/medal-projects.png",
+      "galleryImg": [
+        {
+          "id": 1,
+          "url": "/img/conferention.jpeg"
+        },
+        {
+          "id": 2,
+          "url": "/img/gallery-gram.png"
+        },
+        {
+          "id": 3,
+          "url": "/img/gallery-sertificats.jpeg"
+        }
+      ]
     },
     {
       "title": "Цели и задачи:",
@@ -130,7 +148,21 @@
     {
       "title": "Описание проекта:",
       "description": "Проект направлен на создание учебно-производственного комбината для детей с ОВЗ, обеспечивающего их профессиональное обучение и подготовку к самостоятельной жизни.",
-      "image": "/img/medal-projects.png"
+      "image": "/img/medal-projects.png",
+      "galleryImg": [
+        {
+          "id": 1,
+          "url": "/img/conferention.jpeg"
+        },
+        {
+          "id": 2,
+          "url": "/img/gallery-gram.png"
+        },
+        {
+          "id": 3,
+          "url": "/img/gallery-sertificats.jpeg"
+        }
+      ]
     },
     {
       "title": "Цели и задачи:",

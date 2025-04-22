@@ -78,10 +78,10 @@ h3 {
   font-weight: 600;
 }
 
-h2 {
+/* h2 {
   font-size: 20px;
   line-height: 1.5;
-}
+} */
 
 h3 {
   font-family: var(--font-family-nunito);
