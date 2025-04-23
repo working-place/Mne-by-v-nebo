@@ -6,10 +6,6 @@ import LinkCard from './ui/LinkCard.vue';
 import GallerySection from './ui/GallerySection.vue';
 
 defineProps({
-  bgColor: {
-    type: String,
-    default: 'var(--color-hover-red)',
-  },
   textColor: {
     type: String,
     default: 'var(--color-text-dark)',
@@ -17,17 +13,13 @@ defineProps({
 })
 
 const newsData = ref([]);
-const projectMneByVNebo = ref([]);
-const projectOVZ = ref([]);
-const projectOU = ref([]);
+const projects = ref([]);
 
 const loadData = async () => {
   try {
     const response = await import('@/data/db.json');
     newsData.value = response.news;
-    projectMneByVNebo.value = response.projectMneByVNebo;
-    projectOVZ.value = response.projectOVZ;
-    projectOU.value = response.projectOU;
+    projects.value = response.projects;
   } catch (error) {
     console.error('Ошибка загрузки проектов:', error)
   };
@@ -36,6 +28,7 @@ const loadData = async () => {
 onMounted(loadData);
 
 const firstTwoNews = computed(() => newsData.value.slice(0, 2));
+
 </script>
 
 <template>
@@ -54,66 +47,31 @@ const firstTwoNews = computed(() => newsData.value.slice(0, 2));
       </template>
     </ReusableScreen>
 
-    <div class="project">
-      <slot name="title">
-        <h2>Наши проекты</h2>
-      </slot>
-      <div class="project__box" :style="{ backgroundColor: bgColor }">
-        <div class="project__title">
-          <span>Мне бы в небо</span>
+    <slot name="title">
+      <h2 class="title-page">Наши проекты</h2>
+    </slot>
+
+    <div v-for="(project) in projects" :key="project.id" class="project" :class="`project-${project.id}`">
+
+      <div :class="`project-${project.id}__box`">
+        <div :class="`project-${project.id}__title project-${project.id}__title_color`">
+          <span>{{ project.title }}</span>
         </div>
-        <img class="project__img" src="/img/mne-by-v-nebo.png" alt="Мальчик с самолетом в руке">
+        <img :class="`project-${project.id}__img project-${project.id}__img_size`" :src="`/img/${project.imgURL}`"
+          :alt="project.imgAlt">
       </div>
 
-      <LinkCard v-for="(item, index) in projectMneByVNebo" :key="index" :title="item.title"
-        :description="item.description" :linkUrl="item.linkUrl" :linkText="item.linkText" :paddingBottom="'46px'"
-        image-width="30%" title-size="20px">
-        <template #image>
-          <img :src="item.image" :alt="item.title" width="90px">
-        </template>
-      </LinkCard>
+      <template v-for="section in project.sections" :key="section.title">
+        <LinkCard v-if="['description', 'goals', 'results'].includes(section.type)" :title="section.title"
+          :description="section.text" :paddingBottom="'46px'" image-width="30%" title-size="20px">
+          <template #image>
+            <img :src="section.icon" :alt="section.title" width="90px">
+          </template>
+        </LinkCard>
 
-      <GallerySection v-if="projectMneByVNebo[0]?.galleryImg"
-        :photos="projectMneByVNebo[0].galleryImg.map(img => ({ image: img.url }))" :show-title="false" />
-    </div>
-
-    <div class="project-ovz">
-      <div class="project-ovz__box" :style="{ backgroundColor: 'var(--color-background-purple)' }">
-        <div class="project-ovz__title project-ovz__title_color">
-          <span>Апробирование современных технологий обучения учащихся с ОВ3 через практическую деятельность</span>
-        </div>
-        <img class="project-ovz__img" src="/img/stem.png" alt="Мальчик смотрит в бинокль">
-      </div>
-
-      <LinkCard v-for="(item, index) in projectOVZ" :key="index" :title="item.title" :description="item.description"
-        :linkUrl="item.linkUrl" :linkText="item.linkText" :paddingBottom="'46px'" image-width="30%" title-size="20px">
-        <template #image>
-          <img :src="item.image" :alt="item.title" width="90px">
-        </template>
-      </LinkCard>
-
-      <GallerySection v-if="projectOVZ[0]?.galleryImg"
-        :photos="projectOVZ[0].galleryImg.map(img => ({ image: img.url }))" :show-title="false" />
-    </div>
-
-    <div class="project-ovz">
-      <div class="project-ovz__box" :style="{ backgroundColor: 'var(--color-background-yellow)' }">
-        <div class="project-ovz__title">
-          <span>Современные технологии обучения детей с ОВ3 через практическую деятельность профессиональных навыков в
-            ОУ</span>
-        </div>
-        <img class="project-ovz__img project-ovz__img_size" src="/img/stod.png" alt="Мальчик читает">
-      </div>
-
-      <LinkCard v-for="(item, index) in projectOU" :key="index" :title="item.title" :description="item.description"
-        :linkUrl="item.linkUrl" :linkText="item.linkText" :paddingBottom="'46px'" image-width="30%" title-size="20px">
-        <template #image>
-          <img :src="item.image" :alt="item.title" width="90px">
-        </template>
-      </LinkCard>
-
-      <GallerySection v-if="projectOU[0]?.galleryImg" :photos="projectOU[0].galleryImg.map(img => ({ image: img.url }))"
-        :show-title="false" />
+        <GallerySection v-else-if="section.type === 'gallery' && section.images"
+          :photos="section.images.map(img => ({ image: img.url }))" :show-title="false" />
+      </template>
     </div>
 
     <div class="similar-topics">
@@ -130,7 +88,6 @@ const firstTwoNews = computed(() => newsData.value.slice(0, 2));
         <template v-slot:text>{{ info.text }}</template>
         <template v-slot:date>{{ info.date }}</template>
       </NewsCard>
-
     </div>
 
   </main>
@@ -153,7 +110,16 @@ const firstTwoNews = computed(() => newsData.value.slice(0, 2));
   }
 }
 
-.project {
+h2 {
+  @include h2-mobile-uppercase;
+}
+
+.title-page {
+  margin-top: 25px;
+  margin-bottom: -30px;
+}
+
+.project-mne-by-v-nebo {
   @include block-mobile;
   padding: 20px 0 0 0;
 
@@ -169,6 +135,7 @@ const firstTwoNews = computed(() => newsData.value.slice(0, 2));
     padding-top: 25px;
     gap: 0;
     border-radius: var(--cards-border-radius);
+    background-color: var(--color-background-red);
   }
 
   &__title {
@@ -205,6 +172,51 @@ const firstTwoNews = computed(() => newsData.value.slice(0, 2));
     padding-top: 40px;
     gap: 0;
     border-radius: var(--cards-border-radius);
+    background-color: var(--color-background-purple);
+  }
+
+  &__img {
+    width: 265px;
+    height: 193px
+  }
+
+  &__img_size {
+    margin-left: 20px;
+    height: 174px;
+    border-bottom-left-radius: var(--cards-border-radius);
+    border-bottom-right-radius: var(--cards-border-radius);
+  }
+
+  &__title {
+    display: flex;
+    text-align: center;
+    font-size: 18px;
+    font-weight: 600;
+    padding-left: 4px;
+    padding-right: 4px;
+  }
+
+  &__title_color {
+    color: var(--color-text-light);
+  }
+}
+
+.project-ou {
+  @include block-mobile;
+  padding: 20px 0 0 0;
+
+  &__box {
+    @include block-mobile;
+    justify-content: center;
+    justify-content: space-between;
+    width: 100%;
+    min-height: 340px;
+    height: fit-content;
+    padding: 0;
+    padding-top: 40px;
+    gap: 0;
+    border-radius: var(--cards-border-radius);
+    background-color: var(--color-background-yellow);
   }
 
   &__img {
@@ -226,10 +238,6 @@ const firstTwoNews = computed(() => newsData.value.slice(0, 2));
     font-weight: 600;
     padding-left: 4px;
     padding-right: 4px;
-  }
-
-  &__title_color {
-    color: var(--color-text-light);
   }
 }
 

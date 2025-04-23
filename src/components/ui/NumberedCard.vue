@@ -59,8 +59,8 @@ defineProps({
     position: absolute;
     bottom: 0;
     right: 0;
-    width: 176px;
-    height: 120px;
+    width: 8em;
+    // height: 120px;
   }
 }
 </style>
