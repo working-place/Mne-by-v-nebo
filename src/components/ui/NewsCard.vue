@@ -2,9 +2,10 @@
 defineProps({
   tagClass: {
     type: String,
-    required: true
+    default: 'all',
   }
 });
+
 </script>
 
 <template>
@@ -33,7 +34,9 @@ defineProps({
 
 .tag-card {
   @include block-mobile;
-  @include minmax-width-mobile-block;
+  min-width: 320px;
+  max-width: 362px;
+  min-height: 206px;
   position: relative;
   background-color: var(--color-background-light-blue);
   border-radius: var(--cards-border-radius);
@@ -52,16 +55,9 @@ defineProps({
     border-radius: 60px;
   }
 
-  &__tag-box_articles {
-    background-color: var(--color-background-lavender);
-  }
-
-  &__tag-box_video {
-    background-color: var(--color-background-red);
-  }
-
   &__img-box {
     @include display-flex-center-center;
+    background-size: cover;
     width: 100%;
     min-height: 100px;
     max-height: 168px;
@@ -85,5 +81,44 @@ defineProps({
 
   &__date {}
 
+  &__tag {}
+
+  &__tag-box_trainings {
+    background-color: var(--color-background-lavender);
+  }
+
+  &__tag-box_grants {
+    background-color: var(--color-background-red);
+  }
+
+  &__tag-box_masterclasses {
+    background-color: var(--color-background-yellow);
+  }
+
+  &__tag-box_trainings:active {
+    background-color: var(--color-pressed-lavender);
+  }
+
+  &__tag-box_grants:active {
+    background-color: var(--color-pressed-red);
+  }
+
+  &__tag-box_masterclasses:active {
+    background-color: var(--color-pressed-yellow);
+  }
+
+  @media (hover :hover) {
+    &__tag-box_trainings:hover {
+      background-color: var(--color-hover-lavender);
+    }
+
+    &__tag-box_grants:hover {
+      background-color: var(--color-hover-red);
+    }
+
+    &__tag-box_masterclasses:hover {
+      background-color: var(--color-hover-yellow);
+    }
+  }
 }
 </style>

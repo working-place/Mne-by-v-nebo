@@ -2,46 +2,54 @@
   "news": [
     {
       "id": 1,
-      "tag": "статьи",
-      "class": "articles",
+      "tag": "тренинги",
       "img": {
-        "src": "/img/charity.jpeg",
+        "src": "charity.jpeg",
         "alt": "Благотворительность"
       },
       "text": "Благотворительный фонд «Олимпия»",
       "fullText": "",
-      "date": "05.02.25"
+      "date": "05.02.25",
+      "source": {
+        "name": "",
+        "url": ""
+      }
     },
     {
       "id": 2,
-      "tag": "статьи",
-      "class": "articles",
+      "tag": "гранты",
       "img": {
-        "src": "/img/proforientacia.jpeg",
+        "src": "proforientacia.jpeg",
         "alt": "Профориентация"
       },
       "text": "Профориентация и БАС",
       "fullText": "",
-      "date": "05.02.25"
+      "date": "05.02.25",
+      "source": {
+        "name": "",
+        "url": ""
+      }
     },
     {
       "id": 3,
-      "tag": "статьи",
-      "class": "articles",
+      "tag": "мастер-классы",
       "img": {
-        "src": "/img/otkritie-granta.jpeg",
+        "src": "otkritie-granta.jpeg",
         "alt": "Открытие гранта"
       },
       "text": "Открытие гранта «Мне бы в небо»",
       "fullText": "",
-      "date": "11.09.24"
+      "date": "11.09.24",
+      "source": {
+        "name": "",
+        "url": ""
+      }
     },
     {
       "id": 4,
-      "tag": "статьи",
-      "class": "articles",
+      "tag": "тренинги",
       "img": {
-        "src": "/img/proekt.jpeg",
+        "src": "proekt.jpeg",
         "alt": "Завершение проекта"
       },
       "text": "В Новороссийске завершается проект «Школа для родителей особенного ребенка»",

@@ -38,17 +38,29 @@ const copyShareLink = () => {
         .then(() => alert('Ссылка скопирована в буфер обмена'))
         .catch(err => console.error('Не удалось скопировать ссылку:', err));
 };
+
+const getTagClass = (tag) => {
+  const tagLower = tag.toLowerCase().trim();
+
+  switch (tagLower) {
+    case 'все': return 'all';
+    case 'тренинги': return 'trainings';
+    case 'гранты': return 'grants';
+    case 'мастер-классы': return 'masterclasses';
+    default: return 'all';
+  }
+}
 </script>
 
 <template>
     <main v-if="article">
         <div class="article-header">
-            <NewsCard :tag-class="article.class">
+            <NewsCard :tag-class="getTagClass(article.tag)">
                 <template v-slot:tag>{{ article.tag }}</template>
                 <template v-slot:text>{{ article.text }}</template>
                 <template v-slot:date>{{ article.date }}</template>
                 <template v-slot:img>
-                    <img :src="article.img.src" :alt="article.img.alt" class="tag-card__img">
+                    <img :src="`/img/${article.img.src}`" :alt="article.img.alt" class="tag-card__img">
                 </template>
             </NewsCard>
         </div>
@@ -70,9 +82,9 @@ const copyShareLink = () => {
             <div class="related-articles-list">
                 <div v-for="related in relatedArticles" :key="related.id" class="related-article">
                     <router-link :to="{ name: 'article', params: { id: related.id } }" class="news-card-link">
-                        <NewsCard :tag-class="related.class">
+                        <NewsCard :tag-class="getTagClass(article.tag)">
                             <template v-slot:img>
-                                <img :src="related.img.src" :alt="related.img.alt" class="tag-card__img">
+                                <img :src="`/img/${related.img.src}`" :alt="related.img.alt" class="tag-card__img">
                             </template>
                             <template v-slot:tag>{{ related.tag }}</template>
                             <template v-slot:text>{{ related.text }}</template>

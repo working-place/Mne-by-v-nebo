@@ -29,6 +29,18 @@ onMounted(loadData);
 
 const firstTwoNews = computed(() => newsData.value.slice(0, 2));
 
+const getTagClass = (tag) => {
+  const tagLower = tag.toLowerCase().trim();
+
+  switch (tagLower) {
+    case 'все': return 'all';
+    case 'тренинги': return 'trainings';
+    case 'гранты': return 'grants';
+    case 'мастер-классы': return 'masterclasses';
+    default: return 'all';
+  }
+}
+
 </script>
 
 <template>
@@ -80,9 +92,9 @@ const firstTwoNews = computed(() => newsData.value.slice(0, 2));
         <h2>Статьи на похожую тему:</h2>
       </div>
 
-      <NewsCard v-for="info in firstTwoNews" :key="info.id" :tag-class="info.class">
+      <NewsCard v-for="info in firstTwoNews" :key="info.id" :tag-class="getTagClass(info.tag)">
         <template v-slot:img>
-          <img :src="info.img.src" :alt="info.img.alt" class="tag-card__img">
+          <img :src="`/img/${info.img.src}`" :alt="info.img.alt" class="tag-card__img">
         </template>
         <template v-slot:tag>{{ info.tag }}</template>
         <template v-slot:text>{{ info.text }}</template>
