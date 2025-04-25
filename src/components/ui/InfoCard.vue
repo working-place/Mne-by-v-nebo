@@ -32,7 +32,7 @@ defineProps({
 
 .info-card {
   @include display-flex-column-center;
-  min-width: var(--min-width);
+  position: relative;
   min-height: var(--main-screen_block-height);
   gap: 10px;
   padding: 20px;

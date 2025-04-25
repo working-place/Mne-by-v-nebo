@@ -1,11 +1,12 @@
 <script setup>
 import ReusableScreen from './ui/ReusableScreen.vue';
 import Slider from './ui/SliderWrapper.vue';
+import RouterLinkButton from './ui/RouterLinkButton.vue';
 import { ref } from 'vue';
 
 const photoSlides = [
   { id: 1, image: '/img/photo1.jpg' },
-  { id: 2, image: '/img/photo1.jpg' },
+  { id: 2, image: '/img/photo2.jpg' },
   { id: 3, image: '/img/photo1.jpg' },
   { id: 4, image: '/img/photo1.jpg' },
   { id: 5, image: '/img/photo1.jpg' },
@@ -82,7 +83,6 @@ const closeModal = () => {
           </template>
         </Slider>
       </div>
-      <button class="view-more-btn">Смотреть больше</button>
     </div>
 
     <div class="gallery-section">
@@ -101,7 +101,9 @@ const closeModal = () => {
           </template>
         </Slider>
       </div>
-      <button class="view-more-btn">Смотреть больше</button>
+      <div class="button-wrapper">
+        <RouterLinkButton to="" textButton="Cмотреть больше" />
+      </div>
     </div>
 
     <!-- Photo Modal -->
@@ -125,32 +127,30 @@ const closeModal = () => {
   </main>
 </template>
 
-<style scoped>
+<style scoped lang="scss">
+@use '@/assets/scss/mixins.scss' as *;
+
 .gallery-section {
   margin: 10px 0;
-  padding: 0 1rem;
-  max-width: 410px;
+  padding: 0 16px;
 }
 
 h2 {
-  margin-bottom: 20px;
+  @include h2-mobile-uppercase;
   text-align: center;
 }
 
 .slider-container {
   position: relative;
-
-
-  margin: 0 auto;
-  padding: 0 20px;
+  width: 100%;
+  padding-top: 20px;
 }
 
 .slide-content {
   position: relative;
   cursor: pointer;
   transition: transform 0.3s;
-  height: 200px;
-  overflow: hidden;
+  height: 176px;
   border-radius: 12px;
 }
 
@@ -198,27 +198,36 @@ h2 {
 }
 
 .modal-content {
+  display: flex;
   position: relative;
   max-width: 90%;
   max-height: 90%;
+  text-align: center;
 }
 
 .modal-close {
   position: absolute;
-  top: -40px;
+  top: -50px;
   right: 0;
   background: none;
   border: none;
   color: white;
-  font-size: 2rem;
+  font-size: 2.5rem;
   cursor: pointer;
+  opacity: 0.7;
+  transition: opacity 0.2s;
+
+  &:hover {
+    opacity: 1;
+  }
 }
 
 .modal-image {
   max-width: 100%;
   max-height: 80vh;
   display: block;
-  margin: 0 auto;
+  border-radius: 12px;
+  object-fit: cover;
 }
 
 .modal-video {
