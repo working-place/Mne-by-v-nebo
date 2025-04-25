@@ -79,19 +79,17 @@ const getTagClass = (tag) => {
 
     <div class="related-articles" v-if="relatedArticles.length > 0">
       <h2>Это интересно</h2>
-      <div class="related-articles-list">
-        <div v-for="related in relatedArticles" :key="related.id" class="related-article">
-          <router-link :to="{ name: 'article', params: { id: related.id } }" class="news-card-link">
-            <NewsCard :tag-class="getTagClass(article.tag)">
-              <template v-slot:img>
-                <img :src="`/img/${related.img.src}`" :alt="related.img.alt" class="tag-card__img">
-              </template>
-              <template v-slot:tag>{{ related.tag }}</template>
-              <template v-slot:text>{{ related.text }}</template>
-              <template v-slot:date>{{ related.date }}</template>
-            </NewsCard>
-          </router-link>
-        </div>
+      <div v-for="related in relatedArticles" :key="related.id" class="related-article">
+        <router-link :to="{ name: 'article', params: { id: related.id } }" class="news-card-link">
+          <NewsCard :tag-class="getTagClass(related.tag)">
+            <template v-slot:img>
+              <img :src="`/img/${related.img.src}`" :alt="related.img.alt" class="tag-card__img">
+            </template>
+            <template v-slot:tag>{{ related.tag }}</template>
+            <template v-slot:text>{{ related.text }}</template>
+            <template v-slot:date>{{ related.date }}</template>
+          </NewsCard>
+        </router-link>
       </div>
     </div>
   </main>
@@ -113,21 +111,22 @@ const getTagClass = (tag) => {
 .article-header {}
 
 .article-content {
-  padding: 0 20px;
+  padding: 0;
   overflow: hidden;
+}
 
-  .article-text {
-    margin-bottom: 20px;
-    line-height: 1.4;
-    word-wrap: break-word;
-  }
+.article-text {
+  margin-bottom: 20px;
+  line-height: 1.4;
+  word-wrap: break-word;
+}
 
-  .article-source {
-    a {
-      color: var(--color-primary);
-    }
+.article-source {
+  a {
+    color: var(--color-primary);
   }
 }
+
 
 .share-section {
   width: 100%;
@@ -151,34 +150,21 @@ const getTagClass = (tag) => {
 }
 
 .related-articles {
-  margin: 0 auto;
-  padding: 0 20px;
+  @include block-mobile;
+  @include minmax-width-mobile;
   box-sizing: border-box;
+}
 
-  h2 {
-    margin-bottom: 20px;
-    text-align: center;
-  }
+h2 {
+  margin-bottom: 20px;
+  text-align: center;
+}
 
-  .related-articles-list {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 20px;
-  }
-
-  .news-card-link {
-    text-decoration: none;
-    color: inherit;
-    display: block;
-    height: 100%;
-  }
-
-  .tag-card__img {
-    max-width: 100%;
-    height: auto;
-    display: block;
-    object-fit: cover;
-  }
+.news-card-link {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+  height: 100%;
 }
 
 .loading {
