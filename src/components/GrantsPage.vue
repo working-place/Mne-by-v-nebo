@@ -18,7 +18,7 @@ const items = ref([
     subtitle: 'Проект «Разные возможности — равные права» 2023',
     content: 'Проект «Разные возможности – равные права» представляет собой комплексную программу занятий по ранней профориентации для детей-инвалидов и детей с ОВЗ 7-14 лет. Программа включает тренинги с педагогом-психологом, игровые занятия, экскурсии на предприятия Новороссийска и мастер-классы. Особое внимание уделяется вовлечению родителей в процесс поддержки детей. Проект помогает детям узнать о различных профессиях, необходимых навыках и возможностях трудоустройства. Также планируется долгосрочное сотрудничество с учреждениями СПО и социальными партнерами. Этот опыт может быть полезен другим школам, способствуя успешной адаптации и социализации детей с ОВЗ.',
     additionalText: '',
-    image: new URL('/public/img/grants-photo-boy2.png', import.meta.url).href,
+    image: new URL('/public/img/grants-photo-project.png', import.meta.url).href,
     isOpen: false
   },
   {
@@ -26,7 +26,7 @@ const items = ref([
     subtitle: 'Проект «Мне бы в небо» 2024',
     content: 'Проект «Мне бы в небо» направлен на формирование предпрофессиональных компетенций у школьников 8-11 классов в области программирования, управления и технического сопровождения беспилотных летательных аппаратов. Он включает образовательные модули по теории, сборке, программированию и пилотированию дронов, а также соревнования по управлению квадрокоптерами. Учащиеся получат практические навыки работы с БПЛА, развивая как hard-skills, так и soft-skills. Реализация проекта повысит интерес подростков к техническим дисциплинам и поможет в профессиональном самоопределении. Дрон-рейсинг и обучение беспилотному пилотированию могут сыграть ключевую роль в выборе будущей профессии, связанной с инженерией, робототехникой и искусственным интеллектом.',
     additionalText: '',
-    image: new URL('/public/img/grants-photo-boy2.png', import.meta.url).href,
+    image: new URL('/public/img/grants-photo-project.png', import.meta.url).href,
     isOpen: false
   },
   {
@@ -34,7 +34,7 @@ const items = ref([
     subtitle: 'Проект «Школа для родителей особенного ребенка» 2024',
     content: 'Проект направлен на оказание психологической и информационной помощи семьям, воспитывающим детей с инвалидностью. В нем участвуют 12 семей (21 родитель и 15 детей), включая неполные семьи. В рамках проекта родители проходят практико-ориентированное обучение по коррекционно-развивающему взаимодействию с детьми. Разработаны методические рекомендации, программы тренингов и занятий для специалистов и родителей. Проект поможет семьям эффективно справляться с воспитательными и реабилитационными задачами. По итогам работы будет создан консультационный центр «Точка опоры» для поддержки родителей и специалистов.',
     additionalText: '',
-    image: new URL('/public/img/grants-photo-boy2.png', import.meta.url).href,
+    image: new URL('/public/img/grants-photo-project.png', import.meta.url).href,
     isOpen: false
   },
   {
@@ -42,7 +42,7 @@ const items = ref([
     subtitle: 'Проект «Мне бы в небо» 2024',
     content: 'Проект «Мне бы в небо» направлен на формирование предпрофессиональных компетенций школьников 8-11 классов в области программирования, управления и технического сопровождения беспилотных летательных аппаратов (БПЛА). Программа включает образовательные модули по теории, сборке, настройке, программированию и управлению дронами, а также соревнования по пилотированию. Учащиеся на практике изучат конструкцию и принципы работы БПЛА, освоят навыки пайки, 3D-печати и программирования. Проект способствует популяризации технических дисциплин и профессиональному самоопределению подростков. Полученные hard- и soft-skills помогут участникам успешно развиваться в IT-сфере и инженерных специальностях.',
     additionalText: '',
-    image: new URL('/public/img/grants-photo-boy2.png', import.meta.url).href,
+    image: new URL('/public/img/grants-photo-project.png', import.meta.url).href,
     isOpen: false
   },
   {
@@ -50,7 +50,7 @@ const items = ref([
     subtitle: 'Проект «Мастерская инноваций» 2025',
     content: 'Ожидаем результатов конкурса.',
     additionalText: '',
-    image: new URL('/public/img/grants-photo-boy2.png', import.meta.url).href,
+    image: new URL('/public/img/grants-photo-project.png', import.meta.url).href,
     isOpen: false
   },
   {
@@ -58,7 +58,7 @@ const items = ref([
     subtitle: 'Проект «БЕСЕДкА» 2025',
     content: 'Ожидаем результатов конкурса.',
     additionalText: '',
-    image: new URL('/public/img/grants-photo-boy2.png', import.meta.url).href,
+    image: new URL('/public/img/grants-photo-project.png', import.meta.url).href,
     isOpen: false
   },
   {
@@ -66,7 +66,7 @@ const items = ref([
     subtitle: 'Проект «Мастерская инноваций» 2025',
     content: 'Ожидаем результатов конкурса.',
     additionalText: '',
-    image: new URL('/public/img/grants-photo-boy2.png', import.meta.url).href,
+    image: new URL('/public/img/grants-photo-project.png', import.meta.url).href,
     isOpen: false
   },
   {
@@ -74,7 +74,7 @@ const items = ref([
     subtitle: 'Проект «Память сильнее времени» 2025',
     content: 'Ожидаем результатов конкурса.',
     additionalText: '',
-    image: new URL('/public/img/grants-photo-boy2.png', import.meta.url).href,
+    image: new URL('/public/img/grants-photo-project.png', import.meta.url).href,
     isOpen: false
   },
 ])
@@ -106,7 +106,6 @@ const toggleItem = (index) => {
     <div class="grants-accordion">
       <div v-for="(item, index) in visibleItems" :key="index" class="accordion-item"
         :class="{ 'is-open': item.isOpen }">
-        <!-- Картинка для мобильной версии -->
         <img v-if="item.isOpen" :src="item.image" :alt="item.title" class="top-image">
 
         <div class="accordion-header">
@@ -115,7 +114,6 @@ const toggleItem = (index) => {
             <h3 v-if="item.isOpen" class="item-subtitle">{{ item.subtitle }}</h3>
           </div>
 
-          <!-- Стрелка в круге - в заголовке (справа) -->
           <div class="arrow-circle header-arrow" :class="{ 'is-open': item.isOpen }" @click.stop="toggleItem(index)">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
               <path d="M6 9L12 15L18 9" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
@@ -128,7 +126,6 @@ const toggleItem = (index) => {
             <p class="main-text">{{ item.content }}</p>
             <p class="additional-text">{{ item.additionalText }}</p>
 
-            <!-- Стрелка в круге - в контенте (слева внизу) -->
             <div class="arrow-circle content-arrow left" :class="{ 'is-open': item.isOpen }"
               @click.stop="toggleItem(index)">
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
@@ -176,6 +173,7 @@ const toggleItem = (index) => {
 .item-title {
   margin: 0;
   text-align: left;
+  font-size: 20px;
 }
 
 .item-subtitle {
@@ -183,7 +181,6 @@ const toggleItem = (index) => {
   text-align: left;
 }
 
-/* Общие стили для стрелки */
 .arrow-circle {
   width: 40px;
   height: 40px;
@@ -210,29 +207,25 @@ const toggleItem = (index) => {
   transform: rotate(180deg);
   color: #000000;
 }
-/* Стрелка в заголовке (справа) */
+
 .header-arrow {
   position: static;
   margin-left: auto;
 }
 
-/* Стрелка в контенте (слева внизу) */
 .content-arrow.left {
   margin: 12px 0 0 12px;
   display: none;
 }
 
-/* Скрываем стрелку в заголовке при открытом состоянии */
 .accordion-item.is-open .header-arrow {
   display: none;
 }
 
-/* Показываем стрелку в контенте при открытом состоянии */
 .accordion-item.is-open .content-arrow {
   display: flex;
 }
 
-/* Стили для картинок */
 .top-image {
   width: 100px;
   height: 100px;
@@ -242,7 +235,6 @@ const toggleItem = (index) => {
   margin: 16px auto 12px;
 }
 
-/* Стили для контента */
 .accordion-content {
   padding: 0 12px 12px;
   
@@ -252,7 +244,6 @@ const toggleItem = (index) => {
   margin-top: 16px;
 }
 
-/* Кнопка "Все гранты" */
 .show-all-btn {
   background-color: #7352E5;
   color: #ffffff;
@@ -267,7 +258,6 @@ const toggleItem = (index) => {
   cursor: pointer;
 }
 
-/* Анимация */
 .slide-enter-active,
 .slide-leave-active {
   transition: all 0.4s ease;

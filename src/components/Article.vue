@@ -90,7 +90,6 @@ const copyShareLink = () => {
 </template>
 
 <style scoped lang="scss">
-
 .article-header {
 
     .tag-card__img {
@@ -140,7 +139,6 @@ const copyShareLink = () => {
 }
 
 .related-articles {
-    margin: 0 auto;
     padding: 0 20px;
     box-sizing: border-box;
 
