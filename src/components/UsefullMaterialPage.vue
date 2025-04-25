@@ -62,7 +62,6 @@ const loadData = async () => {
   try {
     const response = await import('@/data/db.json');
     newsData.value = response.news;
-    // mainDirection.value = response.cards;
   } catch (error) {
     console.error('Ошибка загрузки новостей:', error)
   };
@@ -137,9 +136,9 @@ const getTagClass = (tag) => {
       <h2>Это интересно</h2>
       <router-link v-for="info in firstTwoNews" :key="info.id" :to="{ name: 'article', params: { id: info.id } }"
         class="news-card-link">
-        <NewsCard :tag-class="info.class">
+        <NewsCard :tag-class="getTagClass(info.tag)">
           <template v-slot:img>
-            <img :src="info.img.src" :alt="info.img.alt" class="tag-card__img">
+            <img :src="`/img/${info.img.src}`" :alt="info.img.alt" class="tag-card__img">
           </template>
           <template v-slot:tag>{{ info.tag }}</template>
           <template v-slot:text>{{ info.text }}</template>

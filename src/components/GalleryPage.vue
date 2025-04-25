@@ -132,7 +132,6 @@ const closeModal = () => {
 
 .gallery-section {
   margin: 10px 0;
-  padding: 0 16px;
 }
 
 h2 {

@@ -124,6 +124,7 @@ const getTagClass = (tag) => {
 
 h2 {
   @include h2-mobile-uppercase;
+  text-align: center;
 }
 
 .title-page {

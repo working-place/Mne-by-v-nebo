@@ -156,6 +156,7 @@ const getTagClass = (tag) => {
 }
 
 h2 {
+  @include h2-mobile-uppercase;
   margin-bottom: 20px;
   text-align: center;
 }

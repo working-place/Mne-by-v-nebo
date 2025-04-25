@@ -34,7 +34,7 @@ defineProps({
 
 .tag-card {
   @include block-mobile;
-  min-width: 320px;
+  min-width: 286px;
   max-width: 362px;
   min-height: 206px;
   position: relative;
