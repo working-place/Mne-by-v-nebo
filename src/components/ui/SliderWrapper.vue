@@ -173,9 +173,13 @@ watch(() => props.items, updateSliderPosition);
     justify-content: center;
     cursor: pointer;
 
+    &:active {
+            background: var(--color-pressed-lavender);
+        }
+
     @media (hover: hover) {
         &:hover {
-            background-color: #977AF9;
+            background-color: var(--color-hover-lavender);
         }
     }
 

@@ -192,10 +192,30 @@ const toggleItem = (index) => {
   transition: all 0.3s ease;
   flex-shrink: 0;
   cursor: pointer;
+
+  &:active {
+      background: var(--color-pressed-lavender);
+    }
+  
+    @media (hover: hover) {
+      &:hover {
+        background: var(--color-hover-lavender);
+      }
+    }
 }
 
 .arrow-circle.is-open {
   background: #FDD35D;
+
+  &:active {
+      background: var(--color-pressed-yellow);
+    }
+  
+    @media (hover: hover) {
+      &:hover {
+        background: var(--color-hover-yellow);
+      }
+    }
 }
 
 .arrow-circle svg {
@@ -256,6 +276,16 @@ const toggleItem = (index) => {
   font-family: var(--font-family-next-art);
   font-size: 11px;
   cursor: pointer;
+
+  &:active {
+      background-color: var(--color-pressed-purple);
+    }
+  
+    @media (hover: hover) {
+      &:hover {
+        background-color: var(--color-hover-purple);
+      }
+    }
 }
 
 .slide-enter-active,

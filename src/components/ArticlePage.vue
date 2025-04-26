@@ -146,6 +146,16 @@ const getTagClass = (tag) => {
     font-family: var(--font-family-nunito);
     cursor: pointer;
     text-align: center;
+
+    &:active {
+        background: var(--color-pressed-yellow);
+      }
+    
+      @media (hover: hover) {
+        &:hover {
+          background: var(--color-hover-yellow);
+        }
+      }
   }
 }
 
