@@ -101,7 +101,7 @@ const getTagClass = (tag) => {
       </template>
     </ReusableScreen>
 
-    <InfoCard imageUrl="public/img/usefull-page-boy.png" title="Литература для специалистов"
+    <InfoCard imageUrl="/img/usefull-page-boy.png" title="Литература для специалистов"
       description="Представляем подборку книг и методических материалов для специалистов в области детского образования. Здесь вы найдете актуальные исследования, практические руководства и вдохновляющие примеры." />
 
     <div class="slider-container">
@@ -116,7 +116,7 @@ const getTagClass = (tag) => {
       </Slider>
     </div>
 
-    <InfoCard imageUrl="public\img\usefull-material-content-boy.png" title="Литература для родителей"
+    <InfoCard imageUrl="/img/usefull-material-content-boy.png" title="Литература для родителей"
       description="Помогите своему ребенку раскрыть свой потенциал с помощью наших специально подобранных книг!  Они помогут ему лучше учиться, расширят его кругозор и обогатят его воображение." />
 
     <div class="slider-container">
