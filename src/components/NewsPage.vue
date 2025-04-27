@@ -42,7 +42,8 @@ const filteringButtons = [
 const loadNews = async () => {
   try {
     const response = await import('@/data/db.json');
-    newsData.value = JSON.parse(response.default).news;
+    // newsData.value = JSON.parse(response.default).news;
+    newsData.value = response.news;
   } catch (error) {
     console.error('Ошибка загрузки новостей:', error);
   }
