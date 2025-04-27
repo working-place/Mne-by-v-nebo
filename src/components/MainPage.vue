@@ -103,7 +103,8 @@ const getTagClass = (tag) => {
 
     <div class="news">
       <h2>Новости</h2>
-      <NewsCard v-for="info in firstTwoNews" :key="info.id" :tag-class="getTagClass(info.tag)">
+      <router-link v-for="info in firstTwoNews" :key="info.id" :to="{ name: 'article', params: { id: info.id } }" class="news-card-link">
+        <NewsCard  :tag-class="getTagClass(info.tag)">
         <template v-slot:img>
           <img :src="`/img/${info.img.src}`" :alt="info.img.alt" class="tag-card__img">
         </template>
@@ -111,6 +112,8 @@ const getTagClass = (tag) => {
         <template v-slot:text>{{ info.text }}</template>
         <template v-slot:date>{{ info.date }}</template>
       </NewsCard>
+      </router-link>
+
 
       <RouterLinkButton :to="{ name: 'news' }" :disabled="false" max-height-btn="62px" min-height-btn="62px"
         font-size-btn="20px">
@@ -124,6 +127,13 @@ const getTagClass = (tag) => {
 
 <style scoped lang="scss">
 @use '@/assets/scss/mixins.scss' as *;
+
+.news-card-link {
+  display: flex;
+  width: 100%;
+  text-decoration: none;
+  color: inherit;
+}
 
 h2 {
   @include h2-mobile-uppercase;

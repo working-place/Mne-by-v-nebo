@@ -169,7 +169,6 @@ onMounted(loadNews);
 }
 
 .trainings {
-  background-color: red;
 }
 
 .news {
@@ -181,7 +180,6 @@ onMounted(loadNews);
     @include block-mobile;
     @include minmax-width-mobile;
     min-width: 286px;
-    // max-width: 343px;
     flex-direction: row;
     flex-wrap: wrap;
     padding: 0;
@@ -256,7 +254,8 @@ onMounted(loadNews);
 }
 
 .news-card-link {
-  display: block;
+  display: flex;
+  width: 100%;
   text-decoration: none;
   color: inherit;
 }
@@ -279,14 +278,6 @@ onMounted(loadNews);
 
   span {
     text-align: center;
-  }
-}
-
-@media (min-width: 340px) {
-  .news {
-    &__filtering-box {
-      padding: 10px;
-    }
   }
 }
 

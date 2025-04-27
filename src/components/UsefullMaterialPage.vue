@@ -179,7 +179,8 @@ const getTagClass = (tag) => {
 }
 
 .news-card-link {
-  display: block;
+  display: flex;
+  width: 100%;
   text-decoration: none;
   color: inherit;
 }
