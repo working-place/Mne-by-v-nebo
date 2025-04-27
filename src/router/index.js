@@ -7,7 +7,10 @@ import UsefullMaterialPage from '@/components/UsefullMaterialPage.vue';
 import NewsPage from '@/components/NewsPage.vue';
 import GalleryPage from '@/components/GalleryPage.vue';
 import PrivacyPolicyPdfPage from '@/components/PrivacyPolicyPdfPage.vue';
-import UserAgreementPdf from '@/components/userAgreementPdf.vue';
+import UserAgreementPdf from '@/components/UserAgreementPdf.vue';
+import OrganizationCharter from '@/components/OrganizationCharter.vue';
+import NotFound from '@/components/NotFound.vue';
+import Article from '@/components/ArticlePage.vue';
 
 const router = createRouter({
   history: createWebHistory(),
@@ -39,6 +42,12 @@ const router = createRouter({
       component: NewsPage,
     },
     {
+      path: '/news/:id',
+      name: 'article',
+      component: Article,
+      props: true
+    },
+    {
       path: '/gallery',
       name: 'gallery',
       component: GalleryPage,
@@ -53,6 +62,16 @@ const router = createRouter({
       name: 'user-agreement',
       component: UserAgreementPdf,
     },
+    {
+      path: '/charter',
+      name: 'charter',
+      component: OrganizationCharter,
+    },
+    {
+      path: '/:pathMatch(.*)*',
+      name: 'NotFound',
+      component: NotFound
+    }
   ],
 })
 

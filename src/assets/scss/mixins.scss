@@ -1,9 +1,8 @@
-
 @mixin h1-mobile {
   font-weight: 600;
   font-size: 36px;
   line-height: 1.25;
-  text-align:center;
+  text-align: center;
 }
 
 @mixin h1-pdf-container {
@@ -13,9 +12,40 @@
 }
 
 @mixin h2-mobile-uppercase {
+  font-family: var(--font-family-next-art);
+  text-transform: uppercase;
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 1.5;
+}
+
+@mixin h2-mobile-button {
+  font-family: var(--font-family-next-art);
+  text-transform: uppercase;
+  font-weight: 600;
+  line-height: 1;
+}
+
+@mixin h2-mobile-uppercase-footer {
   text-transform: uppercase;
   font-weight: 700;
   line-height: 1.5;
+}
+
+@mixin h3-mobile-card {}
+
+@mixin button-text {
+  font-family: var(--font-family-nunito);
+  line-height: 1;
+  font-size: 16px;
+  font-weight: 400;
+}
+
+@mixin button-basic-style {
+  padding: 10px;
+  outline: none;
+  border: none;
+  border-radius: 60px;
 }
 
 @mixin display-flex-center-center {
@@ -40,9 +70,25 @@
   align-items: center;
 }
 
+@mixin block-mobile {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  height: fit-content;
+  align-items: center;
+  padding-left: 17px;
+  padding-right: 17px;
+  gap: 22px;
+}
+
 @mixin minmax-width-mobile {
   min-width: 320px;
   max-width: 362px;
+}
+
+@mixin minmax-width-mobile-block {
+  max-width: 320px;
+  min-height: 206px;
 }
 
 @mixin cover-center-no-repeat-img {
@@ -72,10 +118,10 @@
 
 @mixin list-decoration {
   white-space: nowrap;
-    padding: 0;
-    margin: 0;
-    gap: 12px;
-    list-style: none;
+  padding: 0;
+  margin: 0;
+  gap: 12px;
+  list-style: none;
 }
 
 @mixin border-bottom-radius-8 {
@@ -83,6 +129,24 @@
   border-bottom-right-radius: 8px;
 }
 
-// @mixin border-top-radius-8 {
+@mixin btn-disable {
+  background-color: var(--color-disabled);
+  color: var(--color-text-gray);
+  cursor: not-allowed;
+  pointer-events: none;
 
-// }
+  &:not(.button_disabled) {
+    &:active {
+      background-color: var(--color-pressed-purple);
+      transition: 0.3s;
+    }
+  }
+
+  &:hover {
+    background-color: var(--color-disabled);
+  }
+}
+
+@mixin img-border-radius {
+border-radius: 8px;
+}
