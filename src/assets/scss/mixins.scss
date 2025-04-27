@@ -1,19 +1,94 @@
+@mixin h1-mobile {
+  font-weight: 600;
+  font-size: 36px;
+  line-height: 1.25;
+  text-align: center;
+}
+
+@mixin h1-pdf-container {
+  font-size: 20px;
+  padding-left: 17px;
+  padding-right: 17px;
+}
+
+@mixin h2-mobile-uppercase {
+  font-family: var(--font-family-next-art);
+  text-transform: uppercase;
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 1.5;
+}
+
+@mixin h2-mobile-button {
+  font-family: var(--font-family-next-art);
+  text-transform: uppercase;
+  font-weight: 600;
+  line-height: 1;
+}
+
+@mixin h2-mobile-uppercase-footer {
+  text-transform: uppercase;
+  font-weight: 700;
+  line-height: 1.5;
+}
+
+@mixin h3-mobile-card {}
+
+@mixin button-text {
+  font-family: var(--font-family-nunito);
+  line-height: 1;
+  font-size: 16px;
+  font-weight: 400;
+}
+
+@mixin button-basic-style {
+  padding: 10px;
+  outline: none;
+  border: none;
+  border-radius: 60px;
+}
+
+@mixin display-flex-center-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@mixin display-flex-justify-content-center {
+  display: flex;
+  justify-content: center;
+}
+
+@mixin display-flex-column {
+  display: flex;
+  flex-direction: column;
+}
+
 @mixin display-flex-column-center {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-@mixin display-flex-center {
+@mixin block-mobile {
   display: flex;
+  width: 100%;
+  flex-direction: column;
+  height: fit-content;
   align-items: center;
-  justify-content: center;
+  padding-left: 17px;
+  padding-right: 17px;
+  gap: 22px;
 }
 
-@mixin d-flex-jc-space-between-ai-center {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+@mixin minmax-width-mobile {
+  min-width: 320px;
+  max-width: 362px;
+}
+
+@mixin minmax-width-mobile-block {
+  max-width: 320px;
+  min-height: 206px;
 }
 
 @mixin cover-center-no-repeat-img {
@@ -24,20 +99,9 @@
   background-position: center center;
 }
 
-@mixin minmax-width-mobile {
-  min-width: 320px;
-  max-width: 362px;
-}
-
-@mixin h1-mobile {
-  font-weight: 600;
-  font-size: 36px;
-  line-height: 1.25;
-  text-align:center;
-}
-
 @mixin pdf-container {
   max-height: 500px;
+  width: 100%;
   overflow-y: auto;
   overflow-x: auto;
   margin-top: 10px;
@@ -45,8 +109,44 @@
   border-radius: 4px;
 }
 
-@mixin h1-pdf-container {
-  font-size: 20px;
-  padding-left: 17px;
-  padding-right: 17px;
+@mixin item-decoration {
+  line-height: 1.5;
+  margin: 0;
+  text-decoration: none;
+  color: var(--color-text-dark);
+}
+
+@mixin list-decoration {
+  white-space: nowrap;
+  padding: 0;
+  margin: 0;
+  gap: 12px;
+  list-style: none;
+}
+
+@mixin border-bottom-radius-8 {
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
+}
+
+@mixin btn-disable {
+  background-color: var(--color-disabled);
+  color: var(--color-text-gray);
+  cursor: not-allowed;
+  pointer-events: none;
+
+  &:not(.button_disabled) {
+    &:active {
+      background-color: var(--color-pressed-purple);
+      transition: 0.3s;
+    }
+  }
+
+  &:hover {
+    background-color: var(--color-disabled);
+  }
+}
+
+@mixin img-border-radius {
+border-radius: 8px;
 }

@@ -1,28 +1,43 @@
 <script setup>
-import { ref } from 'vue';
+import { onMounted, onUnmounted, ref } from 'vue';
 import { useRoute } from 'vue-router';
 import NavLinks from './NavLinks.vue';
 
 
 const isOpen = ref(false);
-const route = useRoute()
+const route = useRoute();
+const menuRef = ref(null);
+
+const isActive = (path) => {
+  return route.path === path
+}
 
 const closeMenu = () => {
   isOpen.value = false
 }
 
-const isActive = (path) => {
-  return route.path === path
+const handleClickOutside = (event) => {
+  if(isOpen.value && menuRef.value && !menuRef.value.contains(event.target))
+  closeMenu();
 }
+
+onMounted (() => {
+  document.addEventListener('click', handleClickOutside);
+})
+
+onUnmounted (() => {
+  document.removeEventListener('click', handleClickOutside);
+})
+
 </script>
 
 <template>
-  <header class="menu">
+  <header class="menu" ref="menuRef">
     <div class="menu__box" :class="{ 'menu-open': isOpen }">
       <RouterLink to="/" @click="closeMenu" :class="{ active: isActive('/') }">
         <img class="menu__logo" src="/img/logo.png" alt="Логотип">
       </RouterLink>
-      <button v-if="!isOpen" @click="isOpen = true" class="menu__menu-btn"></button>
+      <button v-if="!isOpen" @click.stop="isOpen = true" class="menu__menu-btn"></button>
       <button v-else @click="isOpen = false" class="menu__close-btn"></button>
     </div>
     <NavLinks :is-open="isOpen" @close="closeMenu" align="center" />
@@ -45,7 +60,8 @@ const isActive = (path) => {
   }
 
   &__box {
-    @include d-flex-jc-space-between-ai-center;
+    @include display-flex-justify-content-center;
+    justify-content: space-between;
   }
 
   &__box.menu-open {

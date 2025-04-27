@@ -21,15 +21,14 @@ import NavLinks from './NavLinks.vue';
       <h2>Документы</h2>
       <ul class="footer__docs-list">
         <li class="footer__docs-item">
-          <RouterLink to="/privacy-policy" :class="{ active: $route.path === '/privacy-policy' }" class="footer__docs-item">
+          <RouterLink to="/privacy-policy" :class="{ active: $route.path === '/privacy-policy' }"
+            class="footer__docs-item">
             Политика конфиденциальности
           </RouterLink>
-          <!-- <div v-if="$route.path === '/privacy-policy'" class="pdf-container">
-            <VuePdfEmbed :source="privacyPolicyPdf" />
-          </div> -->
         </li>
         <li class="footer__docs-item">
-          <RouterLink to="" :class="{ active: $route.path === ('/agreement') }" class="footer__docs-item">
+          <RouterLink to="/user-agreement" :class="{ active: $route.path === ('/user-agreement') }"
+            class="footer__docs-item">
             Пользовательское соглашение
           </RouterLink>
         </li>
@@ -54,7 +53,7 @@ import NavLinks from './NavLinks.vue';
         <a href="https://xn--g1ani7c.xn--p1ai/">
           <img class="footer__soyuz-logo" src="/img/soyuz-logo.png" alt="Логотип Союз.РФ">
         </a>
-          <img class="footer__profit-code-logo" src="/img/profit-code.png" alt="Логотип ProfitCode">
+        <img class="footer__profit-code-logo" src="/img/profit-code.png" alt="Логотип ProfitCode">
       </div>
     </div>
     <div class="footer__text-about-center">
@@ -63,140 +62,122 @@ import NavLinks from './NavLinks.vue';
   </footer>
 </template>
 
-<style scoped>
-/* .pdf-container {
-  max-height: 500px;
-  overflow-y: auto;
-  margin-top: 10px;
-  border: 1px solid #eee;
-  border-radius: 4px;
-} */
+<style scoped lang="scss">
+@use '@/assets/scss/mixins.scss' as *;
+
+h2 {
+  @include h2-mobile-uppercase-footer;
+  color: var(--color-text-purple);
+}
+
 .active {
   font-weight: bold;
 }
 
-.menu__nav-box_position {
-  position: static;
-  align-items: flex-start;
-  justify-content: flex-start;
-  gap: 40px;
-}
+.menu {
+  &__nav-box_position {
+    position: static;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: 40px;
+  }
 
-.menu__link_position {
-  align-items: flex-start;
-}
+  &__link_position {
+    align-items: flex-start;
+  }
 
-.footer__docs-list,
-.footer__address-list {
-  display: flex;
-  flex-direction: column;
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  gap: 12px;
-  width: fit-content;
-  white-space: nowrap;
-}
-
-.menu__link-decoration,
-.footer__docs-item,
-.footer__address-item {
-  line-height: 1.5;
-  margin: 0;
-  text-decoration: none;
-  color: var(--color-text-dark);
-}
-
-h2 {
-  text-transform: uppercase;
-  font-weight: 700;
-  line-height: 1.5;
-  color: var(--color-text-purple);
-}
-
-.footer,
-.footer__logo-box,
-.footer__navigation-box,
-.footer__docs-box,
-.footer__contact-box,
-.footer__info-box {
-  display: flex;
-  flex-direction: column;
-}
-
-.footer__info-box_direction {
-  display: flex;
-  justify-content: center;
-  align-items: flex-end;
-}
-
-.footer__docs-box,
-.footer__navigation-box,
-.footer__contact-box,
-.footer__info-box,
-.footer__info-box_direction {
-  gap: 22px;
-}
-
-.footer,
-.footer__logo-box {
-  gap: 40px;
+  &__link-decoration {
+    @include list-decoration;
+  }
 }
 
 .footer {
-  min-width: var(--min-width);
-  max-width: var(--max-width);
+  @include display-flex-column;
+  @include minmax-width-mobile;
   min-height: 915px;
   height: fit-content;
   padding: 17px;
   background-color: var(--color-background-light-blue);
-}
+  gap: 40px;
 
-.footer__logo-box {
-  align-items: center;
-  width: 100%;
-}
+  &__logo-box {
+    align-items: center;
+    width: 100%;
+    gap: 40px;
+  }
 
-.footer__logo-img {
-  width: 117px;
-  height: 46px;
-}
+  &__logo-img {
+    width: 117px;
+    height: 46px;
+  }
 
-.footer__vk-img {
-  width: 26px;
-  height: 26px;
-}
+  &__vk-img {
+    width: 26px;
+    height: 26px;
+  }
 
-.footer__navigation-box {
-  display: flex;
-}
+  &__docs-box,
+  &__navigation-box,
+  &__contact-box,
+  &__info-box,
+  &__info-box_direction {
+    gap: 22px;
+  }
 
-.footer__sot-logo {
-  width: 46px;
-  height: 20px;
-}
+  &__logo-box,
+  &__navigation-box,
+  &__docs-box,
+  &__contact-box,
+  &__info-box {
+    @include display-flex-column;
+  }
 
-.footer__soyuz-logo {
-  width: 69px;
-  height: 11px;
-}
+  &__navigation-box {
+    display: flex;
+  }
 
-.footer__profit-code-logo {
-  width: 51px;
-  height: 19px;
-}
+  &__docs-list,
+  &__address-list {
+    @include display-flex-column;
+    @include list-decoration;
+    width: fit-content;
+  }
 
-.footer__text-about-center {
-  display: flex;
-  font-size: 12px;
-  color: var(--color-text-gray);
-  justify-content: center;
-  align-items: center;
-}
+  &__docs-item,
+  &__address-item {
+    @include item-decoration;
+  }
 
-.footer__text-about-center span {
-  display: block;
-  text-align: center;
-  line-height: 1.2;
+  &__info-box_direction {
+    @include display-flex-justify-content-center;
+    align-items: flex-end;
+  }
+
+  &__sot-logo {
+    width: 46px;
+    height: 20px;
+  }
+
+  &__soyuz-logo {
+    width: 69px;
+    height: 11px;
+  }
+
+  &__profit-code-logo {
+    width: 51px;
+    height: 19px;
+  }
+
+  &__text-about-center {
+    @include display-flex-center-center;
+    font-size: 12px;
+    color: var(--color-text-gray);
+  }
+
+  &__text-about-center span {
+    display: block;
+    text-align: center;
+    line-height: 1.2;
+  }
 }
 </style>
