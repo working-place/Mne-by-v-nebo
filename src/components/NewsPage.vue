@@ -105,7 +105,7 @@ onMounted(loadNews);
           placeholder="хештег">
       </template>
       <template v-slot:img>
-        <img src="img/main-screen-photo-boy.png" alt="Изображение мальчика" class="main-screen__img">
+        <img src="/img/main-screen-photo-boy.png" alt="Изображение мальчика" class="main-screen__img">
       </template>
     </ReusableScreen>
 
@@ -120,12 +120,12 @@ onMounted(loadNews);
         </button>
       </div>
 
-      <template v-if="filteredNews && filteredNews.length > 0">
+      <template v-if="filteredNews">
         <router-link v-for="info in filteredNews" :key="info.id" :to="{ name: 'article', params: { id: info.id } }"
           class="news-card-link">
           <NewsCard :tag-class="getTagClass(info.tag)">
             <template v-slot:img>
-              <img :src="`img/${info.img.src}`" :alt="info.img.alt" class="tag-card__img">
+              <img :src="`/img/${info.img.src}`" :alt="info.img.alt" class="tag-card__img">
             </template>
             <template v-slot:tag>{{ info.tag }}</template>
             <template v-slot:text>{{ info.text }}</template>
@@ -150,7 +150,7 @@ onMounted(loadNews);
   margin: 0;
 
   &__search-input {
-    background-image: url('img/search-input.png');
+    background-image: url('/img/search-input.png');
     background-size: 13px, 13px;
     background-repeat: no-repeat;
     background-position: 10px center;

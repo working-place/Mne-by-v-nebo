@@ -50,7 +50,7 @@ const getTagClass = (tag) => {
         физической культуры
       </template>
       <template v-slot:img>
-        <img src="img/main-screen-photo-boy.png" alt="Изображение мальчика" class="main-screen__img">
+        <img src="/img/main-screen-photo-boy.png" alt="Изображение мальчика" class="main-screen__img">
       </template>
     </ReusableScreen>
 
@@ -105,7 +105,7 @@ const getTagClass = (tag) => {
       <h2>Новости</h2>
       <NewsCard v-for="info in firstTwoNews" :key="info.id" :tag-class="getTagClass(info.tag)">
         <template v-slot:img>
-          <img :src="`img/${info.img.src}`" :alt="info.img.alt" class="tag-card__img">
+          <img :src="`/img/${info.img.src}`" :alt="info.img.alt" class="tag-card__img">
         </template>
         <template v-slot:tag>{{ info.tag }}</template>
         <template v-slot:text>{{ info.text }}</template>
@@ -169,7 +169,7 @@ h2 {
     @include cover-center-no-repeat-img;
     min-width: 151px;
     min-height: 151px;
-    background-image: url('img/mascot-boy.png');
+    background-image: url('/img/mascot-boy.png');
   }
 
   &__text {
@@ -210,7 +210,7 @@ h2 {
 
   &__img {
     @include cover-center-no-repeat-img;
-    background-image: url('img/photo-director.png');
+    background-image: url('/img/photo-director.png');
     min-width: 150px;
     min-height: 150px;
   }
