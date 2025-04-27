@@ -42,7 +42,6 @@ const filteringButtons = [
 const loadNews = async () => {
   try {
     const response = await import('@/data/db.json');
-    // newsData.value = JSON.parse(response.default).news;
     newsData.value = response.news;
   } catch (error) {
     console.error('Ошибка загрузки новостей:', error);
@@ -126,7 +125,7 @@ onMounted(loadNews);
           class="news-card-link">
           <NewsCard :tag-class="getTagClass(info.tag)">
             <template v-slot:img>
-              <img :src="`/img/${info.img.src}`" :alt="info.img.alt" class="tag-card__img">
+              <img :src="info.img.src" :alt="info.img.alt" class="tag-card__img">
             </template>
             <template v-slot:tag>{{ info.tag }}</template>
             <template v-slot:text>{{ info.text }}</template>

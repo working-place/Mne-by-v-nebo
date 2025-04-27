@@ -4,7 +4,7 @@
       "id": 1,
       "tag": "тренинги",
       "img": {
-        "src": "charity.jpeg",
+        "src": "/img/charity.jpeg",
         "alt": "Благотворительность"
       },
       "text": "Благотворительный фонд «Олимпия»",
@@ -19,7 +19,7 @@
       "id": 2,
       "tag": "гранты",
       "img": {
-        "src": "proforientacia.jpeg",
+        "src": "/img/proforientacia.jpeg",
         "alt": "Профориентация"
       },
       "text": "Профориентация и БАС",
@@ -34,7 +34,7 @@
       "id": 3,
       "tag": "мастер-классы",
       "img": {
-        "src": "otkritie-granta.jpeg",
+        "src": "/img/otkritie-granta.jpeg",
         "alt": "Открытие гранта"
       },
       "text": "Открытие гранта «Мне бы в небо»",
@@ -49,7 +49,7 @@
       "id": 4,
       "tag": "тренинги",
       "img": {
-        "src": "proekt.jpeg",
+        "src": "/img/proekt.jpeg",
         "alt": "Завершение проекта"
       },
       "text": "В Новороссийске завершается проект «Школа для родителей особенного ребенка»",
