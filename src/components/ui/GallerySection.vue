@@ -14,6 +14,26 @@ const props = defineProps({
   title: {
     type: String,
     default: 'Наши Фотоотчеты'
+  },
+  showPagination: {
+    type: Boolean,
+    default: true
+  },
+  bgColor: {
+    type: String,
+    default: ''
+  },
+  textColor: {
+    type: String,
+    default: 'var(--color-text-dark)'
+  },
+  minHeight: {
+    type: String,
+    default: ''
+  },
+  height: {
+    type: String,
+    default: ''
   }
 });
 
@@ -84,7 +104,11 @@ watch(() => props.photos, updateSliderPosition);
 </script>
 
 <template>
-  <div class="gallery-section">
+  <div class="gallery-section" :style="{
+    '--gallery-section_background-color': bgColor,
+    '--gallery-text-color': textColor,
+    '--gallery-height': height
+  }">
     <h2 v-if="showTitle">{{ title }}</h2>
     <div ref="sliderContainer" class="slider-wrapper">
       <div class="slider" ref="slider" @touchstart="handleTouchStart" @touchmove="handleTouchMove"
@@ -97,7 +121,7 @@ watch(() => props.photos, updateSliderPosition);
       </div>
 
       <div class="navigation">
-        <div class="pagination">
+        <div v-if="showPagination" class="pagination">
           <button v-for="(_, index) in photos" :key="index" @click="goToSlide(index)"
             :class="{ active: index === currentIndex }"></button>
         </div>
@@ -130,18 +154,23 @@ watch(() => props.photos, updateSliderPosition);
 
 <style scoped lang="scss">
 @use '@/assets/scss/mixins.scss' as *;
+@use "@/assets/scss/modalViewer.scss" as *;
 
 .gallery-section {
+  height: var(--gallery-height);
   min-width: 286px;
   max-width: 326px;
   position: relative;
   width: 100%;
+  padding: 0;
+  background-color: var(--gallery-section_background-color);
 
   h2 {
     text-align: center;
     margin-bottom: 24px;
+    margin: 20px 0 20px;
     font-size: 24px;
-    color: #333;
+    color: var(--gallery-text-color);
   }
 }
 
@@ -178,6 +207,10 @@ watch(() => props.photos, updateSliderPosition);
   height: 360px;
   object-fit: cover;
   border-radius: 12px;
+}
+
+.slide {
+  width: 100%;
 }
 
 .navigation {
@@ -242,51 +275,5 @@ watch(() => props.photos, updateSliderPosition);
   stroke: white;
   width: 18px;
   height: 18px;
-}
-
-.modal-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: rgba(0, 0, 0, 0.9);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 1000;
-}
-
-.modal-content {
-  display: flex;
-  position: relative;
-  max-width: 90%;
-  max-height: 90%;
-  text-align: center;
-}
-
-.modal-close {
-  position: absolute;
-  top: -50px;
-  right: 0;
-  background: none;
-  border: none;
-  color: white;
-  font-size: 2.5rem;
-  cursor: pointer;
-  opacity: 0.7;
-  transition: opacity 0.2s;
-
-  &:hover {
-    opacity: 1;
-  }
-}
-
-.modal-image {
-  max-width: 100%;
-  max-height: 80vh;
-  display: block;
-  border-radius: 12px;
-  object-fit: cover;
 }
 </style>

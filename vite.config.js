@@ -18,6 +18,7 @@ export default defineConfig({
         additionalData: `
         @use "@/assets/scss/mixins.scss" as *;
         @use "@/assets/scss/variables.scss" as *;
+        @use "@/assets/scss/modalViewer.scss" as *;
         `
       }
     }

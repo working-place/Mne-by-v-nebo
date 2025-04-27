@@ -90,6 +90,36 @@
       "paddingBottom": null
     }
   ],
+  "gallery": [
+    {
+      "id": 1,
+      "img": {
+        "src": "diploma-parent-academy.png",
+        "alt": "Диплом Родительская академия"
+      }
+    },
+    {
+      "id": 2,
+      "img": {
+        "src": "charter-school-33.png",
+        "alt": "Грамота за профессиональное мастерство"
+      }
+    },
+    {
+      "id": 3,
+      "img": {
+        "src": "diploma-pedagogical-conference.png",
+        "alt": "Диплом проблемы инклюзивного образования"
+      }
+    },
+    {
+      "id": 4,
+      "img": {
+        "src": "charter-achievements.png",
+        "alt": "Грамота за добросовестный труд"
+      }
+    }
+  ],
   "projects": [
     {
       "id": "mne-by-v-nebo",

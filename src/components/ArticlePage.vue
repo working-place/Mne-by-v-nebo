@@ -136,7 +136,7 @@ const getTagClass = (tag) => {
 
   .share-button {
     background-color: var(--color-background-yellow);
-    color: #000000;
+    color: var(--color-text-dark);
     text-transform: uppercase;
     display: block;
     width: 100%;
@@ -150,7 +150,7 @@ const getTagClass = (tag) => {
     &:active {
         background: var(--color-pressed-yellow);
       }
-    
+
       @media (hover: hover) {
         &:hover {
           background: var(--color-hover-yellow);

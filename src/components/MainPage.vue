@@ -4,15 +4,18 @@ import RouterLinkButton from './ui/RouterLinkButton.vue';
 import NumberedCard from './ui/NumberedCard.vue';
 import ReusableScreen from './ui/ReusableScreen.vue';
 import NewsCard from './ui/NewsCard.vue';
+import GalleryCharters from './ui/GalleryCharters.vue';
 
 const newsData = ref([]);
 const mainDirection = ref([]);
+const chartersGallery = ref([]);
 
 const loadData = async () => {
   try {
     const response = await import('@/data/db.json');
     newsData.value = response.news;
     mainDirection.value = response.cards;
+    chartersGallery.value = response.gallery
   } catch (error) {
     console.error('Ошибка загрузки новостей:', error)
   };
@@ -71,7 +74,8 @@ const getTagClass = (tag) => {
       <div class="organization-charter__text-block">
         <span class="organization-charter__text">
           Вы можете озакомиться с уставом организации<br>
-          <RouterLink to="/charter" class="organization-charter__link" :class="{ active: $route.path === ('/charter') }">
+          <RouterLink to="/charter" class="organization-charter__link"
+            :class="{ active: $route.path === ('/charter') }">
             перейдя по этой ссылке
           </RouterLink>
         </span>
@@ -93,7 +97,9 @@ const getTagClass = (tag) => {
       </div>
     </div>
 
-    <!-- сделать блок грамоты -->
+    <GalleryCharters :photos="chartersGallery" :show-title="true" title="Заслуги"
+      bg-color="var(--color-background-purple)" text-color="var(--color-text-light)">
+    </GalleryCharters>
 
     <div class="news">
       <h2>Новости</h2>
@@ -106,7 +112,8 @@ const getTagClass = (tag) => {
         <template v-slot:date>{{ info.date }}</template>
       </NewsCard>
 
-      <RouterLinkButton :to="{ name: 'news' }" :disabled="false" max-height-btn="62px" min-height-btn="62px" font-size-btn="20px">
+      <RouterLinkButton :to="{ name: 'news' }" :disabled="false" max-height-btn="62px" min-height-btn="62px"
+        font-size-btn="20px">
         <template v-slot:text>ко всем новостям</template>
       </RouterLinkButton>
 
@@ -223,5 +230,4 @@ h2 {
   @include block-mobile;
   padding: 0;
 }
-
 </style>
