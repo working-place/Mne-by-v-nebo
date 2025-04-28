@@ -130,7 +130,7 @@ const closeModal = () => {
 @use "@/assets/scss/modalViewer.scss" as *;
 
 .gallery-section {
-  margin: 10px 0;
+  margin: 20px 0;
 }
 
 h2 {
@@ -156,6 +156,10 @@ h2 {
   width: 100%;
   height: 100%;
   object-fit: cover;
+}
+
+.button-wrapper {
+padding-top: 26px;
 }
 
 .video-play-icon {

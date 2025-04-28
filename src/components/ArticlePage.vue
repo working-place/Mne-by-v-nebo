@@ -2,6 +2,7 @@
 import { ref, onMounted, watch } from 'vue';
 import { useRoute } from 'vue-router';
 import NewsCard from '@/components/ui/NewsCard.vue';
+import ArticleCard from './ui/ArticleCard.vue';
 
 const route = useRoute();
 const article = ref(null);
@@ -55,14 +56,13 @@ const getTagClass = (tag) => {
 <template>
   <main v-if="article">
     <div class="article-header">
-      <NewsCard :tag-class="getTagClass(article.tag)">
-        <template v-slot:tag>{{ article.tag }}</template>
+      <ArticleCard>
         <template v-slot:text>{{ article.text }}</template>
         <template v-slot:date>{{ article.date }}</template>
         <template v-slot:img>
-          <img :src="`/img/${article.img.src}`" :alt="article.img.alt" class="tag-card__img">
+          <img :src="`/img/${article.img.src}`" :alt="article.img.alt" class="adaptive-card__img">
         </template>
-      </NewsCard>
+      </ArticleCard>
     </div>
 
     <div class="article-content">
@@ -100,25 +100,38 @@ const getTagClass = (tag) => {
 </template>
 
 <style scoped lang="scss">
-.tag-card__img {
+@use '@/assets/scss/mixins.scss' as *;
+
+.article-header {
+  padding: 0;
+}
+
+.adaptive-card__img {
   @include cover-center-no-repeat-img;
   width: 100%;
   height: 168px;
-  border-top-right-radius: 8px;
-  border-top-left-radius: 8px;
+  border-radius: var(--cards-border-radius);
 }
-
-.article-header {}
 
 .article-content {
   padding: 0;
   overflow: hidden;
+  margin-top: -10px;
 }
 
 .article-text {
   margin-bottom: 20px;
   line-height: 1.4;
   word-wrap: break-word;
+  &::v-deep {
+      p {
+        margin-bottom: 1em;
+  
+        &:last-child {
+          margin-bottom: 0;
+        }
+      }
+    }
 }
 
 .article-source {
@@ -171,6 +184,14 @@ h2 {
   text-align: center;
 }
 
+.tag-card__img {
+  @include cover-center-no-repeat-img;
+  width: 100%;
+  height: 168px;
+  border-top-right-radius: 8px;
+  border-top-left-radius: 8px;
+}
+
 .news-card-link {
   text-decoration: none;
   color: inherit;
@@ -182,5 +203,4 @@ h2 {
   text-align: center;
   padding: 40px;
   font-size: 1.2rem;
-}
-</style>
+}</style>

@@ -105,7 +105,6 @@ watch(() => props.items, updateSliderPosition);
     width: 100%;
     max-width: 326px;
     margin: 0 auto;
-    padding-bottom: 20px;
 }
 
 .slider-wrapper {

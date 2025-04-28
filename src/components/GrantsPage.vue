@@ -7,7 +7,7 @@ const showAll = ref(false)
 const items = ref([
   {
     title: 'Гранты губернатора Кубани',
-    subtitle: 'Проекта: «Театр равных возможностей» 2022',
+    subtitle: 'Проект: «Театр равных возможностей» 2022',
     content: 'С 1 февраля 2023 года в МАОУ СОШ №33 реализуется грант Губернатора Кубани «Театр равных возможностей», в котором участвуют 37 детей, включая учащихся с ОВЗ и инвалидностью. Проект помогает развивать творческие способности, социализацию и уверенность детей через театральное искусство. Театральная деятельность способствует преодолению застенчивости, развитию коммуникативных навыков и укреплению духовно-нравственных ценностей. В планах – создание театральной образовательной программы, которая интегрируется в учебный процесс и охватит все школы Новороссийска.',
     additionalText: 'Результат: Победа',
     image: new URL('/public/img/grants-photo-project1.jpg', import.meta.url).href,
@@ -80,11 +80,17 @@ const items = ref([
 ])
 
 const visibleItems = computed(() => {
-  return showAll.value ? items.value : items.value.slice(0, 5)
-})
+  return showAll.value ? items.value : items.value.slice(0, 5);
+});
 
 const toggleItem = (index) => {
-  visibleItems.value[index].isOpen = !visibleItems.value[index].isOpen
+  items.value.forEach((item, i) => {
+    if (i !== index) {
+      item.isOpen = false;
+    }
+  });
+
+  items.value[index].isOpen = !items.value[index].isOpen;
 }
 </script>
 

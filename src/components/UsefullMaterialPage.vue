@@ -49,7 +49,6 @@ const bookSlidesParent = [
     description: 'Раскройте секреты детской коммуникации и научитесь понимать потребности и эмоции вашего ребёнка без слов',
     image: '/img/medal.png'
   },
-
   {
     title: 'Воспитание с любовью',
     description: 'Практические советы и упражнения для построения крепких и доверительных отношений с детьми, основанных на взаимном уважении и любви',
@@ -171,11 +170,17 @@ const getTagClass = (tag) => {
 .slider-container {
   position: relative;
   width: 100%;
+  margin-top: -20px;
+  margin-bottom: 30px
 }
 
 .similar-topics {
   @include block-mobile;
   padding: 0;
+}
+
+h2 {
+  @include h2-mobile-uppercase
 }
 
 .news-card-link {
