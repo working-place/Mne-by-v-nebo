@@ -94,9 +94,12 @@
 @mixin cover-center-no-repeat-img {
   background-size: cover;
   background-repeat: no-repeat;
-  border: none;
+  border: 0;
+  outline: none;
   background-color: transparent;
   background-position: center center;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
 }
 
 @mixin pdf-container {

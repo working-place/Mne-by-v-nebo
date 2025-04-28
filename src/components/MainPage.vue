@@ -190,7 +190,6 @@ h2 {
     text-decoration: none;
     color: var(--color-background-purple);
   }
-
 }
 
 .director {
