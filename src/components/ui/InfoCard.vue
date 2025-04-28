@@ -1,5 +1,5 @@
 <template>
-  <div class="info-card">
+  <div class="info-card" :class="{ 'reverse-layout': imagePosition === 'right' }">
     <div class="image-container">
       <img :src="imageUrl" :alt="title" class="rounded-image" />
     </div>
@@ -14,17 +14,22 @@
 defineProps({
   imageUrl: {
     type: String,
-    required: true
+    required: true,
   },
   title: {
     type: String,
-    required: true
+    required: true,
   },
   description: {
     type: String,
-    required: true
-  }
-})
+    required: true,
+  },
+  imagePosition: {
+    type: String,
+    default: "left",
+    validator: (value) => ["left", "right"].includes(value),
+  },
+});
 </script>
 
 <style scoped lang="scss">
@@ -73,6 +78,41 @@ defineProps({
       text-align: center;
       max-width: 100%;
       word-break: break-word;
+    }
+  }
+}
+
+@media (min-width: 768px) {
+  .info-card {
+    flex-direction: row;
+    align-items: center;
+    gap: 30px;
+    padding: 30px;
+    //min-height: 272px;
+    min-width: 650px;
+
+    &.reverse-layout {
+      flex-direction: row-reverse;
+    }
+
+    .image-container {
+      width: 200px;
+      height: 200px;
+      flex-shrink: 0;
+    }
+
+    .text-content {
+      align-items: flex-start;
+
+      .title {
+        font-size: 20px;
+        text-align: left;
+      }
+
+      .description {
+        font-size: 18px;
+        text-align: left;
+      }
     }
   }
 }
