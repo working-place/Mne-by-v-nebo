@@ -112,7 +112,9 @@ const toggleItem = (index) => {
     <div class="grants-accordion">
       <div v-for="(item, index) in visibleItems" :key="index" class="accordion-item"
         :class="{ 'is-open': item.isOpen }">
-        <img v-if="item.isOpen" :src="item.image" :alt="item.title" class="top-image">
+        <div class="image-container" v-if="item.isOpen">
+          <img :src="item.image" :alt="item.title" class="top-image">
+        </div>
 
         <div class="accordion-header">
           <div class="text-content">
@@ -166,7 +168,7 @@ const toggleItem = (index) => {
 .accordion-header {
   display: flex;
   align-items: center;
-  padding: 12px;
+  padding: 20px 16px 16px;
   position: relative;
 }
 
@@ -200,28 +202,28 @@ const toggleItem = (index) => {
   cursor: pointer;
 
   &:active {
-      background: var(--color-pressed-lavender);
+    background: var(--color-pressed-lavender);
+  }
+
+  @media (hover: hover) {
+    &:hover {
+      background: var(--color-hover-lavender);
     }
-  
-    @media (hover: hover) {
-      &:hover {
-        background: var(--color-hover-lavender);
-      }
-    }
+  }
 }
 
 .arrow-circle.is-open {
   background: #FDD35D;
 
   &:active {
-      background: var(--color-pressed-yellow);
+    background: var(--color-pressed-yellow);
+  }
+
+  @media (hover: hover) {
+    &:hover {
+      background: var(--color-hover-yellow);
     }
-  
-    @media (hover: hover) {
-      &:hover {
-        background: var(--color-hover-yellow);
-      }
-    }
+  }
 }
 
 .arrow-circle svg {
@@ -240,7 +242,7 @@ const toggleItem = (index) => {
 }
 
 .content-arrow.left {
-  margin: 12px 0 0 12px;
+  margin-top: 16px;
   display: none;
 }
 
@@ -252,22 +254,28 @@ const toggleItem = (index) => {
   display: flex;
 }
 
+.image-container {
+  padding: 35px 16px 0;
+  display: flex;
+  justify-content: flex-start;
+}
+
 .top-image {
   width: 100px;
   height: 100px;
   border-radius: 100px;
   object-fit: cover;
   display: block;
-  margin: 16px auto 12px;
 }
 
 .accordion-content {
-  padding: 0 12px 12px;
-  
+  padding: 0 16px 20px;
+
 }
 
 .additional-text {
   margin-top: 16px;
+  font-weight: 500;
 }
 
 .show-all-btn {
@@ -284,14 +292,14 @@ const toggleItem = (index) => {
   cursor: pointer;
 
   &:active {
-      background-color: var(--color-pressed-purple);
+    background-color: var(--color-pressed-purple);
+  }
+
+  @media (hover: hover) {
+    &:hover {
+      background-color: var(--color-hover-purple);
     }
-  
-    @media (hover: hover) {
-      &:hover {
-        background-color: var(--color-hover-purple);
-      }
-    }
+  }
 }
 
 .slide-enter-active,
@@ -305,5 +313,29 @@ const toggleItem = (index) => {
 .slide-leave-to {
   max-height: 0;
   opacity: 0;
+}
+
+@media (min-width: 768px) {
+  .grants-accordion {
+    min-width: 648px;
+  }
+
+  .accordion-item {
+    padding: 0 24px;
+  }
+
+  .top-image {
+    width: 160px;
+    height: 160px;
+  }
+
+  .accordion-content {
+    padding: 0 16px 30px;
+  }
+
+  .show-all-btn {
+    font-size: 14px;
+    margin: 30px auto 0;
+  }
 }
 </style>
