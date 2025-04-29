@@ -91,5 +91,11 @@ onUnmounted (() => {
     @include cover-center-no-repeat-img;
   }
 
+//   @media only screen and (min-width: 361px) and (max-width: 650px) {
+//   body {
+
+//   }
+// }
+
 }
 </style>
