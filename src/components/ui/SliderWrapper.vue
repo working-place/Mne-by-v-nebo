@@ -42,6 +42,7 @@ const touchEndX = ref(0);
 
 const handleTouchStart = (e) => {
     touchStartX.value = e.touches[0].clientX;
+    touchEndX.value = e.touches[0].clientX;
 };
 
 const handleTouchMove = (e) => {
@@ -49,8 +50,10 @@ const handleTouchMove = (e) => {
 };
 
 const handleTouchEnd = () => {
-    if (touchStartX.value - touchEndX.value > 50) nextSlide();
-    if (touchEndX.value - touchStartX.value > 50) prevSlide();
+    if (Math.abs(touchStartX.value - touchEndX.value) > 50) {
+        if (touchStartX.value - touchEndX.value > 50) nextSlide();
+        if (touchEndX.value - touchStartX.value > 50) prevSlide();
+    }
 };
 
 onMounted(() => {
@@ -63,9 +66,9 @@ watch(() => props.items, updateSliderPosition);
 </script>
 
 <template>
-    <div class="slider-wrapper">
-        <div class="slider-container" ref="sliderContainer">
-            <div class="slider" ref="slider" @touchstart="handleTouchStart" @touchmove="handleTouchMove"
+    <div class="slider-root">
+        <div class="slider-wrapper" ref="sliderContainer">
+            <div class="slides-container" ref="slider" @touchstart="handleTouchStart" @touchmove="handleTouchMove"
                 @touchend="handleTouchEnd">
                 <div v-for="(item, index) in items" :key="item.id || index" class="slide">
                     <slot :item="item" :index="index"></slot>
@@ -97,39 +100,38 @@ watch(() => props.items, updateSliderPosition);
     </div>
 </template>
 
-<style scoped>
+<style scoped lang="scss">
+.slider-root {
+    width: 100%;
+    max-width: 326px;
+    margin: 0 auto;
+}
+
 .slider-wrapper {
     position: relative;
     width: 100%;
-    max-width: 1200px;
-    margin: 0 auto;
     overflow: hidden;
-    padding: 0 20px;
+    border-radius: 8px;
 }
 
-.slider-container {
-    width: 300px;
-    overflow: hidden;
-}
-
-.slider {
+.slides-container {
     display: flex;
     transition: transform 0.3s ease;
     will-change: transform;
-    gap: 20px;
+    height: 100%;
 }
 
 .slide {
-    flex: 0 0 auto;
-    width: 280px;
+    flex: 0 0 100%;
+    width: 100%;
+    min-height: 100%;
 }
 
 .navigation {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-top: 20px;
-    padding: 0 20px;
+    margin-top: 16px;
 }
 
 .pagination {
@@ -141,7 +143,7 @@ watch(() => props.items, updateSliderPosition);
     width: 8px;
     height: 8px;
     border-radius: 50%;
-    background: #E0E0E0;
+    background: #E3E3E3;
     border: none;
     padding: 0;
     cursor: pointer;
@@ -149,8 +151,8 @@ watch(() => props.items, updateSliderPosition);
 }
 
 .pagination button.active {
-    background: #4a6bdf;
-    width: 20px;
+    background: #CABBFF;
+    width: 8px;
     border-radius: 4px;
 }
 
@@ -169,11 +171,22 @@ watch(() => props.items, updateSliderPosition);
     align-items: center;
     justify-content: center;
     cursor: pointer;
-}
 
-.arrow:disabled {
-    opacity: 0.5;
-    cursor: not-allowed;
+    &:active {
+            background: var(--color-pressed-lavender);
+        }
+
+    @media (hover: hover) {
+        &:hover {
+            background-color: var(--color-hover-lavender);
+        }
+    }
+
+    &:disabled {
+        cursor: not-allowed;
+        background-color: #E3E3E3;
+        color: #525252;
+    }
 }
 
 .arrow svg {

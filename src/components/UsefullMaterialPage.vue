@@ -11,32 +11,24 @@ const bookSlidesSpecialist = [
   {
     title: 'Взросление с умом:  Путеводитель по детскому развитию',
     description: 'Узнайте, как создать гармоничные отношения с вашим ребенком и помочь ему раскрыть свой потенциал',
-    linkUrl: '#',
-    linkText: 'Источник',
     image: '/img/star.png'
   },
 
   {
     title: 'Взросление без слёз',
     description: 'Пошаговое руководство по воспитанию счастливых и самостоятельных детей, основанное на современных исследованиях детской психологии',
-    linkUrl: '#',
-    linkText: 'Источник',
     image: '/img/book.png'
   },
 
   {
     title: 'Тайный язык детей: научитесь понимать своего ребёнка',
     description: 'Раскройте секреты детской коммуникации и научитесь понимать потребности и эмоции вашего ребёнка без слов',
-    linkUrl: '#',
-    linkText: 'Источник',
     image: '/img/medal.png'
   },
 
   {
     title: 'Воспитание с любовью',
     description: 'Практические советы и упражнения для построения крепких и доверительных отношений с детьми, основанных на взаимном уважении и любви',
-    linkUrl: '#',
-    linkText: 'Источник',
     image: '/img/heart.png'
   },
 ];
@@ -45,30 +37,21 @@ const bookSlidesParent = [
   {
     title: 'Взросление без слёз',
     description: 'Пошаговое руководство по воспитанию счастливых и самостоятельных детей, основанное на современных исследованиях детской психологии',
-    linkUrl: '#',
-    linkText: 'Источник',
     image: '/img/book.png'
   },
   {
     title: 'Взросление с умом:  Путеводитель по детскому развитию',
     description: 'Узнайте, как создать гармоничные отношения с вашим ребенком и помочь ему раскрыть свой потенциал',
-    linkUrl: '#',
-    linkText: 'Источник',
     image: '/img/star.png'
   },
   {
     title: 'Тайный язык детей: научитесь понимать своего ребёнка',
     description: 'Раскройте секреты детской коммуникации и научитесь понимать потребности и эмоции вашего ребёнка без слов',
-    linkUrl: '#',
-    linkText: 'Источник',
     image: '/img/medal.png'
   },
-
   {
     title: 'Воспитание с любовью',
     description: 'Практические советы и упражнения для построения крепких и доверительных отношений с детьми, основанных на взаимном уважении и любви',
-    linkUrl: '#',
-    linkText: 'Источник',
     image: '/img/heart.png'
   },
 ];
@@ -78,7 +61,6 @@ const loadData = async () => {
   try {
     const response = await import('@/data/db.json');
     newsData.value = response.news;
-    // mainDirection.value = response.cards;
   } catch (error) {
     console.error('Ошибка загрузки новостей:', error)
   };
@@ -118,32 +100,32 @@ const getTagClass = (tag) => {
       </template>
     </ReusableScreen>
 
-    <InfoCard imageUrl="public\img\usefull-material-photo-boy2.png" title="Литература для специалистов"
+    <InfoCard imageUrl="/img/usefull-page-boy.png" title="Литература для специалистов"
       description="Представляем подборку книг и методических материалов для специалистов в области детского образования. Здесь вы найдете актуальные исследования, практические руководства и вдохновляющие примеры." />
 
     <div class="slider-container">
       <Slider :items="bookSlidesSpecialist">
         <template #default="{ item }">
-          <LinkCard :title="item.title" :description="item.description" :linkUrl="item.linkUrl"
-            :linkText="item.linkText" :paddingBottom="'120px'">
+          <LinkCard :title="item.title" :description="item.description" :paddingBottom="'46px'" image-width="30%">
             <template #image>
-              <img :src="item.image" :alt="item.title" width="176">
+              <img :src="item.image" :alt="item.title" width="90px">
             </template>
           </LinkCard>
         </template>
       </Slider>
     </div>
 
-    <InfoCard imageUrl="public\img\usefull-material-content-boy.png" title="Литература для родителей"
-      description="Помогите своему ребенку раскрыть свой потенциал с помощью наших специально подобранных книг!  Они помогут ему лучше учиться, расширят его кругозор и обогатят его воображение." />
+    <InfoCard imageUrl="/img/usefull-material-content-boy.png" title="Литература для родителей"
+      description="Помогите своему ребенку раскрыть свой потенциал с помощью наших специально подобранных книг!  Они помогут ему лучше учиться, расширят его кругозор и обогатят его воображение."
+      image-position="right"/>
 
     <div class="slider-container">
       <Slider :items="bookSlidesParent">
         <template #default="{ item }">
           <LinkCard :title="item.title" :description="item.description" :linkUrl="item.linkUrl"
-            :linkText="item.linkText" :paddingBottom="'120px'">
+            :linkText="item.linkText" :paddingBottom="'46px'" image-width="30%">
             <template #image>
-              <img :src="item.image" :alt="item.title" width="176">
+              <img :src="item.image" :alt="item.title" width="90px">
             </template>
           </LinkCard>
         </template>
@@ -152,19 +134,21 @@ const getTagClass = (tag) => {
 
     <div class="similar-topics">
       <h2>Это интересно</h2>
-      <NewsCard v-for="info in firstTwoNews" :key="info.id" :tag-class="getTagClass(info.tag)">
-        <template v-slot:img>
-          <img :src="`/img/${info.img.src}`" :alt="info.img.alt" class="tag-card__img">
-        </template>
-        <template v-slot:tag>{{ info.tag }}</template>
-        <template v-slot:text>{{ info.text }}</template>
-        <template v-slot:date>{{ info.date }}</template>
-      </NewsCard>
+      <router-link v-for="info in firstTwoNews" :key="info.id" :to="{ name: 'article', params: { id: info.id } }"
+        class="news-card-link">
+        <NewsCard :tag-class="getTagClass(info.tag)">
+          <template v-slot:img>
+            <img :src="`/img/${info.img.src}`" :alt="info.img.alt" class="tag-card__img">
+          </template>
+          <template v-slot:tag>{{ info.tag }}</template>
+          <template v-slot:text>{{ info.text }}</template>
+          <template v-slot:date>{{ info.date }}</template>
+        </NewsCard>
+      </router-link>
 
       <RouterLinkButton :to="{ name: 'news' }" :disabled="false">
-        <template v-slot:text>ко всем новостям</template>
+        <template v-slot:text>Перейти ко всем новостям</template>
       </RouterLinkButton>
-
     </div>
   </main>
 </template>
@@ -184,9 +168,27 @@ const getTagClass = (tag) => {
   object-fit: cover;
 }
 
+.slider-container {
+  position: relative;
+  width: 100%;
+  margin-top: -20px;
+  margin-bottom: 30px
+}
+
 .similar-topics {
   @include block-mobile;
   padding: 0;
+}
+
+h2 {
+  @include h2-mobile-uppercase
+}
+
+.news-card-link {
+  display: flex;
+  width: 100%;
+  text-decoration: none;
+  color: inherit;
 }
 
 .tag-card {
@@ -197,26 +199,5 @@ const getTagClass = (tag) => {
     border-top-right-radius: 8px;
     border-top-left-radius: 8px;
   }
-}
-
-.slider-container {
-  position: relative;
-  width: 100%;
-  max-width: 410px;
-}
-
-.slide-content {
-  position: relative;
-  cursor: pointer;
-  transition: transform 0.3s;
-  height: 200px;
-  overflow: hidden;
-  border-radius: 8px;
-}
-
-.slide-image {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
 }
 </style>

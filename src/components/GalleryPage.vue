@@ -1,11 +1,12 @@
 <script setup>
 import ReusableScreen from './ui/ReusableScreen.vue';
 import Slider from './ui/SliderWrapper.vue';
+import RouterLinkButton from './ui/RouterLinkButton.vue';
 import { ref } from 'vue';
 
 const photoSlides = [
   { id: 1, image: '/img/photo1.jpg' },
-  { id: 2, image: '/img/photo1.jpg' },
+  { id: 2, image: '/img/photo2.jpg' },
   { id: 3, image: '/img/photo1.jpg' },
   { id: 4, image: '/img/photo1.jpg' },
   { id: 5, image: '/img/photo1.jpg' },
@@ -82,7 +83,6 @@ const closeModal = () => {
           </template>
         </Slider>
       </div>
-      <button class="view-more-btn">Смотреть больше</button>
     </div>
 
     <div class="gallery-section">
@@ -101,10 +101,11 @@ const closeModal = () => {
           </template>
         </Slider>
       </div>
-      <button class="view-more-btn">Смотреть больше</button>
+      <div class="button-wrapper">
+        <RouterLinkButton to="" textButton="Cмотреть больше" />
+      </div>
     </div>
 
-    <!-- Photo Modal -->
     <div v-if="showPhotoModal" class="modal-overlay" @click.self="closeModal">
       <div class="modal-content">
         <button class="modal-close" @click="closeModal">&times;</button>
@@ -112,7 +113,6 @@ const closeModal = () => {
       </div>
     </div>
 
-    <!-- Video Modal -->
     <div v-if="showVideoModal" class="modal-overlay" @click.self="closeModal">
       <div class="modal-content">
         <button class="modal-close" @click="closeModal">&times;</button>
@@ -125,32 +125,30 @@ const closeModal = () => {
   </main>
 </template>
 
-<style scoped>
+<style scoped lang="scss">
+@use '@/assets/scss/mixins.scss' as *;
+@use "@/assets/scss/modalViewer.scss" as *;
+
 .gallery-section {
-  margin: 10px 0;
-  padding: 0 1rem;
-  max-width: 410px;
+  margin: 20px 0;
 }
 
 h2 {
-  margin-bottom: 20px;
+  @include h2-mobile-uppercase;
   text-align: center;
 }
 
 .slider-container {
   position: relative;
-
-
-  margin: 0 auto;
-  padding: 0 20px;
+  width: 100%;
+  padding-top: 20px;
 }
 
 .slide-content {
   position: relative;
   cursor: pointer;
   transition: transform 0.3s;
-  height: 200px;
-  overflow: hidden;
+  height: 176px;
   border-radius: 12px;
 }
 
@@ -158,6 +156,10 @@ h2 {
   width: 100%;
   height: 100%;
   object-fit: cover;
+}
+
+.button-wrapper {
+padding-top: 26px;
 }
 
 .video-play-icon {
@@ -182,49 +184,5 @@ h2 {
   border-radius: 30px;
   cursor: pointer;
   transition: background-color 0.3s;
-}
-
-.modal-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: rgba(0, 0, 0, 0.8);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 1000;
-}
-
-.modal-content {
-  position: relative;
-  max-width: 90%;
-  max-height: 90%;
-}
-
-.modal-close {
-  position: absolute;
-  top: -40px;
-  right: 0;
-  background: none;
-  border: none;
-  color: white;
-  font-size: 2rem;
-  cursor: pointer;
-}
-
-.modal-image {
-  max-width: 100%;
-  max-height: 80vh;
-  display: block;
-  margin: 0 auto;
-}
-
-.modal-video {
-  max-width: 100%;
-  max-height: 80vh;
-  width: 800px;
-  background: black;
 }
 </style>

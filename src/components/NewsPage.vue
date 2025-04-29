@@ -41,8 +41,8 @@ const filteringButtons = [
 
 const loadNews = async () => {
   try {
-    const response = await import('@/data/db.json?raw');
-    newsData.value = JSON.parse(response.default).news;
+    const response = await import('@/data/db.json');
+    newsData.value = response.news;
   } catch (error) {
     console.error('Ошибка загрузки новостей:', error);
   }
@@ -120,7 +120,7 @@ onMounted(loadNews);
         </button>
       </div>
 
-      <template v-if="filteredNews && filteredNews.length > 0">
+      <template v-if="filteredNews">
         <router-link v-for="info in filteredNews" :key="info.id" :to="{ name: 'article', params: { id: info.id } }"
           class="news-card-link">
           <NewsCard :tag-class="getTagClass(info.tag)">
@@ -169,7 +169,6 @@ onMounted(loadNews);
 }
 
 .trainings {
-  background-color: red;
 }
 
 .news {
@@ -180,6 +179,7 @@ onMounted(loadNews);
   &__filtering-box {
     @include block-mobile;
     @include minmax-width-mobile;
+    min-width: 286px;
     flex-direction: row;
     flex-wrap: wrap;
     padding: 0;
@@ -254,7 +254,8 @@ onMounted(loadNews);
 }
 
 .news-card-link {
-  display: block;
+  display: flex;
+  width: 100%;
   text-decoration: none;
   color: inherit;
 }
@@ -279,4 +280,5 @@ onMounted(loadNews);
     text-align: center;
   }
 }
+
 </style>

@@ -7,7 +7,7 @@ const showAll = ref(false)
 const items = ref([
   {
     title: 'Гранты губернатора Кубани',
-    subtitle: 'Проекта: «Театр равных возможностей» 2022',
+    subtitle: 'Проект: «Театр равных возможностей» 2022',
     content: 'С 1 февраля 2023 года в МАОУ СОШ №33 реализуется грант Губернатора Кубани «Театр равных возможностей», в котором участвуют 37 детей, включая учащихся с ОВЗ и инвалидностью. Проект помогает развивать творческие способности, социализацию и уверенность детей через театральное искусство. Театральная деятельность способствует преодолению застенчивости, развитию коммуникативных навыков и укреплению духовно-нравственных ценностей. В планах – создание театральной образовательной программы, которая интегрируется в учебный процесс и охватит все школы Новороссийска.',
     additionalText: 'Результат: Победа',
     image: new URL('/public/img/grants-photo-project1.jpg', import.meta.url).href,
@@ -18,7 +18,7 @@ const items = ref([
     subtitle: 'Проект «Разные возможности — равные права» 2023',
     content: 'Проект «Разные возможности – равные права» представляет собой комплексную программу занятий по ранней профориентации для детей-инвалидов и детей с ОВЗ 7-14 лет. Программа включает тренинги с педагогом-психологом, игровые занятия, экскурсии на предприятия Новороссийска и мастер-классы. Особое внимание уделяется вовлечению родителей в процесс поддержки детей. Проект помогает детям узнать о различных профессиях, необходимых навыках и возможностях трудоустройства. Также планируется долгосрочное сотрудничество с учреждениями СПО и социальными партнерами. Этот опыт может быть полезен другим школам, способствуя успешной адаптации и социализации детей с ОВЗ.',
     additionalText: '',
-    image: new URL('/public/img/grants-photo-boy2.png', import.meta.url).href,
+    image: new URL('/public/img/grants-photo-project.png', import.meta.url).href,
     isOpen: false
   },
   {
@@ -26,7 +26,7 @@ const items = ref([
     subtitle: 'Проект «Мне бы в небо» 2024',
     content: 'Проект «Мне бы в небо» направлен на формирование предпрофессиональных компетенций у школьников 8-11 классов в области программирования, управления и технического сопровождения беспилотных летательных аппаратов. Он включает образовательные модули по теории, сборке, программированию и пилотированию дронов, а также соревнования по управлению квадрокоптерами. Учащиеся получат практические навыки работы с БПЛА, развивая как hard-skills, так и soft-skills. Реализация проекта повысит интерес подростков к техническим дисциплинам и поможет в профессиональном самоопределении. Дрон-рейсинг и обучение беспилотному пилотированию могут сыграть ключевую роль в выборе будущей профессии, связанной с инженерией, робототехникой и искусственным интеллектом.',
     additionalText: '',
-    image: new URL('/public/img/grants-photo-boy2.png', import.meta.url).href,
+    image: new URL('/public/img/grants-photo-project.png', import.meta.url).href,
     isOpen: false
   },
   {
@@ -34,7 +34,7 @@ const items = ref([
     subtitle: 'Проект «Школа для родителей особенного ребенка» 2024',
     content: 'Проект направлен на оказание психологической и информационной помощи семьям, воспитывающим детей с инвалидностью. В нем участвуют 12 семей (21 родитель и 15 детей), включая неполные семьи. В рамках проекта родители проходят практико-ориентированное обучение по коррекционно-развивающему взаимодействию с детьми. Разработаны методические рекомендации, программы тренингов и занятий для специалистов и родителей. Проект поможет семьям эффективно справляться с воспитательными и реабилитационными задачами. По итогам работы будет создан консультационный центр «Точка опоры» для поддержки родителей и специалистов.',
     additionalText: '',
-    image: new URL('/public/img/grants-photo-boy2.png', import.meta.url).href,
+    image: new URL('/public/img/grants-photo-project.png', import.meta.url).href,
     isOpen: false
   },
   {
@@ -42,7 +42,7 @@ const items = ref([
     subtitle: 'Проект «Мне бы в небо» 2024',
     content: 'Проект «Мне бы в небо» направлен на формирование предпрофессиональных компетенций школьников 8-11 классов в области программирования, управления и технического сопровождения беспилотных летательных аппаратов (БПЛА). Программа включает образовательные модули по теории, сборке, настройке, программированию и управлению дронами, а также соревнования по пилотированию. Учащиеся на практике изучат конструкцию и принципы работы БПЛА, освоят навыки пайки, 3D-печати и программирования. Проект способствует популяризации технических дисциплин и профессиональному самоопределению подростков. Полученные hard- и soft-skills помогут участникам успешно развиваться в IT-сфере и инженерных специальностях.',
     additionalText: '',
-    image: new URL('/public/img/grants-photo-boy2.png', import.meta.url).href,
+    image: new URL('/public/img/grants-photo-project.png', import.meta.url).href,
     isOpen: false
   },
   {
@@ -50,7 +50,7 @@ const items = ref([
     subtitle: 'Проект «Мастерская инноваций» 2025',
     content: 'Ожидаем результатов конкурса.',
     additionalText: '',
-    image: new URL('/public/img/grants-photo-boy2.png', import.meta.url).href,
+    image: new URL('/public/img/grants-photo-project.png', import.meta.url).href,
     isOpen: false
   },
   {
@@ -58,7 +58,7 @@ const items = ref([
     subtitle: 'Проект «БЕСЕДкА» 2025',
     content: 'Ожидаем результатов конкурса.',
     additionalText: '',
-    image: new URL('/public/img/grants-photo-boy2.png', import.meta.url).href,
+    image: new URL('/public/img/grants-photo-project.png', import.meta.url).href,
     isOpen: false
   },
   {
@@ -66,7 +66,7 @@ const items = ref([
     subtitle: 'Проект «Мастерская инноваций» 2025',
     content: 'Ожидаем результатов конкурса.',
     additionalText: '',
-    image: new URL('/public/img/grants-photo-boy2.png', import.meta.url).href,
+    image: new URL('/public/img/grants-photo-project.png', import.meta.url).href,
     isOpen: false
   },
   {
@@ -74,17 +74,23 @@ const items = ref([
     subtitle: 'Проект «Память сильнее времени» 2025',
     content: 'Ожидаем результатов конкурса.',
     additionalText: '',
-    image: new URL('/public/img/grants-photo-boy2.png', import.meta.url).href,
+    image: new URL('/public/img/grants-photo-project.png', import.meta.url).href,
     isOpen: false
   },
 ])
 
 const visibleItems = computed(() => {
-  return showAll.value ? items.value : items.value.slice(0, 5)
-})
+  return showAll.value ? items.value : items.value.slice(0, 5);
+});
 
 const toggleItem = (index) => {
-  visibleItems.value[index].isOpen = !visibleItems.value[index].isOpen
+  items.value.forEach((item, i) => {
+    if (i !== index) {
+      item.isOpen = false;
+    }
+  });
+
+  items.value[index].isOpen = !items.value[index].isOpen;
 }
 </script>
 
@@ -106,8 +112,9 @@ const toggleItem = (index) => {
     <div class="grants-accordion">
       <div v-for="(item, index) in visibleItems" :key="index" class="accordion-item"
         :class="{ 'is-open': item.isOpen }">
-        <!-- Картинка для мобильной версии -->
-        <img v-if="item.isOpen" :src="item.image" :alt="item.title" class="top-image">
+        <div class="image-container" v-if="item.isOpen">
+          <img :src="item.image" :alt="item.title" class="top-image">
+        </div>
 
         <div class="accordion-header">
           <div class="text-content">
@@ -115,7 +122,6 @@ const toggleItem = (index) => {
             <h3 v-if="item.isOpen" class="item-subtitle">{{ item.subtitle }}</h3>
           </div>
 
-          <!-- Стрелка в круге - в заголовке (справа) -->
           <div class="arrow-circle header-arrow" :class="{ 'is-open': item.isOpen }" @click.stop="toggleItem(index)">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
               <path d="M6 9L12 15L18 9" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
@@ -128,7 +134,6 @@ const toggleItem = (index) => {
             <p class="main-text">{{ item.content }}</p>
             <p class="additional-text">{{ item.additionalText }}</p>
 
-            <!-- Стрелка в круге - в контенте (слева внизу) -->
             <div class="arrow-circle content-arrow left" :class="{ 'is-open': item.isOpen }"
               @click.stop="toggleItem(index)">
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
@@ -163,7 +168,7 @@ const toggleItem = (index) => {
 .accordion-header {
   display: flex;
   align-items: center;
-  padding: 12px;
+  padding: 20px 16px 16px;
   position: relative;
 }
 
@@ -176,6 +181,7 @@ const toggleItem = (index) => {
 .item-title {
   margin: 0;
   text-align: left;
+  font-size: 20px;
 }
 
 .item-subtitle {
@@ -183,7 +189,6 @@ const toggleItem = (index) => {
   text-align: left;
 }
 
-/* Общие стили для стрелки */
 .arrow-circle {
   width: 40px;
   height: 40px;
@@ -195,10 +200,30 @@ const toggleItem = (index) => {
   transition: all 0.3s ease;
   flex-shrink: 0;
   cursor: pointer;
+
+  &:active {
+    background: var(--color-pressed-lavender);
+  }
+
+  @media (hover: hover) {
+    &:hover {
+      background: var(--color-hover-lavender);
+    }
+  }
 }
 
 .arrow-circle.is-open {
   background: #FDD35D;
+
+  &:active {
+    background: var(--color-pressed-yellow);
+  }
+
+  @media (hover: hover) {
+    &:hover {
+      background: var(--color-hover-yellow);
+    }
+  }
 }
 
 .arrow-circle svg {
@@ -210,49 +235,49 @@ const toggleItem = (index) => {
   transform: rotate(180deg);
   color: #000000;
 }
-/* Стрелка в заголовке (справа) */
+
 .header-arrow {
   position: static;
   margin-left: auto;
 }
 
-/* Стрелка в контенте (слева внизу) */
 .content-arrow.left {
-  margin: 12px 0 0 12px;
+  margin-top: 16px;
   display: none;
 }
 
-/* Скрываем стрелку в заголовке при открытом состоянии */
 .accordion-item.is-open .header-arrow {
   display: none;
 }
 
-/* Показываем стрелку в контенте при открытом состоянии */
 .accordion-item.is-open .content-arrow {
   display: flex;
 }
 
-/* Стили для картинок */
+.image-container {
+  padding: 35px 16px 0;
+  display: flex;
+  justify-content: flex-start;
+}
+
 .top-image {
   width: 100px;
   height: 100px;
   border-radius: 100px;
   object-fit: cover;
   display: block;
-  margin: 16px auto 12px;
 }
 
-/* Стили для контента */
 .accordion-content {
-  padding: 0 12px 12px;
-  
+  padding: 0 16px 20px;
+
 }
 
 .additional-text {
   margin-top: 16px;
+  font-weight: 500;
 }
 
-/* Кнопка "Все гранты" */
 .show-all-btn {
   background-color: #7352E5;
   color: #ffffff;
@@ -265,9 +290,18 @@ const toggleItem = (index) => {
   font-family: var(--font-family-next-art);
   font-size: 11px;
   cursor: pointer;
+
+  &:active {
+    background-color: var(--color-pressed-purple);
+  }
+
+  @media (hover: hover) {
+    &:hover {
+      background-color: var(--color-hover-purple);
+    }
+  }
 }
 
-/* Анимация */
 .slide-enter-active,
 .slide-leave-active {
   transition: all 0.4s ease;
@@ -279,5 +313,29 @@ const toggleItem = (index) => {
 .slide-leave-to {
   max-height: 0;
   opacity: 0;
+}
+
+@media (min-width: 768px) {
+  .grants-accordion {
+    min-width: 648px;
+  }
+
+  .accordion-item {
+    padding: 0 24px;
+  }
+
+  .top-image {
+    width: 160px;
+    height: 160px;
+  }
+
+  .accordion-content {
+    padding: 0 16px 30px;
+  }
+
+  .show-all-btn {
+    font-size: 14px;
+    margin: 30px auto 0;
+  }
 }
 </style>

@@ -4,15 +4,18 @@ import RouterLinkButton from './ui/RouterLinkButton.vue';
 import NumberedCard from './ui/NumberedCard.vue';
 import ReusableScreen from './ui/ReusableScreen.vue';
 import NewsCard from './ui/NewsCard.vue';
+import GalleryCharters from './ui/GalleryCharters.vue';
 
 const newsData = ref([]);
 const mainDirection = ref([]);
+const chartersGallery = ref([]);
 
 const loadData = async () => {
   try {
     const response = await import('@/data/db.json');
     newsData.value = response.news;
     mainDirection.value = response.cards;
+    chartersGallery.value = response.gallery
   } catch (error) {
     console.error('Ошибка загрузки новостей:', error)
   };
@@ -71,7 +74,8 @@ const getTagClass = (tag) => {
       <div class="organization-charter__text-block">
         <span class="organization-charter__text">
           Вы можете озакомиться с уставом организации<br>
-          <RouterLink to="/charter" class="organization-charter__link" :class="{ active: $route.path === ('/charter') }">
+          <RouterLink to="/charter" class="organization-charter__link"
+            :class="{ active: $route.path === ('/charter') }">
             перейдя по этой ссылке
           </RouterLink>
         </span>
@@ -93,11 +97,14 @@ const getTagClass = (tag) => {
       </div>
     </div>
 
-    <!-- сделать блок грамоты -->
+    <GalleryCharters :photos="chartersGallery" :show-title="true" title="Заслуги"
+      bg-color="var(--color-background-purple)" text-color="var(--color-text-light)">
+    </GalleryCharters>
 
     <div class="news">
       <h2>Новости</h2>
-      <NewsCard v-for="info in firstTwoNews" :key="info.id" :tag-class="getTagClass(info.tag)">
+      <router-link v-for="info in firstTwoNews" :key="info.id" :to="{ name: 'article', params: { id: info.id } }" class="news-card-link">
+        <NewsCard  :tag-class="getTagClass(info.tag)">
         <template v-slot:img>
           <img :src="`/img/${info.img.src}`" :alt="info.img.alt" class="tag-card__img">
         </template>
@@ -105,8 +112,11 @@ const getTagClass = (tag) => {
         <template v-slot:text>{{ info.text }}</template>
         <template v-slot:date>{{ info.date }}</template>
       </NewsCard>
+      </router-link>
 
-      <RouterLinkButton :to="{ name: 'news' }" :disabled="false" max-height-btn="62px" min-height-btn="62px" font-size-btn="20px">
+
+      <RouterLinkButton :to="{ name: 'news' }" :disabled="false" max-height-btn="62px" min-height-btn="62px"
+        font-size-btn="20px">
         <template v-slot:text>ко всем новостям</template>
       </RouterLinkButton>
 
@@ -117,6 +127,13 @@ const getTagClass = (tag) => {
 
 <style scoped lang="scss">
 @use '@/assets/scss/mixins.scss' as *;
+
+.news-card-link {
+  display: flex;
+  width: 100%;
+  text-decoration: none;
+  color: inherit;
+}
 
 h2 {
   @include h2-mobile-uppercase;
@@ -162,7 +179,7 @@ h2 {
     @include cover-center-no-repeat-img;
     min-width: 151px;
     min-height: 151px;
-    background-image: url(/img/mascot-boy.png);
+    background-image: url('/img/mascot-boy.png');
   }
 
   &__text {
@@ -173,7 +190,6 @@ h2 {
     text-decoration: none;
     color: var(--color-background-purple);
   }
-
 }
 
 .director {
@@ -203,7 +219,7 @@ h2 {
 
   &__img {
     @include cover-center-no-repeat-img;
-    background-image: url(/img/photo-director.png);
+    background-image: url('/img/photo-director.png');
     min-width: 150px;
     min-height: 150px;
   }
@@ -223,5 +239,4 @@ h2 {
   @include block-mobile;
   padding: 0;
 }
-
 </style>
