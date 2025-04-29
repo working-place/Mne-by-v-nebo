@@ -48,9 +48,11 @@ onUnmounted (() => {
 @use '@/assets/scss/mixins.scss' as *;
 
 .menu {
-  position: relative;
-  border-top-left-radius: 8px;
-  border-top-right-radius: 8px;
+  position: fixed;
+  top: 0px;
+  z-index: 1001;
+  width: 100%;
+  background-color: white;
 
   &__box,
   &__nav-box {

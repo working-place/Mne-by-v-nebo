@@ -56,7 +56,6 @@ defineProps({
   width: calc(100% + 34px);
   min-height: var(--main-screen_block-height);
   height: fit-content;
-  top: 62px;
   padding-top: 40px;
   padding-right: 20px;
   padding-left: 20px;
