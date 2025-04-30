@@ -21,17 +21,16 @@ defineProps({
 
 <template>
   <div class="main-screen" :style="{
-    '--main-screen_bg-color' : bgColor,
-    '--main-screen_text-color' : textColor,
-    '--main-screen_block-height' : blockHeight,
+    '--main-screen_bg-color': bgColor,
+    '--main-screen_text-color': textColor,
+    '--main-screen_block-height': blockHeight,
   }">
     <div class="main-screen__title-box">
       <h1 class="main-screen__title">
         <slot name="title"></slot>
       </h1>
     </div>
-    <div class="main-screen__description-box"
-    :class="{'flex-layout': useFlex}">
+    <div class="main-screen__description-box" :class="{ 'flex-layout': useFlex }">
       <span class="main-screen__description">
         <slot name="description"></slot>
       </span>
@@ -67,7 +66,7 @@ defineProps({
   &__title-box,
   &__description-box {
     justify-content: center;
-  align-items: center;
+    align-items: center;
     width: 100%;
     color: var(--main-screen_text-color);
   }

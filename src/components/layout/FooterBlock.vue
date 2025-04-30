@@ -1,5 +1,5 @@
 <script setup>
-import NavLinks from './NavLinks.vue';
+import NavLinks from './NavLinksMobile.vue';
 
 </script>
 

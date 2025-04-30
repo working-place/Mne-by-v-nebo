@@ -83,12 +83,22 @@
 
 @mixin minmax-width-mobile {
   min-width: 320px;
-  max-width: 362px;
+  // max-width: 362px;
 }
 
 @mixin minmax-width-mobile-block {
-  max-width: 320px;
+  // max-width: 320px;
   min-height: 206px;
+}
+
+@mixin minmax-width-tablet {
+  max-width: 768px;
+  // min-height: 650px;
+}
+
+@mixin minmax-width-tablet-block {
+  // min-width: 506;
+      max-width: 540px;
 }
 
 @mixin cover-center-no-repeat-img {
