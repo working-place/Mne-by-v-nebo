@@ -27,8 +27,8 @@ onMounted(() => {
 })
 
 const checkScreenSize = () => {
-    isDesctop.value = window.innerWidth >= 361;
-  };
+  isDesctop.value = window.innerWidth >= 768;
+};
 
 onMounted(() => {
   checkScreenSize();
@@ -74,6 +74,11 @@ onUnmounted(() => {
   z-index: 1001;
   background-color: white;
 
+  @media only screen and (min-width: 1025px) {
+    padding-left: 124px;
+    padding-right: 124px;
+  }
+
   &__box,
   &__nav-box {
     @include minmax-width-mobile;
@@ -86,15 +91,14 @@ onUnmounted(() => {
     justify-content: space-between;
     align-items: center;
 
-    @media only screen and (min-width: 361px) and (max-width: 768px) {
+    @media only screen and (min-width: 768px) {
+      justify-content: flex-start;
       gap: 40px;
-      max-width: 540px;
     }
 
-    @media only screen and (min-width: 769px) {
+    @media only screen and (min-width: 1025px) {
       justify-content: flex-start;
       gap: 60px;
-      max-width: 1191px;
     }
   }
 
@@ -125,5 +129,4 @@ onUnmounted(() => {
     @include cover-center-no-repeat-img;
   }
 }
-
 </style>

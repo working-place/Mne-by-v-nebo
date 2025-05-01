@@ -25,16 +25,19 @@ defineProps({
     '--main-screen_text-color': textColor,
     '--main-screen_block-height': blockHeight,
   }">
-    <div class="main-screen__title-box">
-      <h1 class="main-screen__title">
-        <slot name="title"></slot>
-      </h1>
+    <div class="main-screen__wrapper">
+      <div class="main-screen__title-box">
+        <h1 class="main-screen__title">
+          <slot name="title"></slot>
+        </h1>
+      </div>
+      <div class="main-screen__description-box" :class="{ 'flex-layout': useFlex }">
+        <span class="main-screen__description">
+          <slot name="description"></slot>
+        </span>
+      </div>
     </div>
-    <div class="main-screen__description-box" :class="{ 'flex-layout': useFlex }">
-      <span class="main-screen__description">
-        <slot name="description"></slot>
-      </span>
-    </div>
+
     <div class="main-screen__img-box">
       <slot name="img"></slot>
     </div>
@@ -45,23 +48,58 @@ defineProps({
 @use '@/assets/scss/mixins.scss' as *;
 
 .main-screen {
-  @include display-flex-column-center;
   @include minmax-width-mobile;
-
-  background-color: var(--main-screen_bg-color);
+  display: flex;
 
   justify-content: flex-end;
   min-width: var(--min-width);
   width: calc(100% + 34px);
-  min-height: var(--main-screen_block-height);
   height: fit-content;
-  padding-top: 40px;
-  padding-right: 20px;
-  padding-left: 20px;
   gap: 24px;
+  padding-top: 40px;
+  padding-left: 20px;
+  padding-right: 20px;
+  background-color: var(--main-screen_bg-color);
   border-radius: 12px;
-  margin-left: -17px;
-  margin-right: -17px;
+
+  @media only screen and (max-width: 767px) {
+    flex-direction: column;
+    align-items: center;
+    min-height: var(--main-screen_block-height);
+  }
+
+  @media only screen and (min-width: 768px) {
+    flex-direction: row;
+    justify-content: space-between;
+    height: fit-content;
+    gap: 10px;
+    padding: 0;
+    padding-top: 60px;
+    padding-left: 52px;
+  }
+
+  @media only screen and (min-width: 1025px) {
+    height: 420px;
+    gap: 10px;
+  }
+
+  &__wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+
+    @media only screen and (min-width: 768px) {
+      justify-content: flex-start;
+      min-height: 244px;
+      height: fit-content;
+      gap: 24px;
+      padding: 0;
+    }
+
+    @media only screen and (min-width: 1025px) {
+      max-width: 825px;
+    }
+  }
 
   &__title-box,
   &__description-box {
@@ -69,26 +107,61 @@ defineProps({
     align-items: center;
     width: 100%;
     color: var(--main-screen_text-color);
+
+    @media only screen and (min-width: 768px) {
+      height: 100%;
+    }
+
+    @media only screen and (min-width: 1025px) {
+      justify-content: flex-start;
+    }
   }
 
   &__title {
     @include h1-mobile;
+
+    @media only screen and (min-width: 768px) {
+      text-align: left;
+      font-size: 36px;
+      line-height: 1.25;
+    }
+
+    @media only screen and (min-width: 1025px) {
+      max-width: 825px;
+      font-size: 48px;
+    }
   }
 
   &__description {
     display: flex;
-    width: 100%;
     text-align: center;
+    width: 100%;
+
+    @media only screen and (min-width: 768px) {
+      text-align: left;
+    }
   }
 
   &__img-box {
     display: flex;
+
+    @media only screen and (min-width: 768px) {
+      justify-content: flex-end;
+    }
+
+    @media only screen and (min-width: 1025px) {
+      width: 318px;
+    }
   }
 
   &__img {
     @include cover-center-no-repeat-img;
-    width: 286px;
-    height: 325px;
+    width: 256px;
+
+    @media only screen and (min-width: 1025px) {
+      width: 318px;
+      border-bottom-right-radius: 12px;
+    }
   }
 }
 

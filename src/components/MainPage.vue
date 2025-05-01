@@ -43,7 +43,7 @@ const getTagClass = (tag) => {
   <main>
     <ReusableScreen>
       <template v-slot:title>
-        AHO<br>«Воспитание<br>для всех»
+        AHO «Воспитание для всех»
       </template>
       <template v-slot:description>
         Содействие развитию просветительской деятельности детей, их семей и молодёжи в области образования, культуры и

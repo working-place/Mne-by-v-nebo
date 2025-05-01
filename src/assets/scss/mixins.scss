@@ -83,11 +83,9 @@
 
 @mixin minmax-width-mobile {
   min-width: 320px;
-  // max-width: 362px;
 }
 
 @mixin minmax-width-mobile-block {
-  // max-width: 320px;
   min-height: 206px;
 }
 
@@ -98,9 +96,8 @@
 }
 
 @mixin minmax-width-tablet-block {
-  // min-width: 506;
-      max-width: 734px;
-      width: 100%;
+  max-width: 734px;
+  width: 100%;
 }
 
 @mixin minmax-width-desctop {
@@ -110,9 +107,8 @@
 }
 
 @mixin minmax-width-desctop-block {
-  // min-width: 506;
-      max-width: 1191px;
-      width: 100%;
+  max-width: 1191px;
+  width: 100%;
 }
 
 @mixin cover-center-no-repeat-img {
@@ -185,5 +181,5 @@
 }
 
 @mixin img-border-radius {
-border-radius: 8px;
+  border-radius: 8px;
 }

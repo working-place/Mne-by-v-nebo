@@ -34,7 +34,6 @@
   --max-width-tablet: 650px;
 
   --cards-border-radius: 12px;
-
 }
 
 *,
@@ -49,10 +48,7 @@
   width: 100vw;
 }
 
-/* стили прописаны для mobile, так как mobile first */
-
 body {
-  /* display: flex; */
   width: 100vw;
   min-height: 100vh;
   font-family: var(--font-family-nunito);
@@ -67,7 +63,6 @@ main {
   flex-direction: column;
   align-items: center;
   min-width: var(--min-width-mob);
-  /* max-width: var(--max-width-mob); */
   width: 100%;
   gap: 40px;
   padding-right: 17px;
@@ -93,38 +88,30 @@ h3 {
   line-height: 1.5;
 }
 
-@media only screen and (min-width: 361px) and (max-width: 768px) {
+@media only screen and (min-width: 768px) {
   main {
-    /* min-width: 327px; */
-    max-width: 734px;
-      width: 100vw;
-      background-color: green;
-      /* margin: 0;
-      padding: 0; */
+    width: 100vw;
+    background-color: green;
+    padding-left: 59px;
+    padding-right: 59px;
   }
+
   body {
     background-color: yellow;
-    /* margin: 0;
-    padding: 0; */
   }
 
+}
+
+@media only screen and (min-width: 1025px) {
+  main {
+    width: 100vw;
+    background-color: rgb(190, 29, 211);
+    padding-left: 124px;
+    padding-right: 124px;
   }
 
-  @media only screen and (min-width: 769px) {
-    main {
-      /* justify-content: flex-start; */
-      /* min-width: 734px; */
-      max-width: 1157px;
-      width: 100vw;
-      background-color: rgb(190, 29, 211);
-      /* margin: 0;
-      padding: 0; */
-    }
-
-    body {
-      background-color: rgb(55, 64, 223);
-      /* margin: 0;
-      padding: 0; */
-    }
-
+  body {
+    background-color: rgb(55, 64, 223);
   }
+
+}

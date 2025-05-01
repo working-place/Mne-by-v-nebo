@@ -1,23 +1,6 @@
 @import './base.css';
 
-/* стили прописаны для mobile, так как mobile first */
 #app {
-  /* max-width: 360px; */
   margin: 0 auto;
   font-weight: normal;
 }
-
-/* если будут ховверы, то для мобилки нужно будет отключить с помощью медиа */
-/* @media (hover: hover) {
-  a:hover {
-  }
-} */
-
-
-/* ширина планшета из макета */
-/* @media (max-width: 650px) {
-} */
-
-/* ширина десктопа из макета */
-/* @media (max-width: 1191px) {
-} */
