@@ -89,6 +89,8 @@ h2 {
   &__link-decoration {
     @include list-decoration;
   }
+
+
 }
 
 .footer {
@@ -99,6 +101,19 @@ h2 {
   padding: 17px;
   background-color: var(--color-background-light-blue);
   gap: 40px;
+
+  @media only screen and (min-width: 361px) and (max-width: 768px) {
+    // min-width: 361px;
+    // max-width: 768px;
+      width: 100vw;
+    }
+
+    @media only screen and (min-width: 769px) {
+      justify-content: flex-start;
+      // min-width: 768px;
+      // max-width: 1191px;
+      width: 100vw;
+    }
 
   &__logo-box {
     align-items: center;

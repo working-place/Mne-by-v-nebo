@@ -105,7 +105,7 @@
 
 @mixin minmax-width-desctop {
   min-width: 768px;
-  min-height: 361px;
+  max-width: 1191px;
   width: 100%;
 }
 

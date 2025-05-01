@@ -2,7 +2,7 @@
 
 /* стили прописаны для mobile, так как mobile first */
 #app {
-  max-width: 360px;
+  /* max-width: 360px; */
   margin: 0 auto;
   font-weight: normal;
 }
