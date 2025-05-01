@@ -93,12 +93,26 @@
 
 @mixin minmax-width-tablet {
   max-width: 768px;
-  // min-height: 650px;
+  min-width: 361px;
+  width: 100%;
 }
 
 @mixin minmax-width-tablet-block {
   // min-width: 506;
-      max-width: 540px;
+      max-width: 734px;
+      width: 100%;
+}
+
+@mixin minmax-width-desctop {
+  min-width: 768px;
+  min-height: 361px;
+  width: 100%;
+}
+
+@mixin minmax-width-desctop-block {
+  // min-width: 506;
+      max-width: 1191px;
+      width: 100%;
 }
 
 @mixin cover-center-no-repeat-img {
@@ -114,6 +128,16 @@
 
 @mixin pdf-container {
   max-height: 500px;
+  width: 100%;
+  overflow-y: auto;
+  overflow-x: auto;
+  margin-top: 10px;
+  border: 1px solid #eee;
+  border-radius: 4px;
+}
+
+@mixin pdf-container-tablet {
+  max-height: 700px;
   width: 100%;
   overflow-y: auto;
   overflow-x: auto;

@@ -7,7 +7,7 @@ import NavLinks from './NavLinks.vue';
 const isOpen = ref(false);
 const route = useRoute();
 const menuRef = ref(null);
-const isTablet = ref(false);
+const isDesctop = ref(false);
 
 const isActive = (path) => {
   return route.path === path
@@ -27,7 +27,7 @@ onMounted(() => {
 })
 
 const checkScreenSize = () => {
-    isTablet.value = window.innerWidth >= 361 && window.innerWidth <= 768;
+    isDesctop.value = window.innerWidth >= 361;
   };
 
 onMounted(() => {
@@ -50,14 +50,14 @@ onUnmounted(() => {
         <img class="menu__logo" src="/img/logo.png" alt="Логотип">
       </RouterLink>
 
-      <template v-if="!isTablet">
+      <template v-if="!isDesctop">
         <button v-if="!isOpen" @click.stop="isOpen = true" class="menu__menu-btn"></button>
         <button v-else @click="isOpen = false" class="menu__close-btn"></button>
       </template>
-      <NavLinks v-if="isTablet" :is-open="!isOpen" align="center" />
+      <NavLinks v-if="isDesctop" :is-open="!isOpen" align="center" />
     </div>
 
-    <NavLinksMobile v-if="!isTablet" :is-open="isOpen" @close="closeMenu" align="center" />
+    <NavLinksMobile v-if="!isDesctop" :is-open="isOpen" @close="closeMenu" align="center" />
   </header>
 </template>
 
@@ -89,6 +89,12 @@ onUnmounted(() => {
     @media only screen and (min-width: 361px) and (max-width: 768px) {
       gap: 40px;
       max-width: 540px;
+    }
+
+    @media only screen and (min-width: 769px) {
+      justify-content: flex-start;
+      gap: 60px;
+      max-width: 1191px;
     }
   }
 

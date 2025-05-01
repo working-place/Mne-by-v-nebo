@@ -42,10 +42,19 @@ h1 {
   @include minmax-width-mobile;
   padding-left: 17px;
   padding-right: 17px;
+  margin-top: 100px;
 
   &__file {
     @include pdf-container;
     @include minmax-width-mobile;
+
+
+
+
   }
+
+  @media only screen and (min-width: 361px) and (max-width: 768px) {
+      @include minmax-width-tablet-block;
+    }
 }
 </style>

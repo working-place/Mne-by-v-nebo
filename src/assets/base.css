@@ -88,7 +88,7 @@ h3 {
   line-height: 1.5;
 }
 
-@media only screen and (min-width: 361px) and (max-width: 650px) {
+@media only screen and (min-width: 361px) and (max-width: 768px) {
   body,
   main {
     min-width: var(--min-width-tablet);

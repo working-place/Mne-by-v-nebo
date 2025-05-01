@@ -56,6 +56,15 @@ const isActive = (path) => route.path === path;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
+
+    @media only screen and (min-width: 361px) and (max-width: 768px) {
+      max-width: 424px;
+    }
+
+    @media only screen and (min-width: 769px) {
+      gap: 60px;
+      max-width: 620px;
+    }
   }
 
   &__item {
