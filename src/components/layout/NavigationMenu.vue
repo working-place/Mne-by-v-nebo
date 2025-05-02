@@ -110,6 +110,11 @@ onUnmounted(() => {
     width: 61px;
     height: 24px;
     outline: none;
+    border: 0;
+    outline: none;
+    background-color: transparent;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
   }
 
   &__menu-btn {

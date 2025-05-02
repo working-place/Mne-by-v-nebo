@@ -85,9 +85,9 @@ const getTagClass = (tag) => {
 
 <template>
   <main>
-    <ReusableScreen bgColor="var(--color-background-yellow)">
+    <ReusableScreen textColor="var(--color-text-dark)" bgColor="var(--color-background-yellow)">
       <template v-slot:title>
-        <span class="title-text">Полезные материалы</span>
+        <span class="main-screen__title">Полезные материалы</span>
       </template>
       <template v-slot:description>
         <span class="description-text">
@@ -156,11 +156,7 @@ const getTagClass = (tag) => {
 <style scoped lang="scss">
 @use '@/assets/scss/mixins.scss' as *;
 
-.title-text {
-  @include h1-mobile
-}
-
-.title-text, .description-text {
+.description-text {
   color: #000000;
 }
 

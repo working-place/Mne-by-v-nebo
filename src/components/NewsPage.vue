@@ -96,7 +96,7 @@ onMounted(loadNews);
   <main>
 
     <ReusableScreen bgColor="var(--color-background-lavender)" textColor="var(--color-text-dark)" blockHeight="470px"
-      :use-flex="false">
+      tabletHeight="50px" desctopHeight="255px" :use-flex="false" hideImgOnTablet="true">
       <template v-slot:title>
         новости
       </template>
@@ -160,6 +160,16 @@ onMounted(loadNews);
     border: none;
     outline: none;
     border-radius: 60px;
+
+    @media only screen and (min-width: 768px) {
+      width: 100%;
+      height: 40px;
+    }
+
+    @media only screen and (min-width: 1280px) {
+      max-width: 610px;
+      height: 54px;
+    }
   }
 
   &__search-input::placeholder {
@@ -168,8 +178,7 @@ onMounted(loadNews);
   }
 }
 
-.trainings {
-}
+.trainings {}
 
 .news {
   @include block-mobile;
@@ -280,5 +289,4 @@ onMounted(loadNews);
     text-align: center;
   }
 }
-
 </style>

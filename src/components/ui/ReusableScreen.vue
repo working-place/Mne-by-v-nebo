@@ -15,6 +15,18 @@ defineProps({
   useFlex: {
     type: Boolean,
     default: true,
+  },
+  hideImgOnTablet: {
+    type: Boolean,
+    default: false,
+  },
+  tabletHeight: {
+    type: String,
+    default: '244px',
+  },
+  desctopHeight: {
+    type: String,
+    default: '420px',
   }
 })
 </script>
@@ -24,14 +36,17 @@ defineProps({
     '--main-screen_bg-color': bgColor,
     '--main-screen_text-color': textColor,
     '--main-screen_block-height': blockHeight,
+    '--main-screen_desctop-height': desctopHeight,
   }">
-    <div class="main-screen__wrapper">
+    <div class="main-screen__wrapper" :style="{
+      '--main-screen_tablet-height': tabletHeight,
+    }">
       <div class="main-screen__title-box">
         <h1 class="main-screen__title">
           <slot name="title"></slot>
         </h1>
       </div>
-      <div class="main-screen__description-box" :class="{ 'flex-layout': useFlex }">
+      <div class="main-screen__description-box">
         <span class="main-screen__description">
           <slot name="description"></slot>
         </span>
@@ -71,6 +86,7 @@ defineProps({
   @media only screen and (min-width: 768px) {
     flex-direction: row;
     justify-content: space-between;
+
     height: fit-content;
     gap: 10px;
     padding: 0;
@@ -78,25 +94,28 @@ defineProps({
     padding-left: 52px;
   }
 
-  @media only screen and (min-width: 1280px) {
-    height: 420px;
+  @media only screen and (min-width: 1025px) {
+    height: var(--main-screen_desctop-height);
     gap: 10px;
   }
 
   &__wrapper {
     display: flex;
+    width: 100%;
     flex-direction: column;
     gap: 20px;
 
     @media only screen and (min-width: 768px) {
       justify-content: flex-start;
-      min-height: 244px;
+      min-height: var(--main-screen_tablet-height);
       height: fit-content;
       gap: 24px;
       padding: 0;
+      padding-right: 52px;
+      margin-bottom: 60px;
     }
 
-    @media only screen and (min-width: 1280px) {
+    @media only screen and (min-width: 1025px) {
       max-width: 825px;
     }
   }
@@ -112,21 +131,23 @@ defineProps({
       height: 100%;
     }
 
-    @media only screen and (min-width: 1280px) {
+    @media only screen and (min-width: 1025px) {
       justify-content: flex-start;
     }
   }
 
   &__title {
     @include h1-mobile;
+    margin: 0;
 
     @media only screen and (min-width: 768px) {
+      justify-content: flex-start;
       text-align: left;
       font-size: 36px;
       line-height: 1.25;
     }
 
-    @media only screen and (min-width: 1280px) {
+    @media only screen and (min-width: 1025px) {
       max-width: 825px;
       font-size: 48px;
     }
@@ -147,9 +168,10 @@ defineProps({
 
     @media only screen and (min-width: 768px) {
       justify-content: flex-end;
+      display: v-bind('hideImgOnTablet ? "none" : "flex"');
     }
 
-    @media only screen and (min-width: 1280px) {
+    @media only screen and (min-width: 1025px) {
       width: 318px;
     }
   }
@@ -158,7 +180,7 @@ defineProps({
     @include cover-center-no-repeat-img;
     width: 256px;
 
-    @media only screen and (min-width: 1280px) {
+    @media only screen and (min-width: 1025px) {
       width: 318px;
       border-bottom-right-radius: 12px;
     }
