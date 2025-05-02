@@ -78,7 +78,7 @@ defineProps({
     padding-left: 52px;
   }
 
-  @media only screen and (min-width: 1025px) {
+  @media only screen and (min-width: 1280px) {
     height: 420px;
     gap: 10px;
   }
@@ -96,7 +96,7 @@ defineProps({
       padding: 0;
     }
 
-    @media only screen and (min-width: 1025px) {
+    @media only screen and (min-width: 1280px) {
       max-width: 825px;
     }
   }
@@ -112,7 +112,7 @@ defineProps({
       height: 100%;
     }
 
-    @media only screen and (min-width: 1025px) {
+    @media only screen and (min-width: 1280px) {
       justify-content: flex-start;
     }
   }
@@ -126,7 +126,7 @@ defineProps({
       line-height: 1.25;
     }
 
-    @media only screen and (min-width: 1025px) {
+    @media only screen and (min-width: 1280px) {
       max-width: 825px;
       font-size: 48px;
     }
@@ -149,7 +149,7 @@ defineProps({
       justify-content: flex-end;
     }
 
-    @media only screen and (min-width: 1025px) {
+    @media only screen and (min-width: 1280px) {
       width: 318px;
     }
   }
@@ -158,7 +158,7 @@ defineProps({
     @include cover-center-no-repeat-img;
     width: 256px;
 
-    @media only screen and (min-width: 1025px) {
+    @media only screen and (min-width: 1280px) {
       width: 318px;
       border-bottom-right-radius: 12px;
     }

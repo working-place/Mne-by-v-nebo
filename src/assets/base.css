@@ -63,7 +63,7 @@ main {
   flex-direction: column;
   align-items: center;
   min-width: var(--min-width-mob);
-  width: 100%;
+  width: 100vw;
   gap: 40px;
   padding-right: 17px;
   padding-left: 17px;
@@ -91,27 +91,33 @@ h3 {
 @media only screen and (min-width: 768px) {
   main {
     width: 100vw;
-    background-color: green;
+    /* background-color: green; */
     padding-left: 59px;
     padding-right: 59px;
   }
 
   body {
-    background-color: yellow;
+    /* background-color: yellow; */
   }
 
 }
 
-@media only screen and (min-width: 1025px) {
+@media only screen and (min-width: 1280px) {
   main {
     width: 100vw;
-    background-color: rgb(190, 29, 211);
+    /* background-color: rgb(190, 29, 211); */
     padding-left: 124px;
     padding-right: 124px;
   }
 
   body {
-    background-color: rgb(55, 64, 223);
+    /* background-color: rgb(55, 64, 223); */
+  }
+
+  h1 {
+    font-size: 48px;
+  line-height: 1;
+  font-weight: 700;
   }
 
 }

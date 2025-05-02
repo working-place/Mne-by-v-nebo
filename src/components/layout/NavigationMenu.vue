@@ -74,7 +74,7 @@ onUnmounted(() => {
   z-index: 1001;
   background-color: white;
 
-  @media only screen and (min-width: 1025px) {
+  @media only screen and (min-width: 1280px) {
     padding-left: 124px;
     padding-right: 124px;
   }
@@ -96,7 +96,7 @@ onUnmounted(() => {
       gap: 40px;
     }
 
-    @media only screen and (min-width: 1025px) {
+    @media only screen and (min-width: 1280px) {
       justify-content: flex-start;
       gap: 60px;
     }

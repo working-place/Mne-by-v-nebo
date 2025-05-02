@@ -19,6 +19,7 @@ export default defineConfig({
         @use "@/assets/scss/mixins.scss" as *;
         @use "@/assets/scss/variables.scss" as *;
         @use "@/assets/scss/modalViewer.scss" as *;
+        @use "@/assets/scss/pdf-styles.scss" as *;
         `
       }
     }
@@ -27,9 +28,6 @@ export default defineConfig({
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url))
     },
-  },
-  optimizeDeps: {
-    include: ['vue-pdf-embed']
   },
   assetsInclude: ['**/*.pdf']
 })
