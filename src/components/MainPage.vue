@@ -56,15 +56,17 @@ const getTagClass = (tag) => {
 
     <div class="description">
       <h2>Основное направление деятельности</h2>
-      <NumberedCard v-for="card in mainDirection" :key="card.number" :padding-bottom="card.paddingBottom">
-        <template v-slot:number>{{ card.number }}</template>
-        <template v-slot:description>{{ card.description }}
-        </template>
-        <template v-slot:img>
-          <img :src="card.img.src" :alt="card.img.alt"
-            :class="`description-card__img description-card__img_size-${card.number}`">
-        </template>
-      </NumberedCard>
+      <div class="description__news-card-box">
+        <NumberedCard v-for="card in mainDirection" :key="card.number" :padding-bottom="card.paddingBottom">
+          <template v-slot:number>{{ card.number }}</template>
+          <template v-slot:description>{{ card.description }}
+          </template>
+          <template v-slot:img>
+            <img :src="card.img.src" :alt="card.img.alt"
+              :class="`description-card__img description-card__img_size-${card.number}`">
+          </template>
+        </NumberedCard>
+      </div>
     </div>
 
     <div class="organization-charter">
@@ -143,9 +145,38 @@ h2 {
 .description {
   @include block-mobile;
   padding: 0;
+
+  &__news-card-box {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    width: 100%;
+
+    @media only screen and (min-width: 768px) {
+      flex-direction: row;
+      flex-wrap: wrap;
+      justify-content: space-between;
+    }
+
+    @media only screen and (min-width: 1280px) {}
+  }
 }
 
 .description-card {
+
+  @media only screen and (min-width: 768px) {
+    //   min-width: 327px;
+    // min-height: 206;
+    // aspect-ratio: 1.4/1;
+    // height: auto;
+    // height: 100%;
+    // flex-direction: row;
+  }
+
+  @media only screen and (min-width: 1280px) {}
+
   &__img {
     border-bottom-right-radius: 12px;
   }
