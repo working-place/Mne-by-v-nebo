@@ -103,15 +103,16 @@ const getTagClass = (tag) => {
 
     <div class="news">
       <h2>Новости</h2>
-      <router-link v-for="info in firstTwoNews" :key="info.id" :to="{ name: 'article', params: { id: info.id } }" class="news-card-link">
-        <NewsCard  :tag-class="getTagClass(info.tag)">
-        <template v-slot:img>
-          <img :src="`/img/${info.img.src}`" :alt="info.img.alt" class="tag-card__img">
-        </template>
-        <template v-slot:tag>{{ info.tag }}</template>
-        <template v-slot:text>{{ info.text }}</template>
-        <template v-slot:date>{{ info.date }}</template>
-      </NewsCard>
+      <router-link v-for="info in firstTwoNews" :key="info.id" :to="{ name: 'article', params: { id: info.id } }"
+        class="news-card-link">
+        <NewsCard :tag-class="getTagClass(info.tag)">
+          <template v-slot:img>
+            <img :src="`/img/${info.img.src}`" :alt="info.img.alt" class="tag-card__img">
+          </template>
+          <template v-slot:tag>{{ info.tag }}</template>
+          <template v-slot:text>{{ info.text }}</template>
+          <template v-slot:date>{{ info.date }}</template>
+        </NewsCard>
       </router-link>
 
       <RouterLinkButton :to="{ name: 'news' }" :disabled="false" max-height-btn="62px" min-height-btn="62px"
@@ -224,18 +225,9 @@ h2 {
   }
 }
 
-.tag-card {
-  &__img {
-    @include cover-center-no-repeat-img;
-    width: 100%;
-    height: 168px;
-    border-top-right-radius: 8px;
-    border-top-left-radius: 8px;
-  }
-}
-
 .news {
-  @include block-mobile;
-  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
 }
 </style>

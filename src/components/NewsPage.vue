@@ -96,7 +96,7 @@ onMounted(loadNews);
   <main>
 
     <ReusableScreen bgColor="var(--color-background-lavender)" textColor="var(--color-text-dark)" blockHeight="470px"
-      tabletHeight="50px" desctopHeight="255px" :use-flex="false" hideImgOnTablet="true">
+      tabletHeight="50px" desctopHeight="255px" :use-flex="false" hideImgOnTablet="true" paddingRight="52px">
       <template v-slot:title>
         новости
       </template>
@@ -184,6 +184,8 @@ onMounted(loadNews);
   @include block-mobile;
   @include minmax-width-mobile-block;
   padding: 0;
+  width: 100%;
+  height: fit-content;
 
   &__filtering-box {
     @include block-mobile;
@@ -191,7 +193,6 @@ onMounted(loadNews);
     min-width: 286px;
     flex-direction: row;
     flex-wrap: wrap;
-    padding: 0;
     width: 100%;
     gap: 10px;
   }
@@ -264,19 +265,10 @@ onMounted(loadNews);
 
 .news-card-link {
   display: flex;
+  justify-content: center;
   width: 100%;
   text-decoration: none;
   color: inherit;
-}
-
-.tag-card {
-  &__img {
-    @include cover-center-no-repeat-img;
-    width: 100%;
-    height: 168px;
-    border-top-right-radius: 8px;
-    border-top-left-radius: 8px;
-  }
 }
 
 .not-found {

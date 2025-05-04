@@ -91,13 +91,8 @@ h3 {
 @media only screen and (min-width: 768px) {
   main {
     width: 100vw;
-    /* background-color: green; */
     padding-left: 59px;
     padding-right: 59px;
-  }
-
-  body {
-    /* background-color: yellow; */
   }
 
 }
@@ -105,13 +100,9 @@ h3 {
 @media only screen and (min-width: 1280px) {
   main {
     width: 100vw;
-    /* background-color: rgb(190, 29, 211); */
     padding-left: 124px;
     padding-right: 124px;
-  }
-
-  body {
-    /* background-color: rgb(55, 64, 223); */
+    margin-top: 0;
   }
 
   h1 {

@@ -85,7 +85,7 @@ const getTagClass = (tag) => {
 
 <template>
   <main>
-    <ReusableScreen textColor="var(--color-text-dark)" bgColor="var(--color-background-yellow)">
+    <ReusableScreen textColor="var(--color-text-dark)" bgColor="var(--color-background-yellow)" imgPaddingTop="0">
       <template v-slot:title>
         <span class="main-screen__title">Полезные материалы</span>
       </template>
@@ -202,6 +202,7 @@ h2 {
       }
   }
 }
+<<<<<<< HEAD
 
 .tag-card {
   &__img {
@@ -219,4 +220,6 @@ h2 {
     margin-top: 20px;
   }
 }
+=======
+>>>>>>> v-gorkina
 </style>

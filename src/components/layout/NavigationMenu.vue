@@ -68,15 +68,21 @@ onUnmounted(() => {
   display: flex;
   justify-content: center;
   position: fixed;
-  top: 0px;
+  top: 0;
   left: 0;
   right: 0;
   z-index: 1001;
+  width: 100%;
+  margin: 0 auto;
   background-color: white;
 
+  @media only screen and (min-width: 768px) {
+    padding: 0 59px;
+  }
+
   @media only screen and (min-width: 1280px) {
-    padding-left: 124px;
-    padding-right: 124px;
+    padding: 0 124px;
+    position: static;
   }
 
   &__box,
@@ -90,9 +96,12 @@ onUnmounted(() => {
     @include display-flex-justify-content-center;
     justify-content: space-between;
     align-items: center;
+    max-width: 1190px;
 
     @media only screen and (min-width: 768px) {
-      justify-content: flex-start;
+      justify-content: center;
+      padding-right: 0;
+      padding-left: 0;
       gap: 40px;
     }
 
@@ -115,6 +124,16 @@ onUnmounted(() => {
     background-color: transparent;
     user-select: none;
     -webkit-tap-highlight-color: transparent;
+
+    @media only screen and (min-width: 768px) {
+      width: 76px;
+      height: 30px;
+    }
+
+    @media only screen and (min-width: 1280px) {
+      width: 101px;
+      height: 40px;
+    }
   }
 
   &__menu-btn {

@@ -19,9 +19,9 @@ defineProps({
       <slot name="img"></slot>
     </div>
     <div class="tag-card__text-box">
-      <span class="tag-card__text">
+      <h3 class="tag-card__text">
         <slot name="text"></slot>
-      </span>
+      </h3>
       <span class="tag-card__date">
         <slot name="date"></slot>
       </span>
@@ -29,18 +29,21 @@ defineProps({
   </div>
 </template>
 
-<style scoped lang="scss">
+<style lang="scss">
 @use '@/assets/scss/mixins.scss' as *;
 
 .tag-card {
-  @include block-mobile;
-  min-width: 286px;
-  max-width: 362px;
-  min-height: 206px;
+  display: flex;
+  flex-direction: column;
+  min-width: 302px;
+  justify-content: space-between;
+  width: 100%;
   position: relative;
   background-color: var(--color-background-light-blue);
   border-radius: var(--cards-border-radius);
   padding: 10px 10px 20px 10px;
+  aspect-ratio: 1.2/1;
+  height: auto;
 
   &__tag-box {
     @include display-flex-center-center;
@@ -56,20 +59,33 @@ defineProps({
   }
 
   &__img-box {
-    @include display-flex-center-center;
-    background-size: cover;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    align-items: stretch;
     width: 100%;
-    min-height: 100px;
-    max-height: 168px;
+    height: 60%;
+    overflow: hidden;
+    border-top-right-radius: 8px;
+    border-top-left-radius: 8px;
+  }
+
+  &__img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
   }
 
   &__text-box {
     @include display-flex-column;
-    width: 100%;
+    justify-content: space-around;
+    height: 35%;
+    margin-top: 22px;
     gap: 8px;
   }
 
   &__text {
+    @include h3-mobile-card;
     display: -webkit-box;
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;

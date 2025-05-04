@@ -57,7 +57,7 @@ const closeModal = () => {
 
 <template>
   <main>
-    <ReusableScreen>
+    <ReusableScreen imgPaddingTop="20px">
       <template v-slot:title>
         <span class="title-text">Наша жизнь</span>
       </template>

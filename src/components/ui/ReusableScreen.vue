@@ -1,17 +1,5 @@
 <script setup>
 defineProps({
-  bgColor: {
-    type: String,
-    default: 'var(--color-background-purple)',
-  },
-  textColor: {
-    type: String,
-    default: 'var(--color-text-light)',
-  },
-  blockHeight: {
-    type: String,
-    default: '600px',
-  },
   useFlex: {
     type: Boolean,
     default: true,
@@ -20,14 +8,43 @@ defineProps({
     type: Boolean,
     default: false,
   },
-  tabletHeight: {
+  bgColor: {
     type: String,
-    default: '244px',
+    default: 'var(--color-background-purple)',
+  },
+  textColor: {
+    type: String,
+    default: 'var(--color-text-light)',
+  },
+  paddingRight: {
+    type: String,
+    default: '0',
+  },
+  blockHeight: {
+    type: String,
+    default: 'fit-content',
+  },
+  mobileHeight: {
+    type: String,
+    default: '600px',
   },
   desctopHeight: {
     type: String,
     default: '420px',
+  },
+  tabletHeight: {
+    type: String,
+    default: 'fit-content',
+  },
+  imgWidth: {
+    type: String,
+    default: '45%',
+  },
+  imgPaddingTop: {
+    type: String,
+    default: '60px',
   }
+
 })
 </script>
 
@@ -37,9 +54,11 @@ defineProps({
     '--main-screen_text-color': textColor,
     '--main-screen_block-height': blockHeight,
     '--main-screen_desctop-height': desctopHeight,
+    '--main-screen_mobile-height': mobileHeight,
   }">
     <div class="main-screen__wrapper" :style="{
       '--main-screen_tablet-height': tabletHeight,
+      '--main-screen_tablet-padding-right': paddingRight,
     }">
       <div class="main-screen__title-box">
         <h1 class="main-screen__title">
@@ -53,7 +72,9 @@ defineProps({
       </div>
     </div>
 
-    <div class="main-screen__img-box">
+    <div class="main-screen__img-box" :style="{
+      '--main-screen_tablet-img-margin-top': imgPaddingTop
+    }">
       <slot name="img"></slot>
     </div>
   </div>
@@ -65,9 +86,9 @@ defineProps({
 .main-screen {
   @include minmax-width-mobile;
   display: flex;
-
   justify-content: flex-end;
   min-width: var(--min-width);
+  max-width: 1190px;
   width: calc(100% + 34px);
   height: fit-content;
   gap: 24px;
@@ -80,7 +101,7 @@ defineProps({
   @media only screen and (max-width: 767px) {
     flex-direction: column;
     align-items: center;
-    min-height: var(--main-screen_block-height);
+    min-height: var(--main-screen_mobile-height);
   }
 
   @media only screen and (min-width: 768px) {
@@ -90,8 +111,8 @@ defineProps({
     height: fit-content;
     gap: 10px;
     padding: 0;
-    padding-top: 60px;
     padding-left: 52px;
+    margin-top: 15px;
   }
 
   @media only screen and (min-width: 1025px) {
@@ -104,14 +125,14 @@ defineProps({
     width: 100%;
     flex-direction: column;
     gap: 20px;
+    height: fit-content;
 
     @media only screen and (min-width: 768px) {
-      justify-content: flex-start;
       min-height: var(--main-screen_tablet-height);
-      height: fit-content;
       gap: 24px;
-      padding: 0;
-      padding-right: 52px;
+      width: 55%;
+      padding-right: var(--main-screen_tablet-padding-right);
+      padding-top: 60px;
       margin-bottom: 60px;
     }
 
@@ -128,7 +149,7 @@ defineProps({
     color: var(--main-screen_text-color);
 
     @media only screen and (min-width: 768px) {
-      height: 100%;
+      height: fit-content;
     }
 
     @media only screen and (min-width: 1025px) {
@@ -165,9 +186,12 @@ defineProps({
 
   &__img-box {
     display: flex;
+    width: 100%;
+
 
     @media only screen and (min-width: 768px) {
-      justify-content: flex-end;
+      width: 300px;
+      margin-top: var(--main-screen_tablet-img-margin-top);
       display: v-bind('hideImgOnTablet ? "none" : "flex"');
     }
 
@@ -177,11 +201,11 @@ defineProps({
   }
 
   &__img {
-    @include cover-center-no-repeat-img;
-    width: 256px;
+    object-fit: cover;
+    width: 100%;
 
     @media only screen and (min-width: 1025px) {
-      width: 318px;
+      object-fit: cover;
       border-bottom-right-radius: 12px;
     }
   }

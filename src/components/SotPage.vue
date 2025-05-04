@@ -69,8 +69,10 @@ const getTagClass = (tag) => {
         <div :class="`project-${project.id}__title project-${project.id}__title_color`">
           <span>{{ project.title }}</span>
         </div>
-        <img :class="`project-${project.id}__img project-${project.id}__img_size`" :src="`/img/${project.imgURL}`"
-          :alt="project.imgAlt">
+        <div class="project__img-box" :class="`project-${project.id}__img-box`">
+          <img class="img" :class="`project-${project.id}__img project-${project.id}__img_size`"
+            :src="`/img/${project.imgURL}`" :alt="project.imgAlt">
+        </div>
       </div>
 
       <template v-for="section in project.sections" :key="section.title">
@@ -93,16 +95,16 @@ const getTagClass = (tag) => {
       </div>
 
       <router-link v-for="info in firstTwoNews" :key="info.id" :to="{ name: 'article', params: { id: info.id } }"
-          class="news-card-link">
-          <NewsCard  :tag-class="getTagClass(info.tag)">
-        <template v-slot:img>
-          <img :src="`/img/${info.img.src}`" :alt="info.img.alt" class="tag-card__img">
-        </template>
-        <template v-slot:tag>{{ info.tag }}</template>
-        <template v-slot:text>{{ info.text }}</template>
-        <template v-slot:date>{{ info.date }}</template>
-      </NewsCard>
-        </router-link>
+        class="news-card-link">
+        <NewsCard :tag-class="getTagClass(info.tag)">
+          <template v-slot:img>
+            <img :src="`/img/${info.img.src}`" :alt="info.img.alt" class="tag-card__img">
+          </template>
+          <template v-slot:tag>{{ info.tag }}</template>
+          <template v-slot:text>{{ info.text }}</template>
+          <template v-slot:date>{{ info.date }}</template>
+        </NewsCard>
+      </router-link>
 
     </div>
 
@@ -111,6 +113,13 @@ const getTagClass = (tag) => {
 
 <style scoped lang="scss">
 @use '@/assets/scss/mixins.scss' as *;
+
+.img {
+  @include cover-center-no-repeat-img;
+  width: 100%;
+  border-bottom-right-radius: var(--cards-border-radius);
+  border-bottom-left-radius: var(--cards-border-radius);
+}
 
 .news-card-link {
   display: flex;
@@ -130,6 +139,7 @@ const getTagClass = (tag) => {
   &__img {
     width: 247px;
     height: 282px;
+    object-fit: contain;
   }
 }
 
@@ -143,12 +153,24 @@ h2 {
   margin-bottom: -30px;
 }
 
+.project {
+  object-fit: cover;
+  z-index: 1;
+
+  &__img-box {
+    display: flex;
+    width: 90%;
+    overflow: hidden;
+  }
+}
+
 .project-mne-by-v-nebo {
   @include block-mobile;
   padding: 20px 0 0 0;
 
   &__box {
     @include block-mobile;
+    position: relative;
     flex-direction: row;
     justify-content: flex-end;
     align-items: flex-end;
@@ -165,6 +187,9 @@ h2 {
   &__title {
     display: flex;
     justify-content: right;
+    position: absolute;
+    top: 80%;
+    left: 10%;
     width: fit-content;
     white-space: nowrap;
     padding-bottom: 33px;
@@ -172,12 +197,15 @@ h2 {
     color: var(--color-text-light);
   }
 
+  &__img-box {
+    justify-content: flex-end;
+  }
+
   &__img {
     @include cover-center-no-repeat-img;
-    max-width: 165px;
-    max-height: 187px;
-    width: 50%;
+    width: 70%;
     border-bottom-right-radius: var(--cards-border-radius);
+    border-bottom-left-radius: var(--cards-border-radius);
   }
 }
 
@@ -197,18 +225,6 @@ h2 {
     gap: 0;
     border-radius: var(--cards-border-radius);
     background-color: var(--color-background-purple);
-  }
-
-  &__img {
-    width: 265px;
-    height: 193px
-  }
-
-  &__img_size {
-    margin-left: 20px;
-    height: 174px;
-    border-bottom-left-radius: var(--cards-border-radius);
-    border-bottom-right-radius: var(--cards-border-radius);
   }
 
   &__title {
@@ -243,18 +259,6 @@ h2 {
     background-color: var(--color-background-yellow);
   }
 
-  &__img {
-    width: 265px;
-    height: 193px
-  }
-
-  &__img_size {
-    width: 100%;
-    height: 174px;
-    border-bottom-left-radius: var(--cards-border-radius);
-    border-bottom-right-radius: var(--cards-border-radius);
-  }
-
   &__title {
     display: flex;
     text-align: center;
@@ -277,16 +281,6 @@ h2 {
   &__img {
     width: 150px;
     height: 150px
-  }
-}
-
-.tag-card {
-  &__img {
-    @include cover-center-no-repeat-img;
-    width: 100%;
-    height: 168px;
-    border-top-right-radius: 8px;
-    border-top-left-radius: 8px;
   }
 }
 </style>

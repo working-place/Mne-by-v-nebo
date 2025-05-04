@@ -96,7 +96,7 @@ const toggleItem = (index) => {
 
 <template>
   <main>
-    <ReusableScreen>
+    <ReusableScreen blockHeight="fit-content">
       <template v-slot:title>
         Участие<br>в грантах
       </template>
