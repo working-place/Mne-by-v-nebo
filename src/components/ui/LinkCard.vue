@@ -66,6 +66,7 @@ defineExpose({
   gap: 10px;
   background-color: var(--color-background-light-blue);
   border-radius: var(--cards-border-radius);
+  box-sizing: border-box;
 
   &__title {
     margin-bottom: 10px;
@@ -95,6 +96,18 @@ defineExpose({
     :slotted(img) {
       width: v-bind(imageWidth);
       height: auto;
+    }
+  }
+
+  @media (min-width: 768px) {
+    width: 320px;
+    height: 274px;
+    min-height: auto;
+    padding: 25px;
+    gap: 15px;
+
+    &__img-box :slotted(img) {
+      width: calc(v-bind(imageWidth) * 1.2);
     }
   }
 }

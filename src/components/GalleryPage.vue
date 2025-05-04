@@ -131,6 +131,10 @@ const closeModal = () => {
 
 .gallery-section {
   margin: 20px 0;
+
+  @media (min-width: 768px) {
+    min-width: 650px;
+  }
 }
 
 h2 {
@@ -149,17 +153,27 @@ h2 {
   cursor: pointer;
   transition: transform 0.3s;
   height: 176px;
-  border-radius: 12px;
 }
 
 .slide-image {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  border-radius: 12px;
+
+  @media (min-width: 768px) {
+      width: 291px;
+      height: 176px;
+      border-radius: 8px;
+    }
 }
 
 .button-wrapper {
-padding-top: 26px;
+  padding-top: 26px;
+
+  @media (min-width: 768px) {
+    padding-top: 40px;
+  }
 }
 
 .video-play-icon {
@@ -171,18 +185,20 @@ padding-top: 26px;
   opacity: 0.8;
 }
 
-.view-more-btn {
-  width: 100%;
-  padding: 10px;
-  font-family: var(--font-family-next-art);
-  display: block;
-  margin: 2rem auto;
-  background-color: #7352E5;
-  color: white;
-  text-transform: uppercase;
-  border: none;
-  border-radius: 30px;
-  cursor: pointer;
-  transition: background-color 0.3s;
-}
+// .view-more-btn {
+//   width: 100%;
+//   padding: 10px;
+//   font-family: var(--font-family-next-art);
+//   display: block;
+//   margin: 2rem auto;
+//   background-color: #7352E5;
+//   color: white;
+//   text-transform: uppercase;
+//   border: none;
+//   border-radius: 30px;
+//   cursor: pointer;
+//   transition: background-color 0.3s;
+
+  
+// }
 </style>

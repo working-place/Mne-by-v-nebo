@@ -103,59 +103,66 @@ const getTagClass = (tag) => {
     <InfoCard imageUrl="/img/usefull-page-boy.png" title="Литература для специалистов"
       description="Представляем подборку книг и методических материалов для специалистов в области детского образования. Здесь вы найдете актуальные исследования, практические руководства и вдохновляющие примеры." />
 
-    <div class="slider-container">
-      <Slider :items="bookSlidesSpecialist">
-        <template #default="{ item }">
-          <LinkCard :title="item.title" :description="item.description" :paddingBottom="'46px'" image-width="30%">
-            <template #image>
-              <img :src="item.image" :alt="item.title" width="90px">
-            </template>
-          </LinkCard>
-        </template>
-      </Slider>
-    </div>
-
-    <InfoCard imageUrl="/img/usefull-material-content-boy.png" title="Литература для родителей"
-      description="Помогите своему ребенку раскрыть свой потенциал с помощью наших специально подобранных книг!  Они помогут ему лучше учиться, расширят его кругозор и обогатят его воображение."
-      image-position="right"/>
-
-    <div class="slider-container">
-      <Slider :items="bookSlidesParent">
-        <template #default="{ item }">
-          <LinkCard :title="item.title" :description="item.description" :linkUrl="item.linkUrl"
-            :linkText="item.linkText" :paddingBottom="'46px'" image-width="30%">
-            <template #image>
-              <img :src="item.image" :alt="item.title" width="90px">
-            </template>
-          </LinkCard>
-        </template>
-      </Slider>
-    </div>
-
-    <div class="similar-topics">
-      <h2>Это интересно</h2>
-      <router-link v-for="info in firstTwoNews" :key="info.id" :to="{ name: 'article', params: { id: info.id } }"
-        class="news-card-link">
-        <NewsCard :tag-class="getTagClass(info.tag)">
-          <template v-slot:img>
-            <img :src="`/img/${info.img.src}`" :alt="info.img.alt" class="tag-card__img">
+      <div class="slider-container">
+        <Slider :items="bookSlidesSpecialist">
+          <template #default="{ item }">
+            <LinkCard :title="item.title" :description="item.description" :paddingBottom="'46px'" image-width="30%">
+              <template #image>
+                <img :src="item.image" :alt="item.title" width="90px">
+              </template>
+            </LinkCard>
           </template>
-          <template v-slot:tag>{{ info.tag }}</template>
-          <template v-slot:text>{{ info.text }}</template>
-          <template v-slot:date>{{ info.date }}</template>
-        </NewsCard>
-      </router-link>
+        </Slider>
+      </div>
 
-      <RouterLinkButton :to="{ name: 'news' }" :disabled="false">
-        <template v-slot:text>Перейти ко всем новостям</template>
-      </RouterLinkButton>
-    </div>
+      <InfoCard imageUrl="/img/usefull-material-content-boy.png" title="Литература для родителей"
+        description="Помогите своему ребенку раскрыть свой потенциал с помощью наших специально подобранных книг! Они помогут ему лучше учиться, расширят его кругозор и обогатят его воображение."
+        image-position="right" />
+
+      <div class="slider-container">
+        <Slider :items="bookSlidesParent">
+          <template #default="{ item }">
+            <LinkCard :title="item.title" :description="item.description" :linkUrl="item.linkUrl"
+              :linkText="item.linkText" :paddingBottom="'46px'" image-width="30%">
+              <template #image>
+                <img :src="item.image" :alt="item.title" width="90px">
+              </template>
+            </LinkCard>
+          </template>
+        </Slider>
+      </div>
+
+      <div class="similar-topics">
+        <h2>Это интересно</h2>
+          <router-link v-for="info in firstTwoNews" :key="info.id" :to="{ name: 'article', params: { id: info.id } }"
+            class="news-card-link">
+            <NewsCard :tag-class="getTagClass(info.tag)">
+              <template v-slot:img>
+                <img :src="`/img/${info.img.src}`" :alt="info.img.alt" class="tag-card__img">
+              </template>
+              <template v-slot:tag>{{ info.tag }}</template>
+              <template v-slot:text>{{ info.text }}</template>
+              <template v-slot:date>{{ info.date }}</template>
+            </NewsCard>
+          </router-link>
+
+        <RouterLinkButton :to="{ name: 'news' }" :disabled="false">
+          <template v-slot:text>Перейти ко всем новостям</template>
+        </RouterLinkButton>
+      </div>
+    
   </main>
 </template>
 
 <style scoped lang="scss">
 @use '@/assets/scss/mixins.scss' as *;
 
+.title-text {
+  @include h1-mobile
+}
+
+.title-text,
+.description-text {
 .description-text {
   color: #000000;
 }
@@ -168,12 +175,17 @@ const getTagClass = (tag) => {
   position: relative;
   width: 100%;
   margin-top: -20px;
-  margin-bottom: 30px
+  margin-bottom: 30px;
 }
 
 .similar-topics {
   @include block-mobile;
   padding: 0;
+
+  @media (min-width: 768px) {
+    padding: 0 24px;
+    margin-bottom: 60px;
+  }
 }
 
 h2 {

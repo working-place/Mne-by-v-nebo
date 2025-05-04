@@ -105,13 +105,17 @@ watch(() => props.items, updateSliderPosition);
     width: 100%;
     max-width: 326px;
     margin: 0 auto;
+
+    @media (min-width: 768px) {
+        min-width: 650px;
+    }
 }
 
 .slider-wrapper {
     position: relative;
     width: 100%;
     overflow: hidden;
-    border-radius: 8px;
+
 }
 
 .slides-container {
@@ -123,8 +127,8 @@ watch(() => props.items, updateSliderPosition);
 
 .slide {
     flex: 0 0 100%;
-    width: 100%;
-    min-height: 100%;
+    padding: 0 5px;
+        
 }
 
 .navigation {
@@ -132,11 +136,19 @@ watch(() => props.items, updateSliderPosition);
     justify-content: space-between;
     align-items: center;
     margin-top: 16px;
+
+    @media (min-width: 768px) {
+        margin-top: 24px;
+    }
 }
 
 .pagination {
     display: flex;
     gap: 5px;
+
+    @media (min-width: 768px) {
+        gap: 8px;
+    }
 }
 
 .pagination button {
@@ -172,9 +184,14 @@ watch(() => props.items, updateSliderPosition);
     justify-content: center;
     cursor: pointer;
 
+    @media (min-width: 768px) {
+        width: 40px;
+        height: 40px;
+    }
+
     &:active {
-            background: var(--color-pressed-lavender);
-        }
+        background: var(--color-pressed-lavender);
+    }
 
     @media (hover: hover) {
         &:hover {
@@ -193,5 +210,10 @@ watch(() => props.items, updateSliderPosition);
     stroke: white;
     width: 18px;
     height: 18px;
+
+    @media (min-width: 768px) {
+        width: 22px;
+        height: 22px;
+    }
 }
 </style>
