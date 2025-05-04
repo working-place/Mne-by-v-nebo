@@ -163,7 +163,6 @@ const getTagClass = (tag) => {
 
 .title-text,
 .description-text {
-.description-text {
   color: #000000;
 }
 
