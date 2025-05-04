@@ -2,14 +2,14 @@
 defineProps({
     imagePosition: {
         type: String,
-        default: 'bottom', // 'bottom' или 'right'
+        default: 'bottom',
         validator: (value) => ['bottom', 'right'].includes(value),
     }
 });
 </script>
 
 <template>
-    <div class="adaptive-card">
+    <div class="adaptive-card" :class="`image-${imagePosition}`">
         <div class="adaptive-card__content">
             <div class="adaptive-card__text-box">
                 <span class="adaptive-card__text">
@@ -54,7 +54,8 @@ defineProps({
         gap: 8px;
     }
 
-    &__text, &__date {
+    &__text,
+    &__date {
         word-break: break-word;
         line-height: 1.5;
         font-weight: 600;
@@ -67,6 +68,27 @@ defineProps({
         min-height: 100px;
         max-height: 168px;
         overflow: hidden;
+        border-radius: 0  0 var(--cards-border-radius) var(--cards-border-radius);
+    }
+
+        @media only screen and (min-width: 768px) {
+        &.image-right {
+            flex-direction: row;
+            align-items: center;
+
+            .adaptive-card__content {
+                width: 60%;
+                text-align: left;
+                padding: 30px;
+            }
+
+            .adaptive-card__img-box {
+                width: 50%;
+                height: 100%;
+                max-height: none;
+                border-radius: 0 var(--cards-border-radius) var(--cards-border-radius) 0;
+            }
+        }
     }
 }
 </style>

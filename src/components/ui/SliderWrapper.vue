@@ -1,19 +1,36 @@
 <script setup>
-import { ref, onMounted, watch } from 'vue';
+import { ref, onMounted, watch, computed, onBeforeUnmount, nextTick } from 'vue';
 
 const props = defineProps({
     items: {
         type: Array,
         required: true
+    },
+    visibleSlides: {
+        type: Number,
+        default: 1
     }
 });
 
 const currentIndex = ref(0);
 const slider = ref(null);
 const sliderContainer = ref(null);
+const windowWidth = ref(window.innerWidth);
+
+const visibleSlidesCount = computed(() => {
+    return windowWidth.value >= 768 ? Math.min(props.visibleSlides, props.items.length) : 1;
+});
+
+const slideWidth = computed(() => {
+    return 100 / visibleSlidesCount.value;
+});
+
+const maxIndex = computed(() => {
+    return Math.max(0, props.items.length - visibleSlidesCount.value);
+});
 
 const nextSlide = () => {
-    if (currentIndex.value < props.items.length - 1) {
+    if (currentIndex.value < maxIndex.value) {
         currentIndex.value++;
     }
 };
@@ -25,16 +42,22 @@ const prevSlide = () => {
 };
 
 const goToSlide = (index) => {
-    currentIndex.value = index;
+    currentIndex.value = Math.min(index, maxIndex.value);
 };
 
 const updateSliderPosition = () => {
-    if (!slider.value) return;
+    if (!slider.value || !sliderContainer.value) return;
 
-    const slideWidth = sliderContainer.value?.offsetWidth || 0;
-    const offset = currentIndex.value * slideWidth;
+    nextTick(() => {
+        const containerWidth = sliderContainer.value.offsetWidth;
+        const offset = (currentIndex.value * containerWidth) / visibleSlidesCount.value;
+        slider.value.style.transform = `translateX(-${offset}px)`;
+    });
+};
 
-    slider.value.style.transform = `translateX(-${offset}px)`;
+const handleResize = () => {
+    windowWidth.value = window.innerWidth;
+    updateSliderPosition();
 };
 
 const touchStartX = ref(0);
@@ -57,12 +80,23 @@ const handleTouchEnd = () => {
 };
 
 onMounted(() => {
+    window.addEventListener('resize', handleResize);
     updateSliderPosition();
-    window.addEventListener('resize', updateSliderPosition);
+});
+
+onBeforeUnmount(() => {
+    window.removeEventListener('resize', handleResize);
 });
 
 watch(currentIndex, updateSliderPosition);
-watch(() => props.items, updateSliderPosition);
+watch(() => props.items, () => {
+    currentIndex.value = 0;
+    updateSliderPosition();
+});
+watch(visibleSlidesCount, () => {
+    currentIndex.value = Math.min(currentIndex.value, maxIndex.value);
+    updateSliderPosition();
+});
 </script>
 
 <template>
@@ -70,7 +104,7 @@ watch(() => props.items, updateSliderPosition);
         <div class="slider-wrapper" ref="sliderContainer">
             <div class="slides-container" ref="slider" @touchstart="handleTouchStart" @touchmove="handleTouchMove"
                 @touchend="handleTouchEnd">
-                <div v-for="(item, index) in items" :key="item.id || index" class="slide">
+                <div v-for="(item, index) in items" :key="index" class="slide" :style="{ width: `${slideWidth}%` }">
                     <slot :item="item" :index="index"></slot>
                 </div>
             </div>
@@ -78,8 +112,8 @@ watch(() => props.items, updateSliderPosition);
 
         <div class="navigation">
             <div class="pagination">
-                <button v-for="(_, index) in items" :key="index" @click="goToSlide(index)"
-                    :class="{ active: index === currentIndex }"></button>
+                <button v-for="(_, index) in Math.max(1, items.length - visibleSlidesCount + 1)" :key="index"
+                    @click="goToSlide(index)" :class="{ active: index === currentIndex }"></button>
             </div>
 
             <div class="arrows">
@@ -89,7 +123,7 @@ watch(() => props.items, updateSliderPosition);
                             stroke-linejoin="round" />
                     </svg>
                 </button>
-                <button @click="nextSlide" class="arrow" :disabled="currentIndex === items.length - 1">
+                <button @click="nextSlide" class="arrow" :disabled="currentIndex >= maxIndex">
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
                         <path d="M9 18L15 12L9 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                             stroke-linejoin="round" />
@@ -106,7 +140,7 @@ watch(() => props.items, updateSliderPosition);
     max-width: 326px;
     margin: 0 auto;
 
-    @media (min-width: 768px) {
+    @media only screen and (min-width: 768px) {
         min-width: 650px;
     }
 }
@@ -115,7 +149,6 @@ watch(() => props.items, updateSliderPosition);
     position: relative;
     width: 100%;
     overflow: hidden;
-
 }
 
 .slides-container {
@@ -126,9 +159,8 @@ watch(() => props.items, updateSliderPosition);
 }
 
 .slide {
-    flex: 0 0 100%;
+    flex: 0 0 auto;
     padding: 0 5px;
-        
 }
 
 .navigation {
@@ -137,7 +169,7 @@ watch(() => props.items, updateSliderPosition);
     align-items: center;
     margin-top: 16px;
 
-    @media (min-width: 768px) {
+    @media only screen and (min-width: 768px) {
         margin-top: 24px;
     }
 }
@@ -146,7 +178,7 @@ watch(() => props.items, updateSliderPosition);
     display: flex;
     gap: 5px;
 
-    @media (min-width: 768px) {
+    @media only screen and (min-width: 768px) {
         gap: 8px;
     }
 }
@@ -184,7 +216,7 @@ watch(() => props.items, updateSliderPosition);
     justify-content: center;
     cursor: pointer;
 
-    @media (min-width: 768px) {
+    @media only screen and (min-width: 768px) {
         width: 40px;
         height: 40px;
     }
@@ -211,7 +243,7 @@ watch(() => props.items, updateSliderPosition);
     width: 18px;
     height: 18px;
 
-    @media (min-width: 768px) {
+    @media only screen and (min-width: 768px) {
         width: 22px;
         height: 22px;
     }

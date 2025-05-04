@@ -101,7 +101,7 @@ defineExpose({
 
   @media (min-width: 768px) {
     width: 320px;
-    height: 274px;
+    height: 270px;
     min-height: auto;
     padding: 25px;
     gap: 15px;

@@ -21,7 +21,7 @@ const photoSlides = [
 
 const videoSlides = [
   { id: 1, video: '/videos/video1.mp4', thumbnail: '/img/video1.png' },
-  { id: 2, video: '/videos/video2.mp4', thumbnail: '/img/video1.png' },
+  { id: 2, video: '/videos/video1.mp4', thumbnail: '/img/video1.png' },
   { id: 3, video: '/videos/video3.mp4', thumbnail: '/img/video1.png' },
   { id: 4, video: '/videos/video4.mp4', thumbnail: '/img/video1.png' },
   { id: 5, video: '/videos/video5.mp4', thumbnail: '/img/video1.png' },
@@ -75,7 +75,7 @@ const closeModal = () => {
     <div class="gallery-section">
       <h2>Наши Фотоотчеты:</h2>
       <div class="slider-container">
-        <Slider :items="photoSlides">
+        <Slider :items="photoSlides" :visible-slides="2">
           <template #default="{ item }">
             <div class="slide-content" @click="openPhotoModal(item)">
               <img :src="item.image" alt="Фото" class="slide-image">
@@ -88,7 +88,7 @@ const closeModal = () => {
     <div class="gallery-section">
       <h2>Наши видео:</h2>
       <div class="slider-container">
-        <Slider :items="videoSlides">
+        <Slider :items="videoSlides" :visible-slides="2">
           <template #default="{ item }">
             <div class="slide-content" @click="openVideoModal(item)">
               <img :src="item.thumbnail" alt="Видео" class="slide-image">
@@ -131,10 +131,6 @@ const closeModal = () => {
 
 .gallery-section {
   margin: 20px 0;
-
-  @media (min-width: 768px) {
-    min-width: 650px;
-  }
 }
 
 h2 {
@@ -161,7 +157,7 @@ h2 {
   object-fit: cover;
   border-radius: 12px;
 
-  @media (min-width: 768px) {
+  @media only screen and (min-width: 768px) {
       width: 291px;
       height: 176px;
       border-radius: 8px;
@@ -171,7 +167,7 @@ h2 {
 .button-wrapper {
   padding-top: 26px;
 
-  @media (min-width: 768px) {
+  @media only screen and (min-width: 768px) {
     padding-top: 40px;
   }
 }
@@ -184,21 +180,4 @@ h2 {
   color: white;
   opacity: 0.8;
 }
-
-// .view-more-btn {
-//   width: 100%;
-//   padding: 10px;
-//   font-family: var(--font-family-next-art);
-//   display: block;
-//   margin: 2rem auto;
-//   background-color: #7352E5;
-//   color: white;
-//   text-transform: uppercase;
-//   border: none;
-//   border-radius: 30px;
-//   cursor: pointer;
-//   transition: background-color 0.3s;
-
-  
-// }
 </style>

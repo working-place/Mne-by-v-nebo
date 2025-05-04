@@ -56,7 +56,7 @@ const getTagClass = (tag) => {
 <template>
   <main v-if="article">
     <div class="article-header">
-      <ArticleCard>
+      <ArticleCard imagePosition="right">
         <template v-slot:text>{{ article.text }}</template>
         <template v-slot:date>{{ article.date }}</template>
         <template v-slot:img>
@@ -79,17 +79,19 @@ const getTagClass = (tag) => {
 
     <div class="related-articles" v-if="relatedArticles.length > 0">
       <h2>Это интересно</h2>
-      <div v-for="related in relatedArticles" :key="related.id" class="related-article">
-        <router-link :to="{ name: 'article', params: { id: related.id } }" class="news-card-link">
-          <NewsCard :tag-class="getTagClass(related.tag)">
-            <template v-slot:img>
-              <img :src="`/img/${related.img.src}`" :alt="related.img.alt" class="tag-card__img">
-            </template>
-            <template v-slot:tag>{{ related.tag }}</template>
-            <template v-slot:text>{{ related.text }}</template>
-            <template v-slot:date>{{ related.date }}</template>
-          </NewsCard>
-        </router-link>
+      <div class="related-articles-container">
+        <div v-for="related in relatedArticles" :key="related.id" class="related-article">
+          <router-link :to="{ name: 'article', params: { id: related.id } }" class="news-card-link">
+            <NewsCard :tag-class="getTagClass(related.tag)">
+              <template v-slot:img>
+                <img :src="`/img/${related.img.src}`" :alt="related.img.alt" class="tag-card__img">
+              </template>
+              <template v-slot:tag>{{ related.tag }}</template>
+              <template v-slot:text>{{ related.text }}</template>
+              <template v-slot:date>{{ related.date }}</template>
+            </NewsCard>
+          </router-link>
+        </div>
       </div>
     </div>
   </main>
@@ -109,8 +111,6 @@ const getTagClass = (tag) => {
 .adaptive-card__img {
   @include cover-center-no-repeat-img;
   width: 100%;
-  height: 168px;
-  border-radius: var(--cards-border-radius);
 }
 
 .article-content {
@@ -123,15 +123,16 @@ const getTagClass = (tag) => {
   margin-bottom: 20px;
   line-height: 1.4;
   word-wrap: break-word;
+
   &::v-deep {
-      p {
-        margin-bottom: 1em;
-  
-        &:last-child {
-          margin-bottom: 0;
-        }
+    p {
+      margin-bottom: 1em;
+
+      &:last-child {
+        margin-bottom: 0;
       }
     }
+  }
 }
 
 .article-source {
@@ -161,14 +162,20 @@ const getTagClass = (tag) => {
     text-align: center;
 
     &:active {
-        background: var(--color-pressed-yellow);
-      }
+      background: var(--color-pressed-yellow);
+    }
 
-      @media (hover: hover) {
-        &:hover {
-          background: var(--color-hover-yellow);
-        }
+    @media (hover: hover) {
+      &:hover {
+        background: var(--color-hover-yellow);
       }
+    }
+
+    @media only screen and (min-width: 768px) {
+      width: 369px;
+      margin: 0 auto;
+      font-size: 16px;
+    }
   }
 }
 
@@ -176,6 +183,23 @@ const getTagClass = (tag) => {
   @include block-mobile;
   @include minmax-width-mobile;
   box-sizing: border-box;
+}
+
+.related-articles-container {
+  @media only screen and (min-width: 768px) {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+  }
+}
+
+.related-article {
+  margin-bottom: 20px;
+
+  @media only screen and (min-width: 768px) {
+    flex: 0 1 calc(50% - 10px);
+    margin-bottom: 0;
+  }
 }
 
 h2 {
@@ -203,4 +227,5 @@ h2 {
   text-align: center;
   padding: 40px;
   font-size: 1.2rem;
-}</style>
+}
+</style>

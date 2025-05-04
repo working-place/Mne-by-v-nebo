@@ -154,10 +154,6 @@ const toggleItem = (index) => {
 <style scoped lang="scss">
 @use '@/assets/scss/mixins.scss' as *;
 
-.main-screen {
-  background-color: var(--color-background-purple);
-}
-
 .accordion-item {
   background: #F5F5FD;
   border-radius: 12px;
