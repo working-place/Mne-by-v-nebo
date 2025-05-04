@@ -85,7 +85,7 @@ const getTagClass = (tag) => {
 
 <template>
   <main>
-    <ReusableScreen textColor="var(--color-text-dark)" bgColor="var(--color-background-yellow)">
+    <ReusableScreen textColor="var(--color-text-dark)" bgColor="var(--color-background-yellow)" imgPaddingTop="0">
       <template v-slot:title>
         <span class="main-screen__title">Полезные материалы</span>
       </template>
@@ -185,15 +185,5 @@ h2 {
   width: 100%;
   text-decoration: none;
   color: inherit;
-}
-
-.tag-card {
-  &__img {
-    @include cover-center-no-repeat-img;
-    width: 100%;
-    height: 168px;
-    border-top-right-radius: 8px;
-    border-top-left-radius: 8px;
-  }
 }
 </style>
