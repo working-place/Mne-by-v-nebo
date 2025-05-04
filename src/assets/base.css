@@ -34,6 +34,8 @@
   --max-width-tablet: 650px;
 
   --cards-border-radius: 12px;
+
+  --margin-between-blocs-desctop: 60px;
 }
 
 *,
@@ -103,6 +105,7 @@ h3 {
     padding-left: 124px;
     padding-right: 124px;
     margin-top: 0;
+    /* gap: 40px; */
   }
 
   h1 {
@@ -110,5 +113,4 @@ h3 {
   line-height: 1;
   font-weight: 700;
   }
-
 }

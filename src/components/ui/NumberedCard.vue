@@ -46,7 +46,15 @@ defineProps({
     }
   }
 
-  @media only screen and (min-width: 1280px) {}
+  @media only screen and (min-width: 1280px) {
+    min-height: 226px;
+    width: 33%;
+
+    &:last-child {
+    min-height: 226px;
+    width: 33%;
+    }
+  }
 
   &__number {
     @include display-flex-center-center;

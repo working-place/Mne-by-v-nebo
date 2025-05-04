@@ -140,6 +140,12 @@ const getTagClass = (tag) => {
 h2 {
   @include h2-mobile-uppercase;
   text-align: center;
+
+  @media only screen and (min-width: 1280px) {
+    font-size: 32px;
+    font-weight: 600;
+    line-height: 1.2;
+  }
 }
 
 .description {
@@ -150,7 +156,6 @@ h2 {
     display: flex;
     justify-content: center;
     flex-direction: column;
-    align-items: center;
     gap: 16px;
     width: 100%;
 
@@ -160,22 +165,29 @@ h2 {
       justify-content: space-between;
     }
 
-    @media only screen and (min-width: 1280px) {}
+    @media only screen and (min-width: 1280px) {
+      flex-wrap: nowrap;
+      justify-content: space-between;
+    }
   }
+
+  @media only screen and (min-width: 1280px) {
+      max-width: 1190px;
+      width: 100%;
+      gap: 48px;
+      margin-top: var(--margin-between-blocs-desctop);
+    }
 }
 
 .description-card {
 
   @media only screen and (min-width: 768px) {
-    //   min-width: 327px;
-    // min-height: 206;
-    // aspect-ratio: 1.4/1;
-    // height: auto;
-    // height: 100%;
-    // flex-direction: row;
+
   }
 
-  @media only screen and (min-width: 1280px) {}
+  @media only screen and (min-width: 1280px) {
+
+  }
 
   &__img {
     border-bottom-right-radius: 12px;

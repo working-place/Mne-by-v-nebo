@@ -168,7 +168,7 @@ defineProps({
       line-height: 1.25;
     }
 
-    @media only screen and (min-width: 1025px) {
+    @media only screen and (min-width: 1280px) {
       max-width: 825px;
       font-size: 48px;
     }
@@ -195,7 +195,7 @@ defineProps({
       display: v-bind('hideImgOnTablet ? "none" : "flex"');
     }
 
-    @media only screen and (min-width: 1025px) {
+    @media only screen and (min-width: 1280px) {
       width: 318px;
     }
   }
@@ -204,7 +204,7 @@ defineProps({
     object-fit: cover;
     width: 100%;
 
-    @media only screen and (min-width: 1025px) {
+    @media only screen and (min-width: 1280px) {
       object-fit: cover;
       border-bottom-right-radius: 12px;
     }
