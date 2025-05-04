@@ -40,8 +40,11 @@ defineProps({
     min-width: 320px;
     min-height: 204px;
     width: 48%;
+    flex-grow: 1;
 
     &:last-child {
+      min-height: 132px;
+      height: fit-content;
       width: 100%;
     }
   }

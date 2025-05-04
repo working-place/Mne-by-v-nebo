@@ -102,6 +102,7 @@ defineProps({
     flex-direction: column;
     align-items: center;
     min-height: var(--main-screen_mobile-height);
+
   }
 
   @media only screen and (min-width: 768px) {
@@ -115,7 +116,7 @@ defineProps({
     margin-top: 15px;
   }
 
-  @media only screen and (min-width: 1025px) {
+  @media only screen and (min-width: 1280px) {
     height: var(--main-screen_desctop-height);
     gap: 10px;
   }
@@ -136,7 +137,7 @@ defineProps({
       margin-bottom: 60px;
     }
 
-    @media only screen and (min-width: 1025px) {
+    @media only screen and (min-width: 1280px) {
       max-width: 825px;
     }
   }
@@ -152,7 +153,7 @@ defineProps({
       height: fit-content;
     }
 
-    @media only screen and (min-width: 1025px) {
+    @media only screen and (min-width: 1280px) {
       justify-content: flex-start;
     }
   }

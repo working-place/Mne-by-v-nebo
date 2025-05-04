@@ -130,13 +130,6 @@ const getTagClass = (tag) => {
 <style scoped lang="scss">
 @use '@/assets/scss/mixins.scss' as *;
 
-.news-card-link {
-  display: flex;
-  width: 100%;
-  text-decoration: none;
-  color: inherit;
-}
-
 h2 {
   @include h2-mobile-uppercase;
   text-align: center;
@@ -154,10 +147,10 @@ h2 {
 
   &__news-card-box {
     display: flex;
-    justify-content: center;
     flex-direction: column;
-    gap: 16px;
+    justify-content: center;
     width: 100%;
+    gap: 16px;
 
     @media only screen and (min-width: 768px) {
       flex-direction: row;
@@ -172,22 +165,14 @@ h2 {
   }
 
   @media only screen and (min-width: 1280px) {
-      max-width: 1190px;
-      width: 100%;
-      gap: 48px;
-      margin-top: var(--margin-between-blocs-desctop);
-    }
+    max-width: 1190px;
+    width: 100%;
+    gap: 48px;
+    margin-top: var(--margin-between-blocs-desctop);
+  }
 }
 
 .description-card {
-
-  @media only screen and (min-width: 768px) {
-
-  }
-
-  @media only screen and (min-width: 1280px) {
-
-  }
 
   &__img {
     border-bottom-right-radius: 12px;
@@ -212,10 +197,59 @@ h2 {
 .organization-charter {
   @include block-mobile;
 
+  @media only screen and (min-width: 768px) {
+    flex-direction: row;
+    min-height: 136px;
+    height: fit-content;
+    padding: 0;
+    gap: 0;
+    border-bottom-right-radius: var(--cards-border-radius);
+    border-top-right-radius: var(--cards-border-radius);
+  }
+
+  @media only screen and (min-width: 1280px) {}
+
   &__img-block,
   &__text-block {
     @include block-mobile;
     @include minmax-width-mobile;
+  }
+
+  &__img-block {
+    @media only screen and (min-width: 768px) {
+      align-items: flex-start;
+      min-width: 136px;
+      max-width: fit-content;
+      min-height: 136px;
+      padding: 0;
+      border-top-left-radius: 50%;
+      border-bottom-left-radius: 50%;
+      background-color: var(--color-background-light-blue);
+
+    }
+
+    @media only screen and (min-width: 1280px) {}
+  }
+
+  &__text-block {
+    @media only screen and (min-width: 768px) {
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      min-height: 136px;
+      height: fit-content;
+      padding: 0;
+      padding-left: 73px;
+      border-bottom-right-radius: var(--cards-border-radius);
+      border-top-right-radius: var(--cards-border-radius);
+      background-color: var(--color-background-light-blue);
+
+    }
+
+    @media only screen and (min-width: 1280px) {
+      min-width: 227px;
+      min-height: 227px;
+    }
   }
 
   &__img {
@@ -223,10 +257,24 @@ h2 {
     min-width: 151px;
     min-height: 151px;
     background-image: url('/img/mascot-boy.png');
+
+    @media only screen and (min-width: 768px) {
+      min-width: 136px;
+      min-height: 136px;
+    }
+
+    @media only screen and (min-width: 1280px) {
+      min-width: 227px;
+      min-height: 227px;
+    }
   }
 
   &__text {
     text-align: center;
+
+    @media only screen and (min-width: 768px) {
+      text-align: left;
+    }
   }
 
   &__link {
@@ -234,6 +282,8 @@ h2 {
     color: var(--color-background-purple);
   }
 }
+
+
 
 .director {
   @include block-mobile;
@@ -245,13 +295,39 @@ h2 {
   border-radius: var(--cards-border-radius);
   background-color: var(--color-background-red);
 
+  @media only screen and (min-width: 768px) {
+    flex-direction: row-reverse;
+    min-height: 271px;
+    gap: 16px;
+  }
+
+@media only screen and (min-width: 1280px) {}
+
   h2 {
     @include h2-mobile-uppercase;
+
+    @media only screen and (min-width: 768px) {
+      font-size: 26px;
+      font-weight: 600;
+      line-height: 1.5;
+    }
+
+@media only screen and (min-width: 1280px) {}
+
   }
 
   h3 {
     width: 100%;
     text-align: center;
+
+    @media only screen and (min-width: 768px) {
+      text-align: left;
+      font-weight: 700;
+      line-height: 1;
+    }
+
+@media only screen and (min-width: 1280px) {}
+
   }
 
   &__img-box,
@@ -260,12 +336,35 @@ h2 {
     gap: 14px
   }
 
+  &__text-box {
+    @media only screen and (min-width: 768px) {
+      align-items: flex-start;
+    }
+
+@media only screen and (min-width: 1280px) {}
+  }
+
   &__img {
     @include cover-center-no-repeat-img;
-    background-image: url('/img/photo-director.png');
+    background-image: url('/img/photo-director.jpg');
     min-width: 150px;
     min-height: 150px;
+    border-radius: 50%;
+
+    @media only screen and (min-width: 768px) {
+      border-radius: var(--cards-border-radius);
+      min-height: 196px;
+    }
+
+@media only screen and (min-width: 1280px) {}
   }
+}
+
+.news-card-link {
+  display: flex;
+  width: 100%;
+  text-decoration: none;
+  color: inherit;
 }
 
 .news {
