@@ -99,10 +99,9 @@ defineExpose({
     }
   }
 
-  @media (min-width: 768px) {
-    width: 320px;
-    height: 270px;
-    min-height: auto;
+  @media only screen and (min-width: 768px) {
+    min-width: 320px;
+    min-height: 270px;
     padding: 25px;
     gap: 15px;
 
@@ -110,5 +109,9 @@ defineExpose({
       width: calc(v-bind(imageWidth) * 1.2);
     }
   }
+    @media only screen and (min-width: 1280px) {
+      min-width: auto;
+      min-height: 300px;
+    }
 }
 </style>

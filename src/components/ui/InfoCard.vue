@@ -1,11 +1,13 @@
 <template>
-  <div class="info-card" :class="{ 'reverse-layout': imagePosition === 'right' }">
-    <div class="image-container">
-      <img :src="imageUrl" :alt="title" class="rounded-image" />
-    </div>
-    <div class="text-content">
-      <h2 class="title">{{ title }}</h2>
-      <p class="description">{{ description }}</p>
+  <div class="info-card-wrapper">
+    <div class="info-card">
+      <div class="image-container">
+        <img :src="imageUrl" :alt="title" class="rounded-image" />
+      </div>
+      <div class="text-content">
+        <h2 class="title">{{ title }}</h2>
+        <p class="description">{{ description }}</p>
+      </div>
     </div>
   </div>
 </template>
@@ -24,21 +26,23 @@ defineProps({
     type: String,
     required: true,
   },
-  imagePosition: {
-    type: String,
-    default: "left",
-    validator: (value) => ["left", "right"].includes(value),
-  },
 });
 </script>
 
 <style scoped lang="scss">
 @use '@/assets/scss/mixins.scss' as *;
 
+.info-card-wrapper {
+  position: relative;
+  min-height: var(--main-screen_block-height);
+  display: flex;
+  justify-content: center;
+}
+
 .info-card {
   @include display-flex-column-center;
   position: relative;
-  min-height: var(--main-screen_block-height);
+  width: 100%;
   gap: 10px;
   padding: 20px;
   background-color: var(--color-background-light-blue);
@@ -82,18 +86,13 @@ defineProps({
   }
 }
 
-@media (min-width: 768px) {
+@media only screen and (min-width: 768px) {
   .info-card {
     flex-direction: row;
     align-items: center;
     gap: 30px;
     padding: 30px;
-    //min-height: 272px;
     min-width: 650px;
-
-    &.reverse-layout {
-      flex-direction: row-reverse;
-    }
 
     .image-container {
       width: 200px;
@@ -116,4 +115,37 @@ defineProps({
     }
   }
 }
+
+@media only screen and (min-width: 1280px) {
+  .info-card {
+    max-width: 1190px;
+    height: 228px;
+    padding: 40px 40px 40px 200px;
+    gap: 50px;
+    border-radius: 100px var(--cards-border-radius) var(--cards-border-radius) 100px;
+
+    .image-container {
+      position: absolute;
+      width: 228px;
+      height: 228px;
+      left: -10px;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+
+    .text-content {
+      gap: 20px;
+      padding-left: 80px;
+
+      .title {
+        font-size: 32px;
+      }
+
+      .description {
+        font-size: 20px;
+      }
+    }
+  }
+}
 </style>
+

@@ -18,7 +18,9 @@ const sliderContainer = ref(null);
 const windowWidth = ref(window.innerWidth);
 
 const visibleSlidesCount = computed(() => {
-    return windowWidth.value >= 768 ? Math.min(props.visibleSlides, props.items.length) : 1;
+    if (windowWidth.value >= 1280) return Math.min(4, props.items.length);
+    if (windowWidth.value >= 768) return Math.min(2, props.items.length);
+    return 1;
 });
 
 const slideWidth = computed(() => {
@@ -137,17 +139,13 @@ watch(visibleSlidesCount, () => {
 <style scoped lang="scss">
 .slider-root {
     width: 100%;
-    max-width: 326px;
+    max-width: 1190px;
     margin: 0 auto;
-
-    @media only screen and (min-width: 768px) {
-        min-width: 650px;
-    }
 }
 
 .slider-wrapper {
     position: relative;
-    width: 100%;
+    //width: 100%;
     overflow: hidden;
 }
 
@@ -161,6 +159,7 @@ watch(visibleSlidesCount, () => {
 .slide {
     flex: 0 0 auto;
     padding: 0 5px;
+    box-sizing: border-box;
 }
 
 .navigation {
@@ -192,17 +191,31 @@ watch(visibleSlidesCount, () => {
     padding: 0;
     cursor: pointer;
     transition: all 0.3s ease;
+
+    @media only screen and (min-width: 1280px) {
+        width: 12px;
+        height: 12px;
+    }
 }
 
 .pagination button.active {
     background: #CABBFF;
     width: 8px;
     border-radius: 4px;
+
+    @media only screen and (min-width: 1280px) {
+            width: 12px;
+            border-radius: 6px;
+        }
 }
 
 .arrows {
     display: flex;
     gap: 12px;
+
+    @media only screen and (min-width: 1280px) {
+        gap: 16px;
+    }
 }
 
 .arrow {
@@ -219,6 +232,11 @@ watch(visibleSlidesCount, () => {
     @media only screen and (min-width: 768px) {
         width: 40px;
         height: 40px;
+    }
+
+    @media only screen and (min-width: 1280px) {
+        width: 48px;
+        height: 48px;
     }
 
     &:active {
@@ -246,6 +264,11 @@ watch(visibleSlidesCount, () => {
     @media only screen and (min-width: 768px) {
         width: 22px;
         height: 22px;
+    }
+
+    @media only screen and (min-width: 1280px) {
+        width: 24px;
+        height: 24px;
     }
 }
 </style>
