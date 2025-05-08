@@ -34,6 +34,8 @@
   --max-width-tablet: 650px;
 
   --cards-border-radius: 12px;
+  --cards-border-radius-tablet: 16px;
+  --cards-border-radius-desctop: 20px;
 
   --margin-between-blocs-desctop: 60px;
 }
@@ -105,7 +107,6 @@ h3 {
     padding-left: 124px;
     padding-right: 124px;
     margin-top: 0;
-    /* gap: 40px; */
   }
 
   h1 {
