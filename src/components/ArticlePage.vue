@@ -54,7 +54,7 @@ const getTagClass = (tag) => {
 </script>
 
 <template>
-  <main v-if="article">
+  <main v-if="article" class="article-main-container">
     <div class="article-header">
       <ArticleCard imagePosition="right">
         <template v-slot:text>{{ article.text }}</template>
@@ -64,33 +64,38 @@ const getTagClass = (tag) => {
         </template>
       </ArticleCard>
     </div>
+    <div class="article-content-wrapper">
+      <div class="article-primary-content">
+        <div class="article-content">
+          <div class="article-text" v-html="article.fullText"></div>
 
-    <div class="article-content">
-      <div class="article-text" v-html="article.fullText"></div>
+          <div v-if="article.source" class="article-source">
+            Источник: <a :href="article.source.url" target="_blank">{{ article.source.name }}</a>
+          </div>
+        </div>
 
-      <div v-if="article.source" class="article-source">
-        Источник: <a :href="article.source.url" target="_blank">{{ article.source.name }}</a>
+        <div class="share-section">
+          <button @click="copyShareLink" class="share-button">Поделиться</button>
+        </div>
       </div>
-    </div>
 
-    <div class="share-section">
-      <button @click="copyShareLink" class="share-button">Поделиться</button>
-    </div>
-
-    <div class="related-articles" v-if="relatedArticles.length > 0">
-      <h2>Это интересно</h2>
-      <div class="related-articles-container">
-        <div v-for="related in relatedArticles" :key="related.id" class="related-article">
-          <router-link :to="{ name: 'article', params: { id: related.id } }" class="news-card-link">
-            <NewsCard :tag-class="getTagClass(related.tag)">
-              <template v-slot:img>
-                <img :src="`/img/${related.img.src}`" :alt="related.img.alt" class="tag-card__img">
-              </template>
-              <template v-slot:tag>{{ related.tag }}</template>
-              <template v-slot:text>{{ related.text }}</template>
-              <template v-slot:date>{{ related.date }}</template>
-            </NewsCard>
-          </router-link>
+      <div class="related-articles-sidebar" v-if="relatedArticles.length > 0">
+        <div class="related-articles">
+          <h2>Это интересно</h2>
+          <div class="related-articles-container">
+            <div v-for="related in relatedArticles" :key="related.id" class="related-article">
+              <router-link :to="{ name: 'article', params: { id: related.id } }" class="news-card-link">
+                <NewsCard :tag-class="getTagClass(related.tag)">
+                  <template v-slot:img>
+                    <img :src="`/img/${related.img.src}`" :alt="related.img.alt" class="tag-card__img">
+                  </template>
+                  <template v-slot:tag>{{ related.tag }}</template>
+                  <template v-slot:text>{{ related.text }}</template>
+                  <template v-slot:date>{{ related.date }}</template>
+                </NewsCard>
+              </router-link>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -103,6 +108,27 @@ const getTagClass = (tag) => {
 
 <style scoped lang="scss">
 @use '@/assets/scss/mixins.scss' as *;
+
+.article-main-container {
+  @media only screen and (min-width: 1280px) {
+    max-width: 1190px;
+    margin: 0 auto;
+    padding: 0;
+  }
+}
+
+.article-content-wrapper {
+  @media only screen and (min-width: 1280px) {
+    display: flex;
+    gap: 100px;
+  }
+}
+
+.article-primary-content {
+  @media only screen and (min-width: 1280px) {
+    flex: 1;
+  }
+}
 
 .article-header {
   padding: 0;
@@ -141,12 +167,10 @@ const getTagClass = (tag) => {
   }
 }
 
-
 .share-section {
   width: 100%;
-  margin-left: -50vw;
-  margin-right: -50vw;
-  margin-bottom: 40px;
+  margin-top: 50px;
+  margin-bottom: 60px;
 
   .share-button {
     background-color: var(--color-background-yellow);
@@ -176,6 +200,17 @@ const getTagClass = (tag) => {
       margin: 0 auto;
       font-size: 16px;
     }
+
+    @media only screen and (min-width: 1280px) {
+      width: 190px;
+      margin-left: 0;
+    }
+  }
+}
+
+.related-articles-sidebar {
+  @media only screen and (min-width: 1280px) {
+    flex-shrink: 0;
   }
 }
 
@@ -183,6 +218,13 @@ const getTagClass = (tag) => {
   @include block-mobile;
   @include minmax-width-mobile;
   box-sizing: border-box;
+
+  @media only screen and (min-width: 1280px) {
+    width: 100%;
+    max-width: 290px;
+    margin: 0;
+    padding: 0;
+  }
 }
 
 .related-articles-container {
@@ -190,6 +232,10 @@ const getTagClass = (tag) => {
     display: flex;
     gap: 20px;
     justify-content: center;
+  }
+
+  @media only screen and (min-width: 1280px) {
+    flex-direction: column;
   }
 }
 
@@ -200,12 +246,22 @@ const getTagClass = (tag) => {
     flex: 0 1 calc(50% - 10px);
     margin-bottom: 0;
   }
+
+  @media only screen and (min-width: 1280px) {
+    flex: none;
+    width: 100%;
+    margin-bottom: 20px;
+  }
 }
 
 h2 {
   @include h2-mobile-uppercase;
   margin-bottom: 20px;
   text-align: center;
+
+  @media only screen and (min-width: 1280px) {
+    font-size: 32px;
+  }
 }
 
 .tag-card__img {

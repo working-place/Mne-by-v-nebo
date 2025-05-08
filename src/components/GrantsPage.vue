@@ -154,11 +154,18 @@ const toggleItem = (index) => {
 <style scoped lang="scss">
 @use '@/assets/scss/mixins.scss' as *;
 
+.grants-accordion {
+  width: 100%;
+  max-width: 1190px;
+  margin: 0 auto;
+}
+
 .accordion-item {
   background: #F5F5FD;
   border-radius: 12px;
   margin-bottom: 12px;
   overflow: hidden;
+  width: 100%;
 }
 
 .accordion-header {
@@ -166,6 +173,7 @@ const toggleItem = (index) => {
   align-items: center;
   padding: 20px 16px 16px;
   position: relative;
+  width: 100%;
 }
 
 .text-content {
@@ -266,7 +274,6 @@ const toggleItem = (index) => {
 
 .accordion-content {
   padding: 0 16px 20px;
-
 }
 
 .additional-text {
@@ -279,8 +286,9 @@ const toggleItem = (index) => {
   color: #ffffff;
   display: block;
   width: 100%;
-  margin: 24px auto 0;
-  padding: 12px 24px;
+  max-width: 300px;
+  margin: 32px auto 0;
+  padding: 14px 24px;
   border: none;
   border-radius: 30px;
   font-family: var(--font-family-next-art);
@@ -301,7 +309,7 @@ const toggleItem = (index) => {
 .slide-enter-active,
 .slide-leave-active {
   transition: all 0.4s ease;
-  max-height: 500px;
+  max-height: 1000px;
   overflow: hidden;
 }
 
@@ -311,13 +319,19 @@ const toggleItem = (index) => {
   opacity: 0;
 }
 
-@media (min-width: 768px) {
+@media only screen and (min-width: 768px) {
+
   .grants-accordion {
-    min-width: 648px;
+    width: 100%;
   }
 
   .accordion-item {
     padding: 0 24px;
+    margin-bottom: 16px;
+  }
+
+  .accordion-header {
+    padding: 24px 16px 20px;
   }
 
   .top-image {
@@ -330,8 +344,53 @@ const toggleItem = (index) => {
   }
 
   .show-all-btn {
-    font-size: 14px;
-    margin: 30px auto 0;
+    margin: 40px auto 0;
+    padding: 16px 32px;
+  }
+}
+
+@media only screen and (min-width: 1280px) {
+
+  .grants-accordion {
+    max-width: 1190px;
+  }
+
+  .accordion-item {
+    max-width: 100%;
+    padding: 0 40px;
+  }
+
+  .accordion-header {
+    padding: 32px 16px 28px;
+  }
+
+  .top-image {
+    width: 200px;
+    height: 200px;
+  }
+
+  .item-title {
+    font-size: 32px;
+  }
+
+  .item-subtitle {
+    font-size: 20px;
+    margin-top: 20px;
+  }
+
+  .main-text {
+    font-size: 16px;
+    line-height: 1.4;
+    font-weight: 400;
+  }
+
+  .additional-text {
+    font-size: 20px;
+  }
+
+  .arrow-circle {
+    width: 62px;
+    height: 62px;
   }
 }
 </style>

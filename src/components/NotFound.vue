@@ -20,16 +20,24 @@ import RouterLinkButton from './ui/RouterLinkButton.vue';
     </main>
 </template>
 
-<style scoped>
+<style scoped lang="scss">
+@use '@/assets/scss/mixins.scss' as *;
+
 .not-found {
     text-align: center;
     padding: 20px;
+    max-width: 1190px;
 }
 
 .not-found h1 {
     margin-bottom: 30px;
     font-size: 36px;
     font-weight: 600;
+
+    @media only screen and (min-width: 1280px) {
+        font-size: 48px;
+        font-weight: 700;
+    }
 }
 
 .button-wrapper {

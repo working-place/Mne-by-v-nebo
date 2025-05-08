@@ -68,10 +68,10 @@ defineProps({
         min-height: 100px;
         max-height: 168px;
         overflow: hidden;
-        border-radius: 0  0 var(--cards-border-radius) var(--cards-border-radius);
+        border-radius: 0 0 var(--cards-border-radius) var(--cards-border-radius);
     }
 
-        @media only screen and (min-width: 768px) {
+    @media only screen and (min-width: 768px) {
         &.image-right {
             flex-direction: row;
             align-items: center;
@@ -87,6 +87,26 @@ defineProps({
                 height: 100%;
                 max-height: none;
                 border-radius: 0 var(--cards-border-radius) var(--cards-border-radius) 0;
+            }
+        }
+    }
+
+    @media only screen and (min-width: 1280px) {
+
+        &.image-right {
+            .adaptive-card__content {
+                width: 55%;
+                padding: 40px;
+            }
+
+            .adaptive-card__img-box {
+                width: 45%;
+                min-height: 300px;
+            }
+
+            .adaptive-card__text {
+                font-size: 20px;
+                line-height: 1.2;
             }
         }
     }
