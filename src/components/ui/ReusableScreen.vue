@@ -102,23 +102,23 @@ defineProps({
     flex-direction: column;
     align-items: center;
     min-height: var(--main-screen_mobile-height);
-
   }
 
   @media only screen and (min-width: 768px) {
     flex-direction: row;
     justify-content: space-between;
-
     height: fit-content;
     gap: 10px;
     padding: 0;
     padding-left: 52px;
     margin-top: 15px;
+    border-radius: 30px;
   }
 
   @media only screen and (min-width: 1280px) {
     height: var(--main-screen_desctop-height);
     gap: 10px;
+    border-radius: 40px;
   }
 
   &__wrapper {
@@ -204,10 +204,11 @@ defineProps({
   &__img {
     object-fit: cover;
     width: 100%;
+    border-bottom-right-radius: 30px;
 
     @media only screen and (min-width: 1280px) {
       object-fit: cover;
-      border-bottom-right-radius: 12px;
+      border-bottom-right-radius: 40px;
     }
   }
 }

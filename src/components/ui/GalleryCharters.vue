@@ -133,6 +133,15 @@ const closeModal = () => {
   background-color: var(--gallery-section_background-color);
   border-radius: var(--cards-border-radius);
 
+  @media only screen and (min-width: 768px) {
+    border-radius: var(--cards-border-radius-tablet);
+  }
+
+@media only screen and (min-width: 1280px) {
+  max-width: 1190px;
+  border-radius: 24px;
+}
+
   h2 {
     text-align: center;
     margin: 0 0 20px;

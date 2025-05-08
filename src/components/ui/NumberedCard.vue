@@ -41,6 +41,7 @@ defineProps({
     min-height: 204px;
     width: 48%;
     flex-grow: 1;
+    border-radius: var(--cards-border-radius-tablet);
 
     &:last-child {
       min-height: 132px;
@@ -52,6 +53,7 @@ defineProps({
   @media only screen and (min-width: 1280px) {
     min-height: 226px;
     width: 33%;
+    border-radius: var(--cards-border-radius-desctop);
 
     &:last-child {
     min-height: 226px;

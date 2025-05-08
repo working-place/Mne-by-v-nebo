@@ -45,6 +45,22 @@ defineProps({
   aspect-ratio: 1.2/1;
   height: auto;
 
+  @media only screen and (min-width: 768px) {
+    border-radius: 24px;
+      // max-width: 290px;
+      // max-width: 303px;
+  }
+
+  @media only screen and (min-width: 1280px) {
+    aspect-ratio: 1/1.1;
+  height: auto;
+  min-width: 200px;
+  max-width: 290px;
+      max-width: 303px;
+  // max-width: 1190px;
+}
+
+
   &__tag-box {
     @include display-flex-center-center;
     position: absolute;
@@ -68,6 +84,13 @@ defineProps({
     overflow: hidden;
     border-top-right-radius: 8px;
     border-top-left-radius: 8px;
+
+    @media only screen and (min-width: 768px) {
+      border-top-right-radius: 20px;
+      border-top-left-radius: 20px;
+      // max-width: 290px;
+      // max-width: 303px;
+  }
   }
 
   &__img {

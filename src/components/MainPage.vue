@@ -23,7 +23,18 @@ const loadData = async () => {
 
 onMounted(loadData);
 
-const firstTwoNews = computed(() => newsData.value.slice(0, 2));
+const windowWidth = ref(window.innerWidth);
+
+onMounted(() => {
+  window.addEventListener('resize', () => {
+    windowWidth.value = window.innerWidth;
+  });
+});
+
+const shownNews = computed(() => {
+  const isDesktop = windowWidth.value >= 1280;
+  return newsData.value.slice(0, isDesktop ? 4 : 2);
+});
 
 const getTagClass = (tag) => {
   const tagLower = tag.toLowerCase().trim();
@@ -105,7 +116,8 @@ const getTagClass = (tag) => {
 
     <div class="news">
       <h2>Новости</h2>
-      <router-link v-for="info in firstTwoNews" :key="info.id" :to="{ name: 'article', params: { id: info.id } }"
+      <div class="news__wrap">
+        <router-link v-for="info in shownNews" :key="info.id" :to="{ name: 'article', params: { id: info.id } }"
         class="news-card-link">
         <NewsCard :tag-class="getTagClass(info.tag)">
           <template v-slot:img>
@@ -116,7 +128,7 @@ const getTagClass = (tag) => {
           <template v-slot:date>{{ info.date }}</template>
         </NewsCard>
       </router-link>
-
+      </div>
       <RouterLinkButton :to="{ name: 'news' }" :disabled="false" max-height-btn="62px" min-height-btn="62px"
         font-size-btn="20px">
         <template v-slot:text>ко всем новостям</template>
@@ -203,11 +215,10 @@ h2 {
     height: fit-content;
     padding: 0;
     gap: 0;
-    border-bottom-right-radius: var(--cards-border-radius);
-    border-top-right-radius: var(--cards-border-radius);
   }
 
-  @media only screen and (min-width: 1280px) {}
+  @media only screen and (min-width: 1280px) {
+    max-width: 1190px;}
 
   &__img-block,
   &__text-block {
@@ -240,8 +251,8 @@ h2 {
       height: fit-content;
       padding: 0;
       padding-left: 73px;
-      border-bottom-right-radius: var(--cards-border-radius);
-      border-top-right-radius: var(--cards-border-radius);
+      border-bottom-right-radius: 16px;
+      border-top-right-radius: 16px;
       background-color: var(--color-background-light-blue);
 
     }
@@ -249,6 +260,8 @@ h2 {
     @media only screen and (min-width: 1280px) {
       min-width: 227px;
       min-height: 227px;
+      border-bottom-right-radius: 30px;
+      border-top-right-radius: 30px;
     }
   }
 
@@ -299,9 +312,13 @@ h2 {
     flex-direction: row-reverse;
     min-height: 271px;
     gap: 16px;
+    border-radius: var(--cards-border-radius-tablet);
   }
 
-@media only screen and (min-width: 1280px) {}
+@media only screen and (min-width: 1280px) {
+  max-width: 1190px;
+  border-radius: 24px;
+}
 
   h2 {
     @include h2-mobile-uppercase;
@@ -371,5 +388,25 @@ h2 {
   display: flex;
   flex-direction: column;
   gap: 22px;
+
+  @media only screen and (min-width: 768px) {
+      gap: 36px;
+  }
+
+  @media only screen and (min-width: 1280px) {
+  max-width: 1190px;
+}
+
+  &__wrap {
+    display: flex;
+    gap: 16px;
+    flex-direction: column;
+    @media only screen and (min-width: 768px) {
+      gap: 20px;
+      flex-direction: row;
+  }
+
+  }
+
 }
 </style>
