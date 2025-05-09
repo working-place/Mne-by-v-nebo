@@ -152,19 +152,16 @@ const closeModal = () => {
   display: flex;
   flex-direction: column;
   width: 100%;
-  // height: 335px;
   gap: 40px;
-  // margin-bottom: 60px;
 
   @media only screen and (min-width: 768px) {
     position: relative;
   }
 
   @media only screen and (min-width: 1280px) {
-    // max-width: 580px;
-    // min-width: 40%;
-    max-width: 40%;
+    width: 44%;
   }
+
 }
 
 

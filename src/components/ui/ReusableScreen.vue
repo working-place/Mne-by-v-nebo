@@ -43,8 +43,15 @@ defineProps({
   imgPaddingTop: {
     type: String,
     default: '60px',
+  },
+  wrapperWidthTablet: {
+    type: String,
+    default: '55%',
+  },
+  wrapperWidthDesctop: {
+    type: String,
+    default: '55%',
   }
-
 })
 </script>
 
@@ -59,6 +66,8 @@ defineProps({
     <div class="main-screen__wrapper" :style="{
       '--main-screen_tablet-height': tabletHeight,
       '--main-screen_tablet-padding-right': paddingRight,
+      '--main-screen_tablet-wrapper-width-tablet': wrapperWidthTablet,
+      '--main-screen_tablet-wrapper-width-desctop': wrapperWidthDesctop,
     }">
       <div class="main-screen__title-box">
         <h1 class="main-screen__title">
@@ -131,7 +140,7 @@ defineProps({
     @media only screen and (min-width: 768px) {
       min-height: var(--main-screen_tablet-height);
       gap: 24px;
-      width: 55%;
+      width: var(--main-screen_tablet-wrapper-width-tablet);
       padding-right: var(--main-screen_tablet-padding-right);
       padding-top: 60px;
       margin-bottom: 60px;
@@ -139,6 +148,7 @@ defineProps({
 
     @media only screen and (min-width: 1280px) {
       max-width: 825px;
+      width: var(--main-screen_tablet-wrapper-width-desctop);
     }
   }
 

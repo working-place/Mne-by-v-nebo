@@ -104,8 +104,6 @@ h3 {
 @media only screen and (min-width: 1280px) {
   main {
     width: 100vw;
-    padding-left: 124px;
-    padding-right: 124px;
     margin-top: 0;
   }
 

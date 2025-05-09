@@ -47,17 +47,13 @@ defineProps({
 
   @media only screen and (min-width: 768px) {
     border-radius: 24px;
-      // max-width: 290px;
-      // max-width: 303px;
+      min-width: 320px;
+      min-height: 302px;
   }
 
   @media only screen and (min-width: 1280px) {
-    aspect-ratio: 1/1.1;
   height: auto;
-  min-width: 200px;
-  max-width: 290px;
-      max-width: 303px;
-  // max-width: 1190px;
+  min-width: 100%;
 }
 
 
@@ -88,8 +84,6 @@ defineProps({
     @media only screen and (min-width: 768px) {
       border-top-right-radius: 20px;
       border-top-left-radius: 20px;
-      // max-width: 290px;
-      // max-width: 303px;
   }
   }
 
@@ -116,6 +110,10 @@ defineProps({
     text-overflow: ellipsis;
     max-height: calc(2 * 1.4em);
     word-break: break-word;
+
+      @media only screen and (min-width: 768px) {
+      line-height: 1;
+    }
   }
 
   &__date {}

@@ -335,7 +335,7 @@ h2 {
 
   @media only screen and (min-width: 1280px) {
     border-radius: 24px;
-    min-width: 55%;
+    width: 56%;
     min-height: 338px;
     height: fit-content;
     padding: 36px;
@@ -410,6 +410,12 @@ h2 {
   width: 100%;
   text-decoration: none;
   color: inherit;
+
+  @media only screen and (min-width: 1280px) {
+    min-width: 290px;
+    width: calc(25% - 30px);
+  }
+
 }
 
 .news {
@@ -433,6 +439,11 @@ h2 {
     @media only screen and (min-width: 768px) {
       gap: 20px;
       flex-direction: row;
+    }
+
+    @media only screen and (min-width: 1280px) {
+      max-width: 1190px;
+      gap: 10px;
     }
 
   }

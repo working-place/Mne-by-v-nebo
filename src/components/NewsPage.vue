@@ -68,8 +68,9 @@ const handleTagFilter = (title) => {
   if (isDisabled.value) return;
 
   activeTag.value = title;
+
   searchQuery.value = "";
-  if (searchInput.value) {
+  if (searchInput.value?.value) {
     searchInput.value.value = "";
   }
 };
@@ -79,10 +80,10 @@ const filteredNews = computed(() => {
 
     const tagMatch = activeTag.value === "все" || news.tag === activeTag.value;
 
-    const searchMatch = news.text.toLowerCase().includes(searchQuery.value.toLowerCase()) || news.tag.toLowerCase().includes(searchQuery.value.toLowerCase());
+    const searchMatch = news.tag.toLowerCase().includes(searchQuery.value.toLowerCase().trim());
     return tagMatch && searchMatch
   });
-  if (filtered.length === 0 && (searchQuery.value || activeTag.value !== "all")) {
+  if (filtered.length === 0 && (searchQuery.value || activeTag.value !== "все")) {
     return null
   }
   return filtered;
@@ -96,7 +97,8 @@ onMounted(loadNews);
   <main>
 
     <ReusableScreen bgColor="var(--color-background-lavender)" textColor="var(--color-text-dark)" blockHeight="470px"
-      tabletHeight="50px" desctopHeight="255px" :use-flex="false" hideImgOnTablet="true" paddingRight="52px">
+      tabletHeight="50px" desctopHeight="255px" :use-flex="false" hideImgOnTablet="true" paddingRight="52px"
+      wrapperWidthTablet="100%">
       <template v-slot:title>
         новости
       </template>
@@ -120,23 +122,27 @@ onMounted(loadNews);
         </button>
       </div>
 
-      <template v-if="filteredNews">
-        <router-link v-for="info in filteredNews" :key="info.id" :to="{ name: 'article', params: { id: info.id } }"
-          class="news-card-link">
-          <NewsCard :tag-class="getTagClass(info.tag)">
-            <template v-slot:img>
-              <img :src="`/img/${info.img.src}`" :alt="info.img.alt" class="tag-card__img">
-            </template>
-            <template v-slot:tag>{{ info.tag }}</template>
-            <template v-slot:text>{{ info.text }}</template>
-            <template v-slot:date>{{ info.date }}</template>
-          </NewsCard>
-        </router-link>
-      </template>
-
-      <div v-else-if="filteredNews === null" class="not-found">
-        <span>По вашему запросу ничего не найдено...</span>
+      <div class="news__wrapper">
+        <template v-if="filteredNews">
+          <router-link v-for="info in filteredNews" :key="info.id" :to="{ name: 'article', params: { id: info.id } }"
+            class="news__card-link">
+            <NewsCard :tag-class="getTagClass(info.tag)">
+              <template v-slot:img>
+                <img :src="`/img/${info.img.src}`" :alt="info.img.alt" class="tag-card__img">
+              </template>
+              <template v-slot:tag>{{ info.tag }}</template>
+              <template v-slot:text>{{ info.text }}</template>
+              <template v-slot:date>{{ info.date }}</template>
+            </NewsCard>
+          </router-link>
+        </template>
+        <div v-else-if="filteredNews === null" class="not-found">
+          <span>По вашему запросу ничего не найдено...</span>
+        </div>
       </div>
+
+
+
 
     </div>
   </main>
@@ -162,7 +168,7 @@ onMounted(loadNews);
     border-radius: 60px;
 
     @media only screen and (min-width: 768px) {
-      width: 100%;
+      min-width: 100%;
       height: 40px;
     }
 
@@ -186,6 +192,26 @@ onMounted(loadNews);
   padding: 0;
   width: 100%;
   height: fit-content;
+  // gap: 10px;
+
+  &__wrapper {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    gap: 10px;
+
+    @media only screen and (min-width: 768px) {
+      justify-content: space-between;
+      flex-direction: row;
+    }
+
+    @media only screen and (min-width: 1280px) {
+      max-width: 1190px;
+      justify-content: flex-start;
+    }
+
+
+  }
 
   &__filtering-box {
     @include block-mobile;
@@ -194,7 +220,17 @@ onMounted(loadNews);
     flex-direction: row;
     flex-wrap: wrap;
     width: 100%;
-    gap: 10px;
+    padding: 0;
+
+    @media only screen and (min-width: 768px) {
+      flex-direction: row;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    @media only screen and (min-width: 1280px) {
+      max-width: 1190px;
+    }
   }
 
   &__filtering-btn {
@@ -261,14 +297,25 @@ onMounted(loadNews);
       background-color: var(--color-hover-yellow);
     }
   }
-}
 
-.news-card-link {
-  display: flex;
-  justify-content: center;
-  width: 100%;
-  text-decoration: none;
-  color: inherit;
+  &__card-link {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    text-decoration: none;
+    color: inherit;
+
+    @media only screen and (min-width: 768px) {
+      min-width: 320px;
+      min-height: 302px;
+      width: calc(50% - 5px);
+    }
+
+    @media only screen and (min-width: 1280px) {
+      min-width: 290px;
+      width: calc(25% - 30px);
+    }
+  }
 }
 
 .not-found {
