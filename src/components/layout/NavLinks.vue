@@ -57,7 +57,11 @@ const isActive = (path) => route.path === path;
     flex-direction: row;
     flex-wrap: wrap;
 
-    @media only screen and (min-width: 1025px) {
+    @media only screen and (min-width: 768px) {
+      gap: 24px;
+    }
+
+    @media only screen and (min-width: 1280px) {
       gap: 60px;
     }
   }

@@ -95,39 +95,45 @@ const getTagClass = (tag) => {
       </div>
     </div>
 
-    <div class="director">
-      <div class="director__img-box">
-        <div class="director__img"></div>
+    <div class="wrapper-director">
+      <div class="director">
+        <div class="director__img-box">
+          <div class="director__img"></div>
+        </div>
+
+        <div class="director__text-box">
+          <h2>Директор</h2>
+          <h3>Мушастая Наталья Викторовна</h3>
+          <span class="director__text">Кандидат психлолгических наук, доцент, детский нейропсихолог, дефектолог и
+            психолог
+            высшей категории. Директор АНО «Инновационный центр развития детей и молодёжи „Воспитание для всех“»,
+            лауреат
+            «Педагог-психолог Кубани» 2023, «Лучший педагог Новороссийска» 2024. Автор научных и методических работ,
+            руководитель федеральных инновационных проектов.</span>
+        </div>
       </div>
 
-      <div class="director__text-box">
-        <h2>Директор</h2>
-        <h3>Мушастая Наталья Викторовна</h3>
-        <span class="director__text">Кандидат психлолгических наук, доцент, детский нейропсихолог, дефектолог и психолог
-          высшей категории. Директор АНО «Инновационный центр развития детей и молодёжи „Воспитание для всех“», лауреат
-          «Педагог-психолог Кубани» 2023, «Лучший педагог Новороссийска» 2024. Автор научных и методических работ,
-          руководитель федеральных инновационных проектов.</span>
-      </div>
+      <GalleryCharters :photos="chartersGallery" :show-title="true" title="Заслуги"
+        bg-color="var(--color-background-purple)" text-color="var(--color-text-light)">
+      </GalleryCharters>
     </div>
 
-    <GalleryCharters :photos="chartersGallery" :show-title="true" title="Заслуги"
-      bg-color="var(--color-background-purple)" text-color="var(--color-text-light)">
-    </GalleryCharters>
+
 
     <div class="news">
       <h2>Новости</h2>
       <div class="news__wrap">
         <router-link v-for="info in shownNews" :key="info.id" :to="{ name: 'article', params: { id: info.id } }"
-        class="news-card-link">
-        <NewsCard :tag-class="getTagClass(info.tag)">
-          <template v-slot:img>
-            <img :src="`/img/${info.img.src}`" :alt="info.img.alt" class="tag-card__img">
-          </template>
-          <template v-slot:tag>{{ info.tag }}</template>
-          <template v-slot:text>{{ info.text }}</template>
-          <template v-slot:date>{{ info.date }}</template>
-        </NewsCard>
-      </router-link>
+          class="news-card-link">
+          <NewsCard :tag-class="getTagClass(info.tag)">
+            <template v-slot:img>
+              <img :src="`/img/${info.img.src}`" :alt="info.img.alt" class="tag-card__img">
+            </template>
+            <template v-slot:tag>{{ info.tag }}</template>
+            <template v-slot:text>{{ info.text }}</template>
+            <template v-slot:date>{{ info.date }}</template>
+          </NewsCard>
+        </router-link>
       </div>
       <RouterLinkButton :to="{ name: 'news' }" :disabled="false" max-height-btn="62px" min-height-btn="62px"
         font-size-btn="20px">
@@ -218,7 +224,8 @@ h2 {
   }
 
   @media only screen and (min-width: 1280px) {
-    max-width: 1190px;}
+    max-width: 1190px;
+  }
 
   &__img-block,
   &__text-block {
@@ -296,7 +303,18 @@ h2 {
   }
 }
 
+.wrapper-director {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
 
+  @media only screen and (min-width: 1280px) {
+    flex-direction: row;
+    max-width: 1190px;
+    width: 100%;
+    gap: 10px;
+  }
+}
 
 .director {
   @include block-mobile;
@@ -315,10 +333,13 @@ h2 {
     border-radius: var(--cards-border-radius-tablet);
   }
 
-@media only screen and (min-width: 1280px) {
-  max-width: 1190px;
-  border-radius: 24px;
-}
+  @media only screen and (min-width: 1280px) {
+    border-radius: 24px;
+    min-width: 55%;
+    min-height: 338px;
+    height: fit-content;
+    padding: 36px;
+  }
 
   h2 {
     @include h2-mobile-uppercase;
@@ -329,7 +350,7 @@ h2 {
       line-height: 1.5;
     }
 
-@media only screen and (min-width: 1280px) {}
+    @media only screen and (min-width: 1280px) {}
 
   }
 
@@ -343,7 +364,7 @@ h2 {
       line-height: 1;
     }
 
-@media only screen and (min-width: 1280px) {}
+    @media only screen and (min-width: 1280px) {}
 
   }
 
@@ -358,7 +379,11 @@ h2 {
       align-items: flex-start;
     }
 
-@media only screen and (min-width: 1280px) {}
+    @media only screen and (min-width: 1280px) {}
+  }
+
+  &__text {
+    font-weight: lighter;
   }
 
   &__img {
@@ -373,7 +398,10 @@ h2 {
       min-height: 196px;
     }
 
-@media only screen and (min-width: 1280px) {}
+    @media only screen and (min-width: 1280px) {
+      max-width: 164px;
+      max-height: 210px;
+    }
   }
 }
 
@@ -390,21 +418,22 @@ h2 {
   gap: 22px;
 
   @media only screen and (min-width: 768px) {
-      gap: 36px;
+    gap: 36px;
   }
 
   @media only screen and (min-width: 1280px) {
-  max-width: 1190px;
-}
+    max-width: 1190px;
+  }
 
   &__wrap {
     display: flex;
     gap: 16px;
     flex-direction: column;
+
     @media only screen and (min-width: 768px) {
       gap: 20px;
       flex-direction: row;
-  }
+    }
 
   }
 

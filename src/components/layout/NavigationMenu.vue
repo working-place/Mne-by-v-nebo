@@ -81,8 +81,10 @@ onUnmounted(() => {
   }
 
   @media only screen and (min-width: 1280px) {
-    padding: 0 124px;
+    padding: 0;
     position: static;
+    padding-left: 124px;
+    padding-right: 124px;
   }
 
   &__box,
@@ -96,18 +98,21 @@ onUnmounted(() => {
     @include display-flex-justify-content-center;
     justify-content: space-between;
     align-items: center;
-    max-width: 1190px;
 
     @media only screen and (min-width: 768px) {
       justify-content: center;
       padding-right: 0;
       padding-left: 0;
+      max-width: 1090px;
       gap: 40px;
     }
 
     @media only screen and (min-width: 1280px) {
       justify-content: flex-start;
       gap: 60px;
+      max-width: 1130px;
+      width: 100%
+
     }
   }
 
