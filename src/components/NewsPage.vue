@@ -2,6 +2,9 @@
 import { ref, onMounted, computed } from 'vue';
 import NewsCard from './ui/NewsCard.vue';
 import ReusableScreen from './ui/ReusableScreen.vue';
+import Paginate from "vuejs-paginate-next";
+
+// Vue.component('paginate', Paginate)
 
 defineProps({
   disabled: {
@@ -15,6 +18,28 @@ const activeTag = ref('все');
 const searchQuery = ref('');
 const searchInput = ref(null);
 const isDisabled = ref(false);
+const currentPage = ref(1);
+const itemsPerPage = 8;
+
+const paginatedNews = computed(() => {
+if(!filteredNews.value) {
+return [];
+}
+const start = (currentPage.value - 1) * 6;
+const end = start + itemsPerPage;
+
+return filteredNews.value.slice(start, end)
+
+});
+
+const pageCount = computed(() => {
+  if (!filteredNews.value) return 0;
+  return Math.ceil(filteredNews.value.length / itemsPerPage);
+});
+
+const changePage = (pageNum) => {
+  currentPage.value = pageNum;
+};
 
 const filteringButtons = [
   {
@@ -124,7 +149,7 @@ onMounted(loadNews);
 
       <div class="news__wrapper">
         <template v-if="filteredNews">
-          <router-link v-for="info in filteredNews" :key="info.id" :to="{ name: 'article', params: { id: info.id } }"
+          <router-link v-for="info in paginatedNews" :key="info.id" :to="{ name: 'article', params: { id: info.id } }"
             class="news__card-link">
             <NewsCard :tag-class="getTagClass(info.tag)">
               <template v-slot:img>
@@ -141,8 +166,18 @@ onMounted(loadNews);
         </div>
       </div>
 
-
-
+      <paginate
+      v-if="pageCount"
+      v-model="currentPage"
+  :page-count="pageCount"
+  :click-handler="changePage"
+  :prev-text="'Назад'"
+  :next-text="'Вперед'"
+  :container-class="'pagination'"
+  :page-class="'page-item'"
+  :active-class="'active'"
+>
+</paginate>
 
     </div>
   </main>
@@ -151,6 +186,11 @@ onMounted(loadNews);
 
 <style scoped lang="scss">
 @use '@/assets/scss/mixins.scss' as *;
+
+.pagination {
+  }
+  .page-item {
+  }
 
 .main-screen {
   margin: 0;
@@ -192,7 +232,6 @@ onMounted(loadNews);
   padding: 0;
   width: 100%;
   height: fit-content;
-  // gap: 10px;
 
   &__wrapper {
     display: flex;
