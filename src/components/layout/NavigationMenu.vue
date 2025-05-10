@@ -51,8 +51,8 @@ onUnmounted(() => {
       </RouterLink>
 
       <template v-if="!isDesctop">
-        <button v-if="!isOpen" @click.stop="isOpen = true" class="menu__menu-btn"></button>
-        <button v-else @click="isOpen = false" class="menu__close-btn"></button>
+        <button v-if="!isOpen" @click.stop="isOpen = true" class="menu__menu-btn" :title="`Open menu button`"></button>
+        <button v-else @click="isOpen = false" class="menu__close-btn" :title="`Close menu button`"></button>
       </template>
       <NavLinks v-if="isDesctop" :is-open="!isOpen" align="center" />
     </div>
@@ -127,6 +127,7 @@ onUnmounted(() => {
     border: 0;
     outline: none;
     background-color: transparent;
+    -webkit-user-select: none;
     user-select: none;
     -webkit-tap-highlight-color: transparent;
 
@@ -156,6 +157,7 @@ onUnmounted(() => {
   &__menu-btn,
   &__close-btn {
     @include cover-center-no-repeat-img;
+
   }
 }
 </style>

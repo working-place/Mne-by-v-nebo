@@ -144,7 +144,7 @@ const toggleItem = (index) => {
         </transition>
       </div>
 
-      <button class="show-all-btn" @click="showAll = !showAll">
+      <button class="show-all-btn" @click="showAll = !showAll" :title="`Filtering button show all`">
         {{ showAll ? 'Скрыть' : 'Все гранты' }}
       </button>
     </div>

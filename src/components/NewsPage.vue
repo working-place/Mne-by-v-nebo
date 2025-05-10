@@ -1,10 +1,8 @@
 <script setup>
-import { ref, onMounted, computed } from 'vue';
+import { ref, onMounted, computed, onUnmounted } from 'vue';
 import NewsCard from './ui/NewsCard.vue';
 import ReusableScreen from './ui/ReusableScreen.vue';
 import Paginate from "vuejs-paginate-next";
-
-// Vue.component('paginate', Paginate)
 
 defineProps({
   disabled: {
@@ -12,34 +10,6 @@ defineProps({
     default: false
   }
 })
-
-const newsData = ref([]);
-const activeTag = ref('все');
-const searchQuery = ref('');
-const searchInput = ref(null);
-const isDisabled = ref(false);
-const currentPage = ref(1);
-const itemsPerPage = 8;
-
-const paginatedNews = computed(() => {
-if(!filteredNews.value) {
-return [];
-}
-const start = (currentPage.value - 1) * 6;
-const end = start + itemsPerPage;
-
-return filteredNews.value.slice(start, end)
-
-});
-
-const pageCount = computed(() => {
-  if (!filteredNews.value) return 0;
-  return Math.ceil(filteredNews.value.length / itemsPerPage);
-});
-
-const changePage = (pageNum) => {
-  currentPage.value = pageNum;
-};
 
 const filteringButtons = [
   {
@@ -63,6 +33,26 @@ const filteringButtons = [
     class: "masterclasses",
   },
 ];
+
+const newsData = ref([]);
+const activeTag = ref('все');
+const searchQuery = ref('');
+const searchInput = ref(null);
+const isDisabled = ref(false);
+const currentPage = ref(1);
+const windowWidth = ref(window.innerWidth);
+
+const handleResize = () => {
+  windowWidth.value = window.innerWidth;
+};
+
+onMounted(() => {
+  window.addEventListener('resize', handleResize);
+});
+
+onUnmounted(() => {
+  window.removeEventListener('resize', handleResize);
+});
 
 const loadNews = async () => {
   try {
@@ -116,44 +106,106 @@ const filteredNews = computed(() => {
 
 onMounted(loadNews);
 
+const itemsPerPage = computed(() => {
+  if (windowWidth.value < 768) {
+    return filteredNews.value?.length || 0;
+  }
+  if (windowWidth.value < 1280) {
+    return 4;
+  }
+  return 8;
+});
+
+const paginatedNews = computed(() => {
+  if (!filteredNews.value) return [];
+
+  if (windowWidth.value < 768) return filteredNews.value;
+
+  const start = (currentPage.value - 1) * itemsPerPage.value;
+  const end = start + itemsPerPage.value;
+
+  return filteredNews.value.slice(start, end);
+});
+
+const pageCount = computed(() => {
+  if (!filteredNews.value || windowWidth.value < 768) return 0;
+  return Math.ceil(filteredNews.value.length / itemsPerPage.value);
+});
+
+const changePage = (pageNum) => {
+  currentPage.value = pageNum;
+};
+
 </script>
 
 <template>
   <main>
 
-    <ReusableScreen bgColor="var(--color-background-lavender)" textColor="var(--color-text-dark)" blockHeight="470px"
-      tabletHeight="50px" desctopHeight="255px" :use-flex="false" hideImgOnTablet="true" paddingRight="52px"
-      wrapperWidthTablet="100%">
+    <ReusableScreen
+      bgColor="var(--color-background-lavender)"
+      textColor="var(--color-text-dark)"
+      blockHeight="470px"
+      tabletHeight="50px"
+      desctopHeight="255px"
+      :use-flex="false"
+      :hideImgOnTablet="true"
+      paddingRight="52px"
+      wrapperWidthTablet="100%"
+    >
       <template v-slot:title>
         новости
       </template>
       <template v-slot:description>
-        <input type="text" class="main-screen__search-input" :value="searchQuery" @input="handleSearchInput"
-          placeholder="хештег">
+        <input
+          id="search-input"
+          type="text"
+          class="main-screen__search-input"
+          :value="searchQuery"
+          @input="handleSearchInput"
+          placeholder="хештег"
+        >
       </template>
       <template v-slot:img>
-        <img src="/img/main-screen-photo-boy.png" alt="Изображение мальчика" class="main-screen__img">
+        <img
+        src="/img/main-screen-photo-boy.png"
+        alt="Изображение мальчика"
+        class="main-screen__img">
       </template>
     </ReusableScreen>
 
     <div class="news">
 
       <div class="news__filtering-box">
-        <button v-for="button in filteringButtons" :key="button.id" class="news__filtering-btn" :class="[`news__filtering-btn_${button.class}`,
-        { 'news__filtering-btn_active': activeTag === button.title },
-        { 'news__filtering-btn_disabled': isDisabled }
-        ]" :aria-disabled="disabled" :disabled="isDisabled" @click="handleTagFilter(button.title)">
+        <button
+          v-for="button in filteringButtons"
+          :key="button.id" class="news__filtering-btn"
+          :class="[`news__filtering-btn_${button.class}`,
+            { 'news__filtering-btn_active': activeTag === button.title },
+            { 'news__filtering-btn_disabled': isDisabled }
+          ]"
+          :aria-disabled="disabled" :disabled="isDisabled" @click="handleTagFilter(button.title)"
+          :title="`Filter by ${button.title}`"
+        >
           <span>{{ button.title }}</span>
         </button>
       </div>
 
       <div class="news__wrapper">
-        <template v-if="filteredNews">
-          <router-link v-for="info in paginatedNews" :key="info.id" :to="{ name: 'article', params: { id: info.id } }"
-            class="news__card-link">
+        <template v-if="filteredNews && filteredNews.length">
+          <router-link
+            v-for="info in paginatedNews"
+            :key="info.id"
+            :to="{ name: 'article',
+            params: { id: info.id } }"
+            class="news__card-link"
+          >
             <NewsCard :tag-class="getTagClass(info.tag)">
               <template v-slot:img>
-                <img :src="`/img/${info.img.src}`" :alt="info.img.alt" class="tag-card__img">
+                <img
+                  :src="`/img/${info.img.src}`"
+                  :alt="info.img.alt"
+                  class="tag-card__img"
+                >
               </template>
               <template v-slot:tag>{{ info.tag }}</template>
               <template v-slot:text>{{ info.text }}</template>
@@ -167,30 +219,58 @@ onMounted(loadNews);
       </div>
 
       <paginate
-      v-if="pageCount"
-      v-model="currentPage"
-  :page-count="pageCount"
-  :click-handler="changePage"
-  :prev-text="'Назад'"
-  :next-text="'Вперед'"
-  :container-class="'pagination'"
-  :page-class="'page-item'"
-  :active-class="'active'"
->
-</paginate>
+        v-if="windowWidth >= 768"
+        v-model="currentPage"
+        :page-count="pageCount"
+        :click-handler="changePage"
+        :prev-text="''"
+        :next-text="''"
+        :container-class="'pagination'"
+        :page-class="'page-item'"
+        :active-class="'active'"
+        :page-link-class="'page-link'"
+      >
+      </paginate>
 
     </div>
   </main>
 
 </template>
 
-<style scoped lang="scss">
+<style lang="scss">
 @use '@/assets/scss/mixins.scss' as *;
 
 .pagination {
-  }
-  .page-item {
-  }
+  display: flex;
+  list-style: none;
+  justify-content: center;
+  width: 100%;
+  margin-left: 0;
+  gap: 20px;
+
+  @media only screen and (min-width: 768px) {}
+
+  @media only screen and (min-width: 1280px) {}
+}
+
+.page-item {}
+
+.page-item .page-link {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  width: 34px;
+  height: 34px;
+  text-decoration: none;
+  border: none;
+  border-radius: 50px;
+}
+
+.page-item.active .page-link {
+  z-index: 3;
+  background-color: var(--color-background-yellow);
+}
 
 .main-screen {
   margin: 0;
@@ -248,8 +328,6 @@ onMounted(loadNews);
       max-width: 1190px;
       justify-content: flex-start;
     }
-
-
   }
 
   &__filtering-box {
