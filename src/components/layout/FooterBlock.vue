@@ -72,6 +72,12 @@ import NavLinks from './NavLinksMobile.vue';
 h2 {
   @include h2-mobile-uppercase-footer;
   color: var(--color-text-purple);
+
+  @media only screen and (min-width: 1280px) {
+    font-size: 32px;
+    font-weight: 600;
+    line-height: 1.2;
+  }
 }
 
 .active {
@@ -108,11 +114,28 @@ h2 {
   padding: 40px 17px;
   background-color: var(--color-background-light-blue);
 
+  @media only screen and (min-width: 361px) and (max-width: 768px) {
+    width: 100vw;
+  }
+
   @media only screen and (min-width: 768px) {
     min-height: 492px;
     height: fit-content;
     padding-left: 59px;
     padding-right: 59px;
+  }
+
+  @media only screen and (min-width: 1280px) {
+    position: relative;
+    flex-direction: row;
+    justify-content: center;
+    min-height: 385px;
+    padding-left: 0;
+    padding-right: 0;
+    gap: 10px;
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 1;
   }
 
   &__wrapper-top,
@@ -126,18 +149,37 @@ h2 {
       flex-direction: row;
       gap: 0;
     }
+
+    @media only screen and (min-width: 1280px) {
+      justify-content: space-around;
+      min-height: 100%;
+      height: fit-content;
+      max-width: 590px;
+      width: 50%;
+      gap: 10px;
+    }
   }
 
   &__wrapper-top {
     @media only screen and (min-width: 768px) {
       position: relative;
     }
+
+    @media only screen and (min-width: 1280px) {
+      position: static;
+    }
   }
 
   &__wrapper-bottom {
     @media only screen and (min-width: 768px) {
-      margin-top: 40px;
       align-items: flex-end;
+      margin-top: 40px;
+    }
+
+    @media only screen and (min-width: 1280px) {
+      align-items: flex-start;
+      margin-top: 0;
+      line-height: 1.3;
     }
   }
 
@@ -147,19 +189,16 @@ h2 {
     height: 100%;
 
     @media only screen and (min-width: 768px) {
-      gap: 22px;
       max-width: 224px;
       width: 50%;
+      gap: 22px;
     }
-  }
 
-  @media only screen and (min-width: 361px) and (max-width: 768px) {
-    width: 100vw;
-  }
-
-  @media only screen and (min-width: 769px) {
-    justify-content: flex-start;
-    width: 100vw;
+    @media only screen and (min-width: 1280px) {
+      max-width: 188px;
+      width: fit-content;
+      height: fit-content;
+    }
   }
 
   &__logo-box {
@@ -168,12 +207,20 @@ h2 {
     gap: 40px;
 
     @media only screen and (min-width: 769px) {
+      align-items: flex-start;
       position: absolute;
-      gap: 22px;
       width: 50%;
+      gap: 22px;
       bottom: -40px;
       right: 0;
+    }
+
+    @media only screen and (min-width: 1280px) {
       align-items: flex-start;
+      width: 50%;
+      gap: 22px;
+      bottom: 20px;
+      left: 52%;
     }
   }
 
@@ -207,6 +254,11 @@ h2 {
     @media only screen and (min-width: 768px) {
       width: 50%;
     }
+
+    @media only screen and (min-width: 768px) {
+      max-width: 390px;
+      width: fit-content;
+    }
   }
 
   &__info-box {
@@ -215,23 +267,39 @@ h2 {
       align-items: flex-start;
       padding: 10px 0 0 0;
     }
+
+    @media only screen and (min-width: 1280px) {
+      flex-direction: column;
+      gap: 36px;
+    }
   }
 
   &__contact-box {
     margin-top: 40px;
 
     @media only screen and (min-width: 768px) {
+      width: 50%;
       margin-top: 0;
       gap: 22px;
-      width: 50%;
+    }
+
+    @media only screen and (min-width: 1280px) {
+      max-width: 292px;
+      width: fit-content;
     }
   }
 
   &__navigation-box {
     display: flex;
+    height: fit-content;
 
     @media only screen and (min-width: 768px) {
       width: 50%;
+    }
+
+    @media only screen and (min-width: 1280px) {
+      max-width: 290px;
+      width: fit-content;
     }
   }
 
@@ -242,6 +310,18 @@ h2 {
     width: fit-content;
   }
 
+  &__docs-list {
+    @media only screen and (min-width: 1280px) {
+      gap: 16px;
+    }
+  }
+
+  &__address-list {
+    @media only screen and (min-width: 1280px) {
+      text-wrap-mode: wrap;
+    }
+  }
+
   &__docs-item,
   &__address-item {
     @include item-decoration;
@@ -250,21 +330,42 @@ h2 {
   &__info-box_direction {
     @include display-flex-justify-content-center;
     align-items: flex-end;
+
+    @media only screen and (min-width: 1280px) {
+      flex-direction: column;
+      align-items: flex-start;
+      line-height: 1.3;
+    }
   }
 
   &__sot-logo {
     width: 46px;
     height: 20px;
+
+    @media only screen and (min-width: 1280px) {
+      width: 98px;
+      height: 42px;
+    }
   }
 
   &__soyuz-logo {
     width: 69px;
     height: 11px;
+
+    @media only screen and (min-width: 1280px) {
+      width: 140px;
+      height: 23px;
+    }
   }
 
   &__profit-code-logo {
     width: 51px;
     height: 19px;
+
+    @media only screen and (min-width: 1280px) {
+      width: 99px;
+      height: 37px;
+    }
   }
 
   &__text-about {

@@ -72,6 +72,10 @@ const emit = defineEmits(['close']);
   &__link-box {
     @include display-flex-column-center;
     @include list-decoration;
+
+    @media only screen and (min-width: 1280px) {
+      gap: 16px;
+    }
   }
 
   &__link {
@@ -80,6 +84,5 @@ const emit = defineEmits(['close']);
     text-decoration: none;
     color: var(--color-text-dark);
   }
-
 }
 </style>
