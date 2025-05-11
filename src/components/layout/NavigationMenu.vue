@@ -49,14 +49,12 @@ onUnmounted(() => {
       <RouterLink to="/" @click="closeMenu" :class="{ active: isActive('/') }">
         <img class="menu__logo" src="/img/logo.png" alt="Логотип">
       </RouterLink>
-
       <template v-if="!isDesctop">
         <button v-if="!isOpen" @click.stop="isOpen = true" class="menu__menu-btn" :title="`Open menu button`"></button>
         <button v-else @click="isOpen = false" class="menu__close-btn" :title="`Close menu button`"></button>
       </template>
       <NavLinks v-if="isDesctop" :is-open="!isOpen" align="center" />
     </div>
-
     <NavLinksMobile v-if="!isDesctop" :is-open="isOpen" @close="closeMenu" align="center" />
   </header>
 </template>
@@ -112,7 +110,6 @@ onUnmounted(() => {
       gap: 60px;
       max-width: 1130px;
       width: 100%
-
     }
   }
 
@@ -157,7 +154,6 @@ onUnmounted(() => {
   &__menu-btn,
   &__close-btn {
     @include cover-center-no-repeat-img;
-
   }
 }
 </style>
