@@ -264,14 +264,6 @@ h2 {
   }
 }
 
-.tag-card__img {
-  @include cover-center-no-repeat-img;
-  width: 100%;
-  height: 168px;
-  border-top-right-radius: 8px;
-  border-top-left-radius: 8px;
-}
-
 .news-card-link {
   text-decoration: none;
   color: inherit;
