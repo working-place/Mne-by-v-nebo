@@ -14,11 +14,11 @@ import NavLinks from './NavLinksMobile.vue';
         </a>
       </div>
       <div class="footer__navigation-box">
-        <h2>Навигация</h2>
+        <h2 class="footer__title-link">Навигация</h2>
         <NavLinks class="menu__nav-box_position" decoration-class="menu__link-decoration" align="start" />
       </div>
       <div class="footer__docs-box">
-        <h2>Документы</h2>
+        <h2 class="footer__title-link">Документы</h2>
         <ul class="footer__docs-list">
           <li class="footer__docs-item">
             <RouterLink to="/privacy-policy" :class="{ active: $route.path === '/privacy-policy' }"
@@ -37,7 +37,7 @@ import NavLinks from './NavLinksMobile.vue';
     </div>
     <div class="footer__wrapper-bottom">
       <div class="footer__contact-box">
-        <h2>Контакты</h2>
+        <h2 class="footer__title-link">Контакты</h2>
         <ul class="footer__address-list">
           <li class="footer__address-item">г. Новороссийск, ул. Ивановская д. 3</li>
           <li class="footer__address-item">+7 (903) 456 84 46</li>
@@ -68,17 +68,6 @@ import NavLinks from './NavLinksMobile.vue';
 
 <style scoped lang="scss">
 @use '@/assets/scss/mixins.scss' as *;
-
-h2 {
-  @include h2-mobile-uppercase-footer;
-  color: var(--color-text-purple);
-
-  @media only screen and (min-width: 1280px) {
-    font-size: 32px;
-    font-weight: 600;
-    line-height: 1.2;
-  }
-}
 
 .active {
   font-weight: bold;
@@ -137,6 +126,18 @@ h2 {
     font-weight: 400;
     line-height: 1;
   }
+
+  &__title-link {
+  @include h2-mobile-uppercase-footer;
+  color: var(--color-text-purple);
+
+  @media only screen and (min-width: 1280px) {
+    text-align: left;
+    font-size: 32px;
+    font-weight: 600;
+    line-height: 1.2;
+  }
+}
 
   &__wrapper-top,
   &__wrapper-bottom {
