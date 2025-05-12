@@ -66,7 +66,7 @@ const getTagClass = (tag) => {
     </ReusableScreen>
 
     <div class="description">
-      <h2>Основное направление деятельности</h2>
+      <h2 class="description__title">Основное направление деятельности</h2>
       <div class="description__news-card-box">
         <NumberedCard v-for="card in mainDirection" :key="card.number" :padding-bottom="card.paddingBottom">
           <template v-slot:number>{{ card.number }}</template>
@@ -102,8 +102,8 @@ const getTagClass = (tag) => {
         </div>
 
         <div class="director__text-box">
-          <h2>Директор</h2>
-          <h3>Мушастая Наталья Викторовна</h3>
+          <h2 class="director__title">Директор</h2>
+          <h3 class="director__subtitle">Мушастая Наталья Викторовна</h3>
           <span class="director__text">Кандидат психлолгических наук, доцент, детский нейропсихолог, дефектолог и
             психолог
             высшей категории. Директор АНО «Инновационный центр развития детей и молодёжи „Воспитание для всех“»,
@@ -118,10 +118,8 @@ const getTagClass = (tag) => {
       </GalleryCharters>
     </div>
 
-
-
     <div class="news">
-      <h2>Новости</h2>
+      <h2 class="news__title">Новости</h2>
       <div class="news__wrap">
         <router-link v-for="info in shownNews" :key="info.id" :to="{ name: 'article', params: { id: info.id } }"
           class="news-card-link">
@@ -145,23 +143,23 @@ const getTagClass = (tag) => {
   </main>
 </template>
 
-<style scoped lang="scss">
+<style lang="scss">
 @use '@/assets/scss/mixins.scss' as *;
-
-h2 {
-  @include h2-mobile-uppercase;
-  text-align: center;
-
-  @media only screen and (min-width: 1280px) {
-    font-size: 32px;
-    font-weight: 600;
-    line-height: 1.2;
-  }
-}
 
 .description {
   @include block-mobile;
   padding: 0;
+
+  &__title {
+    @include h2-mobile-uppercase;
+    text-align: center;
+
+    @media only screen and (min-width: 1280px) {
+      font-size: 32px;
+      font-weight: 600;
+      line-height: 1.2;
+    }
+  }
 
   &__news-card-box {
     display: flex;
@@ -243,7 +241,6 @@ h2 {
       border-top-left-radius: 50%;
       border-bottom-left-radius: 50%;
       background-color: var(--color-background-light-blue);
-
     }
 
     @media only screen and (min-width: 1280px) {}
@@ -261,7 +258,6 @@ h2 {
       border-bottom-right-radius: 16px;
       border-top-right-radius: 16px;
       background-color: var(--color-background-light-blue);
-
     }
 
     @media only screen and (min-width: 1280px) {
@@ -341,7 +337,7 @@ h2 {
     padding: 36px;
   }
 
-  h2 {
+  &__title {
     @include h2-mobile-uppercase;
 
     @media only screen and (min-width: 768px) {
@@ -351,10 +347,9 @@ h2 {
     }
 
     @media only screen and (min-width: 1280px) {}
-
   }
 
-  h3 {
+  &__subtitle {
     width: 100%;
     text-align: center;
 
@@ -365,7 +360,6 @@ h2 {
     }
 
     @media only screen and (min-width: 1280px) {}
-
   }
 
   &__img-box,
@@ -415,7 +409,6 @@ h2 {
     min-width: 290px;
     width: calc(25% - 30px);
   }
-
 }
 
 .news {
@@ -447,6 +440,5 @@ h2 {
     }
 
   }
-
 }
 </style>
