@@ -204,9 +204,9 @@ const getTagClass = (tag) => {
       </Slider>
     </div>
 
-    <div class="similar-topics">
+    <div class="similar-topics news">
       <h2>Это интересно</h2>
-      <div class="news-container">
+      <div class="news-container news__wrap">
         <router-link v-for="info in visibleNews" :key="info.id" :to="{ name: 'article', params: { id: info.id } }"
           class="news-card-link">
           <NewsCard :tag-class="getTagClass(info.tag)">
@@ -350,28 +350,7 @@ const getTagClass = (tag) => {
   margin-bottom: 30px;
 
   @media only screen and (min-width: 1280px) {
-      margin-top: 10px;
-    }
-}
-
-.similar-topics {
-  margin-top: 40px;
-}
-
-.news-container {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 10px;
-  margin-bottom: 30px;
-  margin-top: 40px;
-  max-width: 1190px;
-
-  @media (min-width: 768px) {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  @media (min-width: 1280px) {
-    grid-template-columns: repeat(4, 1fr);
+    margin-top: 10px;
   }
 }
 
