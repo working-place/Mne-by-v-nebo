@@ -65,8 +65,10 @@ const getTagClass = (tag) => {
 
     <div v-for="(project) in projects" :key="project.id" class="project" :class="`project-${project.id}`">
 
+      <h2 :class="`project-${project.id}__title project-${project.id}__title_color-tablet`">{{ project.title }}</h2>
+
       <div :class="`project-${project.id}__box`">
-        <div :class="`project-${project.id}__title project-${project.id}__title_color`">
+        <div :class="`project-${project.id}__title project-${project.id}__title_color-visibility`">
           <span>{{ project.title }}</span>
         </div>
         <div class="project__img-box" :class="`project-${project.id}__img-box`">
@@ -151,6 +153,10 @@ h2 {
 .title-page {
   margin-top: 25px;
   margin-bottom: -30px;
+
+  // @media only screen and (min-width: 768px) {
+  //   display: none;
+  // }
 }
 
 .project {
@@ -195,6 +201,25 @@ h2 {
     padding-bottom: 33px;
     font-size: 18px;
     color: var(--color-text-light);
+
+    @media only screen and (min-width: 768px) {
+      // display: none;
+      // position: absolute;
+      // margin-top: 40px;
+      // top: -40px;
+      // color: black;
+    }
+
+    &_color-tablet {
+      color: var(--color-text-dark);
+    }
+
+  @media only screen and (min-width: 768px) {
+    &_color-visibility {
+      // color: var(--color-text-dark);
+      display: none;
+    }
+  }
   }
 
   &__img-box {
