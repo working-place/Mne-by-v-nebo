@@ -1,12 +1,12 @@
 <template>
   <div class="info-card-wrapper">
-    <div class="info-card">
-      <div class="image-container">
-        <img :src="imageUrl" :alt="title" class="rounded-image" />
+    <div class="info-card info-card--left">
+      <div class="info-card__image-container">
+        <img :src="imageUrl" :alt="title" class="info-card__image" />
       </div>
-      <div class="text-content">
-        <h2 class="title">{{ title }}</h2>
-        <p class="description">{{ description }}</p>
+      <div class="info-card__text-content">
+        <h2 class="info-card__title">{{ title }}</h2>
+        <p class="info-card__description">{{ description }}</p>
       </div>
     </div>
   </div>
@@ -48,83 +48,82 @@ defineProps({
   background-color: var(--color-background-light-blue);
   border-radius: var(--cards-border-radius);
 
-  .image-container {
+  &__image-container {
     width: 150px;
     height: 150px;
-
-    .rounded-image {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      border-radius: 50%;
-    }
+    order: 1;
   }
 
-  .text-content {
+  &__image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+  }
+
+  &__text-content {
     display: flex;
     flex-direction: column;
     align-items: center;
     width: 100%;
     gap: 10px;
-
-    .title {
-      color: #000000;
-      font-size: 20px;
-      line-height: 1.5;
-      text-align: center;
-      width: 100%;
-    }
-
-    .description {
-      color: #000000;
-      line-height: 1.5;
-      font-size: 18px;
-      text-align: center;
-      max-width: 100%;
-      word-break: break-word;
-    }
+    order: 2;
   }
-}
 
-@media only screen and (min-width: 768px) {
-  .info-card {
+  &__title {
+    color: #000000;
+    font-size: 20px;
+    line-height: 1.5;
+    text-align: center;
+    width: 100%;
+  }
+
+  &__description {
+    color: #000000;
+    line-height: 1.5;
+    font-size: 18px;
+    text-align: center;
+    max-width: 100%;
+    word-break: break-word;
+  }
+
+  @media only screen and (min-width: 768px) {
     flex-direction: row;
     align-items: center;
     gap: 30px;
     padding: 30px;
     min-width: 650px;
 
-    .image-container {
+    &__image-container {
       width: 200px;
       height: 200px;
       flex-shrink: 0;
+      order: 1;
     }
 
-    .text-content {
+    &__text-content {
       align-items: flex-start;
+      order: 2;
 
-      .title {
-        font-size: 20px;
+      .info-card__title {
         text-align: left;
       }
 
-      .description {
-        font-size: 18px;
+      .info-card__description {
         text-align: left;
       }
     }
   }
-}
 
-@media only screen and (min-width: 1280px) {
-  .info-card {
+  @media only screen and (min-width: 1280px) {
     max-width: 1190px;
     height: 228px;
     padding: 40px 40px 40px 200px;
     gap: 50px;
+    //margin-top: 50px;
     border-radius: 100px var(--cards-border-radius) var(--cards-border-radius) 100px;
 
-    .image-container {
+    &--left &__image-container {
       position: absolute;
       width: 228px;
       height: 228px;
@@ -133,19 +132,18 @@ defineProps({
       transform: translateY(-50%);
     }
 
-    .text-content {
+    &__text-content {
       gap: 20px;
       padding-left: 80px;
+    }
 
-      .title {
-        font-size: 32px;
-      }
+    &__title {
+      font-size: 32px;
+    }
 
-      .description {
-        font-size: 20px;
-      }
+    &__description {
+      font-size: 20px;
     }
   }
 }
 </style>
-

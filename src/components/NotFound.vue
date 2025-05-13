@@ -9,13 +9,12 @@ import RouterLinkButton from './ui/RouterLinkButton.vue';
         <div class="not-found">
             <h1>Ошибка 404</h1>
             <InfoCard imageUrl="public\img\404-photo-boy.png" title="ОЙ!  Кажется, этой страницы тут нет"
-                description="Страница не найдена.  Мы тоже расстроены и делаем все возможное, чтобы исправить проблему." />
+                description="Страница не найдена.  Мы тоже расстроены и делаем все возможное, чтобы исправить проблему. А пока попробуйте поискать что-нибудь другое или вернитесь на главную." />
 
-            <div class="button-wrapper">
-                <RouterLinkButton :to="{ name: 'home' }" :disabled="false">
+                <RouterLinkButton :to="{ name: 'home' }" :disabled="false" max-height-btn="63px" min-height-btn="63px"
+                    font-size-btn="20px">
                     <template v-slot:text>вернуться на главную</template>
                 </RouterLinkButton>
-            </div>
         </div>
     </main>
 </template>
@@ -38,9 +37,5 @@ import RouterLinkButton from './ui/RouterLinkButton.vue';
         font-size: 48px;
         font-weight: 700;
     }
-}
-
-.button-wrapper {
-    margin-top: 26px;
 }
 </style>

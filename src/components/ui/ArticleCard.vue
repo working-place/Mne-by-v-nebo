@@ -31,7 +31,6 @@ defineProps({
 @use '@/assets/scss/mixins.scss' as *;
 
 .adaptive-card {
-    @include minmax-width-mobile;
     width: 100%;
     position: relative;
     background-color: var(--color-background-lavender);
@@ -97,11 +96,6 @@ defineProps({
             .adaptive-card__content {
                 width: 55%;
                 padding: 40px;
-            }
-
-            .adaptive-card__img-box {
-                width: 45%;
-                min-height: 300px;
             }
 
             .adaptive-card__text {

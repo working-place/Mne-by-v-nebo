@@ -123,8 +123,8 @@ const toggleItem = (index) => {
           </div>
 
           <div class="arrow-circle header-arrow" :class="{ 'is-open': item.isOpen }" @click.stop="toggleItem(index)">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
-              <path d="M6 9L12 15L18 9" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+              <path d="M6 10L12 16L18 10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
             </svg>
           </div>
         </div>
@@ -136,8 +136,8 @@ const toggleItem = (index) => {
 
             <div class="arrow-circle content-arrow left" :class="{ 'is-open': item.isOpen }"
               @click.stop="toggleItem(index)">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
-                <path d="M6 9L12 15L18 9" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                <path d="M6 10L12 16L18 10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
               </svg>
             </div>
           </div>
@@ -233,6 +233,8 @@ const toggleItem = (index) => {
 .arrow-circle svg {
   transition: transform 0.3s ease;
   color: #000000;
+  width: 18px;
+    height: 18px;
 }
 
 .arrow-circle.is-open svg {
@@ -286,7 +288,6 @@ const toggleItem = (index) => {
   color: #ffffff;
   display: block;
   width: 100%;
-  max-width: 300px;
   margin: 32px auto 0;
   padding: 14px 24px;
   border: none;
@@ -343,7 +344,13 @@ const toggleItem = (index) => {
     padding: 0 16px 30px;
   }
 
+.arrow-circle svg {
+  width: 24px;
+  height: 24px;
+}
+
   .show-all-btn {
+    font-size: 14px;
     margin: 40px auto 0;
     padding: 16px 32px;
   }
@@ -388,9 +395,19 @@ const toggleItem = (index) => {
     font-size: 20px;
   }
 
-  .arrow-circle {
-    width: 62px;
-    height: 62px;
+    .arrow-circle svg {
+      width: 32px;
+      height: 32px;
+    }
+  
+    .arrow-circle {
+      width: 62px;
+      height: 62px;
+    }
+    
+
+  .show-all-btn {
+    font-size: 20px;
   }
 }
 </style>
