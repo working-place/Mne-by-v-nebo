@@ -61,12 +61,25 @@ defineExpose({
 .card {
   @include display-flex-column-center;
   position: relative;
-  min-height: var(--main-screen_block-height);
+
   padding: 20px;
   gap: 10px;
   background-color: var(--color-background-light-blue);
   border-radius: var(--cards-border-radius);
   box-sizing: border-box;
+
+  @media only screen and (max-width: 767px) {
+    min-height: var(--main-screen_block-height);
+  }
+
+  @media only screen and (min-width: 768px) {
+    min-width: 428px;
+    max-width: 600px;
+    width: 70%;
+    min-height: 201px;
+    max-height: fit-content;
+
+  }
 
   &__title {
     margin-bottom: 10px;
@@ -100,18 +113,15 @@ defineExpose({
   }
 
   @media only screen and (min-width: 768px) {
-    min-width: 320px;
-    min-height: 270px;
-    padding: 25px;
-    gap: 15px;
 
     &__img-box :slotted(img) {
       width: calc(v-bind(imageWidth) * 1.2);
     }
   }
-    @media only screen and (min-width: 1280px) {
-      min-width: auto;
-      min-height: 300px;
-    }
+
+  @media only screen and (min-width: 1280px) {
+    min-width: auto;
+    min-height: 300px;
+  }
 }
 </style>
