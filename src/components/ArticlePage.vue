@@ -110,6 +110,8 @@ const getTagClass = (tag) => {
 @use '@/assets/scss/mixins.scss' as *;
 
 .article-main-container {
+  align-items: stretch;
+
   @media only screen and (min-width: 1280px) {
     max-width: 1190px;
     margin: 0 auto;
@@ -215,15 +217,18 @@ const getTagClass = (tag) => {
 }
 
 .related-articles {
-  @include block-mobile;
-  @include minmax-width-mobile;
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  height: fit-content;
+  gap: 22px;
   box-sizing: border-box;
 
   @media only screen and (min-width: 1280px) {
-    width: 100%;
     max-width: 290px;
     margin: 0;
-    padding: 0;
+    padding-top: 10px;
+    gap: 0;
   }
 }
 
