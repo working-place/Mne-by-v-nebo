@@ -147,7 +147,7 @@ defineProps({
     }
 
     @media only screen and (min-width: 1280px) {
-      max-width: 825px;
+      min-width: 825px;
       width: var(--main-screen_tablet-wrapper-width-desctop);
     }
   }
@@ -192,6 +192,11 @@ defineProps({
 
     @media only screen and (min-width: 768px) {
       text-align: left;
+    }
+
+    @media only screen and (min-width: 1280px) {
+      max-width: 630px;
+      font-size: 20px;
     }
   }
 
