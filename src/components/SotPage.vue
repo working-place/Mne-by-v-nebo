@@ -64,30 +64,37 @@ const getTagClass = (tag) => {
     </slot>
 
     <div v-for="(project) in projects" :key="project.id" class="project" :class="`project-${project.id}`">
+      <div class="project-grid">
+        <h3 class="project-title_tablet">
+          {{ project.title }}
+        </h3>
 
-      <h2 :class="`project-${project.id}__title project-${project.id}__title_color-tablet`">{{ project.title }}</h2>
-
-      <div :class="`project-${project.id}__box`">
-        <div :class="`project-${project.id}__title project-${project.id}__title_color-visibility`">
-          <span>{{ project.title }}</span>
+        <div class="project-image_mobile" :class="`project-${project.id}-image_mobile`">
+          <h3 class="project-title_mobile" :class="`project-${project.id}-title_mobile`">
+            {{ project.title }}
+          </h3>
+          <img :src="`/img/${project.imgURL}`" :alt="project.imgAlt">
         </div>
-        <div class="project__img-box" :class="`project-${project.id}__img-box`">
-          <img class="img" :class="`project-${project.id}__img project-${project.id}__img_size`"
-            :src="`/img/${project.imgURL}`" :alt="project.imgAlt">
+
+        <div class="project-content">
+          <div class="project-image_tablet">
+            <img :src="`/img/${project.imgURL}`" :alt="project.imgAlt">
+          </div>
+
+          <div class="project-cards">
+            <template v-for="section in project.sections" :key="section.title">
+              <LinkCard v-if="['description', 'goals', 'results'].includes(section.type)" :title="section.title"
+                :description="section.text" :paddingBottom="'46px'" image-width="30%" title-size="20px">
+                <template #image>
+                  <img :src="section.icon" :alt="section.title" width="90px">
+                </template>
+              </LinkCard>
+              <GallerySection v-else-if="section.type === 'gallery' && section.images"
+                :photos="section.images.map(img => ({ image: img.url }))" :show-title="false" />
+            </template>
+          </div>
         </div>
       </div>
-
-      <template v-for="section in project.sections" :key="section.title">
-        <LinkCard v-if="['description', 'goals', 'results'].includes(section.type)" :title="section.title"
-          :description="section.text" :paddingBottom="'46px'" image-width="30%" title-size="20px">
-          <template #image>
-            <img :src="section.icon" :alt="section.title" width="90px">
-          </template>
-        </LinkCard>
-
-        <GallerySection v-else-if="section.type === 'gallery' && section.images"
-          :photos="section.images.map(img => ({ image: img.url }))" :show-title="false" />
-      </template>
     </div>
 
     <div class="similar-topics">
@@ -107,191 +114,114 @@ const getTagClass = (tag) => {
           <template v-slot:date>{{ info.date }}</template>
         </NewsCard>
       </router-link>
-
     </div>
-
   </main>
 </template>
 
 <style scoped lang="scss">
 @use '@/assets/scss/mixins.scss' as *;
 
-.img {
-  @include cover-center-no-repeat-img;
+.project-grid {
+  display: grid;
+  grid-template-rows: auto 1fr;
+  gap: 12px;
+}
+
+.project-title {
+  grid-row: 1;
   width: 100%;
-  border-bottom-right-radius: var(--cards-border-radius);
-  border-bottom-left-radius: var(--cards-border-radius);
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 1.5;
 }
 
-.news-card-link {
-  display: flex;
-  width: 100%;
-  text-decoration: none;
-  color: inherit;
+.project-mne-by-v-nebo-title_mobile {
+  color: var(--color-text-light);
+  padding-left: 33px;
+  padding-bottom: 33px;
 }
 
-.main-screen {
-
-  &__title_lower-case {
-    font-weight: 600;
-    font-size: 20px;
-    line-height: 1.5;
-  }
-
-  &__img {
-    width: 247px;
-    height: 282px;
-    object-fit: contain;
-  }
-}
-
-h2 {
-  @include h2-mobile-uppercase;
+.project-ovz-title_mobile {
   text-align: center;
+  color: var(--color-text-light);
+  padding-top: 40px;
+  max-width: 90%;
 }
 
-.title-page {
-  margin-top: 25px;
-  margin-bottom: -30px;
-
-  // @media only screen and (min-width: 768px) {
-  //   display: none;
-  // }
+.project-ou-title_mobile {
+  text-align: center;
+  padding-top: 40px;
+  max-width: 90%;
 }
 
-.project {
-  object-fit: cover;
-  z-index: 1;
-
-  &__img-box {
-    display: flex;
-    width: 90%;
-    overflow: hidden;
-  }
+.project-title_tablet {
+  display: none;
 }
 
-.project-mne-by-v-nebo {
-  @include block-mobile;
-  padding: 20px 0 0 0;
+.project-content {
+  display: grid;
+  grid-template-columns: 100%;
+  gap: 10%;
+  align-items: start;
+}
 
-  &__box {
-    @include block-mobile;
-    position: relative;
-    flex-direction: row;
-    justify-content: flex-end;
-    align-items: flex-end;
-    width: 100%;
-    min-height: 209px;
-    height: fit-content;
-    padding: 0;
-    padding-top: 25px;
-    gap: 0;
-    border-radius: var(--cards-border-radius);
-    background-color: var(--color-background-red);
-  }
+.project-image_tablet {
+  display: none;
 
-  &__title {
-    display: flex;
-    justify-content: right;
-    position: absolute;
-    top: 80%;
-    left: 10%;
-    width: fit-content;
-    white-space: nowrap;
-    padding-bottom: 33px;
-    font-size: 18px;
-    color: var(--color-text-light);
-
-    @media only screen and (min-width: 768px) {
-      // display: none;
-      // position: absolute;
-      // margin-top: 40px;
-      // top: -40px;
-      // color: black;
-    }
-
-    &_color-tablet {
-      color: var(--color-text-dark);
-    }
-
-  @media only screen and (min-width: 768px) {
-    &_color-visibility {
-      // color: var(--color-text-dark);
-      display: none;
-    }
-  }
-  }
-
-  &__img-box {
-    justify-content: flex-end;
-  }
-
-  &__img {
-    @include cover-center-no-repeat-img;
-    width: 70%;
-    border-bottom-right-radius: var(--cards-border-radius);
-    border-bottom-left-radius: var(--cards-border-radius);
+  @media (max-width: 768px) {
+    grid-row: 1;
+    width: 100px;
+    grid-column: 1;
   }
 }
 
-.project-ovz {
-  @include block-mobile;
-  padding: 20px 0 0 0;
-
-  &__box {
-    @include block-mobile;
-    justify-content: center;
-    justify-content: space-between;
-    width: 100%;
-    min-height: 340px;
-    height: fit-content;
-    padding: 0;
-    padding-top: 40px;
-    gap: 0;
-    border-radius: var(--cards-border-radius);
-    background-color: var(--color-background-purple);
-  }
-
-  &__title {
-    display: flex;
-    text-align: center;
-    font-size: 18px;
-    font-weight: 600;
-    padding-left: 4px;
-    padding-right: 4px;
-  }
-
-  &__title_color {
-    color: var(--color-text-light);
-  }
+.project-image_mobile {
+  width: 100%;
+  min-height: 209px;
+  border-radius: 12px;
 }
 
-.project-ou {
-  @include block-mobile;
-  padding: 20px 0 0 0;
+.project-mne-by-v-nebo-image_mobile {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  background-color: var(--color-background-red);
+}
 
-  &__box {
-    @include block-mobile;
-    justify-content: center;
-    justify-content: space-between;
-    width: 100%;
-    min-height: 340px;
-    height: fit-content;
-    padding: 0;
-    padding-top: 40px;
-    gap: 0;
-    border-radius: var(--cards-border-radius);
-    background-color: var(--color-background-yellow);
-  }
+.project-ovz-image_mobile {
+  display: flex;
+  background-color: var(--color-background-purple);
+  flex-direction: column;
+  align-items: center;
+}
 
-  &__title {
-    display: flex;
-    text-align: center;
-    font-size: 18px;
-    font-weight: 600;
-    padding-left: 4px;
-    padding-right: 4px;
-  }
+.project-ou-image_mobile {
+  display: flex;
+  background-color: var(--color-background-yellow);
+  flex-direction: column;
+  align-items: center;
+}
+
+.project-mne-by-v-nebo-image_mobile img {
+  width: 50%;
+}
+
+.project-ovz-image_mobile img {
+  width: 80%;
+  padding-left: 20px;
+}
+
+.project-ou-image_mobile img {
+  width: 80%;
+}
+
+.project-image_mobile img {
+  border-bottom-right-radius: 12px;
+}
+
+.project-cards {
+  display: grid;
+  gap: 12px;
 }
 
 .similar-topics {
@@ -301,6 +231,10 @@ h2 {
   &__title-box {
     @include block-mobile;
     padding: 0;
+  }
+
+  &__title-box h2 {
+    font-size: 20px;
   }
 
   &__img {
