@@ -133,7 +133,8 @@ watch(() => props.photos, updateSliderPosition);
                 stroke-linejoin="round" />
             </svg>
           </button>
-          <button @click="nextSlide" class="arrow" :disabled="currentIndex === photos.length - 1" :title="`Next slide button`">
+          <button @click="nextSlide" class="arrow" :disabled="currentIndex === photos.length - 1"
+            :title="`Next slide button`">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
               <path d="M9 18L15 12L9 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                 stroke-linejoin="round" />
@@ -159,9 +160,8 @@ watch(() => props.photos, updateSliderPosition);
 .gallery-section {
   height: var(--gallery-height);
   min-width: 286px;
-  max-width: 326px;
+  max-width: 100%;
   position: relative;
-  width: 100%;
   padding: 0;
   background-color: var(--gallery-section_background-color);
 
@@ -202,7 +202,6 @@ watch(() => props.photos, updateSliderPosition);
 
 .slide-image {
   min-height: 286px;
-  max-width: 360px;
   width: 100%;
   height: 360px;
   object-fit: cover;
