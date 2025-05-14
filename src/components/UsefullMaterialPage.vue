@@ -171,7 +171,8 @@ const getTagClass = (tag) => {
     <div class="slider-container">
       <Slider :items="bookSlidesSpecialist" :visible-slides="4">
         <template #default="{ item }">
-          <LinkCard :title="item.title" :description="item.description" :paddingBottom="'46px'" image-width="30%">
+          <LinkCard :title="item.title" :description="item.description" :paddingBottom="'46px'" image-width="30%"
+            title-size="20px">
             <template #image>
               <img :src="item.image" :alt="item.title" width="90px">
             </template>
@@ -221,7 +222,7 @@ const getTagClass = (tag) => {
       </div>
 
       <RouterLinkButton :to="{ name: 'news' }" :disabled="false" class="router-link-button" max-height-btn="63px"
-        min-height-btn="63px"  font-size-btn="20px">
+        min-height-btn="63px" font-size-btn="20px">
         <template v-slot:text>Перейти ко всем новостям</template>
       </RouterLinkButton>
     </div>
@@ -332,6 +333,8 @@ const getTagClass = (tag) => {
 
     &__title {
       font-size: 32px;
+      font-weight: 600;
+      line-height: 1.2;
     }
 
     &__description {

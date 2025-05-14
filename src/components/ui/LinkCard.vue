@@ -73,16 +73,16 @@ defineExpose({
   }
 
   @media only screen and (min-width: 768px) {
-    min-width: 428px;
-    max-width: 600px;
-    width: 70%;
-    min-height: 201px;
+    min-height: 270px;
     max-height: fit-content;
-
   }
 
   &__title {
     margin-bottom: 10px;
+
+    @media only screen and (min-width: 1280px) {
+        line-height: 1.2;
+      }
   }
 
   &__title,
