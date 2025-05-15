@@ -96,6 +96,7 @@ defineProps({
   @include minmax-width-mobile;
   display: flex;
   justify-content: flex-end;
+flex-direction: column;
   min-width: var(--min-width);
   max-width: 1190px;
   width: calc(100% + 34px);
@@ -220,6 +221,10 @@ defineProps({
     object-fit: cover;
     width: 100%;
     border-bottom-right-radius: 30px;
+
+//     @media only screen and (min-width: 768px) {
+// width: 200px;
+//     }
 
     @media only screen and (min-width: 1280px) {
       object-fit: cover;
