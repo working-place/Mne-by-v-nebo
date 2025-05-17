@@ -47,7 +47,6 @@ const getTagClass = (tag) => {
     default: return 'all';
   }
 }
-
 </script>
 
 <template>
