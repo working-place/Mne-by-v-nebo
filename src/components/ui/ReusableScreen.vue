@@ -204,6 +204,8 @@ flex-direction: column;
   &__img-box {
     display: flex;
     width: 100%;
+    align-items: flex-end;
+    justify-content: center;
 
 
     @media only screen and (min-width: 768px) {
@@ -218,9 +220,11 @@ flex-direction: column;
   }
 
   &__img {
-    object-fit: cover;
+    object-fit: contain;
     width: 100%;
+    // pad: 5px;
     border-bottom-right-radius: 30px;
+
 
 //     @media only screen and (min-width: 768px) {
 // width: 200px;
