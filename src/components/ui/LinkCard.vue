@@ -18,7 +18,7 @@ defineProps({
     type: String,
     default: ''
   },
-  paddingBottom: {
+  paddingBottomMobile: {
     type: String,
     default: '0'
   },
@@ -34,6 +34,18 @@ defineProps({
     type: String,
     default: '16px'
   },
+  cardMinHeight: {
+    type: String,
+    default: '201px'
+  },
+  cardMaxHeight: {
+    type: String,
+    default: 'fit-content'
+  },
+  cardMinWidth: {
+    type: String,
+    default: '428px'
+  },
 });
 
 const root = ref(null);
@@ -43,7 +55,11 @@ defineExpose({
 </script>
 
 <template>
-  <div class="card" :style="{ paddingBottom: paddingBottom }" ref="root">
+  <div class="card" :style="{ '--card-padding-bottom-mobile': paddingBottomMobile,
+    '--card_card-min-height': cardMinHeight,
+'--card_card-max-height': cardMaxHeight,
+'--card_card-max-width': cardMinWidth,
+   }" ref="root">
     <div class="card__content-text">
       <h3 class="card__title" :style="{ fontSize: titleSize }">{{ title }}</h3>
       <p class="card__description" :style="{ fontSize: descriptionSize }">{{ description }}</p>
@@ -70,15 +86,16 @@ defineExpose({
 
   @media only screen and (max-width: 767px) {
     min-height: var(--main-screen_block-height);
+    padding-bottom: var(--card-padding-bottom-mobile);
   }
 
   @media only screen and (min-width: 768px) {
-    min-width: 428px;
-    max-width: 600px;
-    width: 70%;
-    min-height: 201px;
-    max-height: fit-content;
-
+    min-width: var(--card_card-max-width);
+    min-height: var(--card_card-min-height);
+    max-height: var(--card_card-max-height);
+border-radius: 16px;
+min-height: 211px;
+// padding-bottom: 30px;
   }
 
   &__title {
@@ -115,7 +132,7 @@ defineExpose({
   @media only screen and (min-width: 768px) {
 
     &__img-box :slotted(img) {
-      width: calc(v-bind(imageWidth) * 1.2);
+      width: calc(v-bind(imageWidth));
     }
   }
 
