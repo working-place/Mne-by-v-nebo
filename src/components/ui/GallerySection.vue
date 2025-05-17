@@ -34,7 +34,56 @@ const props = defineProps({
   height: {
     type: String,
     default: ''
-  }
+  },
+  heightTablet: {
+    type: String,
+    default: ''
+  },
+  minWidthTablet: {
+    type: String,
+    default: ''
+  },
+  topPositionTablet: {
+    type: String,
+    default: ''
+  },
+  widthTablet: {
+    type: String,
+    default: ''
+  },
+
+  wrapperHeightTablet: {
+    type: String,
+    default: ''
+  },
+  sliderHeightTablet: {
+    type: String,
+    default: ''
+  },
+  slideImageHeightTablet: {
+    type: String,
+    default: ''
+  },
+  slideContentHeightTablet: {
+    type: String,
+    default: ''
+  },
+  sliderWrapperBorderRadiusTablet: {
+    type: String,
+    default: ''
+  },
+  navigationPositionTablet: {
+        type: String,
+    default: ''
+  },
+  navigationPositionBottomTablet: {
+        type: String,
+    default: ''
+  },
+  navigationPositionRightTablet: {
+        type: String,
+    default: ''
+  },
 });
 
 const currentIndex = ref(0);
@@ -107,20 +156,53 @@ watch(() => props.photos, updateSliderPosition);
   <div class="gallery-section" :style="{
     '--gallery-section_background-color': bgColor,
     '--gallery-text-color': textColor,
-    '--gallery-height': height
+    '--gallery-height-tablet': heightTablet,
+    '--gallery-min-width-tablet': minWidthTablet,
+    '--gallery-top-position-tablet': topPositionTablet
+
   }">
     <h2 v-if="showTitle">{{ title }}</h2>
-    <div ref="sliderContainer" class="slider-wrapper">
-      <div class="slider" ref="slider" @touchstart="handleTouchStart" @touchmove="handleTouchMove"
-        @touchend="handleTouchEnd">
+    <div ref="sliderContainer"
+    class="slider-wrapper"
+    :style="{
+      '--wrapper-height-tablet': wrapperHeightTablet,
+      '--slider-wrapper-border-radius-tablet': sliderWrapperBorderRadiusTablet
+    }"
+    >
+      <div class="slider"
+      ref="slider"
+      @touchstart="handleTouchStart"
+      @touchmove="handleTouchMove"
+        @touchend="handleTouchEnd"
+        :style="{
+          '--slider-height-tablet': sliderHeightTablet
+        }"
+        >
         <div v-for="(photo, index) in photos" :key="photo.id || index" class="slide">
-          <div class="slide-content" @click="openPhotoModal(photo)">
-            <img :src="photo.image" :alt="`Фото ${index + 1}`" class="slide-image">
+          <div
+          class="slide-content"
+          @click="openPhotoModal(photo)"
+          :style="{
+            '--slide-content-height-tablet': slideContentHeightTablet
+          }"
+          >
+            <img
+            :src="photo.image"
+            :alt="`Фото ${index + 1}`"
+            class="slide-image"
+            :style="{
+              '--slide-image-height-tablet': slideImageHeightTablet
+            }"
+            >
           </div>
         </div>
       </div>
 
-      <div class="navigation">
+      <div class="navigation" :style="{
+        '--navigation-position-tablet': navigationPositionTablet,
+        '--navigation-position-bottom-tablet': navigationPositionBottomTablet,
+        '--navigation-position-right-tablet': navigationPositionRightTablet
+      }">
         <div v-if="showPagination" class="pagination">
           <button v-for="(_, index) in photos" :key="index" @click="goToSlide(index)"
             :class="{ active: index === currentIndex }"></button>
@@ -165,6 +247,12 @@ watch(() => props.photos, updateSliderPosition);
   padding: 0;
   background-color: var(--gallery-section_background-color);
 
+  @media (min-width: 768px) {
+    height: var(--gallery-height-tablet);
+    min-width: var(--gallery-min-width-tablet);
+    top: var(--gallery-top-position-tablet);
+  }
+
   h2 {
     text-align: center;
     margin-bottom: 24px;
@@ -179,6 +267,11 @@ watch(() => props.photos, updateSliderPosition);
   width: 100%;
   margin: 0 auto;
   overflow: hidden;
+
+  @media (min-width: 768px) {
+    height: var(--wrapper-height-tablet);
+    border-radius: var(--slider-wrapper-border-radius-tablet);
+  }
 }
 
 .slider-container {
@@ -192,6 +285,10 @@ watch(() => props.photos, updateSliderPosition);
   transition: transform 0.3s ease;
   will-change: transform;
   gap: 20px;
+
+  @media (min-width: 768px) {
+    height: var(--slider-height-tablet);
+  }
 }
 
 .slide {
@@ -200,12 +297,24 @@ watch(() => props.photos, updateSliderPosition);
   height: fit-content;
 }
 
+.slide-content {
+  @media (min-width: 768px) {
+    height: var(--slide-content-height-tablet);
+  }
+}
+
+
 .slide-image {
   min-height: 286px;
   width: 100%;
   height: 360px;
   object-fit: cover;
   border-radius: 12px;
+
+  @media only screen and (min-width: 768px) {
+border-radius: 16px;
+height: var(--slide-image-height-tablet);
+  }
 }
 
 .slide {
@@ -217,6 +326,15 @@ watch(() => props.photos, updateSliderPosition);
   justify-content: space-between;
   align-items: center;
   margin-top: 16px;
+
+  @media only screen and (min-width: 768px) {
+    // position: absolute;
+    // bottom: 0;
+    // right: 0;
+    position: var(--navigation-position-tablet);
+    bottom: var(--navigation-position-bottom-tablet);
+    right: var(--navigation-position-right-tablet);
+  }
 }
 
 .pagination {
