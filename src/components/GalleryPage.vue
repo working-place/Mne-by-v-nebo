@@ -123,7 +123,7 @@ onUnmounted(() => {
         </div>
 
         <div v-if="isMounted && !isDesktop">
-          <Slider :items="photoSlides" :visible-slides="2">
+          <Slider :items="photoSlides" :visible-slides="2" >
             <template #default="{ item }">
               <div class="slide-content" @click="openPhotoModal(item)">
                 <img :src="item.image" alt="Фото" class="slide-image">
@@ -238,10 +238,16 @@ h2 {
   position: relative;
   cursor: pointer;
   transition: transform 0.3s;
-  height: 176px;
+  min-height: 176px;
+  height: 60vw;
 
   &:hover {
     transform: scale(1.03);
+  }
+
+  @media only screen and (min-width: 768px) {
+    min-height: 176px;
+    height: 30vw;
   }
 
   @media only screen and (min-width: 1280px) {
