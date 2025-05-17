@@ -115,6 +115,9 @@ const getTagClass = (tag) => {
         <img class="similar-topics__img" src="/img/happy-boy.png" alt="">
         <h2>Статьи на похожую тему:</h2>
       </div>
+      <div class="news-card-wrapper">
+
+
 
       <router-link v-for="info in firstTwoNews" :key="info.id" :to="{ name: 'article', params: { id: info.id } }"
         class="news-card-link">
@@ -127,6 +130,7 @@ const getTagClass = (tag) => {
           <template v-slot:date>{{ info.date }}</template>
         </NewsCard>
       </router-link>
+    </div>
     </div>
   </main>
 </template>
@@ -373,5 +377,15 @@ const getTagClass = (tag) => {
     width: 150px;
     height: 150px;
   }
+}
+
+.news-card-wrapper {
+
+  @media (min-width: 768px) {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    }
+
 }
 </style>
