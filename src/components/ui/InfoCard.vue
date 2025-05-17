@@ -139,6 +139,8 @@ defineProps({
 
     &__title {
       font-size: 32px;
+      font-weight: 600;
+      line-height: 1.2;
     }
 
     &__description {

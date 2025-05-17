@@ -174,7 +174,7 @@ watch(visibleSlidesCount, () => {
 }
 
 .pagination {
-    display: flex;
+    width: auto;
     gap: 5px;
 
     @media only screen and (min-width: 768px) {

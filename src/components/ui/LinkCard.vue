@@ -100,6 +100,10 @@ min-height: 211px;
 
   &__title {
     margin-bottom: 10px;
+
+    @media only screen and (min-width: 1280px) {
+        line-height: 1.2;
+      }
   }
 
   &__title,
