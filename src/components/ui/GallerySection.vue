@@ -19,6 +19,10 @@ const props = defineProps({
     type: Boolean,
     default: true
   },
+  showPaginationTablet: {
+    type: String,
+    default: ''
+  },
   bgColor: {
     type: String,
     default: ''
@@ -65,6 +69,10 @@ const props = defineProps({
     default: ''
   },
   slideContentHeightTablet: {
+    type: String,
+    default: ''
+  },
+  slideContentHeightDesctop: {
     type: String,
     default: ''
   },
@@ -183,7 +191,8 @@ watch(() => props.photos, updateSliderPosition);
           class="slide-content"
           @click="openPhotoModal(photo)"
           :style="{
-            '--slide-content-height-tablet': slideContentHeightTablet
+            '--slide-content-height-tablet': slideContentHeightTablet,
+            '--slide-content-height-desctop': slideContentHeightDesctop
           }"
           >
             <img
@@ -203,7 +212,9 @@ watch(() => props.photos, updateSliderPosition);
         '--navigation-position-bottom-tablet': navigationPositionBottomTablet,
         '--navigation-position-right-tablet': navigationPositionRightTablet
       }">
-        <div v-if="showPagination" class="pagination">
+        <div v-if="showPagination" class="pagination" :style="{
+          '--show-pagination': showPaginationTablet
+        }">
           <button v-for="(_, index) in photos" :key="index" @click="goToSlide(index)"
             :class="{ active: index === currentIndex }"></button>
         </div>
@@ -301,8 +312,11 @@ watch(() => props.photos, updateSliderPosition);
   @media (min-width: 768px) {
     height: var(--slide-content-height-tablet);
   }
-}
 
+  @media (min-width: 1280px) {
+    height: var(--slide-content-height-desctop);
+  }
+}
 
 .slide-image {
   min-height: 286px;
@@ -340,6 +354,12 @@ height: var(--slide-image-height-tablet);
 .pagination {
   display: flex;
   gap: 8px;
+
+  @media only screen and (min-width: 1280px) {
+display: var(--show-pagination);
+  }
+
+
 }
 
 .pagination button {
