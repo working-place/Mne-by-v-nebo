@@ -78,6 +78,9 @@ const getTagClass = (tag) => {
         </div>
 
         <div class="project-content">
+          <!-- <h3 class="project-title_desctop">
+          {{ project.title }}
+        </h3> -->
           <div class="project-image_tablet" :class="`project-${project.id}-image_tablet`">
             <img :src="`/img/${project.imgURL}`" :alt="project.imgAlt">
           </div>
@@ -295,6 +298,7 @@ const getTagClass = (tag) => {
     grid-template-columns: 100%;
     gap: 12px;
     align-items: start;
+    // position: relative;
 
     @media (min-width: 768px) {
       width: 100%;
@@ -323,7 +327,58 @@ const getTagClass = (tag) => {
         grid-column: 3/4;
       }
     }
+
+    @media (min-width: 1280px) {
+      // width: 100%;
+      max-width: 1190px;
+      grid-template-rows: 53px 289px 125px;
+      grid-template-columns: 26% calc(24% - 10px) calc(24% - 10px) 26%;
+      gap: 10px;
+      align-items: center;
+
+      &> :first-child {
+        grid-row: 1/3;
+        grid-column: 1;
+      }
+
+      &> :nth-child(2) {
+        grid-row: 2;
+        grid-column: 2;
+      }
+
+      &> :nth-child(3) {
+        grid-row: 2;
+        grid-column: 3;
+      }
+
+      &> :nth-child(4) {
+        grid-row: 3;
+        grid-column: 1/5;
+        // max-height: 0;
+        height: 125px;
+        // padding: 0;
+      }
+
+      &> :nth-child(5) {
+        grid-row: 1/3;
+        grid-column: 4;
+      }
+    }
   }
+
+  &-title_tablet {
+    @media (min-width: 1280px) {
+      // display: none;
+    }
+  }
+
+  &-title_desctop {
+    @media (max-width: 1279px) {
+      // position: absolute;
+      // display: none;
+    }
+  }
+
 
   &-image_mobile {
     width: 100%;
