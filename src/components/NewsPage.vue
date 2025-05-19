@@ -77,6 +77,7 @@ const getTagClass = (tag) => {
 
 const handleSearchInput = (event) => {
   searchQuery.value = event.target.value;
+  clearTagFilter();
 };
 
 const handleTagFilter = (title) => {
@@ -89,6 +90,10 @@ const handleTagFilter = (title) => {
     searchInput.value.value = "";
   }
 };
+
+const clearTagFilter = () => {
+    activeTag.value = "все";
+}
 
 const filteredNews = computed(() => {
   const filtered = newsData.value.filter(news => {
@@ -265,6 +270,7 @@ const changePage = (pageNum) => {
   text-decoration: none;
   border: none;
   border-radius: 50px;
+  cursor: pointer;
 }
 
 .page-item.active .page-link {
