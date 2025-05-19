@@ -103,10 +103,12 @@ const getTagClass = (tag) => {
               sliderHeightTablet="100%"
               slideImageHeightTablet="100%"
               slideContentHeightTablet="100%"
+              slideContentHeightDesctop="330px"
               sliderWrapperBorderRadiusTablet="16px"
               navigationPositionTablet="absolute"
               navigationPositionBottomTablet="0"
               navigationPositionRightTablet="0"
+              showPaginationTablet="none"
               />
           </template>
         </div>
@@ -176,12 +178,22 @@ const getTagClass = (tag) => {
 
 .project-grid {
   display: grid;
+  grid-template-columns: auto;
+  grid-template-rows: auto;
   gap: 12px;
+  position: relative;
 
   @media (min-width: 768px) {
-    display: flex;
-    flex-direction: column;
+    // display: flex;
+    // flex-direction: column;
+    justify-items: center;
     gap: 16px;
+    margin-top: 60px;
+  }
+
+  @media (min-width: 1280px) {
+
+    margin-top: 100px;
   }
 }
 
@@ -331,51 +343,92 @@ const getTagClass = (tag) => {
     @media (min-width: 1280px) {
       // width: 100%;
       max-width: 1190px;
-      grid-template-rows: 53px 289px 125px;
+      grid-template-rows: 53px 277px 125px;
       grid-template-columns: 26% calc(24% - 10px) calc(24% - 10px) 26%;
       gap: 10px;
       align-items: center;
 
+
+      // фото
       &> :first-child {
         grid-row: 1/3;
         grid-column: 1;
+        height: 330px;
+        // max-width: 290px;
       }
 
+      // описание проекта
       &> :nth-child(2) {
         grid-row: 2;
         grid-column: 2;
+        min-height: 0;
+        height: 100%;
+        max-width: 290px;
       }
 
+      // цели
       &> :nth-child(3) {
         grid-row: 2;
         grid-column: 3;
+        min-height: 0;
+        height: 100%;
+        max-width: 290px;
       }
 
+      // дост рез
       &> :nth-child(4) {
         grid-row: 3;
         grid-column: 1/5;
         // max-height: 0;
+        // height: 125px;
+        // padding: 0;\
+        // display: none;
+        min-height: 0;
         height: 125px;
-        // padding: 0;
+        // max-width: 290px;
       }
 
+      // галлерея
       &> :nth-child(5) {
         grid-row: 1/3;
         grid-column: 4;
+        min-height: 0;
+        height: 330px;
+        max-width: calc(100% - 10px);
+        // top: 0;
+      }
+
+      &> :nth-child(5) img {
+        height: 330px;
+        top: 0;
       }
     }
   }
 
   &-title_tablet {
+    display: flex;
+
+    @media (min-width: 768px) {
+      max-width: 650px;
+    }
+
+
     @media (min-width: 1280px) {
-      // display: none;
+
+      align-items: flex-end;
+      // align-items: center;
+      max-width: 591px;
+      position: absolute;
+      font-size: 24px;
+      height: 60px;
+      // top: -10px;
+      padding: 0;
+      padding-bottom: 15px;
     }
   }
 
   &-title_desctop {
     @media (max-width: 1279px) {
-      // position: absolute;
-      // display: none;
     }
   }
 
@@ -419,18 +472,43 @@ const getTagClass = (tag) => {
   @include block-mobile;
   padding: 20px 0 0 0;
 
+  @media (min-width: 1280px) {
+    max-width: 1190px;
+    flex-direction: row;
+    gap: 53px;
+    }
+
   &__title-box {
     @include block-mobile;
     padding: 0;
 
-    h2 {
-      font-size: 20px;
+    @media (min-width: 768px) {
+      & h2 {
+        font-size: 20px;
+      }
+    }
+
+    @media (min-width: 1280px) {
+    flex-direction: row;
+    gap: 24px;
+
+    & h2 {
+      font-size: 32px;
+      line-height: 1.2;
+      font-weight: 600;
+    }
+
     }
   }
 
   &__img {
     width: 150px;
     height: 150px;
+
+    @media (min-width: 1280px) {
+width: 273px;
+height: 273px;
+    }
   }
 }
 
@@ -440,6 +518,11 @@ const getTagClass = (tag) => {
     display: flex;
     flex-direction: row;
     gap: 10px;
+    }
+
+    @media (min-width: 1280px) {
+      min-width: 0;
+width: 100%;
     }
 
 }
