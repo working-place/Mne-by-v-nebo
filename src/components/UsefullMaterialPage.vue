@@ -1,7 +1,7 @@
 <script setup>
 import { computed, ref, onMounted, onBeforeUnmount } from 'vue';
 import ReusableScreen from './ui/ReusableScreen.vue';
-import LinkCard from './ui/LinkCard.vue';
+import FeatureCard from './ui/FeatureCard.vue';
 import InfoCard from './ui/InfoCard.vue';
 import Slider from './ui/SliderWrapper.vue';
 import NewsCard from './ui/NewsCard.vue';
@@ -171,12 +171,11 @@ const getTagClass = (tag) => {
     <div class="slider-container">
       <Slider :items="bookSlidesSpecialist" :visible-slides="4">
         <template #default="{ item }">
-          <LinkCard :title="item.title" :description="item.description" :paddingBottom="'46px'" image-width="30%"
-            title-size="20px">
+          <FeatureCard :title="item.title" :description="item.description" :paddingBottom="'46px'" image-width="30%">
             <template #image>
               <img :src="item.image" :alt="item.title" width="90px">
             </template>
-          </LinkCard>
+          </FeatureCard>
         </template>
       </Slider>
     </div>
@@ -195,12 +194,11 @@ const getTagClass = (tag) => {
     <div class="slider-container">
       <Slider :items="bookSlidesParent" :visible-slides="4">
         <template #default="{ item }">
-          <LinkCard :title="item.title" :description="item.description" :linkUrl="item.linkUrl"
-            :linkText="item.linkText" :paddingBottom="'46px'" image-width="30%">
+          <FeatureCard :title="item.title" :description="item.description" :paddingBottom="'46px'" image-width="30%">
             <template #image>
               <img :src="item.image" :alt="item.title" width="90px">
             </template>
-          </LinkCard>
+          </FeatureCard>
         </template>
       </Slider>
     </div>
@@ -276,6 +274,7 @@ const getTagClass = (tag) => {
     color: #000000;
     line-height: 1.5;
     font-size: 18px;
+    font-weight: 300;
     text-align: center;
     max-width: 100%;
     word-break: break-word;

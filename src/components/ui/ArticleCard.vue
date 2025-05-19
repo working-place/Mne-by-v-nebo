@@ -99,6 +99,7 @@ defineProps({
             }
 
             .adaptive-card__text {
+                font-family: var(--font-family-next-art);
                 font-size: 20px;
                 line-height: 1.2;
             }
