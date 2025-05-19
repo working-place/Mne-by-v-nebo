@@ -73,6 +73,7 @@ defineProps({
   &__title {
     color: #000000;
     font-size: 20px;
+    font-weight: 600;
     line-height: 1.5;
     text-align: center;
     width: 100%;
@@ -81,6 +82,7 @@ defineProps({
   &__description {
     color: #000000;
     line-height: 1.5;
+    font-weight: 300;
     font-size: 18px;
     text-align: center;
     max-width: 100%;
@@ -112,6 +114,17 @@ defineProps({
       .info-card__description {
         text-align: left;
       }
+    }
+
+    &__title {
+      font-size: 20px;
+      font-weight: 600;
+      line-height: 1.5;
+    }
+
+    &__description {
+      font-size: 18px;
+      font-weight: 300;
     }
   }
 
