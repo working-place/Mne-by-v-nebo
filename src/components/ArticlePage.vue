@@ -112,6 +112,11 @@ const getTagClass = (tag) => {
 .article-main-container {
   align-items: stretch;
 
+  @media only screen and (max-width: 767px) {
+    padding-left: 0;
+    padding-right: 0;
+  }
+
   @media only screen and (min-width: 1280px) {
     max-width: 1190px;
     margin: 0 auto;
@@ -120,6 +125,11 @@ const getTagClass = (tag) => {
 }
 
 .article-content-wrapper {
+  @media only screen and (max-width: 767px) {
+    padding-left: 17px;
+    padding-right: 17px;
+  }
+
   @media only screen and (min-width: 1280px) {
     display: flex;
     gap: 100px;
@@ -175,6 +185,7 @@ const getTagClass = (tag) => {
   margin-bottom: 60px;
 
   .share-button {
+    font-size: 16px;
     background-color: var(--color-background-yellow);
     color: var(--color-text-dark);
     text-transform: uppercase;

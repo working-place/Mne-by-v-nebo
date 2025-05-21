@@ -206,7 +206,8 @@ onUnmounted(() => {
 @use "@/assets/scss/modalViewer.scss" as *;
 
 .gallery-section {
-  margin: 20px 0;
+  // margin: 20px 0;
+  padding-top: 60px
 }
 
 h2 {

@@ -186,11 +186,14 @@ const toggleItem = (index) => {
   margin: 0;
   text-align: left;
   font-size: 20px;
+  font-weight: 600;
 }
 
 .item-subtitle {
-  margin: 4px 0 0 0;
+  margin: 6px 0 0 0;
   text-align: left;
+  font-size: 16px;
+  font-weight: 600;
 }
 
 .arrow-circle {
@@ -233,8 +236,8 @@ const toggleItem = (index) => {
 .arrow-circle svg {
   transition: transform 0.3s ease;
   color: #000000;
-  width: 18px;
-    height: 18px;
+  width: 20px;
+  height: 20px;
 }
 
 .arrow-circle.is-open svg {
@@ -261,7 +264,7 @@ const toggleItem = (index) => {
 }
 
 .image-container {
-  padding: 35px 16px 0;
+  padding: 20px 16px 0;
   display: flex;
   justify-content: flex-start;
 }
@@ -344,10 +347,10 @@ const toggleItem = (index) => {
     padding: 0 16px 30px;
   }
 
-.arrow-circle svg {
-  width: 24px;
-  height: 24px;
-}
+  .arrow-circle svg {
+    width: 24px;
+    height: 24px;
+  }
 
   .show-all-btn {
     font-size: 14px;
@@ -395,16 +398,15 @@ const toggleItem = (index) => {
     font-size: 20px;
   }
 
-    .arrow-circle svg {
-      width: 32px;
-      height: 32px;
-    }
-  
-    .arrow-circle {
-      width: 62px;
-      height: 62px;
-    }
-    
+  .arrow-circle svg {
+    width: 32px;
+    height: 32px;
+  }
+
+  .arrow-circle {
+    width: 62px;
+    height: 62px;
+  }
 
   .show-all-btn {
     font-size: 20px;
