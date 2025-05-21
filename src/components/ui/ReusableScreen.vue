@@ -85,6 +85,7 @@ defineProps({
       '--main-screen_tablet-img-margin-top': imgPaddingTop
     }">
       <slot name="img"></slot>
+      <slot name="gallery"></slot>
     </div>
   </div>
 </template>
@@ -107,6 +108,7 @@ flex-direction: column;
   padding-right: 20px;
   background-color: var(--main-screen_bg-color);
   border-radius: 12px;
+  position: relative;
 
   @media only screen and (max-width: 767px) {
     flex-direction: column;
