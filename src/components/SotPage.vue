@@ -398,27 +398,6 @@ const getTagClass = (tag) => {
   }
 }
 
-.project-title {
-  width: 100%;
-  font-weight: 600;
-  font-size: 18px;
-  line-height: 1.5;
-
-  &_tablet {
-    display: none;
-
-    @media (min-width: 768px) {
-      display: flex;
-      justify-content: center;
-      font-weight: 600;
-      font-size: 24px;
-      line-height: 1;
-      padding: 10px;
-      text-align: center;
-    }
-  }
-}
-
 .project-mne-by-v-nebo {
   &-title_mobile {
     color: var(--color-text-light);
@@ -510,7 +489,7 @@ const getTagClass = (tag) => {
 
     @media (min-width: 768px) {
       width: 100%;
-      grid-template-rows: 217px 223px 196px;
+      grid-template-rows: 212px 212px 212px;
       grid-template-columns: 33% calc(33% - 24px) 33%;
       gap: 16px;
       align-items: end;
@@ -518,21 +497,36 @@ const getTagClass = (tag) => {
       &> :nth-child(2) {
         grid-row: 1;
         grid-column: 2/4;
+        height: 100%;
+
+        & img {
+          width: 20%;
+        }
       }
 
       &> :nth-child(3) {
         grid-row: 2;
         grid-column: 1/3;
+        height: 100%;
+
+        & img {
+          width: 20%;
+        }
       }
 
       &> :nth-child(4) {
         grid-row: 3;
         grid-column: 1/4;
+
+        & img {
+          display: none;
+        }
       }
 
       &> :nth-child(5) {
         grid-row: 2;
         grid-column: 3/4;
+        min-height: 100%;
       }
     }
 
@@ -596,11 +590,26 @@ const getTagClass = (tag) => {
     }
   }
 
+  &-title {
+    width: 100%;
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 1.5;
+  }
+
+
   &-title_tablet {
-    display: flex;
+    display: none;
 
     @media (min-width: 768px) {
+      display: flex;
+      justify-content: center;
+      font-weight: 600;
+      font-size: 24px;
+      line-height: 1;
       max-width: 650px;
+      padding: 10px;
+      text-align: center;
     }
 
     @media (min-width: 1280px) {
@@ -614,6 +623,29 @@ const getTagClass = (tag) => {
       padding-bottom: 15px;
     }
   }
+
+  // .project-title {
+  // width: 100%;
+  // font-weight: 600;
+  // font-size: 18px;
+  // line-height: 1.5;
+
+  // &_tablet {
+  //   @media (max-width: 767px) {
+  //     display: none;
+  // }
+
+  //   @media (min-width: 768px) {
+  //     display: flex;
+  //     justify-content: center;
+  //     font-weight: 600;
+  //     font-size: 24px;
+  //     line-height: 1;
+  //     padding: 10px;
+  //     text-align: center;
+  //   }
+  // }
+// }
 
   &-title_desctop {
     @media (max-width: 1279px) {}
