@@ -14,6 +14,15 @@ defineProps({
 
 const newsData = ref([]);
 const projects = ref([]);
+const currentProjectIndex = ref(0);
+
+const nextProject = () => {
+  currentProjectIndex.value = (currentProjectIndex.value + 1) % projects.value.length;
+};
+
+const prevProject = () => {
+  currentProjectIndex.value = (currentProjectIndex.value - 1 + projects.value.length) % projects.value.length;
+};
 
 const loadData = async () => {
   try {
@@ -54,9 +63,59 @@ const getTagClass = (tag) => {
         <h2 class="main-screen__subtitle_lower-case">АНО «Воспитание для всех», основанная на базе МАОУ СОШ № 33,
           активно развивает образование и социализацию
           молодёжи. В 2021, 2022 и 2024 годах организация стала победителем СОТ для работников образования.</h2>
+        <h2 class="main-screen__subtitle_upper-case">Наши проекты</h2>
       </template>
       <template v-slot:img>
-        <img src="/img/boy-thumb.png" alt="Изображение мальчика" class="main-screen__img">
+        <img src="/img/boy-thumb.png" alt="Изображение мальчика"
+          class="main-screen__img main-screen__img_mobile-tablet">
+        <img src="/img/girl-on-swing.png" alt="Изображение мальчика" class="main-screen__img-desctop">
+      </template>
+      <template v-slot:gallery>
+
+
+        <!-- галлерея -->
+
+        <div v-for="(project) in projects" :key="project.id" class="main-screen__projects-gallery">
+
+          <div class="main-screen__project-info-box">
+
+            <div class="main-screen__project-slide" v-for="(project, index) in projects" :key="project.id"
+              v-show="currentProjectIndex === index">
+              <div class="main-screen__project-info">
+                <h3 class="main-screen__project-title">{{ project.title }}</h3>
+              </div>
+            </div>
+
+            <div class="main-screen__slider-controls">
+              <button @click="prevProject" class="main-screen__slider-button prev-button">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M15 18L9 12L15 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                    stroke-linejoin="round" />
+                </svg>
+              </button>
+              <button @click="nextProject" class="main-screen__slider-button next-button">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M9 6L15 12L9 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                    stroke-linejoin="round" />
+                </svg>
+              </button>
+              <router-link class="main-screen__project-link">
+                Подробнее
+              </router-link>
+            </div>
+
+          </div>
+
+          <div class="main-screen__gallery-card-box" v-for="(project, index) in projects" :key="project.id"
+            v-show="currentProjectIndex === index">
+            <div class="main-screen__project-image">
+              <img v-if="project.sections.find(s => s.type === 'gallery')?.images?.length"
+                :src="project.sections.find(s => s.type === 'gallery').images[0].url" :alt="project.imgAlt">
+            </div>
+          </div>
+
+        </div>
+
       </template>
     </ReusableScreen>
 
@@ -78,9 +137,6 @@ const getTagClass = (tag) => {
         </div>
 
         <div class="project-content">
-          <!-- <h3 class="project-title_desctop">
-          {{ project.title }}
-        </h3> -->
           <div class="project-image_tablet" :class="`project-${project.id}-image_tablet`">
             <img :src="`/img/${project.imgURL}`" :alt="project.imgAlt">
           </div>
@@ -92,24 +148,12 @@ const getTagClass = (tag) => {
                 <img :src="section.icon" :alt="section.title" width="90px">
               </template>
             </LinkCard>
-            <GallerySection
-              v-else-if="section.type === 'gallery' && section.images"
-              :photos="section.images.map(img => ({ image: img.url }))"
-              :show-title="false"
-              heightTablet="211px"
-              minWidthTablet="0"
-              topPositionTablet="0"
-              wrapperHeightTablet="100%"
-              sliderHeightTablet="100%"
-              slideImageHeightTablet="100%"
-              slideContentHeightTablet="100%"
-              slideContentHeightDesctop="330px"
-              sliderWrapperBorderRadiusTablet="16px"
-              navigationPositionTablet="absolute"
-              navigationPositionBottomTablet="0"
-              navigationPositionRightTablet="0"
-              showPaginationTablet="none"
-              />
+            <GallerySection v-else-if="section.type === 'gallery' && section.images"
+              :photos="section.images.map(img => ({ image: img.url }))" :show-title="false" heightTablet="211px"
+              minWidthTablet="0" topPositionTablet="0" wrapperHeightTablet="100%" sliderHeightTablet="100%"
+              slideImageHeightTablet="100%" slideContentHeightTablet="100%" slideContentHeightDesctop="330px"
+              sliderWrapperBorderRadiusTablet="16px" navigationPositionTablet="absolute"
+              navigationPositionBottomTablet="0" navigationPositionRightTablet="0" showPaginationTablet="none" />
           </template>
         </div>
       </div>
@@ -122,20 +166,18 @@ const getTagClass = (tag) => {
       </div>
       <div class="news-card-wrapper">
 
-
-
-      <router-link v-for="info in firstTwoNews" :key="info.id" :to="{ name: 'article', params: { id: info.id } }"
-        class="news-card-link">
-        <NewsCard :tag-class="getTagClass(info.tag)">
-          <template v-slot:img>
-            <img :src="`/img/${info.img.src}`" :alt="info.img.alt" class="tag-card__img">
-          </template>
-          <template v-slot:tag>{{ info.tag }}</template>
-          <template v-slot:text>{{ info.text }}</template>
-          <template v-slot:date>{{ info.date }}</template>
-        </NewsCard>
-      </router-link>
-    </div>
+        <router-link v-for="info in firstTwoNews" :key="info.id" :to="{ name: 'article', params: { id: info.id } }"
+          class="news-card-link">
+          <NewsCard :tag-class="getTagClass(info.tag)">
+            <template v-slot:img>
+              <img :src="`/img/${info.img.src}`" :alt="info.img.alt" class="tag-card__img">
+            </template>
+            <template v-slot:tag>{{ info.tag }}</template>
+            <template v-slot:text>{{ info.text }}</template>
+            <template v-slot:date>{{ info.date }}</template>
+          </NewsCard>
+        </router-link>
+      </div>
     </div>
   </main>
 </template>
@@ -150,6 +192,13 @@ const getTagClass = (tag) => {
     font-size: 22px;
     line-height: 1.5;
     margin: 0;
+
+    @media (min-width: 1280px) {
+      max-width: 332px;
+      margin-left: 38px;
+      font-size: 20px;
+      line-height: 1.2;
+    }
   }
 
   &__subtitle_lower-case {
@@ -157,6 +206,30 @@ const getTagClass = (tag) => {
     font-weight: 400px;
     font-size: 18px;
     line-height: 1.4;
+
+    @media (min-width: 1280px) {
+      max-width: 312px;
+      margin-left: 38px;
+      font-size: 16px;
+      line-height: 1.4;
+      font-weight: 400;
+    }
+  }
+
+  &__subtitle_upper-case {
+
+    @media (max-width: 1279px) {
+      display: none;
+    }
+
+    @media (min-width: 1280px) {
+      font-size: 36px;
+      font-weight: 600;
+      line-height: 1;
+      position: absolute;
+      top: 148px;
+      right: 180px;
+    }
   }
 
   &__img-box {
@@ -167,6 +240,127 @@ const getTagClass = (tag) => {
     min-width: 247px;
     max-width: 300px;
     width: 80%;
+  }
+
+  &__img_mobile-tablet {
+    @media (min-width: 1280px) {
+      display: none;
+    }
+  }
+
+  &__img-desctop {
+    @media (max-width: 1279px) {
+      display: none;
+    }
+
+    @media (min-width: 1280px) {
+      min-width: 320px;
+      height: 382px;
+      position: absolute;
+      top: 0;
+      left: 295px;
+      z-index: 1000;
+    }
+  }
+
+  &__projects-gallery {
+    @media (max-width: 1279px) {
+      display: none;
+    }
+
+    @media (min-width: 1280px) {
+      display: flex;
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      height: 196px;
+      width: 590px;
+      background-color: white;
+      padding-top: 40px;
+      padding-left: 40px;
+      gap: 32px;
+      border-top-left-radius: 40px;
+      border-bottom-right-radius: 40px;
+    }
+  }
+
+  &__project-info-box {
+    display: flex;
+    flex-direction: column;
+    width: 372px;
+    height: 100%;
+    justify-content: space-between;
+  }
+
+  &__project-title {
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 1.2;
+  }
+
+  &__slider-controls {
+    display: flex;
+    gap: 15px;
+  }
+
+  &__slider-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 62px;
+    height: 62px;
+    border: none;
+    border-radius: 50%;
+    background: #CABBFF;
+    cursor: pointer;
+
+    @media (hover: hover) {
+      &:hover {
+        background-color: #977AF9;
+      }
+    }
+
+    &:disabled {
+      cursor: not-allowed;
+      background-color: #E3E3E3;
+      color: #525252;
+    }
+
+    & svg {
+      width: 40px;
+      height: 40px;
+    }
+  }
+
+  &__project-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    background-color: var(--color-background-yellow);
+    padding: 16px;
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--color-text-dark);
+    text-transform: uppercase;
+    line-height: 1;
+    text-decoration: none;
+    min-width: 205px;
+    gap: 10px;
+    border-radius: 60px;
+  }
+
+  &__gallery-card-box,
+  &__project-image {
+    width: 146px;
+    height: 156px;
+  }
+
+  &__project-image img {
+    height: 156px;
+    width: 100%;
+    object-fit: cover;
+    border-radius: 20px;
   }
 }
 
@@ -184,15 +378,12 @@ const getTagClass = (tag) => {
   position: relative;
 
   @media (min-width: 768px) {
-    // display: flex;
-    // flex-direction: column;
     justify-items: center;
     gap: 16px;
     margin-top: 60px;
   }
 
   @media (min-width: 1280px) {
-
     margin-top: 100px;
   }
 }
@@ -241,10 +432,6 @@ const getTagClass = (tag) => {
     @media (min-width: 768px) {
       object-fit: cover;
       background-color: var(--color-background-red);
-    }
-
-    img {
-      max-width: 80%
     }
   }
 }
@@ -310,7 +497,6 @@ const getTagClass = (tag) => {
     grid-template-columns: 100%;
     gap: 12px;
     align-items: start;
-    // position: relative;
 
     @media (min-width: 768px) {
       width: 100%;
@@ -341,7 +527,6 @@ const getTagClass = (tag) => {
     }
 
     @media (min-width: 1280px) {
-      // width: 100%;
       max-width: 1190px;
       grid-template-rows: 53px 277px 125px;
       grid-template-columns: 26% calc(24% - 10px) calc(24% - 10px) 26%;
@@ -354,7 +539,6 @@ const getTagClass = (tag) => {
         grid-row: 1/3;
         grid-column: 1;
         height: 330px;
-        // max-width: 290px;
       }
 
       // описание проекта
@@ -379,13 +563,8 @@ const getTagClass = (tag) => {
       &> :nth-child(4) {
         grid-row: 3;
         grid-column: 1/5;
-        // max-height: 0;
-        // height: 125px;
-        // padding: 0;\
-        // display: none;
         min-height: 0;
         height: 125px;
-        // max-width: 290px;
       }
 
       // галлерея
@@ -395,7 +574,6 @@ const getTagClass = (tag) => {
         min-height: 0;
         height: 330px;
         max-width: calc(100% - 10px);
-        // top: 0;
       }
 
       &> :nth-child(5) img {
@@ -412,26 +590,21 @@ const getTagClass = (tag) => {
       max-width: 650px;
     }
 
-
     @media (min-width: 1280px) {
 
       align-items: flex-end;
-      // align-items: center;
       max-width: 591px;
       position: absolute;
       font-size: 24px;
       height: 60px;
-      // top: -10px;
       padding: 0;
       padding-bottom: 15px;
     }
   }
 
   &-title_desctop {
-    @media (max-width: 1279px) {
-    }
+    @media (max-width: 1279px) {}
   }
-
 
   &-image_mobile {
     width: 100%;
@@ -476,7 +649,7 @@ const getTagClass = (tag) => {
     max-width: 1190px;
     flex-direction: row;
     gap: 53px;
-    }
+  }
 
   &__title-box {
     @include block-mobile;
@@ -489,14 +662,14 @@ const getTagClass = (tag) => {
     }
 
     @media (min-width: 1280px) {
-    flex-direction: row;
-    gap: 24px;
+      flex-direction: row;
+      gap: 24px;
 
-    & h2 {
-      font-size: 32px;
-      line-height: 1.2;
-      font-weight: 600;
-    }
+      & h2 {
+        font-size: 32px;
+        line-height: 1.2;
+        font-weight: 600;
+      }
 
     }
   }
@@ -506,8 +679,8 @@ const getTagClass = (tag) => {
     height: 150px;
 
     @media (min-width: 1280px) {
-width: 273px;
-height: 273px;
+      width: 273px;
+      height: 273px;
     }
   }
 }
@@ -518,12 +691,11 @@ height: 273px;
     display: flex;
     flex-direction: row;
     gap: 10px;
-    }
+  }
 
-    @media (min-width: 1280px) {
-      min-width: 0;
-width: 100%;
-    }
-
+  @media (min-width: 1280px) {
+    min-width: 0;
+    width: 100%;
+  }
 }
 </style>

@@ -285,7 +285,7 @@
           "images": [
             {
               "id": 1,
-              "url": "/img/conferention.jpeg"
+              "url": "/img/gallery-sertificats.jpeg"
             },
             {
               "id": 2,
@@ -293,7 +293,7 @@
             },
             {
               "id": 3,
-              "url": "/img/gallery-sertificats.jpeg"
+              "url": "/img/conferention.jpeg"
             }
           ]
         }
@@ -328,11 +328,11 @@
           "images": [
             {
               "id": 1,
-              "url": "/img/conferention.jpeg"
+              "url": "/img/gallery-gram.png"
             },
             {
               "id": 2,
-              "url": "/img/gallery-gram.png"
+              "url": "/img/conferention.jpeg"
             },
             {
               "id": 3,
