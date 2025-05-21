@@ -214,7 +214,6 @@ const closeModal = () => {
   @include display-flex-column;
   justify-content: center;
   align-items: center;
-
   position: relative;
   width: 100%;
 
