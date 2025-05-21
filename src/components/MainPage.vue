@@ -132,8 +132,7 @@ const getTagClass = (tag) => {
           </NewsCard>
         </router-link>
       </div>
-      <RouterLinkButton :to="{ name: 'news' }" :disabled="false" max-height-btn="62px" min-height-btn="62px"
-        font-size-btn="20px">
+      <RouterLinkButton :to="{ name: 'news' }" :disabled="false" fontSizeMobile="20px" heightMobile="62px">
         <template v-slot:text>ко всем новостям</template>
       </RouterLinkButton>
 

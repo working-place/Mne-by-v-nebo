@@ -123,7 +123,7 @@ onUnmounted(() => {
         </div>
 
         <div v-if="isMounted && !isDesktop">
-          <Slider :items="photoSlides" :visible-slides="2" >
+          <Slider :items="photoSlides" :visible-slides="2">
             <template #default="{ item }">
               <div class="slide-content" @click="openPhotoModal(item)">
                 <img :src="item.image" alt="Фото" class="slide-image">
@@ -177,8 +177,7 @@ onUnmounted(() => {
         </div>
       </div>
       <div class="button-wrapper">
-        <RouterLinkButton to="" textButton="Cмотреть больше" max-height-btn="63px" min-height-btn="63px"
-          font-size-btn="20px" />
+        <RouterLinkButton to="" textButton="Cмотреть больше" />
       </div>
     </div>
 
