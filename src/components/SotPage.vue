@@ -16,6 +16,16 @@ const newsData = ref([]);
 const projects = ref([]);
 const currentProjectIndex = ref(0);
 
+const scrollToProject = (projectId) => {
+  const element = document.getElementById(`project-${projectId}`);
+  if (element) {
+    element.scrollIntoView({
+      behavior: 'smooth',
+      block: 'start'
+    });
+  }
+};
+
 const nextProject = () => {
   currentProjectIndex.value = (currentProjectIndex.value + 1) % projects.value.length;
 };
@@ -72,10 +82,7 @@ const getTagClass = (tag) => {
       </template>
       <template v-slot:gallery>
 
-
-        <!-- галлерея -->
-
-        <div v-for="(project) in projects" :key="project.id" class="main-screen__projects-gallery">
+        <div class="main-screen__projects-gallery">
 
           <div class="main-screen__project-info-box">
 
@@ -99,9 +106,9 @@ const getTagClass = (tag) => {
                     stroke-linejoin="round" />
                 </svg>
               </button>
-              <router-link class="main-screen__project-link">
+              <button @click="scrollToProject(projects[currentProjectIndex]?.id)" class="main-screen__project-link">
                 Подробнее
-              </router-link>
+              </button>
             </div>
 
           </div>
@@ -123,7 +130,8 @@ const getTagClass = (tag) => {
       <h2 class="title-page">Наши проекты</h2>
     </div>
 
-    <div v-for="(project) in projects" :key="project.id" class="project" :class="`project-${project.id}`">
+    <div v-for="(project) in projects" :key="project.id" class="project" :class="`project-${project.id}`"
+      :id="`project-${project.id}`">
       <div class="project-grid">
         <h3 class="project-title_tablet">
           {{ project.title }}
@@ -151,7 +159,7 @@ const getTagClass = (tag) => {
             <GallerySection v-else-if="section.type === 'gallery' && section.images"
               :photos="section.images.map(img => ({ image: img.url }))" :show-title="false" heightTablet="211px"
               minWidthTablet="0" topPositionTablet="0" wrapperHeightTablet="100%" sliderHeightTablet="100%"
-              slideImageHeightTablet="100%" slideContentHeightTablet="100%" slideContentHeightDesctop="330px"
+              slideImageHeightTablet="100%" slideContentHeightTablet="100%" slideContentHeightDesctop="360px"
               sliderWrapperBorderRadiusTablet="16px" navigationPositionTablet="absolute"
               navigationPositionBottomTablet="0" navigationPositionRightTablet="0" showPaginationTablet="none" />
           </template>
@@ -290,6 +298,8 @@ const getTagClass = (tag) => {
     width: 372px;
     height: 100%;
     justify-content: space-between;
+    transition: transform 0.3s ease;
+    will-change: transform;
   }
 
   &__project-title {
@@ -503,7 +513,7 @@ const getTagClass = (tag) => {
       grid-template-rows: 217px 223px 196px;
       grid-template-columns: 33% calc(33% - 24px) 33%;
       gap: 16px;
-      align-items: center;
+      align-items: end;
 
       &> :nth-child(2) {
         grid-row: 1;
@@ -528,38 +538,40 @@ const getTagClass = (tag) => {
 
     @media (min-width: 1280px) {
       max-width: 1190px;
-      grid-template-rows: 53px 277px 125px;
+      grid-template-rows: 45px auto 125px;
       grid-template-columns: 26% calc(24% - 10px) calc(24% - 10px) 26%;
       gap: 10px;
       align-items: center;
 
-
-      // фото
       &> :first-child {
         grid-row: 1/3;
         grid-column: 1;
-        height: 330px;
+        display: flex;
+        min-height: 100%;
+        max-height: 360px;
+        align-items: flex-end;
       }
 
-      // описание проекта
       &> :nth-child(2) {
         grid-row: 2;
         grid-column: 2;
-        min-height: 0;
-        height: 100%;
+        min-height: 100%;
+        height: fit-content;
         max-width: 290px;
       }
 
-      // цели
+      &> :nth-child(2) img {
+        width: 27%;
+      }
+
       &> :nth-child(3) {
         grid-row: 2;
         grid-column: 3;
-        min-height: 0;
-        height: 100%;
+        min-height: 100%;
+        height: fit-content;
         max-width: 290px;
       }
 
-      // дост рез
       &> :nth-child(4) {
         grid-row: 3;
         grid-column: 1/5;
@@ -567,18 +579,19 @@ const getTagClass = (tag) => {
         height: 125px;
       }
 
-      // галлерея
-      &> :nth-child(5) {
-        grid-row: 1/3;
-        grid-column: 4;
-        min-height: 0;
-        height: 330px;
-        max-width: calc(100% - 10px);
+      &> :nth-child(4) img {
+        display: none;
       }
 
-      &> :nth-child(5) img {
-        height: 330px;
-        top: 0;
+      &> :nth-child(5) {
+        display: flex;
+        align-items: flex-end;
+        grid-row: 1/3;
+        grid-column: 4;
+        min-width: 309px;
+        min-height: 100%;
+        height: fit-content;
+        max-width: calc(100% - 10px);
       }
     }
   }
@@ -670,7 +683,6 @@ const getTagClass = (tag) => {
         line-height: 1.2;
         font-weight: 600;
       }
-
     }
   }
 
