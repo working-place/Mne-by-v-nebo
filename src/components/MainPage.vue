@@ -349,10 +349,9 @@ const getTagClass = (tag) => {
 
   &__subtitle {
     width: 100%;
-    text-align: center;
+    text-align: left;
 
     @media only screen and (min-width: 768px) {
-      text-align: left;
       font-weight: 700;
       line-height: 1;
     }
