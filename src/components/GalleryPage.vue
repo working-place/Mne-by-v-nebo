@@ -98,7 +98,8 @@ onUnmounted(() => {
 
 <template>
   <main>
-    <ReusableScreen imgPaddingTop="20px">
+    <ReusableScreen imgPaddingTop="20px" imgMinWidth="315px" imgMaxWidth="400px" imgMinHeight="300px"
+      imgMaxHeight="400px">
       <template v-slot:title>
         <span class="title-text">Наша жизнь</span>
       </template>
