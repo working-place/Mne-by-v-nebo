@@ -132,7 +132,8 @@ const getTagClass = (tag) => {
           </NewsCard>
         </router-link>
       </div>
-      <RouterLinkButton :to="{ name: 'news' }" :disabled="false" fontSizeMobile="20px" heightMobile="62px">
+      <RouterLinkButton :to="{ name: 'news' }" :disabled="false" fontSizeMobile="20px" heightMobile="62px"
+        widthTablet="100%">
         <template v-slot:text>ко всем новостям</template>
       </RouterLinkButton>
 
@@ -161,10 +162,13 @@ const getTagClass = (tag) => {
 
   &__news-card-box {
     display: flex;
-    flex-direction: column;
     justify-content: center;
     width: 100%;
     gap: 16px;
+
+    @media only screen and (max-width: 767px) {
+      flex-direction: column;
+    }
 
     @media only screen and (min-width: 768px) {
       flex-direction: row;
@@ -182,7 +186,6 @@ const getTagClass = (tag) => {
     max-width: 1190px;
     width: 100%;
     gap: 48px;
-    margin-top: var(--margin-between-blocs-desctop);
   }
 }
 
@@ -190,6 +193,10 @@ const getTagClass = (tag) => {
 
   &__img {
     border-bottom-right-radius: 12px;
+
+    @media only screen and (min-width: 1280px) {
+      border-bottom-right-radius: 24px;
+    }
   }
 
   &__img_size-1 {
@@ -200,11 +207,32 @@ const getTagClass = (tag) => {
   &__img_size-2 {
     width: 90%;
     height: 85%;
+
+    @media only screen and (min-width: 768px) {
+      min-width: 140px;
+      min-height: 100px;
+      width: 100%;
+      height: 100%;
+    }
+
+    @media only screen and (min-width: 768px) {
+      min-width: 150px;
+      min-height: 110px;
+      width: 100%;
+      height: 100%;
+    }
   }
 
   &__img_size-3 {
     width: 85%;
     height: 100%;
+
+    @media only screen and (min-width: 768px) {
+      min-width: 115px;
+      min-height: 85px;
+      width: 100%;
+      height: 100%;
+    }
   }
 }
 
@@ -289,6 +317,12 @@ const getTagClass = (tag) => {
     @media only screen and (min-width: 768px) {
       text-align: left;
     }
+
+    @media only screen and (min-width: 1280px) {
+      font-size: 20px;
+      font-weight: 400;
+      line-height: 1.2;
+    }
   }
 
   &__link {
@@ -337,6 +371,7 @@ const getTagClass = (tag) => {
 
   &__title {
     @include h2-mobile-uppercase;
+    text-align: center;
 
     @media only screen and (min-width: 768px) {
       font-size: 26px;
@@ -344,14 +379,21 @@ const getTagClass = (tag) => {
       line-height: 1.5;
     }
 
-    @media only screen and (min-width: 1280px) {}
+    @media only screen and (min-width: 1280px) {
+      font-size: 32px;
+      font-weight: 600;
+      line-height: 1.2;
+    }
   }
 
   &__subtitle {
     width: 100%;
-    text-align: left;
+    text-align: center;
+    font-size: 16px;
+    font-weight: 600;
 
     @media only screen and (min-width: 768px) {
+      text-align: left;
       font-weight: 700;
       line-height: 1;
     }
@@ -421,6 +463,19 @@ const getTagClass = (tag) => {
     max-width: 1190px;
   }
 
+  &__title {
+    font-size: 20px;
+    font-weight: 600;
+    line-height: 1.5;
+
+    @media only screen and (min-width: 1280px) {
+      max-width: 1190px;
+      font-size: 32px;
+      font-weight: 600;
+      line-height: 1.2;
+    }
+  }
+
   &__wrap {
     display: flex;
     gap: 16px;
@@ -435,7 +490,6 @@ const getTagClass = (tag) => {
       max-width: 1190px;
       gap: 10px;
     }
-
   }
 }
 </style>

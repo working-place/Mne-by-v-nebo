@@ -30,7 +30,7 @@ onBeforeUnmount(() => {
     <h1>Устав организации</h1>
     <template v-if="pdf">
       <div v-for="page in pages" :key="page" class="pdf-page">
-        <VuePDF :pdf="pdf" :page="page" :scale="scale"/>
+        <VuePDF :pdf="pdf" :page="page" :scale="scale" />
       </div>
     </template>
     <div v-else class="pdf-loading">
@@ -39,5 +39,4 @@ onBeforeUnmount(() => {
   </div>
 </template>
 
-<style scoped lang="scss">
-</style>
+<style scoped lang="scss"></style>

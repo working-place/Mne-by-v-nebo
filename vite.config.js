@@ -17,7 +17,6 @@ export default defineConfig({
       scss: {
         additionalData: `
         @use "@/assets/scss/mixins.scss" as *;
-        @use "@/assets/scss/variables.scss" as *;
         @use "@/assets/scss/modalViewer.scss" as *;
         @use "@/assets/scss/pdf-styles.scss" as *;
         `

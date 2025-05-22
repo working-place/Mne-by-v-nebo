@@ -197,14 +197,15 @@ const getTagClass = (tag) => {
   &__title_lower-case {
     font-family: var(--font-family-nunito);
     font-weight: 600px;
-    font-size: 22px;
+    font-size: 20px;
     line-height: 1.5;
     margin: 0;
+
+    max-width: 344px;
 
     @media (min-width: 1280px) {
       max-width: 332px;
       margin-left: 38px;
-      font-size: 20px;
       line-height: 1.2;
     }
   }
@@ -212,15 +213,13 @@ const getTagClass = (tag) => {
   &__subtitle_lower-case {
     font-family: var(--font-family-nunito);
     font-weight: 400px;
-    font-size: 18px;
+    font-size: 16px;
     line-height: 1.4;
+    max-width: 344px;
 
     @media (min-width: 1280px) {
       max-width: 312px;
       margin-left: 38px;
-      font-size: 16px;
-      line-height: 1.4;
-      font-weight: 400;
     }
   }
 
@@ -236,7 +235,7 @@ const getTagClass = (tag) => {
       line-height: 1;
       position: absolute;
       top: 148px;
-      right: 180px;
+      right: 250px;
     }
   }
 
@@ -337,8 +336,8 @@ const getTagClass = (tag) => {
     }
 
     & svg {
-      width: 40px;
-      height: 40px;
+      width: 35px;
+      height: 35px;
     }
   }
 
@@ -375,9 +374,17 @@ const getTagClass = (tag) => {
 }
 
 .title_mobile {
+  margin-bottom: -20px;
+
   @media (min-width: 768px) {
     display: none;
   }
+}
+
+.title-page {
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 1.5;
 }
 
 .project-grid {
@@ -390,11 +397,6 @@ const getTagClass = (tag) => {
   @media (min-width: 768px) {
     justify-items: center;
     gap: 16px;
-    margin-top: 60px;
-  }
-
-  @media (min-width: 1280px) {
-    margin-top: 100px;
   }
 }
 
@@ -487,6 +489,12 @@ const getTagClass = (tag) => {
     gap: 12px;
     align-items: start;
 
+    &> :nth-child(2) {
+      & img {
+        width: 25%;
+      }
+    }
+
     @media (min-width: 768px) {
       width: 100%;
       grid-template-rows: 212px 212px 212px;
@@ -566,6 +574,10 @@ const getTagClass = (tag) => {
         max-width: 290px;
       }
 
+      &> :nth-child(3) img {
+        width: 35%;
+      }
+
       &> :nth-child(4) {
         grid-row: 3;
         grid-column: 1/5;
@@ -592,11 +604,10 @@ const getTagClass = (tag) => {
 
   &-title {
     width: 100%;
-  font-weight: 600;
-  font-size: 18px;
-  line-height: 1.5;
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 1.5;
   }
-
 
   &-title_tablet {
     display: none;
@@ -613,39 +624,15 @@ const getTagClass = (tag) => {
     }
 
     @media (min-width: 1280px) {
-
       align-items: flex-end;
       max-width: 591px;
       position: absolute;
       font-size: 24px;
       height: 60px;
       padding: 0;
-      padding-bottom: 15px;
+      padding-bottom: 30px;
     }
   }
-
-  // .project-title {
-  // width: 100%;
-  // font-weight: 600;
-  // font-size: 18px;
-  // line-height: 1.5;
-
-  // &_tablet {
-  //   @media (max-width: 767px) {
-  //     display: none;
-  // }
-
-  //   @media (min-width: 768px) {
-  //     display: flex;
-  //     justify-content: center;
-  //     font-weight: 600;
-  //     font-size: 24px;
-  //     line-height: 1;
-  //     padding: 10px;
-  //     text-align: center;
-  //   }
-  // }
-// }
 
   &-title_desctop {
     @media (max-width: 1279px) {}
@@ -679,9 +666,14 @@ const getTagClass = (tag) => {
       overflow: hidden;
 
       img {
-        height: 100%;
-        object-fit: contain;
+        @include cover-center-no-repeat-img;
+        background-position: left;
+        height: 90%;
       }
+    }
+
+    @media (min-width: 1280px) {
+      border-radius: 24px;
     }
   }
 }
@@ -700,10 +692,8 @@ const getTagClass = (tag) => {
     @include block-mobile;
     padding: 0;
 
-    @media (min-width: 768px) {
-      & h2 {
-        font-size: 20px;
-      }
+    & h2 {
+      font-size: 20px;
     }
 
     @media (min-width: 1280px) {

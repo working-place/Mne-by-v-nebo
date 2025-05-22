@@ -44,6 +44,10 @@ defineProps({
     type: String,
     default: '63px',
   },
+  widthTablet: {
+    type: String,
+    default: '',
+  },
   textButton: {
     type: String,
     default: 'Перейти ко всем новостям',
@@ -61,7 +65,8 @@ defineProps({
     '--button_font-size-desktop': fontSizeDesktop || fontSizeTablet || fontSizeMobile,
     '--button_height-mobile': heightMobile,
     '--button_height-tablet': heightTablet || heightMobile,
-    '--button_height-desktop': heightDesktop || heightTablet || heightMobile
+    '--button_height-desktop': heightDesktop || heightTablet || heightMobile,
+    '--button_width-tablet': widthTablet
   }" @click.prevent="disabled ? null : $emit('click')">
     <span class="button__text">
       <slot name="text">{{ textButton }}</slot>
@@ -85,10 +90,13 @@ defineProps({
   border: none;
   border-radius: 60px;
   text-decoration: none;
+  font-size: var(--button_font-size-mobile);
 
   @media (min-width: 768px) {
     min-height: var(--button_height-tablet);
     max-height: var(--button_height-tablet);
+    width: var(--button_width-tablet);
+    font-size: 14px;
   }
 
   @media (min-width: 1280px) {
@@ -107,7 +115,6 @@ defineProps({
   }
 
   &__text {
-    font-size: var(--button_font-size-mobile);
     text-transform: uppercase;
     font-weight: 600;
 

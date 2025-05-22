@@ -115,6 +115,10 @@ onUnmounted(() => {
 
   &__box.menu-open {
     background-color: var(--color-background-light-blue);
+
+    @media only screen and (min-width: 768px) {
+      background-color: transparent;
+    }
   }
 
   &__logo {

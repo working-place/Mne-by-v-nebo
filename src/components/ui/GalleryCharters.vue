@@ -115,16 +115,17 @@ const closeModal = () => {
       </div>
     </div>
 
-    <div class="navigation">
+    <div class="navigation" v-if="visiblePhotosGroup.length > 1">
       <div class="arrows">
         <button @click="prevSlide" class="arrow" :disabled="currentIndex === 0" :title="`Previous slide button`">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+          <svg class="svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
             <path d="M15 18L9 12L15 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"
               stroke-linejoin="round" />
           </svg>
         </button>
-        <button @click="nextSlide" class="arrow" :disabled="currentIndex === visiblePhotosGroup.length - 1" :title="`Next slide button`">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+        <button @click="nextSlide" class="arrow" :disabled="currentIndex === visiblePhotosGroup.length - 1"
+          :title="`Next slide button`">
+          <svg class="svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
             <path d="M9 18L15 12L9 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"
               stroke-linejoin="round" />
           </svg>
@@ -161,9 +162,7 @@ const closeModal = () => {
   @media only screen and (min-width: 1280px) {
     width: 44%;
   }
-
 }
-
 
 .gallery-section {
   position: relative;
@@ -178,7 +177,7 @@ const closeModal = () => {
     flex-direction: column;
     justify-content: space-between;
     gap: 20px;
-    border-radius: var(--cards-border-radius-tablet);
+    border-radius: 16px;
     min-height: 276px;
   }
 
@@ -216,7 +215,6 @@ const closeModal = () => {
   align-items: center;
   position: relative;
   width: 100%;
-
 }
 
 .slider {
@@ -228,7 +226,6 @@ const closeModal = () => {
 .slide-group {
   display: flex;
   justify-content: center;
-
   width: 100%;
   gap: 40px;
 
@@ -333,10 +330,20 @@ const closeModal = () => {
   &:disabled {
     @include btn-disable;
   }
+
+  @media only screen and (min-width: 1280px) {
+    width: 62px;
+    height: 62px;
+  }
 }
 
 .arrow svg {
   width: 18px;
   height: 18px;
+
+  @media only screen and (min-width: 1280px) {
+    width: 35px;
+    height: 35px;
+  }
 }
 </style>

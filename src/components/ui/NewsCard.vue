@@ -47,15 +47,13 @@ defineProps({
 
   @media only screen and (min-width: 768px) {
     border-radius: 24px;
-      min-width: 320px;
-      min-height: 302px;
+    gap: 20px;
   }
 
   @media only screen and (min-width: 1280px) {
-  height: auto;
-  min-width: 100%;
-}
-
+    height: auto;
+    min-width: 100%;
+  }
 
   &__tag-box {
     @include display-flex-center-center;
@@ -84,7 +82,7 @@ defineProps({
     @media only screen and (min-width: 768px) {
       border-top-right-radius: 20px;
       border-top-left-radius: 20px;
-  }
+    }
   }
 
   &__img {
@@ -97,7 +95,7 @@ defineProps({
     @include display-flex-column;
     justify-content: space-around;
     height: 35%;
-    margin-top: 22px;
+    // margin-top: 22px;
     gap: 8px;
   }
 
@@ -111,8 +109,8 @@ defineProps({
     max-height: calc(2 * 1.4em);
     word-break: break-word;
 
-      @media only screen and (min-width: 768px) {
-      line-height: 1;
+    @media only screen and (min-width: 768px) {
+      line-height: 1.2;
     }
   }
 

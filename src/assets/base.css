@@ -90,19 +90,22 @@ h3 {
     width: 100vw;
     padding-left: 59px;
     padding-right: 59px;
+    gap: 60px;
   }
-
 }
 
 @media only screen and (min-width: 1280px) {
   main {
     width: 100vw;
+    padding-bottom: 0;
     margin-top: 0;
+    margin-bottom: 100px;
+    gap: 100px;
   }
 
   h1 {
     font-size: 48px;
-  line-height: 1;
-  font-weight: 700;
+    line-height: 1;
+    font-weight: 700;
   }
 }

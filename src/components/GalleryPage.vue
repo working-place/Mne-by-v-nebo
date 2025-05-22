@@ -204,11 +204,6 @@ onUnmounted(() => {
 @use '@/assets/scss/mixins.scss' as *;
 @use "@/assets/scss/modalViewer.scss" as *;
 
-.gallery-section {
-  // margin: 20px 0;
-  padding-top: 60px
-}
-
 h2 {
   @include h2-mobile-uppercase;
   text-align: center;
@@ -223,8 +218,12 @@ h2 {
 .slider-container {
   position: relative;
   width: 100%;
-  padding-top: 20px;
+  padding-top: 22px;
   max-width: 1190px;
+
+  @media only screen and (min-width: 1280px) {
+    padding-top: 40px;
+  }
 }
 
 .grid-container {
@@ -261,6 +260,10 @@ h2 {
   object-fit: cover;
   border-radius: 12px;
 
+  @media only screen and (min-width: 678px) {
+    border-radius: 16px;
+  }
+
   @media only screen and (min-width: 1280px) {
     border-radius: 24px;
   }
@@ -288,7 +291,7 @@ h2 {
   display: flex;
   justify-content: center;
   gap: 8px;
-  margin-top: 20px;
+  margin-top: 40px;
 }
 
 .page-number {

@@ -181,8 +181,6 @@ const getTagClass = (tag) => {
 
 .share-section {
   width: 100%;
-  margin-top: 50px;
-  margin-bottom: 60px;
 
   .share-button {
     font-size: 16px;

@@ -92,7 +92,7 @@ const handleTagFilter = (title) => {
 };
 
 const clearTagFilter = () => {
-    activeTag.value = "все";
+  activeTag.value = "все";
 }
 
 const filteredNews = computed(() => {
@@ -146,71 +146,42 @@ const changePage = (pageNum) => {
 <template>
   <main>
 
-    <ReusableScreen
-      bgColor="var(--color-background-lavender)"
-      textColor="var(--color-text-dark)"
-      blockHeight="470px"
-      tabletHeight="50px"
-      desctopHeight="255px"
-      :use-flex="false"
-      :hideImgOnTablet="true"
-      paddingRight="52px"
-      wrapperWidthTablet="100%"
-    >
+    <ReusableScreen bgColor="var(--color-background-lavender)" textColor="var(--color-text-dark)" blockHeight="470px"
+      tabletHeight="50px" desctopHeight="255px" :use-flex="false" :hideImgOnTablet="true" paddingRight="52px"
+      wrapperWidthTablet="100%" textSize="19px">
       <template v-slot:title>
         новости
       </template>
       <template v-slot:description>
-        <input
-          id="search-input"
-          type="text"
-          class="main-screen__search-input"
-          :value="searchQuery"
-          @input="handleSearchInput"
-          placeholder="хештег"
-        >
+        <input id="search-input" type="text" class="main-screen__search-input" :value="searchQuery"
+          @input="handleSearchInput" placeholder="хештег">
       </template>
       <template v-slot:img>
-        <img
-        src="/img/main-screen-photo-boy.png"
-        alt="Изображение мальчика"
-        class="main-screen__img">
+        <img src="/img/main-screen-photo-boy.png" alt="Изображение мальчика" class="main-screen__img">
       </template>
     </ReusableScreen>
 
     <div class="news">
 
       <div class="news__filtering-box">
-        <button
-          v-for="button in filteringButtons"
-          :key="button.id" class="news__filtering-btn"
-          :class="[`news__filtering-btn_${button.class}`,
-            { 'news__filtering-btn_active': activeTag === button.title },
-            { 'news__filtering-btn_disabled': isDisabled }
-          ]"
-          :aria-disabled="disabled" :disabled="isDisabled" @click="handleTagFilter(button.title)"
-          :title="`Filter by ${button.title}`"
-        >
+        <button v-for="button in filteringButtons" :key="button.id" class="news__filtering-btn" :class="[`news__filtering-btn_${button.class}`,
+        { 'news__filtering-btn_active': activeTag === button.title },
+        { 'news__filtering-btn_disabled': isDisabled }
+        ]" :aria-disabled="disabled" :disabled="isDisabled" @click="handleTagFilter(button.title)"
+          :title="`Filter by ${button.title}`">
           <span>{{ button.title }}</span>
         </button>
       </div>
 
       <div class="news__wrapper">
         <template v-if="filteredNews && filteredNews.length">
-          <router-link
-            v-for="info in paginatedNews"
-            :key="info.id"
-            :to="{ name: 'article',
-            params: { id: info.id } }"
-            class="news__card-link"
-          >
+          <router-link v-for="info in paginatedNews" :key="info.id" :to="{
+            name: 'article',
+            params: { id: info.id }
+          }" class="news__card-link">
             <NewsCard :tag-class="getTagClass(info.tag)">
               <template v-slot:img>
-                <img
-                  :src="`/img/${info.img.src}`"
-                  :alt="info.img.alt"
-                  class="tag-card__img"
-                >
+                <img :src="`/img/${info.img.src}`" :alt="info.img.alt" class="tag-card__img">
               </template>
               <template v-slot:tag>{{ info.tag }}</template>
               <template v-slot:text>{{ info.text }}</template>
@@ -223,18 +194,9 @@ const changePage = (pageNum) => {
         </div>
       </div>
 
-      <paginate
-        v-if="windowWidth >= 768"
-        v-model="currentPage"
-        :page-count="pageCount"
-        :click-handler="changePage"
-        :prev-text="''"
-        :next-text="''"
-        :container-class="'pagination'"
-        :page-class="'page-item'"
-        :active-class="'active'"
-        :page-link-class="'page-link'"
-      >
+      <paginate v-if="windowWidth >= 768" v-model="currentPage" :page-count="pageCount" :click-handler="changePage"
+        :prev-text="''" :next-text="''" :container-class="'pagination'" :page-class="'page-item'"
+        :active-class="'active'" :page-link-class="'page-link'">
       </paginate>
 
     </div>
@@ -318,6 +280,17 @@ const changePage = (pageNum) => {
   padding: 0;
   width: 100%;
   height: fit-content;
+
+  @media only screen and (min-width: 768px) {
+    margin-top: -10px;
+    gap: 40px;
+  }
+
+  @media only screen and (min-width: 1280px) {
+    margin-top: -50px;
+    margin-bottom: 60px;
+    gap: 40px;
+  }
 
   &__wrapper {
     display: flex;

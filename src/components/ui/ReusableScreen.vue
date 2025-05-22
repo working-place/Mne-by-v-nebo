@@ -16,6 +16,10 @@ defineProps({
     type: String,
     default: 'var(--color-text-light)',
   },
+  textSize: {
+    type: String,
+    default: '36px',
+  },
   paddingRight: {
     type: String,
     default: '0',
@@ -70,7 +74,7 @@ defineProps({
       '--main-screen_tablet-wrapper-width-desctop': wrapperWidthDesctop,
     }">
       <div class="main-screen__title-box">
-        <h1 class="main-screen__title">
+        <h1 class="main-screen__title" :style="{ '--main-screen_text-size': textSize }">
           <slot name="title"></slot>
         </h1>
       </div>
@@ -97,7 +101,7 @@ defineProps({
   @include minmax-width-mobile;
   display: flex;
   justify-content: flex-end;
-flex-direction: column;
+  flex-direction: column;
   min-width: var(--min-width);
   max-width: 1190px;
   width: calc(100% + 34px);
@@ -145,18 +149,24 @@ flex-direction: column;
       gap: 24px;
       width: var(--main-screen_tablet-wrapper-width-tablet);
       padding-right: var(--main-screen_tablet-padding-right);
-      padding-top: 60px;
-      margin-bottom: 60px;
+      min-height: 340px;
+      height: 100%;
+      justify-content: center;
     }
 
     @media only screen and (min-width: 1280px) {
       min-width: 825px;
       width: var(--main-screen_tablet-wrapper-width-desctop);
+      padding: 0;
+      margin: 0;
     }
   }
 
+
+
   &__title-box,
   &__description-box {
+    display: flex;
     justify-content: center;
     align-items: center;
     width: 100%;
@@ -171,30 +181,43 @@ flex-direction: column;
     }
   }
 
+  &__title-box {
+
+    @media only screen and (min-width: 768px) {
+      justify-content: flex-start;
+    }
+  }
+
   &__title {
-    @include h1-mobile;
+    text-align: center;
     margin: 0;
+    font-size: var(--main-screen_text-size);
+    font-weight: 600;
+    line-height: 1.25;
+    width: 321px;
 
     @media only screen and (min-width: 768px) {
       justify-content: flex-start;
       text-align: left;
       font-size: 36px;
-      line-height: 1.25;
     }
 
     @media only screen and (min-width: 1280px) {
       max-width: 825px;
       font-size: 48px;
+      width: 100%;
     }
   }
 
   &__description {
     display: flex;
+    justify-content: center;
     text-align: center;
     width: 100%;
 
     @media only screen and (min-width: 768px) {
       text-align: left;
+      justify-content: start;
     }
 
     @media only screen and (min-width: 1280px) {
@@ -208,7 +231,6 @@ flex-direction: column;
     width: 100%;
     align-items: flex-end;
     justify-content: center;
-
 
     @media only screen and (min-width: 768px) {
       width: 300px;
@@ -224,13 +246,7 @@ flex-direction: column;
   &__img {
     object-fit: contain;
     width: 100%;
-    // pad: 5px;
     border-bottom-right-radius: 30px;
-
-
-//     @media only screen and (min-width: 768px) {
-// width: 200px;
-//     }
 
     @media only screen and (min-width: 1280px) {
       object-fit: cover;

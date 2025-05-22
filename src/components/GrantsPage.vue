@@ -98,7 +98,7 @@ const toggleItem = (index) => {
   <main>
     <ReusableScreen blockHeight="fit-content">
       <template v-slot:title>
-        Участие<br>в грантах
+        Участие в грантах
       </template>
       <template v-slot:description>
         Гранты позволяют внедрять новые образовательные технологии, программы и подходы, улучшая эффективность обучения
@@ -166,6 +166,14 @@ const toggleItem = (index) => {
   margin-bottom: 12px;
   overflow: hidden;
   width: 100%;
+
+  @media only screen and (min-width: 768px) {
+    border-radius: 16px;
+  }
+
+  @media only screen and (min-width: 1280px) {
+    border-radius: 24px;
+  }
 }
 
 .accordion-header {

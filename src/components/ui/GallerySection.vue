@@ -81,15 +81,15 @@ const props = defineProps({
     default: ''
   },
   navigationPositionTablet: {
-        type: String,
+    type: String,
     default: ''
   },
   navigationPositionBottomTablet: {
-        type: String,
+    type: String,
     default: ''
   },
   navigationPositionRightTablet: {
-        type: String,
+    type: String,
     default: ''
   },
 });
@@ -170,39 +170,22 @@ watch(() => props.photos, updateSliderPosition);
 
   }">
     <h2 v-if="showTitle">{{ title }}</h2>
-    <div ref="sliderContainer"
-    class="slider-wrapper"
-    :style="{
+    <div ref="sliderContainer" class="slider-wrapper" :style="{
       '--wrapper-height-tablet': wrapperHeightTablet,
       '--slider-wrapper-border-radius-tablet': sliderWrapperBorderRadiusTablet
-    }"
-    >
-      <div class="slider"
-      ref="slider"
-      @touchstart="handleTouchStart"
-      @touchmove="handleTouchMove"
-        @touchend="handleTouchEnd"
-        :style="{
+    }">
+      <div class="slider" ref="slider" @touchstart="handleTouchStart" @touchmove="handleTouchMove"
+        @touchend="handleTouchEnd" :style="{
           '--slider-height-tablet': sliderHeightTablet
-        }"
-        >
+        }">
         <div v-for="(photo, index) in photos" :key="photo.id || index" class="slide">
-          <div
-          class="slide-content"
-          @click="openPhotoModal(photo)"
-          :style="{
+          <div class="slide-content" @click="openPhotoModal(photo)" :style="{
             '--slide-content-height-tablet': slideContentHeightTablet,
             '--slide-content-height-desctop': slideContentHeightDesctop
-          }"
-          >
-            <img
-            :src="photo.image"
-            :alt="`Фото ${index + 1}`"
-            class="slide-image"
-            :style="{
+          }">
+            <img :src="photo.image" :alt="`Фото ${index + 1}`" class="slide-image" :style="{
               '--slide-image-height-tablet': slideImageHeightTablet
-            }"
-            >
+            }">
           </div>
         </div>
       </div>
@@ -281,7 +264,11 @@ watch(() => props.photos, updateSliderPosition);
 
   @media (min-width: 768px) {
     height: var(--wrapper-height-tablet);
-    border-radius: var(--slider-wrapper-border-radius-tablet);
+    border-radius: 16px;
+  }
+
+  @media (min-width: 1280px) {
+    border-radius: 24px;
   }
 }
 
@@ -289,6 +276,14 @@ watch(() => props.photos, updateSliderPosition);
   width: 100%;
   overflow: hidden;
   border-radius: 12px;
+
+  @media (min-width: 768px) {
+    border-radius: 16px;
+  }
+
+  @media (min-width: 1280px) {
+    border-radius: 24px;
+  }
 }
 
 .slider {
@@ -326,8 +321,12 @@ watch(() => props.photos, updateSliderPosition);
   border-radius: 12px;
 
   @media only screen and (min-width: 768px) {
-border-radius: 16px;
-height: var(--slide-image-height-tablet);
+    border-radius: 16px;
+    height: var(--slide-image-height-tablet);
+  }
+
+  @media only screen and (min-width: 1280px) {
+    border-radius: 24px;
   }
 }
 
@@ -342,9 +341,6 @@ height: var(--slide-image-height-tablet);
   margin-top: 16px;
 
   @media only screen and (min-width: 768px) {
-    // position: absolute;
-    // bottom: 0;
-    // right: 0;
     position: var(--navigation-position-tablet);
     bottom: var(--navigation-position-bottom-tablet);
     right: var(--navigation-position-right-tablet);
@@ -354,12 +350,11 @@ height: var(--slide-image-height-tablet);
 .pagination {
   display: flex;
   gap: 8px;
+  justify-content: flex-start;
 
   @media only screen and (min-width: 1280px) {
-display: var(--show-pagination);
+    display: var(--show-pagination);
   }
-
-
 }
 
 .pagination button {
@@ -395,6 +390,11 @@ display: var(--show-pagination);
   justify-content: center;
   cursor: pointer;
 
+  @media only screen and (min-width: 1280px) {
+    width: 62px;
+    height: 62px;
+  }
+
   @media (hover: hover) {
     &:hover {
       background-color: #977AF9;
@@ -412,5 +412,10 @@ display: var(--show-pagination);
   stroke: white;
   width: 18px;
   height: 18px;
+
+  @media (min-width: 1280px) {
+    width: 35px;
+    height: 35px;
+  }
 }
 </style>

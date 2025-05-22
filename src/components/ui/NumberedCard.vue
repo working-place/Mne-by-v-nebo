@@ -37,7 +37,6 @@ defineProps({
   border-radius: var(--cards-border-radius);
 
   @media only screen and (min-width: 768px) {
-    min-width: 320px;
     min-height: 204px;
     width: 48%;
     flex-grow: 1;
@@ -56,8 +55,8 @@ defineProps({
     border-radius: var(--cards-border-radius-desctop);
 
     &:last-child {
-    min-height: 226px;
-    width: 33%;
+      min-height: 226px;
+      width: 33%;
     }
   }
 
@@ -84,6 +83,7 @@ defineProps({
     bottom: 0;
     right: 0;
     width: 8em;
+
   }
 }
 </style>

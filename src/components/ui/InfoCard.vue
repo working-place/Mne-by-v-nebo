@@ -43,7 +43,7 @@ defineProps({
   @include display-flex-column-center;
   position: relative;
   width: 100%;
-  gap: 10px;
+  gap: 20px;
   padding: 20px;
   background-color: var(--color-background-light-blue);
   border-radius: var(--cards-border-radius);
@@ -95,6 +95,7 @@ defineProps({
     gap: 30px;
     padding: 30px;
     min-width: 650px;
+    border-radius: 16px;
 
     &__image-container {
       width: 200px;
@@ -133,8 +134,7 @@ defineProps({
     height: 228px;
     padding: 40px 40px 40px 200px;
     gap: 50px;
-    //margin-top: 50px;
-    border-radius: 100px var(--cards-border-radius) var(--cards-border-radius) 100px;
+    border-radius: 24px;
 
     &--left &__image-container {
       position: absolute;

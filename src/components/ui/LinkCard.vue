@@ -55,11 +55,12 @@ defineExpose({
 </script>
 
 <template>
-  <div class="card" :style="{ '--card-padding-bottom-mobile': paddingBottomMobile,
+  <div class="card" :style="{
+    '--card-padding-bottom-mobile': paddingBottomMobile,
     '--card_card-min-height': cardMinHeight,
-'--card_card-max-height': cardMaxHeight,
-'--card_card-max-width': cardMinWidth,
-   }" ref="root">
+    '--card_card-max-height': cardMaxHeight,
+    '--card_card-max-width': cardMinWidth,
+  }" ref="root">
     <div class="card__content-text">
       <h3 class="card__title" :style="{ fontSize: titleSize }">{{ title }}</h3>
       <p class="card__description" :style="{ fontSize: descriptionSize }">{{ description }}</p>
@@ -93,17 +94,20 @@ defineExpose({
     min-width: var(--card_card-max-width);
     min-height: var(--card_card-min-height);
     max-height: var(--card_card-max-height);
-border-radius: 16px;
-min-height: 211px;
-// padding-bottom: 30px;
+    border-radius: 16px;
+    min-height: 211px;
+  }
+
+  @media only screen and (min-width: 1280px) {
+    border-radius: 24px;
   }
 
   &__title {
     margin-bottom: 10px;
 
     @media only screen and (min-width: 1280px) {
-        line-height: 1.2;
-      }
+      line-height: 1.2;
+    }
   }
 
   &__title,
@@ -126,6 +130,14 @@ min-height: 211px;
     justify-content: flex-end;
     overflow: hidden;
     border-radius: 0 0 12px 0;
+
+    @media only screen and (min-width: 768px) {
+      border-radius: 0 0 16px 0;
+    }
+
+    @media only screen and (min-width: 1280px) {
+      border-radius: 0 0 24px 0;
+    }
 
     :slotted(img) {
       width: v-bind(imageWidth);

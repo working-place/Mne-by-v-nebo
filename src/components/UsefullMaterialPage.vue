@@ -219,7 +219,8 @@ const getTagClass = (tag) => {
         </router-link>
       </div>
 
-      <RouterLinkButton :to="{ name: 'news' }" :disabled="false" class="router-link-button">
+      <RouterLinkButton :to="{ name: 'news' }" :disabled="false" class="router-link-button" heightMobile="36px"
+        widthTablet="100%">
         <template v-slot:text>Перейти ко всем новостям</template>
       </RouterLinkButton>
     </div>
@@ -234,7 +235,7 @@ const getTagClass = (tag) => {
   @include display-flex-column-center;
   position: relative;
   width: 100%;
-  gap: 10px;
+  gap: 20px;
   padding: 20px;
   background-color: var(--color-background-light-blue);
   border-radius: var(--cards-border-radius);
@@ -285,6 +286,7 @@ const getTagClass = (tag) => {
     gap: 30px;
     padding: 30px;
     min-width: 650px;
+    border-radius: 16px;
 
     &__image-container {
       width: 200px;
@@ -312,8 +314,7 @@ const getTagClass = (tag) => {
     height: 228px;
     padding: 40px 200px 40px 40px;
     gap: 50px;
-    margin-top: 50px;
-    border-radius: var(--cards-border-radius) 100px 100px var(--cards-border-radius);
+    border-radius: 24px;
 
     &--right &__image-container {
       position: absolute;
@@ -339,10 +340,6 @@ const getTagClass = (tag) => {
       font-size: 20px;
     }
   }
-}
-
-.content-card {
-  margin-top: 60px;
 }
 
 .slider-container {
