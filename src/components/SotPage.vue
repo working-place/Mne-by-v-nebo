@@ -261,11 +261,11 @@ const getTagClass = (tag) => {
     }
 
     @media (min-width: 1280px) {
-      min-width: 320px;
+      width: 320px;
       height: 382px;
       position: absolute;
-      top: 0;
-      left: 295px;
+      top: -420px;
+      right: 550px;
       z-index: 1000;
     }
   }

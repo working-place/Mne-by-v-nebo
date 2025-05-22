@@ -146,8 +146,8 @@ const changePage = (pageNum) => {
 <template>
   <main>
 
-    <ReusableScreen bgColor="var(--color-background-lavender)" textColor="var(--color-text-dark)" blockHeight="470px"
-      tabletHeight="50px" desctopHeight="255px" :use-flex="false" :hideImgOnTablet="true" paddingRight="52px"
+    <ReusableScreen bgColor="var(--color-background-lavender)" textColor="var(--color-text-dark)" blockHeight="255px"
+      tabletHeight="230px" desctopHeight="255px" :use-flex="false" :hideImgOnTablet="true" paddingRight="52px"
       wrapperWidthTablet="100%" textSize="19px">
       <template v-slot:title>
         новости
@@ -263,6 +263,7 @@ const changePage = (pageNum) => {
     @media only screen and (min-width: 1280px) {
       max-width: 610px;
       height: 54px;
+      // margin-bottom: 60px;
     }
   }
 

@@ -95,7 +95,6 @@ defineProps({
     @include display-flex-column;
     justify-content: space-around;
     height: 35%;
-    // margin-top: 22px;
     gap: 8px;
   }
 

@@ -169,7 +169,6 @@ defineProps({
       gap: 24px;
       width: var(--main-screen_tablet-wrapper-width-tablet);
       padding-right: var(--main-screen_tablet-padding-right);
-      min-height: 340px;
       height: 100%;
       justify-content: center;
     }
