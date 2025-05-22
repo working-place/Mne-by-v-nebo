@@ -149,7 +149,8 @@ const getTagClass = (tag) => {
 
 <template>
   <main>
-    <ReusableScreen textColor="var(--color-text-dark)" bgColor="var(--color-background-yellow)" imgPaddingTop="0">
+    <ReusableScreen textColor="var(--color-text-dark)" bgColor="var(--color-background-yellow)" imgPaddingTop="0"
+      imgMinWidth="315px" imgMaxWidth="463px" imgMinHeight="300px" imgMaxHeight="463px">
       <template v-slot:title>
         <span class="main-screen__title">Полезные материалы</span>
       </template>
