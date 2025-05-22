@@ -38,11 +38,27 @@ defineProps({
   },
   tabletHeight: {
     type: String,
-    default: 'fit-content',
+    default: '344px',
   },
   imgWidth: {
     type: String,
     default: '45%',
+  },
+  imgMinWidth: {
+    type: String,
+    default: '257px',
+  },
+  imgMaxWidth: {
+    type: String,
+    default: '319px',
+  },
+  imgMinHeight: {
+    type: String,
+    default: 'auto',
+  },
+  imgMaxHeight: {
+    type: String,
+    default: 'auto',
   },
   imgPaddingTop: {
     type: String,
@@ -86,7 +102,11 @@ defineProps({
     </div>
 
     <div class="main-screen__img-box" :style="{
-      '--main-screen_tablet-img-margin-top': imgPaddingTop
+  '--main-screen_tablet-img-margin-top': imgPaddingTop,
+  '--img-min-width': imgMinWidth,
+  '--img-max-width': imgMaxWidth,
+  '--img-min-height': imgMinHeight,
+  '--img-max-height': imgMaxHeight,
     }">
       <slot name="img"></slot>
       <slot name="gallery"></slot>
@@ -101,7 +121,7 @@ defineProps({
   @include minmax-width-mobile;
   display: flex;
   justify-content: flex-end;
-  flex-direction: column;
+    flex-direction: column;
   min-width: var(--min-width);
   max-width: 1190px;
   width: calc(100% + 34px);
@@ -233,13 +253,21 @@ defineProps({
     justify-content: center;
 
     @media only screen and (min-width: 768px) {
-      width: 300px;
-      margin-top: var(--main-screen_tablet-img-margin-top);
+      position: absolute;
+      right: 0;
+      bottom: 0;
+      width: clamp(var(--img-min-width),
+          calc(300px + (100vw - 768px) / (1280 - 768) * (500 - 300)),
+          var(--img-max-width));
+      height: clamp(var(--img-min-height),
+          calc(200px + (100vw - 768px) / (1280 - 768) * (400 - 200)),
+          var(--img-max-height));
       display: v-bind('hideImgOnTablet ? "none" : "flex"');
     }
 
     @media only screen and (min-width: 1280px) {
-      width: 318px;
+      width: var(--img-max-width);
+      height: var(--img-max-height);
     }
   }
 
@@ -248,12 +276,15 @@ defineProps({
     width: 100%;
     border-bottom-right-radius: 30px;
 
-    @media only screen and (min-width: 1280px) {
+    @media only screen and (min-width: 768px) {
       object-fit: cover;
+    }
+
+    @media only screen and (min-width: 1280px) {
       border-bottom-right-radius: 40px;
     }
   }
-}
+  }
 
 .flex-layout {
   display: flex;

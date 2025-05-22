@@ -96,7 +96,8 @@ const toggleItem = (index) => {
 
 <template>
   <main>
-    <ReusableScreen blockHeight="fit-content">
+    <ReusableScreen blockHeight="fit-content" imgMinWidth="315px" imgMaxWidth="400px" imgMinHeight="300px"
+      imgMaxHeight="400px">
       <template v-slot:title>
         Участие в грантах
       </template>
