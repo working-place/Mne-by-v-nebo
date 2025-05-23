@@ -315,7 +315,7 @@ const getTagClass = (tag) => {
     height: 228px;
     padding: 40px 200px 40px 40px;
     gap: 50px;
-    border-radius: 24px;
+    border-radius: 24px 100px 100px 24px;
 
     &--right &__image-container {
       position: absolute;

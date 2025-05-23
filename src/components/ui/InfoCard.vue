@@ -134,7 +134,7 @@ defineProps({
     height: 228px;
     padding: 40px 40px 40px 200px;
     gap: 50px;
-    border-radius: 24px;
+    border-radius: 100px 24px 24px 100px;
 
     &--left &__image-container {
       position: absolute;
