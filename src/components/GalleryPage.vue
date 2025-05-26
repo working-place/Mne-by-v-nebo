@@ -1,7 +1,6 @@
 <script setup>
 import ReusableScreen from './ui/ReusableScreen.vue';
 import Slider from './ui/SliderWrapper.vue';
-import RouterLinkButton from './ui/RouterLinkButton.vue';
 import { ref, computed, onMounted, onUnmounted } from 'vue';
 
 const photoSlides = [
@@ -178,7 +177,7 @@ onUnmounted(() => {
         </div>
       </div>
       <div class="button-wrapper">
-        <RouterLinkButton to="" textButton="Cмотреть больше" />
+        <a href="https://vk.com/vospitaniedlyvseh" target="_blank" class="button-style">Смотреть больше</a>
       </div>
     </div>
 
@@ -273,9 +272,39 @@ h2 {
 .button-wrapper {
   padding-top: 26px;
   max-width: 1190px;
+  display: flex;
+  justify-content: center;
 
   @media only screen and (min-width: 768px) {
     padding-top: 40px;
+  }
+}
+
+.button-style {
+  display: block;
+  width: 100%;
+  padding: 10px 20px;
+  background-color: #7352E5;
+  color: #ffffff;
+  border-radius: 60px;
+  font-family: var(--font-family-next-art);
+  font-size: 11px;
+  text-decoration: none;
+  text-align: center;
+
+  @media (hover: hover) {
+    &:hover {
+      background-color: var(--color-hover-purple);
+    }
+  }
+
+  @media only screen and (min-width: 768px) {
+    font-size: 14px;
+  }
+
+  @media only screen and (min-width: 1280px) {
+    font-size: 20px;
+    padding: 16px 26px;
   }
 }
 
