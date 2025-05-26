@@ -187,6 +187,7 @@ import NavLinks from './NavLinksMobile.vue';
   &__wrapper-contacts {
     display: flex;
     flex-direction: column;
+    width: 100%;
     height: 100%;
 
     @media only screen and (min-width: 768px) {
@@ -199,6 +200,12 @@ import NavLinks from './NavLinksMobile.vue';
       max-width: 188px;
       width: fit-content;
       height: fit-content;
+      gap: 36px;
+    }
+
+    & span {
+      display: inline-block;
+      width: 285px;
     }
   }
 
@@ -263,13 +270,16 @@ import NavLinks from './NavLinksMobile.vue';
   }
 
   &__info-box {
+    margin-bottom: 40px;
     @media only screen and (min-width: 768px) {
       flex-direction: row;
       align-items: flex-start;
       padding: 10px 0 0 0;
+      margin-bottom: 0;
     }
 
     @media only screen and (min-width: 1280px) {
+      height: fit-content;
       flex-direction: column;
       gap: 36px;
     }
@@ -336,7 +346,13 @@ import NavLinks from './NavLinksMobile.vue';
       flex-direction: column;
       align-items: flex-start;
       line-height: 1.3;
+      gap: 36px;
     }
+
+    & a {
+      display: flex;
+      height: 11px;
+  }
   }
 
   &__sot-logo {
@@ -346,12 +362,13 @@ import NavLinks from './NavLinksMobile.vue';
     @media only screen and (min-width: 1280px) {
       width: 98px;
       height: 42px;
+      margin-bottom: 36px;
     }
   }
 
   &__soyuz-logo {
     width: 69px;
-    height: 11px;
+    height: 100%;
 
     @media only screen and (min-width: 1280px) {
       width: 140px;
