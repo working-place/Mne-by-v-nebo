@@ -263,7 +263,6 @@ const changePage = (pageNum) => {
     @media only screen and (min-width: 1280px) {
       max-width: 610px;
       height: 54px;
-      // margin-bottom: 60px;
     }
   }
 
@@ -350,14 +349,17 @@ const changePage = (pageNum) => {
 
   &__filtering-btn_trainings {
     background-color: var(--color-background-lavender);
+    color: black;
   }
 
   &__filtering-btn_grants {
     background-color: var(--color-background-red);
+    color: black;
   }
 
   &__filtering-btn_masterclasses {
     background-color: var(--color-background-yellow);
+    color: black;
   }
 
   &__filtering-btn_all:active {

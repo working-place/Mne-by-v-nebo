@@ -128,16 +128,16 @@ import NavLinks from './NavLinksMobile.vue';
   }
 
   &__title-link {
-  @include h2-mobile-uppercase-footer;
-  color: var(--color-text-purple);
+    @include h2-mobile-uppercase-footer;
+    color: var(--color-text-purple);
 
-  @media only screen and (min-width: 1280px) {
-    text-align: left;
-    font-size: 32px;
-    font-weight: 600;
-    line-height: 1.2;
+    @media only screen and (min-width: 1280px) {
+      text-align: left;
+      font-size: 32px;
+      font-weight: 600;
+      line-height: 1.2;
+    }
   }
-}
 
   &__wrapper-top,
   &__wrapper-bottom {
@@ -271,6 +271,7 @@ import NavLinks from './NavLinksMobile.vue';
 
   &__info-box {
     margin-bottom: 40px;
+
     @media only screen and (min-width: 768px) {
       flex-direction: row;
       align-items: flex-start;
@@ -352,7 +353,7 @@ import NavLinks from './NavLinksMobile.vue';
     & a {
       display: flex;
       height: 11px;
-  }
+    }
   }
 
   &__sot-logo {
