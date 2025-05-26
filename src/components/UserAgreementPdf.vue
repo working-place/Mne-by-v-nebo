@@ -1,51 +1,90 @@
 <script setup>
-import { ref, onMounted } from 'vue';
-import VuePdfEmbed from 'vue-pdf-embed';
+import { VuePDF, usePDF } from '@tato30/vue-pdf'
+import { ref, onMounted, onBeforeUnmount } from 'vue'
 
-import 'vue-pdf-embed/dist/styles/annotationLayer.css';
-import 'vue-pdf-embed/dist/styles/textLayer.css';
+const { pdf, pages } = usePDF('/user-agreement.pdf')
+const scale = ref(1.0)
 
-const error = ref(null);
+const calculateScale = () => {
+  const containerWidth = document.querySelector('.pdf-container')?.clientWidth || window.innerWidth
+  const targetWidth = containerWidth - 34
+  scale.value = Math.min(targetWidth / 800, 1.3)
+}
 
-const pdfSource = ref("/docs/user-agreement.pdf");
+const handleResize = () => {
+  calculateScale()
+}
 
 onMounted(() => {
-  fetch(pdfSource.value)
-    .catch(() => {
-      error.value = 'Файл не найден';
-    });
-});
+  calculateScale()
+  window.addEventListener('resize', handleResize)
+})
+
+onBeforeUnmount(() => {
+  window.removeEventListener('resize', handleResize)
+})
 </script>
 
 <template>
   <div class="pdf-container">
     <h1>Пользовательское соглашение</h1>
-    <div v-if="error">{{ error }}</div>
-    <div v-if="$route.path === '/user-agreement'" class="pdf-container__file"
-      :style="{ width: '1028px', height: '700px' }">
-      <VuePdfEmbed :source="pdfSource" />
+    <template v-if="pdf">
+      <div v-for="page in pages" :key="page" class="pdf-page">
+        <VuePDF :pdf="pdf" :page="page" :scale="scale" />
+      </div>
+    </template>
+    <div v-else class="pdf-loading">
+      Загрузка документа...
     </div>
   </div>
 </template>
 
-<style scoped lang="scss">
+<style lang="scss">
 @use '@/assets/scss/mixins.scss' as *;
-@import 'vue-pdf-embed/dist/styles/annotationLayer.css';
-@import 'vue-pdf-embed/dist/styles/textLayer.css';
-
-h1 {
-  @include h1-pdf-container;
-}
 
 .pdf-container {
-  @include display-flex-column-center;
-  @include minmax-width-mobile;
-  padding-left: 17px;
-  padding-right: 17px;
+  width: 100%;
+  padding: 17px;
+  box-sizing: border-box;
+  margin: 60px auto 0;
 
-  &__file {
-    @include pdf-container;
-    @include minmax-width-mobile;
+  h1 {
+    display: flex;
+    text-align: center;
+    margin: 0;
+    margin-bottom: 20px;
+    font-size: 16px;
+    max-width: 50%;
+  }
+}
+
+.pdf-page {
+  margin-bottom: 20px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  border-radius: 4px;
+
+  :deep(.page) {
+    max-width: 100%;
+    height: auto !important;
+    margin: 0 auto;
+    display: block;
+  }
+}
+
+.pdf-loading {
+  text-align: center;
+  padding: 40px;
+  color: #666;
+}
+
+@media (max-width: 768px) {
+  .pdf-container {
+    padding: 10px;
+  }
+
+  .pdf-page {
+    margin-bottom: 10px;
   }
 }
 </style>

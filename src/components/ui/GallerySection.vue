@@ -19,6 +19,10 @@ const props = defineProps({
     type: Boolean,
     default: true
   },
+  showPaginationTablet: {
+    type: String,
+    default: ''
+  },
   bgColor: {
     type: String,
     default: ''
@@ -34,7 +38,60 @@ const props = defineProps({
   height: {
     type: String,
     default: ''
-  }
+  },
+  heightTablet: {
+    type: String,
+    default: ''
+  },
+  minWidthTablet: {
+    type: String,
+    default: ''
+  },
+  topPositionTablet: {
+    type: String,
+    default: ''
+  },
+  widthTablet: {
+    type: String,
+    default: ''
+  },
+
+  wrapperHeightTablet: {
+    type: String,
+    default: ''
+  },
+  sliderHeightTablet: {
+    type: String,
+    default: ''
+  },
+  slideImageHeightTablet: {
+    type: String,
+    default: ''
+  },
+  slideContentHeightTablet: {
+    type: String,
+    default: ''
+  },
+  slideContentHeightDesctop: {
+    type: String,
+    default: ''
+  },
+  sliderWrapperBorderRadiusTablet: {
+    type: String,
+    default: ''
+  },
+  navigationPositionTablet: {
+    type: String,
+    default: ''
+  },
+  navigationPositionBottomTablet: {
+    type: String,
+    default: ''
+  },
+  navigationPositionRightTablet: {
+    type: String,
+    default: ''
+  },
 });
 
 const currentIndex = ref(0);
@@ -107,33 +164,53 @@ watch(() => props.photos, updateSliderPosition);
   <div class="gallery-section" :style="{
     '--gallery-section_background-color': bgColor,
     '--gallery-text-color': textColor,
-    '--gallery-height': height
+    '--gallery-height-tablet': heightTablet,
+    '--gallery-min-width-tablet': minWidthTablet,
+    '--gallery-top-position-tablet': topPositionTablet
+
   }">
     <h2 v-if="showTitle">{{ title }}</h2>
-    <div ref="sliderContainer" class="slider-wrapper">
+    <div ref="sliderContainer" class="slider-wrapper" :style="{
+      '--wrapper-height-tablet': wrapperHeightTablet,
+      '--slider-wrapper-border-radius-tablet': sliderWrapperBorderRadiusTablet
+    }">
       <div class="slider" ref="slider" @touchstart="handleTouchStart" @touchmove="handleTouchMove"
-        @touchend="handleTouchEnd">
+        @touchend="handleTouchEnd" :style="{
+          '--slider-height-tablet': sliderHeightTablet
+        }">
         <div v-for="(photo, index) in photos" :key="photo.id || index" class="slide">
-          <div class="slide-content" @click="openPhotoModal(photo)">
-            <img :src="photo.image" :alt="`Фото ${index + 1}`" class="slide-image">
+          <div class="slide-content" @click="openPhotoModal(photo)" :style="{
+            '--slide-content-height-tablet': slideContentHeightTablet,
+            '--slide-content-height-desctop': slideContentHeightDesctop
+          }">
+            <img :src="photo.image" :alt="`Фото ${index + 1}`" class="slide-image" :style="{
+              '--slide-image-height-tablet': slideImageHeightTablet
+            }">
           </div>
         </div>
       </div>
 
-      <div class="navigation">
-        <div v-if="showPagination" class="pagination">
+      <div class="navigation" :style="{
+        '--navigation-position-tablet': navigationPositionTablet,
+        '--navigation-position-bottom-tablet': navigationPositionBottomTablet,
+        '--navigation-position-right-tablet': navigationPositionRightTablet
+      }">
+        <div v-if="showPagination" class="pagination" :style="{
+          '--show-pagination': showPaginationTablet
+        }">
           <button v-for="(_, index) in photos" :key="index" @click="goToSlide(index)"
             :class="{ active: index === currentIndex }"></button>
         </div>
 
         <div class="arrows">
-          <button @click="prevSlide" class="arrow" :disabled="currentIndex === 0">
+          <button @click="prevSlide" class="arrow" :disabled="currentIndex === 0" :title="`Previous slide button`">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
               <path d="M15 18L9 12L15 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                 stroke-linejoin="round" />
             </svg>
           </button>
-          <button @click="nextSlide" class="arrow" :disabled="currentIndex === photos.length - 1">
+          <button @click="nextSlide" class="arrow" :disabled="currentIndex === photos.length - 1"
+            :title="`Next slide button`">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
               <path d="M9 18L15 12L9 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                 stroke-linejoin="round" />
@@ -159,11 +236,16 @@ watch(() => props.photos, updateSliderPosition);
 .gallery-section {
   height: var(--gallery-height);
   min-width: 286px;
-  max-width: 326px;
+  max-width: 100%;
   position: relative;
-  width: 100%;
   padding: 0;
   background-color: var(--gallery-section_background-color);
+
+  @media (min-width: 768px) {
+    height: var(--gallery-height-tablet);
+    min-width: var(--gallery-min-width-tablet);
+    top: var(--gallery-top-position-tablet);
+  }
 
   h2 {
     text-align: center;
@@ -179,12 +261,29 @@ watch(() => props.photos, updateSliderPosition);
   width: 100%;
   margin: 0 auto;
   overflow: hidden;
+
+  @media (min-width: 768px) {
+    height: var(--wrapper-height-tablet);
+    border-radius: 16px;
+  }
+
+  @media (min-width: 1280px) {
+    border-radius: 24px;
+  }
 }
 
 .slider-container {
   width: 100%;
   overflow: hidden;
   border-radius: 12px;
+
+  @media (min-width: 768px) {
+    border-radius: 16px;
+  }
+
+  @media (min-width: 1280px) {
+    border-radius: 24px;
+  }
 }
 
 .slider {
@@ -192,6 +291,10 @@ watch(() => props.photos, updateSliderPosition);
   transition: transform 0.3s ease;
   will-change: transform;
   gap: 20px;
+
+  @media (min-width: 768px) {
+    height: var(--slider-height-tablet);
+  }
 }
 
 .slide {
@@ -200,13 +303,31 @@ watch(() => props.photos, updateSliderPosition);
   height: fit-content;
 }
 
+.slide-content {
+  @media (min-width: 768px) {
+    height: var(--slide-content-height-tablet);
+  }
+
+  @media (min-width: 1280px) {
+    height: var(--slide-content-height-desctop);
+  }
+}
+
 .slide-image {
   min-height: 286px;
-  max-width: 360px;
   width: 100%;
   height: 360px;
   object-fit: cover;
   border-radius: 12px;
+
+  @media only screen and (min-width: 768px) {
+    border-radius: 16px;
+    height: var(--slide-image-height-tablet);
+  }
+
+  @media only screen and (min-width: 1280px) {
+    border-radius: 24px;
+  }
 }
 
 .slide {
@@ -218,11 +339,22 @@ watch(() => props.photos, updateSliderPosition);
   justify-content: space-between;
   align-items: center;
   margin-top: 16px;
+
+  @media only screen and (min-width: 768px) {
+    position: var(--navigation-position-tablet);
+    bottom: var(--navigation-position-bottom-tablet);
+    right: var(--navigation-position-right-tablet);
+  }
 }
 
 .pagination {
   display: flex;
   gap: 8px;
+  justify-content: flex-start;
+
+  @media only screen and (min-width: 1280px) {
+    display: var(--show-pagination);
+  }
 }
 
 .pagination button {
@@ -258,6 +390,11 @@ watch(() => props.photos, updateSliderPosition);
   justify-content: center;
   cursor: pointer;
 
+  @media only screen and (min-width: 1280px) {
+    width: 62px;
+    height: 62px;
+  }
+
   @media (hover: hover) {
     &:hover {
       background-color: #977AF9;
@@ -275,5 +412,10 @@ watch(() => props.photos, updateSliderPosition);
   stroke: white;
   width: 18px;
   height: 18px;
+
+  @media (min-width: 1280px) {
+    width: 35px;
+    height: 35px;
+  }
 }
 </style>

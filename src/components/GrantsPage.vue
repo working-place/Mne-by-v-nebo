@@ -7,7 +7,7 @@ const showAll = ref(false)
 const items = ref([
   {
     title: 'Гранты губернатора Кубани',
-    subtitle: 'Проекта: «Театр равных возможностей» 2022',
+    subtitle: 'Проект: «Театр равных возможностей» 2022',
     content: 'С 1 февраля 2023 года в МАОУ СОШ №33 реализуется грант Губернатора Кубани «Театр равных возможностей», в котором участвуют 37 детей, включая учащихся с ОВЗ и инвалидностью. Проект помогает развивать творческие способности, социализацию и уверенность детей через театральное искусство. Театральная деятельность способствует преодолению застенчивости, развитию коммуникативных навыков и укреплению духовно-нравственных ценностей. В планах – создание театральной образовательной программы, которая интегрируется в учебный процесс и охватит все школы Новороссийска.',
     additionalText: 'Результат: Победа',
     image: new URL('/public/img/grants-photo-project1.jpg', import.meta.url).href,
@@ -80,19 +80,26 @@ const items = ref([
 ])
 
 const visibleItems = computed(() => {
-  return showAll.value ? items.value : items.value.slice(0, 5)
-})
+  return showAll.value ? items.value : items.value.slice(0, 5);
+});
 
 const toggleItem = (index) => {
-  visibleItems.value[index].isOpen = !visibleItems.value[index].isOpen
+  items.value.forEach((item, i) => {
+    if (i !== index) {
+      item.isOpen = false;
+    }
+  });
+
+  items.value[index].isOpen = !items.value[index].isOpen;
 }
 </script>
 
 <template>
   <main>
-    <ReusableScreen>
+    <ReusableScreen blockHeight="fit-content" imgMinWidth="315px" imgMaxWidth="400px" imgMinHeight="300px"
+      imgMaxHeight="400px">
       <template v-slot:title>
-        Участие<br>в грантах
+        Участие в грантах
       </template>
       <template v-slot:description>
         Гранты позволяют внедрять новые образовательные технологии, программы и подходы, улучшая эффективность обучения
@@ -106,7 +113,9 @@ const toggleItem = (index) => {
     <div class="grants-accordion">
       <div v-for="(item, index) in visibleItems" :key="index" class="accordion-item"
         :class="{ 'is-open': item.isOpen }">
-        <img v-if="item.isOpen" :src="item.image" :alt="item.title" class="top-image">
+        <div class="image-container" v-if="item.isOpen">
+          <img :src="item.image" :alt="item.title" class="top-image">
+        </div>
 
         <div class="accordion-header">
           <div class="text-content">
@@ -115,8 +124,8 @@ const toggleItem = (index) => {
           </div>
 
           <div class="arrow-circle header-arrow" :class="{ 'is-open': item.isOpen }" @click.stop="toggleItem(index)">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
-              <path d="M6 9L12 15L18 9" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+              <path d="M6 10L12 16L18 10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
             </svg>
           </div>
         </div>
@@ -128,15 +137,15 @@ const toggleItem = (index) => {
 
             <div class="arrow-circle content-arrow left" :class="{ 'is-open': item.isOpen }"
               @click.stop="toggleItem(index)">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
-                <path d="M6 9L12 15L18 9" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                <path d="M6 10L12 16L18 10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
               </svg>
             </div>
           </div>
         </transition>
       </div>
 
-      <button class="show-all-btn" @click="showAll = !showAll">
+      <button class="show-all-btn" @click="showAll = !showAll" :title="`Filtering button show all`">
         {{ showAll ? 'Скрыть' : 'Все гранты' }}
       </button>
     </div>
@@ -146,8 +155,10 @@ const toggleItem = (index) => {
 <style scoped lang="scss">
 @use '@/assets/scss/mixins.scss' as *;
 
-.main-screen {
-  background-color: var(--color-background-purple);
+.grants-accordion {
+  width: 100%;
+  max-width: 1190px;
+  margin: 0 auto;
 }
 
 .accordion-item {
@@ -155,13 +166,23 @@ const toggleItem = (index) => {
   border-radius: 12px;
   margin-bottom: 12px;
   overflow: hidden;
+  width: 100%;
+
+  @media only screen and (min-width: 768px) {
+    border-radius: 16px;
+  }
+
+  @media only screen and (min-width: 1280px) {
+    border-radius: 24px;
+  }
 }
 
 .accordion-header {
   display: flex;
   align-items: center;
-  padding: 12px;
+  padding: 20px 16px 16px;
   position: relative;
+  width: 100%;
 }
 
 .text-content {
@@ -174,11 +195,14 @@ const toggleItem = (index) => {
   margin: 0;
   text-align: left;
   font-size: 20px;
+  font-weight: 600;
 }
 
 .item-subtitle {
-  margin: 4px 0 0 0;
+  margin: 6px 0 0 0;
   text-align: left;
+  font-size: 16px;
+  font-weight: 600;
 }
 
 .arrow-circle {
@@ -194,33 +218,35 @@ const toggleItem = (index) => {
   cursor: pointer;
 
   &:active {
-      background: var(--color-pressed-lavender);
+    background: var(--color-pressed-lavender);
+  }
+
+  @media (hover: hover) {
+    &:hover {
+      background: var(--color-hover-lavender);
     }
-  
-    @media (hover: hover) {
-      &:hover {
-        background: var(--color-hover-lavender);
-      }
-    }
+  }
 }
 
 .arrow-circle.is-open {
   background: #FDD35D;
 
   &:active {
-      background: var(--color-pressed-yellow);
+    background: var(--color-pressed-yellow);
+  }
+
+  @media (hover: hover) {
+    &:hover {
+      background: var(--color-hover-yellow);
     }
-  
-    @media (hover: hover) {
-      &:hover {
-        background: var(--color-hover-yellow);
-      }
-    }
+  }
 }
 
 .arrow-circle svg {
   transition: transform 0.3s ease;
   color: #000000;
+  width: 20px;
+  height: 20px;
 }
 
 .arrow-circle.is-open svg {
@@ -234,7 +260,7 @@ const toggleItem = (index) => {
 }
 
 .content-arrow.left {
-  margin: 12px 0 0 12px;
+  margin-top: 16px;
   display: none;
 }
 
@@ -246,22 +272,27 @@ const toggleItem = (index) => {
   display: flex;
 }
 
+.image-container {
+  padding: 20px 16px 0;
+  display: flex;
+  justify-content: flex-start;
+}
+
 .top-image {
   width: 100px;
   height: 100px;
   border-radius: 100px;
   object-fit: cover;
   display: block;
-  margin: 16px auto 12px;
 }
 
 .accordion-content {
-  padding: 0 12px 12px;
-  
+  padding: 0 16px 20px;
 }
 
 .additional-text {
   margin-top: 16px;
+  font-weight: 500;
 }
 
 .show-all-btn {
@@ -269,8 +300,8 @@ const toggleItem = (index) => {
   color: #ffffff;
   display: block;
   width: 100%;
-  margin: 24px auto 0;
-  padding: 12px 24px;
+  margin: 32px auto 0;
+  padding: 14px 24px;
   border: none;
   border-radius: 30px;
   font-family: var(--font-family-next-art);
@@ -278,20 +309,20 @@ const toggleItem = (index) => {
   cursor: pointer;
 
   &:active {
-      background-color: var(--color-pressed-purple);
+    background-color: var(--color-pressed-purple);
+  }
+
+  @media (hover: hover) {
+    &:hover {
+      background-color: var(--color-hover-purple);
     }
-  
-    @media (hover: hover) {
-      &:hover {
-        background-color: var(--color-hover-purple);
-      }
-    }
+  }
 }
 
 .slide-enter-active,
 .slide-leave-active {
   transition: all 0.4s ease;
-  max-height: 500px;
+  max-height: 1000px;
   overflow: hidden;
 }
 
@@ -299,5 +330,95 @@ const toggleItem = (index) => {
 .slide-leave-to {
   max-height: 0;
   opacity: 0;
+}
+
+@media only screen and (min-width: 768px) {
+
+  .grants-accordion {
+    width: 100%;
+  }
+
+  .accordion-item {
+    padding: 0 24px;
+    margin-bottom: 16px;
+  }
+
+  .accordion-header {
+    padding: 24px 16px 20px;
+  }
+
+  .top-image {
+    width: 160px;
+    height: 160px;
+  }
+
+  .accordion-content {
+    padding: 0 16px 30px;
+  }
+
+  .arrow-circle svg {
+    width: 24px;
+    height: 24px;
+  }
+
+  .show-all-btn {
+    font-size: 14px;
+    margin: 40px auto 0;
+    padding: 16px 32px;
+  }
+}
+
+@media only screen and (min-width: 1280px) {
+
+  .grants-accordion {
+    max-width: 1190px;
+  }
+
+  .accordion-item {
+    max-width: 100%;
+    padding: 0 40px;
+  }
+
+  .accordion-header {
+    padding: 32px 16px 28px;
+  }
+
+  .top-image {
+    width: 200px;
+    height: 200px;
+  }
+
+  .item-title {
+    font-size: 32px;
+  }
+
+  .item-subtitle {
+    font-size: 20px;
+    margin-top: 20px;
+  }
+
+  .main-text {
+    font-size: 16px;
+    line-height: 1.4;
+    font-weight: 400;
+  }
+
+  .additional-text {
+    font-size: 20px;
+  }
+
+  .arrow-circle svg {
+    width: 32px;
+    height: 32px;
+  }
+
+  .arrow-circle {
+    width: 62px;
+    height: 62px;
+  }
+
+  .show-all-btn {
+    font-size: 20px;
+  }
 }
 </style>

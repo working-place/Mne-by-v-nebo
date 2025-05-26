@@ -27,11 +27,17 @@
   --font-family-nunito: Nunito, Roboto, sans-serif;
   --font-family-next-art: 'NEXT ART', Roboto, sans-serif;
 
-  --min-width: 320px;
-  --max-width: 362px;
+  --min-width-mob: 320px;
+  --max-width-mob: 362px;
+
+  --min-width-tablet: 361px;
+  --max-width-tablet: 650px;
 
   --cards-border-radius: 12px;
+  --cards-border-radius-tablet: 16px;
+  --cards-border-radius-desctop: 20px;
 
+  --margin-between-blocs-desctop: 60px;
 }
 
 *,
@@ -42,13 +48,15 @@
   font-weight: normal;
 }
 
-/* стили прописаны для mobile, так как mobile first */
+#app {
+  width: 100vw;
+}
 
 body {
   width: 100vw;
   min-height: 100vh;
   font-family: var(--font-family-nunito);
-  font-weight: 400;
+  font-weight: lighter;
   color: var(--color-text-dark);
   font-size: 16px;
   line-height: 1.4;
@@ -58,14 +66,14 @@ main {
   display: flex;
   flex-direction: column;
   align-items: center;
-  min-width: var(--min-width);
-  max-width: var(--max-width);
-  width: 100%;
-  gap: 40px;
+  min-width: var(--min-width-mob);
+  width: 100vw;
+  gap: 62px;
   padding-right: 17px;
   padding-left: 17px;
   height: fit-content;
   padding-bottom: 40px;
+  margin-top: 70px;
 }
 
 h1,
@@ -73,13 +81,31 @@ h2 {
   font-family: var(--font-family-next-art);
 }
 
-h2,
-h3 {
-  font-weight: 600;
-}
-
 h3 {
   font-family: var(--font-family-nunito);
-  font-size: 16px;
-  line-height: 1.5;
+}
+
+@media only screen and (min-width: 768px) {
+  main {
+    width: 100vw;
+    padding-left: 59px;
+    padding-right: 59px;
+    gap: 74px;
+  }
+}
+
+@media only screen and (min-width: 1280px) {
+  main {
+    width: 100vw;
+    padding-bottom: 0;
+    margin-top: 0;
+    margin-bottom: 100px;
+    gap: 121px;
+  }
+
+  h1 {
+    font-size: 48px;
+    line-height: 1;
+    font-weight: 700;
+  }
 }

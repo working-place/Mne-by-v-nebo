@@ -1,50 +1,45 @@
 <script setup>
+import { useRoute } from 'vue-router';
+
 defineProps({
-  isOpen: {
-    type: Boolean,
-    default: true
-  },
   align: {
     type: String,
     default: 'center',
     validator: value => ['center', 'start'].includes(value)
-  },
-  decorationClass: {
-    type: String,
-    default: ''
   }
 });
-const emit = defineEmits(['close']);
+
+const route = useRoute();
+const isActive = (path) => route.path === path;
 </script>
 
 <template>
-  <nav v-show="isOpen" class="menu__nav-box">
-    <ul class="menu__link-box" :style="{ alignItems: align === 'center' ? 'center' : 'flex-start' }">
-      <li class="menu__link">
-        <RouterLink to="/sot" @click="emit('close')" class="menu__link" :class="{ active: $route.path === ('/sot') }">
+  <nav class="tablet-menu">
+    <ul class="tablet-menu__list" :style="{ alignItems: align === 'center' ? 'center' : 'flex-start' }">
+      <li class="tablet-menu__item">
+        <RouterLink to="/sot" class="tablet-menu__link" :class="{ active: isActive('/sot') }">
           СОТ
         </RouterLink>
       </li>
-      <li class="menu__link">
-        <RouterLink to="/grants" @click="emit('close')" class="menu__link"
-          :class="{ active: $route.path === ('/grants') }">Гранты
+      <li class="tablet-menu__item">
+        <RouterLink to="/grants" class="tablet-menu__link" :class="{ active: isActive('/grants') }">
+          Гранты
         </RouterLink>
       </li>
-      <li class="menu__link">
-        <RouterLink to="/usefull" @click="emit('close')" class="menu__link"
-          :class="{ active: $route.path === ('/usefull') }">
+      <li class="tablet-menu__item">
+        <RouterLink to="/usefull" class="tablet-menu__link" :class="{ active: isActive('/usefull') }">
           Полезные материалы
         </RouterLink>
       </li>
-      <li class="menu__link">
-        <RouterLink to="/news" @click="emit('close')" class="menu__link" :class="{ active: $route.path === ('/news') }">
+      <li class="tablet-menu__item">
+        <RouterLink to="/news" class="tablet-menu__link" :class="{ active: isActive('/news') }">
           Новости
         </RouterLink>
       </li>
-      <li class="menu__link">
-        <RouterLink to="/gallery" @click="emit('close')" class="menu__link"
-          :class="{ active: $route.path === ('/gallery') }">
-          Галерея</RouterLink>
+      <li class="tablet-menu__item">
+        <RouterLink to="/gallery" class="tablet-menu__link" :class="{ active: isActive('/gallery') }">
+          Галерея
+        </RouterLink>
       </li>
     </ul>
   </nav>
@@ -53,32 +48,39 @@ const emit = defineEmits(['close']);
 <style scoped lang="scss">
 @use '@/assets/scss/mixins.scss' as *;
 
-.active {
-  font-weight: bold;
-}
+.tablet-menu {
+  display: flex;
 
-.menu {
+  &__list {
+    @include list-decoration;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
 
-  &__nav-box {
-    @include display-flex-justify-content-center;
-    @include border-bottom-radius-8;
-    position: absolute;
-    top: 58px;
-    background-color: var(--color-background-light-blue);
-    z-index: 1000;
+    @media only screen and (min-width: 768px) {
+      gap: 24px;
+    }
+
+    @media only screen and (min-width: 1280px) {
+      gap: 60px;
+    }
   }
 
-  &__link-box {
-    @include display-flex-column-center;
-    @include list-decoration;
+  &__item {
+    list-style: none;
   }
 
   &__link {
+    display: block;
     line-height: 1.5;
-    margin: 0;
     text-decoration: none;
     color: var(--color-text-dark);
-  }
+    font-size: 14px;
+    white-space: nowrap;
 
+    &.active {
+      font-weight: bold;
+    }
+  }
 }
 </style>

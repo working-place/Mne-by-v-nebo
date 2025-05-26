@@ -1,51 +1,42 @@
 <script setup>
-import { ref, onMounted } from 'vue';
-import VuePdfEmbed from 'vue-pdf-embed';
+import { VuePDF, usePDF } from '@tato30/vue-pdf'
+import { ref, onMounted, onBeforeUnmount } from 'vue'
 
-import 'vue-pdf-embed/dist/styles/annotationLayer.css';
-import 'vue-pdf-embed/dist/styles/textLayer.css';
+const { pdf, pages } = usePDF('/charter.pdf')
+const scale = ref(1.0)
 
-const error = ref(null);
+const calculateScale = () => {
+  const containerWidth = document.querySelector('.pdf-container')?.clientWidth || window.innerWidth
+  const targetWidth = containerWidth - 34
+  scale.value = Math.min(targetWidth / 800, 1.3)
+}
 
-const pdfSource = ref('/docs/charter.pdf');
+const handleResize = () => {
+  calculateScale()
+}
 
 onMounted(() => {
-  fetch(pdfSource.value)
-    .catch(() => {
-      error.value = 'Файл не найден';
-    });
-});
+  calculateScale()
+  window.addEventListener('resize', handleResize)
+})
+
+onBeforeUnmount(() => {
+  window.removeEventListener('resize', handleResize)
+})
 </script>
 
 <template>
   <div class="pdf-container">
     <h1>Устав организации</h1>
-    <div v-if="error">{{ error }}</div>
-    <div v-if="$route.path === '/charter'" class="pdf-container__file">
-      <VuePdfEmbed :source="pdfSource" />
+    <template v-if="pdf">
+      <div v-for="page in pages" :key="page" class="pdf-page">
+        <VuePDF :pdf="pdf" :page="page" :scale="scale" />
+      </div>
+    </template>
+    <div v-else class="pdf-loading">
+      Загрузка документа...
     </div>
   </div>
 </template>
 
-<style scoped lang="scss">
-@use '@/assets/scss/mixins.scss' as *;
-@import 'vue-pdf-embed/dist/styles/annotationLayer.css';
-@import 'vue-pdf-embed/dist/styles/textLayer.css';
-
-h1 {
-  @include h1-pdf-container;
-  width: 100%;
-}
-
-.pdf-container {
-  @include display-flex-column-center;
-  @include minmax-width-mobile;
-  padding-left: 17px;
-  padding-right: 17px;
-
-  &__file {
-    @include pdf-container;
-    @include minmax-width-mobile;
-  }
-}
-</style>
+<style scoped lang="scss"></style>

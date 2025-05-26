@@ -1,8 +1,7 @@
 <script setup>
 import ReusableScreen from './ui/ReusableScreen.vue';
 import Slider from './ui/SliderWrapper.vue';
-import RouterLinkButton from './ui/RouterLinkButton.vue';
-import { ref } from 'vue';
+import { ref, computed, onMounted, onUnmounted } from 'vue';
 
 const photoSlides = [
   { id: 1, image: '/img/photo1.jpg' },
@@ -21,7 +20,7 @@ const photoSlides = [
 
 const videoSlides = [
   { id: 1, video: '/videos/video1.mp4', thumbnail: '/img/video1.png' },
-  { id: 2, video: '/videos/video2.mp4', thumbnail: '/img/video1.png' },
+  { id: 2, video: '/videos/video1.mp4', thumbnail: '/img/video1.png' },
   { id: 3, video: '/videos/video3.mp4', thumbnail: '/img/video1.png' },
   { id: 4, video: '/videos/video4.mp4', thumbnail: '/img/video1.png' },
   { id: 5, video: '/videos/video5.mp4', thumbnail: '/img/video1.png' },
@@ -38,6 +37,25 @@ const activePhoto = ref(null);
 const activeVideo = ref(null);
 const showPhotoModal = ref(false);
 const showVideoModal = ref(false);
+const isDesktop = ref(false);
+const isMounted = ref(false);
+
+const currentPhotoPage = ref(1);
+const currentVideoPage = ref(1);
+const itemsPerPage = 6;
+
+const paginatedPhotos = computed(() => {
+  const start = (currentPhotoPage.value - 1) * itemsPerPage;
+  return photoSlides.slice(start, start + itemsPerPage);
+});
+
+const paginatedVideos = computed(() => {
+  const start = (currentVideoPage.value - 1) * itemsPerPage;
+  return videoSlides.slice(start, start + itemsPerPage);
+});
+
+const totalPhotoPages = computed(() => Math.ceil(photoSlides.length / itemsPerPage));
+const totalVideoPages = computed(() => Math.ceil(videoSlides.length / itemsPerPage));
 
 const openPhotoModal = (photo) => {
   activePhoto.value = photo;
@@ -53,11 +71,34 @@ const closeModal = () => {
   showPhotoModal.value = false;
   showVideoModal.value = false;
 };
+
+const changePhotoPage = (page) => {
+  currentPhotoPage.value = page;
+};
+
+const changeVideoPage = (page) => {
+  currentVideoPage.value = page;
+};
+
+const checkScreenSize = () => {
+  isDesktop.value = window.innerWidth >= 1280;
+};
+
+onMounted(() => {
+  isMounted.value = true;
+  checkScreenSize();
+  window.addEventListener('resize', checkScreenSize);
+});
+
+onUnmounted(() => {
+  window.removeEventListener('resize', checkScreenSize);
+});
 </script>
 
 <template>
   <main>
-    <ReusableScreen>
+    <ReusableScreen imgPaddingTop="20px" imgMinWidth="315px" imgMaxWidth="400px" imgMinHeight="300px"
+      imgMaxHeight="400px">
       <template v-slot:title>
         <span class="title-text">Наша жизнь</span>
       </template>
@@ -75,34 +116,68 @@ const closeModal = () => {
     <div class="gallery-section">
       <h2>Наши Фотоотчеты:</h2>
       <div class="slider-container">
-        <Slider :items="photoSlides">
-          <template #default="{ item }">
-            <div class="slide-content" @click="openPhotoModal(item)">
-              <img :src="item.image" alt="Фото" class="slide-image">
-            </div>
-          </template>
-        </Slider>
+        <div v-if="isMounted && isDesktop" class="grid-container">
+          <div v-for="item in paginatedPhotos" :key="item.id" class="slide-content" @click="openPhotoModal(item)">
+            <img :src="item.image" alt="Фото" class="slide-image">
+          </div>
+        </div>
+
+        <div v-if="isMounted && !isDesktop">
+          <Slider :items="photoSlides" :visible-slides="2">
+            <template #default="{ item }">
+              <div class="slide-content" @click="openPhotoModal(item)">
+                <img :src="item.image" alt="Фото" class="slide-image">
+              </div>
+            </template>
+          </Slider>
+        </div>
+
+        <div v-if="isMounted && isDesktop" class="pagination">
+          <div v-for="page in totalPhotoPages" :key="page" class="page-number"
+            :class="{ active: currentPhotoPage === page }" @click="changePhotoPage(page)">
+            {{ page }}
+          </div>
+        </div>
       </div>
     </div>
 
     <div class="gallery-section">
       <h2>Наши видео:</h2>
       <div class="slider-container">
-        <Slider :items="videoSlides">
-          <template #default="{ item }">
-            <div class="slide-content" @click="openVideoModal(item)">
-              <img :src="item.thumbnail" alt="Видео" class="slide-image">
-              <div class="video-play-icon">
-                <svg viewBox="0 0 24 24" width="48" height="48">
-                  <path fill="currentColor" d="M8,5.14V19.14L19,12.14L8,5.14Z" />
-                </svg>
-              </div>
+        <div v-if="isMounted && isDesktop" class="grid-container">
+          <div v-for="item in paginatedVideos" :key="item.id" class="slide-content" @click="openVideoModal(item)">
+            <img :src="item.thumbnail" alt="Видео" class="slide-image">
+            <div class="video-play-icon"> <svg viewBox="0 0 24 24" width="48" height="48">
+                <path fill="currentColor" d="M8,5.14V19.14L19,12.14L8,5.14Z" />
+              </svg>
             </div>
-          </template>
-        </Slider>
+          </div>
+        </div>
+
+        <div v-if="isMounted && !isDesktop">
+          <Slider :items="videoSlides" :visible-slides="2">
+            <template #default="{ item }">
+              <div class="slide-content" @click="openVideoModal(item)">
+                <img :src="item.thumbnail" alt="Видео" class="slide-image">
+                <div class="video-play-icon">
+                  <svg viewBox="0 0 24 24" width="48" height="48">
+                    <path fill="currentColor" d="M8,5.14V19.14L19,12.14L8,5.14Z" />
+                  </svg>
+                </div>
+              </div>
+            </template>
+          </Slider>
+        </div>
+
+        <div v-if="isMounted && isDesktop" class="pagination">
+          <div v-for="page in totalVideoPages" :key="page" class="page-number"
+            :class="{ active: currentVideoPage === page }" @click="changeVideoPage(page)">
+            {{ page }}
+          </div>
+        </div>
       </div>
       <div class="button-wrapper">
-        <RouterLinkButton to="" textButton="Cмотреть больше" />
+        <a href="https://vk.com/vospitaniedlyvseh" target="_blank" class="button-style">Смотреть больше</a>
       </div>
     </div>
 
@@ -129,33 +204,108 @@ const closeModal = () => {
 @use '@/assets/scss/mixins.scss' as *;
 @use "@/assets/scss/modalViewer.scss" as *;
 
-.gallery-section {
-  margin: 10px 0;
-}
-
 h2 {
   @include h2-mobile-uppercase;
   text-align: center;
+
+  @media only screen and (min-width: 1280px) {
+    font-size: 32px;
+    font-weight: 600;
+    line-height: 1.2;
+  }
 }
 
 .slider-container {
   position: relative;
   width: 100%;
-  padding-top: 20px;
+  padding-top: 22px;
+  max-width: 1190px;
+
+  @media only screen and (min-width: 1280px) {
+    padding-top: 40px;
+  }
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 16px;
+  margin-bottom: 24px;
 }
 
 .slide-content {
   position: relative;
   cursor: pointer;
   transition: transform 0.3s;
-  height: 176px;
-  border-radius: 12px;
+  min-height: 176px;
+  height: 60vw;
+
+  &:hover {
+    transform: scale(1.03);
+  }
+
+  @media only screen and (min-width: 768px) {
+    min-height: 176px;
+    height: 30vw;
+  }
+
+  @media only screen and (min-width: 1280px) {
+    height: 258px;
+  }
 }
 
 .slide-image {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  border-radius: 12px;
+
+  @media only screen and (min-width: 678px) {
+    border-radius: 16px;
+  }
+
+  @media only screen and (min-width: 1280px) {
+    border-radius: 24px;
+  }
+}
+
+.button-wrapper {
+  padding-top: 26px;
+  max-width: 1190px;
+  display: flex;
+  justify-content: center;
+
+  @media only screen and (min-width: 768px) {
+    padding-top: 40px;
+  }
+}
+
+.button-style {
+  display: block;
+  width: 100%;
+  padding: 10px 20px;
+  background-color: #7352E5;
+  color: #ffffff;
+  border-radius: 60px;
+  font-family: var(--font-family-next-art);
+  font-size: 11px;
+  text-decoration: none;
+  text-align: center;
+
+  @media (hover: hover) {
+    &:hover {
+      background-color: var(--color-hover-purple);
+    }
+  }
+
+  @media only screen and (min-width: 768px) {
+    font-size: 14px;
+  }
+
+  @media only screen and (min-width: 1280px) {
+    font-size: 20px;
+    padding: 16px 26px;
+  }
 }
 
 .video-play-icon {
@@ -167,18 +317,41 @@ h2 {
   opacity: 0.8;
 }
 
-.view-more-btn {
-  width: 100%;
-  padding: 10px;
-  font-family: var(--font-family-next-art);
-  display: block;
-  margin: 2rem auto;
-  background-color: #7352E5;
-  color: white;
-  text-transform: uppercase;
-  border: none;
-  border-radius: 30px;
+.pagination {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 40px;
+}
+
+.page-number {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   cursor: pointer;
-  transition: background-color 0.3s;
+  transition: all 0.3s ease;
+
+  &.active {
+    background: #FDD35D;
+  }
+}
+
+@media only screen and (max-width: 1279px) {
+  .grid-container {
+    display: none;
+  }
+
+  .pagination {
+    display: none;
+  }
+}
+
+@media only screen and (min-width: 1280px) {
+  .slider-container :deep(.slider-wrapper) {
+    display: none;
+  }
 }
 </style>

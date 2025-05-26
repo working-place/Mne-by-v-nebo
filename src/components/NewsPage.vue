@@ -1,7 +1,8 @@
 <script setup>
-import { ref, onMounted, computed } from 'vue';
+import { ref, onMounted, computed, onUnmounted } from 'vue';
 import NewsCard from './ui/NewsCard.vue';
 import ReusableScreen from './ui/ReusableScreen.vue';
+import Paginate from "vuejs-paginate-next";
 
 defineProps({
   disabled: {
@@ -9,12 +10,6 @@ defineProps({
     default: false
   }
 })
-
-const newsData = ref([]);
-const activeTag = ref('все');
-const searchQuery = ref('');
-const searchInput = ref(null);
-const isDisabled = ref(false);
 
 const filteringButtons = [
   {
@@ -39,10 +34,30 @@ const filteringButtons = [
   },
 ];
 
+const newsData = ref([]);
+const activeTag = ref('все');
+const searchQuery = ref('');
+const searchInput = ref(null);
+const isDisabled = ref(false);
+const currentPage = ref(1);
+const windowWidth = ref(window.innerWidth);
+
+const handleResize = () => {
+  windowWidth.value = window.innerWidth;
+};
+
+onMounted(() => {
+  window.addEventListener('resize', handleResize);
+});
+
+onUnmounted(() => {
+  window.removeEventListener('resize', handleResize);
+});
+
 const loadNews = async () => {
   try {
-    const response = await import('@/data/db.json?raw');
-    newsData.value = JSON.parse(response.default).news;
+    const response = await import('@/data/db.json');
+    newsData.value = response.news;
   } catch (error) {
     console.error('Ошибка загрузки новостей:', error);
   }
@@ -62,27 +77,33 @@ const getTagClass = (tag) => {
 
 const handleSearchInput = (event) => {
   searchQuery.value = event.target.value;
+  clearTagFilter();
 };
 
 const handleTagFilter = (title) => {
   if (isDisabled.value) return;
 
   activeTag.value = title;
+
   searchQuery.value = "";
-  if (searchInput.value) {
+  if (searchInput.value?.value) {
     searchInput.value.value = "";
   }
 };
+
+const clearTagFilter = () => {
+  activeTag.value = "все";
+}
 
 const filteredNews = computed(() => {
   const filtered = newsData.value.filter(news => {
 
     const tagMatch = activeTag.value === "все" || news.tag === activeTag.value;
 
-    const searchMatch = news.text.toLowerCase().includes(searchQuery.value.toLowerCase()) || news.tag.toLowerCase().includes(searchQuery.value.toLowerCase());
+    const searchMatch = news.tag.toLowerCase().includes(searchQuery.value.toLowerCase().trim());
     return tagMatch && searchMatch
   });
-  if (filtered.length === 0 && (searchQuery.value || activeTag.value !== "all")) {
+  if (filtered.length === 0 && (searchQuery.value || activeTag.value !== "все")) {
     return null
   }
   return filtered;
@@ -90,19 +111,50 @@ const filteredNews = computed(() => {
 
 onMounted(loadNews);
 
+const itemsPerPage = computed(() => {
+  if (windowWidth.value < 768) {
+    return filteredNews.value?.length || 0;
+  }
+  if (windowWidth.value < 1280) {
+    return 4;
+  }
+  return 8;
+});
+
+const paginatedNews = computed(() => {
+  if (!filteredNews.value) return [];
+
+  if (windowWidth.value < 768) return filteredNews.value;
+
+  const start = (currentPage.value - 1) * itemsPerPage.value;
+  const end = start + itemsPerPage.value;
+
+  return filteredNews.value.slice(start, end);
+});
+
+const pageCount = computed(() => {
+  if (!filteredNews.value || windowWidth.value < 768) return 0;
+  return Math.ceil(filteredNews.value.length / itemsPerPage.value);
+});
+
+const changePage = (pageNum) => {
+  currentPage.value = pageNum;
+};
+
 </script>
 
 <template>
   <main>
 
-    <ReusableScreen bgColor="var(--color-background-lavender)" textColor="var(--color-text-dark)" blockHeight="470px"
-      :use-flex="false">
+    <ReusableScreen bgColor="var(--color-background-lavender)" textColor="var(--color-text-dark)" blockHeight="255px"
+      tabletHeight="230px" desctopHeight="255px" :use-flex="false" :hideImgOnTablet="true" paddingRight="52px"
+      wrapperWidthTablet="100%" textSize="19px">
       <template v-slot:title>
         новости
       </template>
       <template v-slot:description>
-        <input type="text" class="main-screen__search-input" :value="searchQuery" @input="handleSearchInput"
-          placeholder="хештег">
+        <input id="search-input" type="text" class="main-screen__search-input" :value="searchQuery"
+          @input="handleSearchInput" placeholder="хештег">
       </template>
       <template v-slot:img>
         <img src="/img/main-screen-photo-boy.png" alt="Изображение мальчика" class="main-screen__img">
@@ -115,36 +167,78 @@ onMounted(loadNews);
         <button v-for="button in filteringButtons" :key="button.id" class="news__filtering-btn" :class="[`news__filtering-btn_${button.class}`,
         { 'news__filtering-btn_active': activeTag === button.title },
         { 'news__filtering-btn_disabled': isDisabled }
-        ]" :aria-disabled="disabled" :disabled="isDisabled" @click="handleTagFilter(button.title)">
+        ]" :aria-disabled="disabled" :disabled="isDisabled" @click="handleTagFilter(button.title)"
+          :title="`Filter by ${button.title}`">
           <span>{{ button.title }}</span>
         </button>
       </div>
 
-      <template v-if="filteredNews && filteredNews.length > 0">
-        <router-link v-for="info in filteredNews" :key="info.id" :to="{ name: 'article', params: { id: info.id } }"
-          class="news-card-link">
-          <NewsCard :tag-class="getTagClass(info.tag)">
-            <template v-slot:img>
-              <img :src="`/img/${info.img.src}`" :alt="info.img.alt" class="tag-card__img">
-            </template>
-            <template v-slot:tag>{{ info.tag }}</template>
-            <template v-slot:text>{{ info.text }}</template>
-            <template v-slot:date>{{ info.date }}</template>
-          </NewsCard>
-        </router-link>
-      </template>
-
-      <div v-else-if="filteredNews === null" class="not-found">
-        <span>По вашему запросу ничего не найдено...</span>
+      <div class="news__wrapper">
+        <template v-if="filteredNews && filteredNews.length">
+          <router-link v-for="info in paginatedNews" :key="info.id" :to="{
+            name: 'article',
+            params: { id: info.id }
+          }" class="news__card-link">
+            <NewsCard :tag-class="getTagClass(info.tag)">
+              <template v-slot:img>
+                <img :src="`/img/${info.img.src}`" :alt="info.img.alt" class="tag-card__img">
+              </template>
+              <template v-slot:tag>{{ info.tag }}</template>
+              <template v-slot:text>{{ info.text }}</template>
+              <template v-slot:date>{{ info.date }}</template>
+            </NewsCard>
+          </router-link>
+        </template>
+        <div v-else-if="filteredNews === null" class="not-found">
+          <span>По вашему запросу ничего не найдено...</span>
+        </div>
       </div>
+
+      <paginate v-if="windowWidth >= 768" v-model="currentPage" :page-count="pageCount" :click-handler="changePage"
+        :prev-text="''" :next-text="''" :container-class="'pagination'" :page-class="'page-item'"
+        :active-class="'active'" :page-link-class="'page-link'">
+      </paginate>
 
     </div>
   </main>
 
 </template>
 
-<style scoped lang="scss">
+<style lang="scss">
 @use '@/assets/scss/mixins.scss' as *;
+
+.pagination {
+  display: flex;
+  list-style: none;
+  justify-content: center;
+  width: 100%;
+  margin-left: 0;
+  gap: 20px;
+
+  @media only screen and (min-width: 768px) {}
+
+  @media only screen and (min-width: 1280px) {}
+}
+
+.page-item {}
+
+.page-item .page-link {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  width: 34px;
+  height: 34px;
+  text-decoration: none;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+}
+
+.page-item.active .page-link {
+  z-index: 3;
+  background-color: var(--color-background-yellow);
+}
 
 .main-screen {
   margin: 0;
@@ -160,6 +254,16 @@ onMounted(loadNews);
     border: none;
     outline: none;
     border-radius: 60px;
+
+    @media only screen and (min-width: 768px) {
+      min-width: 100%;
+      height: 40px;
+    }
+
+    @media only screen and (min-width: 1280px) {
+      max-width: 610px;
+      height: 54px;
+    }
   }
 
   &__search-input::placeholder {
@@ -168,25 +272,61 @@ onMounted(loadNews);
   }
 }
 
-.trainings {
-  background-color: red;
-}
+.trainings {}
 
 .news {
   @include block-mobile;
   @include minmax-width-mobile-block;
   padding: 0;
+  width: 100%;
+  height: fit-content;
+
+  @media only screen and (min-width: 768px) {
+    margin-top: -10px;
+    gap: 40px;
+  }
+
+  @media only screen and (min-width: 1280px) {
+    margin-top: -50px;
+    margin-bottom: 60px;
+    gap: 40px;
+  }
+
+  &__wrapper {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    gap: 10px;
+
+    @media only screen and (min-width: 768px) {
+      justify-content: space-between;
+      flex-direction: row;
+    }
+
+    @media only screen and (min-width: 1280px) {
+      max-width: 1190px;
+      justify-content: flex-start;
+    }
+  }
 
   &__filtering-box {
     @include block-mobile;
     @include minmax-width-mobile;
     min-width: 286px;
-    // max-width: 343px;
     flex-direction: row;
     flex-wrap: wrap;
-    padding: 0;
     width: 100%;
-    gap: 10px;
+    padding: 0;
+
+    @media only screen and (min-width: 768px) {
+      flex-direction: row;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    @media only screen and (min-width: 1280px) {
+      max-width: 1190px;
+    }
   }
 
   &__filtering-btn {
@@ -209,14 +349,17 @@ onMounted(loadNews);
 
   &__filtering-btn_trainings {
     background-color: var(--color-background-lavender);
+    color: black;
   }
 
   &__filtering-btn_grants {
     background-color: var(--color-background-red);
+    color: black;
   }
 
   &__filtering-btn_masterclasses {
     background-color: var(--color-background-yellow);
+    color: black;
   }
 
   &__filtering-btn_all:active {
@@ -253,21 +396,24 @@ onMounted(loadNews);
       background-color: var(--color-hover-yellow);
     }
   }
-}
 
-.news-card-link {
-  display: block;
-  text-decoration: none;
-  color: inherit;
-}
-
-.tag-card {
-  &__img {
-    @include cover-center-no-repeat-img;
+  &__card-link {
+    display: flex;
+    justify-content: center;
     width: 100%;
-    height: 168px;
-    border-top-right-radius: 8px;
-    border-top-left-radius: 8px;
+    text-decoration: none;
+    color: inherit;
+
+    @media only screen and (min-width: 768px) {
+      min-width: 320px;
+      min-height: 302px;
+      width: calc(50% - 5px);
+    }
+
+    @media only screen and (min-width: 1280px) {
+      min-width: 290px;
+      width: calc(25% - 30px);
+    }
   }
 }
 
@@ -281,13 +427,4 @@ onMounted(loadNews);
     text-align: center;
   }
 }
-
-@media (min-width: 340px) {
-  .news {
-    &__filtering-box {
-      padding: 10px;
-    }
-  }
-}
-
 </style>

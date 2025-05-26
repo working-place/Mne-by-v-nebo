@@ -5,7 +5,7 @@ import FooterBlock from './components/layout/FooterBlock.vue';
 export default {
   components: {
     NavigationMenu,
-    FooterBlock
+    FooterBlock,
   },
   data() {
     return {}

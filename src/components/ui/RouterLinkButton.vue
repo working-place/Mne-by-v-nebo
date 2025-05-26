@@ -20,17 +20,21 @@ defineProps({
     type: String,
     default: 'var(--color-hover-purple)',
   },
-  fontSizeBtn: {
-    type: String,
-    default: '11px',
-  },
-  maxHeightBtn: {
+  heightMobile: {
     type: String,
     default: '36px',
   },
-  minHeightBtn: {
+  heightTablet: {
     type: String,
-    default: '36px',
+    default: '40px',
+  },
+  heightDesktop: {
+    type: String,
+    default: '63px',
+  },
+  widthTablet: {
+    type: String,
+    default: '',
   },
   textButton: {
     type: String,
@@ -44,38 +48,43 @@ defineProps({
     '--button_bg-color': bgColor,
     '--button_text-color': textColor,
     '--button_hover-color': hoverColor,
-    '--button_font-size': fontSizeBtn,
-    '--button_max-height': maxHeightBtn,
-    '--button_min-height': minHeightBtn
+    '--button_height-mobile': heightMobile,
+    '--button_height-tablet': heightTablet || heightMobile,
+    '--button_height-desktop': heightDesktop || heightTablet || heightMobile,
+    '--button_width-tablet': widthTablet
   }" @click.prevent="disabled ? null : $emit('click')">
-    <h2>
+    <span class="button__text">
       <slot name="text">{{ textButton }}</slot>
-    </h2>
+    </span>
   </RouterLink>
-
 </template>
 
 <style scoped lang="scss">
 @use '@/assets/scss/mixins.scss' as *;
 
-h2 {
-  // @include h2-mobile-button;
-  font-size: var(--button_font-size, 11px);
-}
-
 .button {
   @include display-flex-center-center;
-  background-color: var(--button_bg-color);
-  color: var(--button_text-color);
+  text-decoration: none;
+  min-height: var(--button_height-mobile);
+  max-height: var(--button_height-mobile);
   width: 100%;
-  min-height: var(--button_min-height, 36px);
-  max-height: var(--button_max-height, 36px);
   height: fit-content;
   padding: 10px;
   outline: none;
+  background-color: var(--button_bg-color);
   border: none;
   border-radius: 60px;
-  text-decoration: none;
+
+  @media (min-width: 768px) {
+    min-height: var(--button_height-tablet);
+    max-height: var(--button_height-tablet);
+    width: var(--button_width-tablet);
+  }
+
+  @media (min-width: 1280px) {
+    min-height: var(--button_height-desktop);
+    max-height: var(--button_height-desktop);
+  }
 
   @media (hover :hover) {
     &:hover {
@@ -85,6 +94,21 @@ h2 {
 
   &_disabled {
     @include btn-disable;
+  }
+
+  &__text {
+    font-family: var(--font-family-next-art);
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--button_text-color);
+
+    @media (min-width: 768px) {
+      font-size: 14px;
+    }
+
+    @media (min-width: 1280px) {
+      font-size: 20px;
+    }
   }
 }
 </style>

@@ -18,7 +18,7 @@ defineProps({
     type: String,
     default: ''
   },
-  paddingBottom: {
+  paddingBottomMobile: {
     type: String,
     default: '0'
   },
@@ -34,6 +34,18 @@ defineProps({
     type: String,
     default: '16px'
   },
+  cardMinHeight: {
+    type: String,
+    default: '201px'
+  },
+  cardMaxHeight: {
+    type: String,
+    default: 'fit-content'
+  },
+  cardMinWidth: {
+    type: String,
+    default: '428px'
+  },
 });
 
 const root = ref(null);
@@ -43,7 +55,12 @@ defineExpose({
 </script>
 
 <template>
-  <div class="card" :style="{ paddingBottom: paddingBottom }" ref="root">
+  <div class="card" :style="{
+    '--card-padding-bottom-mobile': paddingBottomMobile,
+    '--card_card-min-height': cardMinHeight,
+    '--card_card-max-height': cardMaxHeight,
+    '--card_card-max-width': cardMinWidth,
+  }" ref="root">
     <div class="card__content-text">
       <h3 class="card__title" :style="{ fontSize: titleSize }">{{ title }}</h3>
       <p class="card__description" :style="{ fontSize: descriptionSize }">{{ description }}</p>
@@ -61,14 +78,36 @@ defineExpose({
 .card {
   @include display-flex-column-center;
   position: relative;
-  min-height: var(--main-screen_block-height);
+
   padding: 20px;
   gap: 10px;
   background-color: var(--color-background-light-blue);
   border-radius: var(--cards-border-radius);
+  box-sizing: border-box;
+
+  @media only screen and (max-width: 767px) {
+    min-height: var(--main-screen_block-height);
+    padding-bottom: var(--card-padding-bottom-mobile);
+  }
+
+  @media only screen and (min-width: 768px) {
+    min-width: var(--card_card-max-width);
+    min-height: var(--card_card-min-height);
+    max-height: var(--card_card-max-height);
+    border-radius: 16px;
+    min-height: 211px;
+  }
+
+  @media only screen and (min-width: 1280px) {
+    border-radius: 24px;
+  }
 
   &__title {
     margin-bottom: 10px;
+
+    @media only screen and (min-width: 1280px) {
+      line-height: 1.2;
+    }
   }
 
   &__title,
@@ -92,10 +131,30 @@ defineExpose({
     overflow: hidden;
     border-radius: 0 0 12px 0;
 
+    @media only screen and (min-width: 768px) {
+      border-radius: 0 0 16px 0;
+    }
+
+    @media only screen and (min-width: 1280px) {
+      border-radius: 0 0 24px 0;
+    }
+
     :slotted(img) {
       width: v-bind(imageWidth);
       height: auto;
     }
+  }
+
+  @media only screen and (min-width: 768px) {
+
+    &__img-box :slotted(img) {
+      width: calc(v-bind(imageWidth));
+    }
+  }
+
+  @media only screen and (min-width: 1280px) {
+    min-width: auto;
+    min-height: 300px;
   }
 }
 </style>

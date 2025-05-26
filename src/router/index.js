@@ -14,7 +14,6 @@ import Article from '@/components/ArticlePage.vue';
 
 const router = createRouter({
   history: createWebHistory(),
-  // history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     {
       path: '/',
@@ -73,6 +72,9 @@ const router = createRouter({
       component: NotFound
     }
   ],
+  scrollBehavior() {
+    return { top: 0 }
+  }
 })
 
 export default router

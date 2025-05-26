@@ -29,13 +29,36 @@ defineProps({
 .description-card {
   @include display-flex-column-center;
   position: relative;
-  max-width: 320px;
   min-height: 206px;
-  height: fit-content;
+  width: 100%;
   padding: 36px 30px;
   gap: 10px;
   background-color: var(--color-background-light-blue);
   border-radius: var(--cards-border-radius);
+
+  @media only screen and (min-width: 768px) {
+    min-height: 204px;
+    width: 48%;
+    flex-grow: 1;
+    border-radius: var(--cards-border-radius-tablet);
+
+    &:last-child {
+      min-height: 132px;
+      height: fit-content;
+      width: 100%;
+    }
+  }
+
+  @media only screen and (min-width: 1280px) {
+    min-height: 226px;
+    width: 33%;
+    border-radius: var(--cards-border-radius-desctop);
+
+    &:last-child {
+      min-height: 226px;
+      width: 33%;
+    }
+  }
 
   &__number {
     @include display-flex-center-center;
@@ -60,7 +83,7 @@ defineProps({
     bottom: 0;
     right: 0;
     width: 8em;
-    // height: 120px;
+
   }
 }
 </style>
