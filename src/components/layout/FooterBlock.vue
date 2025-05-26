@@ -282,7 +282,7 @@ import NavLinks from './NavLinksMobile.vue';
     @media only screen and (min-width: 1280px) {
       height: fit-content;
       flex-direction: column;
-      gap: 36px;
+      gap: 65px;
     }
   }
 
@@ -363,7 +363,6 @@ import NavLinks from './NavLinksMobile.vue';
     @media only screen and (min-width: 1280px) {
       width: 98px;
       height: 42px;
-      margin-bottom: 36px;
     }
   }
 
