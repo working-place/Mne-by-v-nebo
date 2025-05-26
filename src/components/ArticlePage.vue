@@ -128,11 +128,17 @@ const getTagClass = (tag) => {
   @media only screen and (max-width: 767px) {
     padding-left: 17px;
     padding-right: 17px;
+    margin-top: -30px;
+  }
+
+  @media only screen and (min-width: 768px) {
+    margin-top: -30px;
   }
 
   @media only screen and (min-width: 1280px) {
     display: flex;
     gap: 100px;
+    margin-top: -60px;
   }
 }
 
@@ -154,7 +160,6 @@ const getTagClass = (tag) => {
 .article-content {
   padding: 0;
   overflow: hidden;
-  margin-top: -10px;
 }
 
 .article-text {
@@ -181,6 +186,12 @@ const getTagClass = (tag) => {
 
 .share-section {
   width: 100%;
+  margin-bottom: 80px;
+  margin-top: 40px;
+
+  @media only screen and (min-width: 1280px) {
+    margin-top: 60px;
+  }
 
   .share-button {
     font-size: 16px;
@@ -236,7 +247,6 @@ const getTagClass = (tag) => {
   @media only screen and (min-width: 1280px) {
     max-width: 290px;
     margin: 0;
-    padding-top: 10px;
     gap: 0;
   }
 }
