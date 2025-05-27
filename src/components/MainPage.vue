@@ -298,6 +298,7 @@ const getTagClass = (tag) => {
     @include cover-center-no-repeat-img;
     min-width: 151px;
     min-height: 151px;
+    border-radius: 50%;
     background-image: url('/img/mascot-boy.png');
 
     @media only screen and (min-width: 768px) {
