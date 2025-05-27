@@ -219,6 +219,7 @@ watch(visibleSlidesCount, () => {
 
 .arrow {
   background: #CABBFF;
+  color: black;
   border: none;
   border-radius: 50%;
   width: 36px;
